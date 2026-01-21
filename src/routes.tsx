@@ -8,7 +8,11 @@ export const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "events/:eventId",
+    path: "events/",
     Component: Event,
+  },
+  {
+    path: "*",
+    Component: () => (<h1>404 Not Found!</h1>),
   }
 ]);
