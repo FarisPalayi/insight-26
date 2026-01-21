@@ -29,7 +29,7 @@ export const Header = () => {
               <div className="absolute inset-0 bg-primary/20 rounded-lg rotate-45 group-hover:rotate-90 transition-transform duration-500" />
               <span className="relative text-primary font-bold text-lg font-mono">I</span>
             </div>
-            <span className="font-bold text-xl tracking-tight">
+            <span className="font-bold text-xl tracking-tight text-foreground">
               INSIGHT<span className="text-primary">'26</span>
             </span>
           </a>
@@ -40,7 +40,7 @@ export const Header = () => {
               <a
                 key={item.label}
                 href={item.href}
-                className="nav-link text-sm font-medium tracking-wide uppercase"
+                className="nav-link text-muted-foreground text-sm font-medium tracking-wide uppercase"
               >
                 {item.label}
               </a>

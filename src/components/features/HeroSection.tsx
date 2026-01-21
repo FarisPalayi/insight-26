@@ -91,7 +91,7 @@ export const HeroSection = () => {
             <Button
               size="lg"
               variant="outline"
-              className="btn-outline-glow text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-6 rounded-xl border-primary/30 hover:bg-primary/10 hover:border-primary/50 font-semibold transition-all duration-300 w-full sm:w-auto"
+              className="btn-outline-glow text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-6 rounded-xl border-primary/30 hover:bg-primary/10 hover:border-primary/50 font-semibold transition-all duration-300 w-full sm:w-auto text-foreground"
             >
               View Events
             </Button>

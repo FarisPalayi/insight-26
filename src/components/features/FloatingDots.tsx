@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 
-// hidden on mobile
+
 export const FloatingDots = () => {
   return (
     <>
