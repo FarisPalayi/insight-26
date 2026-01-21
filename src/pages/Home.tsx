@@ -1,20 +1,11 @@
-import { NavLink } from "react-router";
+import Header from "@/components/layout/Header";
+import HeroSection from "@/components/features/HeroSection";
 
 export function Home() {
   return (
-    <>
-      <h1>Home Page</h1>
-      <NavLink to="/events/1">
-        {({ isPending }) => (
-          <span>{isPending ? "loading..." : "Web Design"}</span>
-        )}
-      </NavLink >
-      <br />
-      <NavLink to="/events/2">
-        {({ isPending }) => (
-          <span>{isPending ? "loading..." : "Debugging"}</span>
-        )}
-      </NavLink >
-    </>
+    <div className="min-h-screen bg-background dark">
+      <Header />
+      <HeroSection />
+    </div>
   )
 }
