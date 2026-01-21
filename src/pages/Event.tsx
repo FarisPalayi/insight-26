@@ -1,8 +1,8 @@
-import { useLoaderData, useParams } from "react-router"
-
+import { useLoaderData } from "react-router"
+import type { EventData } from "../types";
 
 export function Event() {
-  const event = useLoaderData();
+  const event: EventData = useLoaderData();
 
   return (
     <>
