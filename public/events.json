@@ -1,0 +1,40 @@
+[
+  {
+    "id": "1",
+    "name": "web design",
+    "fancyName": "WebTopia",
+    "guidelines": [
+      "don't do that",
+      "corruption is only bad if i'm not in it",
+      "why are you like this",
+      "you are a bad boy",
+      "don't be like this"
+    ],
+    "first-prize": 3000,
+    "second-prize": 2000,
+    "third-prize": 1000,
+    "participant-count": 3,
+    "registration-fee": 100,
+    "time": "10AM",
+    "date": "17/02/2026"
+  },
+  {
+    "id": "2",
+    "name": "Debugging",
+    "fancyName": "DebugPro",
+    "guidelines": [
+      "don't do that",
+      "corruption is only bad if i'm not in it",
+      "why are you like this",
+      "you are a bad boy",
+      "don't be like this"
+    ],
+    "first-prize": 3000,
+    "second-prize": 2000,
+    "third-prize": 1000,
+    "participant-count": 3,
+    "registration-fee": 100,
+    "time": "10AM",
+    "date": "17/02/2026"
+  }
+]
