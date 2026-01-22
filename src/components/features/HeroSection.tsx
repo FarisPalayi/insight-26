@@ -39,14 +39,12 @@ export const HeroSection = () => {
       <FloatingShapes />
       <FloatingDots />
       {/* Main Content */}
-      <div className="container relative z-10 px-4 sm:px-6 pt-24 sm:pt-32 pb-16 sm:pb-20">
+      <div className="container relative z-10 px-4 sm:px-6 pt-28 sm:pt-32 pb-16 sm:pb-20">
         <motion.div
           className="max-w-5xl mx-auto text-center"
         >
           <HeroBadge />
           <HeroTitle />
-          <HeroSubtitle />
-
 
           {/* Event Details */}
           <motion.div
@@ -56,7 +54,7 @@ export const HeroSection = () => {
             className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 mb-10 sm:mb-14"
           >
             <motion.div
-              className="flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl glass-surface group cursor-default w-full sm:w-auto justify-center"
+              className="flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl group cursor-default w-full sm:w-auto justify-center"
               whileHover={{ scale: 1.03, y: -2 }}
               transition={{ type: "spring", stiffness: 400 }}
             >
@@ -64,7 +62,7 @@ export const HeroSection = () => {
               <span className="text-sm sm:text-base font-medium text-foreground">17 & 18 February 2026</span>
             </motion.div>
             <motion.div
-              className="flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl glass-surface group cursor-default w-full sm:w-auto justify-center"
+              className="flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl group cursor-default w-full sm:w-auto justify-center"
               whileHover={{ scale: 1.03, y: -2 }}
               transition={{ type: "spring", stiffness: 400 }}
             >
@@ -72,6 +70,8 @@ export const HeroSection = () => {
               <span className="text-sm sm:text-base font-medium text-foreground">CCSIT CU Campus</span>
             </motion.div>
           </motion.div>
+
+          <CountdownTimer />
 
           {/* CTA Buttons */}
           <motion.div
@@ -96,7 +96,6 @@ export const HeroSection = () => {
             </Button>
 
           </motion.div>
-          <CountdownTimer />
 
           <StatsCards />
         </motion.div>

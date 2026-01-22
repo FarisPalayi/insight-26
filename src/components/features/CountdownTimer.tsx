@@ -43,7 +43,7 @@ export const CountdownTimer = () => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.4 }}
-      className="mt-8 sm:mt-10"
+      className="mb-10 sm:mb-14"
     >
       <p className="text-xs sm:text-sm text-muted-foreground uppercase tracking-widest mb-4">
         Event starts in
@@ -64,15 +64,13 @@ export const CountdownTimer = () => {
                 <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-xl glass-surface flex items-center justify-center overflow-hidden">
                   <motion.span
                     key={unit.value}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
                     className="text-xl sm:text-3xl font-bold text-gradient font-mono"
                   >
                     {String(unit.value).padStart(2, '0')}
                   </motion.span>
                 </div>
                 {/* Subtle glow effect */}
-                <div className="absolute inset-0 rounded-xl bg-primary/5 blur-xl -z-10" />
+                <div className="absolute inset-0 rounded-xl bg-primary/5 blur-xl -z-10 hidden md:block" />
               </div>
               <span className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-wider mt-2 font-medium">
                 {unit.label}

@@ -4,11 +4,11 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navItems = [
-  { label: "Events", href: "events" },
-  { label: "Schedule", href: "schedule" },
-  { label: "Venue", href: "venue" },
-  { label: "Updates", href: "updates" },
-  { label: "Contact", href: "contact" },
+  { label: "Events", href: "/events" },
+  { label: "Schedule", href: "/schedule" },
+  { label: "Venue", href: "/venue" },
+  { label: "Updates", href: "/updates" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const Header = () => {
@@ -22,7 +22,7 @@ export const Header = () => {
       className="fixed top-0 left-0 right-0 z-50"
     >
       <div className="glass-surface mx-4 mt-4 rounded-2xl">
-        <div className="container flex items-center justify-between h-16 px-6">
+        <div className="container flex items-center justify-between h-16 px-6 min-w-full">
           {/* Logo */}
           <a href="/" className="flex items-center gap-3 group">
             <div className="relative w-10 h-10 flex items-center justify-center">
