@@ -26,7 +26,7 @@ export const Header = () => {
           {/* Logo */}
           <a href="/" className="flex items-center group align-center">
             <div className="relative w-14 h-14 flex items-center justify-center mt-[-2px]">
-              <img src="./logo.png" className="w-full" />
+              <img src="./logo-rotated.png" className="w-full" />
             </div>
             <span className="font-bold text-xl tracking-tight text-foreground ml-[-5px]">
               INSIGHT<span className="text-primary">'26</span>
