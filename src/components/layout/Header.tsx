@@ -24,12 +24,11 @@ export const Header = () => {
       <div className="glass-surface mx-4 mt-4 rounded-2xl">
         <div className="container flex items-center justify-between h-16 px-6 min-w-full">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 flex items-center justify-center">
-              <div className="absolute inset-0 bg-primary/20 rounded-lg rotate-45 group-hover:rotate-90 transition-transform duration-500" />
-              <span className="relative text-primary font-bold text-lg font-mono">I</span>
+          <a href="/" className="flex items-center group align-center">
+            <div className="relative w-14 h-14 flex items-center justify-center mt-[-2px]">
+              <img src="./logo.png" className="w-full" />
             </div>
-            <span className="font-bold text-xl tracking-tight text-foreground">
+            <span className="font-bold text-xl tracking-tight text-foreground ml-[-5px]">
               INSIGHT<span className="text-primary">'26</span>
             </span>
           </a>
