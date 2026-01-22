@@ -46,7 +46,6 @@ export const HeroSection = () => {
           <HeroBadge />
           <HeroTitle />
           <HeroSubtitle />
-          <CountdownTimer />
 
 
           {/* Event Details */}
@@ -95,7 +94,9 @@ export const HeroSection = () => {
             >
               View Events
             </Button>
+
           </motion.div>
+          <CountdownTimer />
 
           <StatsCards />
         </motion.div>
