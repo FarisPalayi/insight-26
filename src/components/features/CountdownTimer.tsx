@@ -43,9 +43,9 @@ export const CountdownTimer = () => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.4 }}
-      className="mb-10 sm:mb-14"
+      className="mb-14"
     >
-      <p className="text-xs sm:text-sm text-muted-foreground uppercase tracking-widest mb-4">
+      <p className="text-sm text-muted-foreground uppercase tracking-widest mb-4">
         Event starts in
       </p>
 
@@ -61,10 +61,10 @@ export const CountdownTimer = () => {
               className="flex flex-col items-center"
             >
               <div className="relative">
-                <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-xl glass-surface flex items-center justify-center overflow-hidden">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl glass-surface flex items-center justify-center overflow-hidden">
                   <motion.span
                     key={unit.value}
-                    className="text-xl sm:text-3xl font-bold text-gradient font-mono"
+                    className="text-2xl sm:text-3xl font-bold text-gradient font-mono"
                   >
                     {String(unit.value).padStart(2, '0')}
                   </motion.span>
@@ -72,7 +72,7 @@ export const CountdownTimer = () => {
                 {/* Subtle glow effect */}
                 <div className="absolute inset-0 rounded-xl bg-primary/5 blur-xl -z-10 hidden md:block" />
               </div>
-              <span className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-wider mt-2 font-medium">
+              <span className="text-xs sm:text-xs text-muted-foreground uppercase tracking-wider mt-2 font-medium">
                 {unit.label}
               </span>
             </motion.div>

@@ -21,24 +21,24 @@ export const HeroSection = () => {
       {/* Gradient Orbs */}
       <FloatingOrb
         className="bg-primary/30 top-0 -left-48"
-        size="w-[500px] h-[500px]"
+        size="w-[200px] h-[200px] sm:w-[500px] sm:h-[500px]"
       />
       <FloatingOrb
         className="bg-accent/25 bottom-0 -right-48"
         delay={4}
-        size="w-[600px] h-[600px]"
+        size="w-[250px] h-[250px] sm:w-[600px] sm:h-[600px]"
       />
       <FloatingOrb
         className="bg-primary/15 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         delay={2}
-        size="w-[800px] h-[800px]"
+        size="w-[500px] h-[500px] sm:w-[800px] sm:h-[800px]"
       />
 
       <FloatingParticles />
       <FloatingShapes />
       <FloatingDots />
       {/* Main Content */}
-      <div className="container relative z-10 px-4 sm:px-6 pt-28 sm:pt-32 pb-16 sm:pb-20">
+      <div className="container relative z-10 px-4 sm:px-6 pt-32 pb-20">
         <motion.div
           className="max-w-5xl mx-auto text-center"
         >
@@ -58,7 +58,7 @@ export const HeroSection = () => {
               transition={{ type: "spring", stiffness: 400 }}
             >
               <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-primary group-hover:scale-110 transition-transform" />
-              <span className="text-sm sm:text-base font-medium text-foreground">17 & 18 February 2026</span>
+              <span className="font-medium text-foreground">17 & 18 February 2026</span>
             </motion.div>
             <motion.div
               className="flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl group cursor-default w-full sm:w-auto justify-center"
@@ -66,7 +66,7 @@ export const HeroSection = () => {
               transition={{ type: "spring", stiffness: 400 }}
             >
               <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-accent group-hover:scale-110 transition-transform" />
-              <span className="text-sm sm:text-base font-medium text-foreground">CCSIT CU Campus</span>
+              <span className="font-medium text-foreground">CCSIT CU Campus</span>
             </motion.div>
           </motion.div>
 
@@ -81,7 +81,7 @@ export const HeroSection = () => {
           >
             <Button
               size="lg"
-              className="btn-glow bg-primary hover:bg-primary/90 text-primary-foreground group text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-6 rounded-xl font-semibold w-full sm:w-auto"
+              className="btn-glow bg-primary hover:bg-primary/90 text-primary-foreground group text-base px-6 sm:px-8 py-5 sm:py-6 rounded-xl font-normal w-full sm:w-auto"
             >
               Register Now
               <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
@@ -89,7 +89,7 @@ export const HeroSection = () => {
             <Button
               size="lg"
               variant="outline"
-              className="btn-outline-glow text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-6 rounded-xl border-primary/30 hover:bg-primary/10 hover:border-primary/50 font-semibold transition-all duration-300 w-full sm:w-auto text-foreground"
+              className="btn-outline-glow text-base px-6 sm:px-8 py-5 sm:py-6 rounded-xl border-primary/30 hover:bg-primary/10 hover:border-primary/50 font-normal transition-all duration-300 w-full sm:w-auto text-foreground"
             >
               View Events
             </Button>

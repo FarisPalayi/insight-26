@@ -8,7 +8,7 @@ export const HeroTitle = () => {
       transition={{ duration: 0.8, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
       className="mb-6 sm:mb-8"
     >
-      <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-none">
+      <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-none">
         <motion.span
           className="text-gradient inline-block"
           whileHover={{ scale: 1.02 }}
