@@ -9,7 +9,6 @@ import { FloatingShapes } from "./FloatingShapes";
 import { FloatingDots } from "./FloatingDots";
 import { HeroBadge } from "./HeroBadge";
 import { HeroTitle } from "./HeroTitle";
-import { HeroSubtitle } from "./HeroSubtitle";
 
 export const HeroSection = () => {
   return (
