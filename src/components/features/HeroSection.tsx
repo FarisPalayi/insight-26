@@ -21,7 +21,7 @@ export const HeroSection = () => {
       {/* Gradient Orbs */}
       <FloatingOrb
         className="bg-primary/30 top-0 -left-48"
-        size="w-[200px] h-[200px] sm:w-[500px] sm:h-[500px]"
+        size="w-[350px] h-[320px] sm:w-[500px] sm:h-[500px]"
       />
       <FloatingOrb
         className="bg-accent/25 bottom-0 -right-48"
