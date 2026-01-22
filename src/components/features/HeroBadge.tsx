@@ -17,7 +17,7 @@ export const HeroBadge = () => {
         <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-primary" />
       </motion.span>
       <span className="text-xs sm:text-sm font-medium text-foreground/80 tracking-wide uppercase">
-        The Ultimate Tech Fest
+        The Ultimate Tech Fest Experience
       </span>
     </motion.div>
   )

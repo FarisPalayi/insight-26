@@ -1,7 +1,12 @@
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { motion } from "framer-motion"
 
 // hidden on mobile
 export const FloatingShapes = () => {
+  const isMobile = useIsMobile();
+
+  if (isMobile) return null;
+
   return (
     <>
       <motion.div
