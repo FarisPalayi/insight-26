@@ -43,7 +43,7 @@ export const CountdownTimer = () => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.4 }}
-      className="mb-8 sm:mb-10"
+      className="mt-8 sm:mt-10"
     >
       <p className="text-xs sm:text-sm text-muted-foreground uppercase tracking-widest mb-4">
         Event starts in
@@ -59,15 +59,13 @@ export const CountdownTimer = () => {
           <div key={unit.label} className="flex items-center gap-2 sm:gap-4">
             <motion.div
               className="flex flex-col items-center"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 400 }}
             >
               <div className="relative">
                 <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-xl glass-surface flex items-center justify-center overflow-hidden">
                   <motion.span
                     key={unit.value}
-                    initial={{ y: -20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
                     className="text-xl sm:text-3xl font-bold text-gradient font-mono"
                   >
                     {String(unit.value).padStart(2, '0')}
@@ -82,7 +80,7 @@ export const CountdownTimer = () => {
             </motion.div>
             {index < timeUnits.length - 1 && (
               <motion.span
-                className="text-xl sm:text-2xl text-primary/60 font-light hidden sm:block"
+                className="text-xl sm:text-2xl text-primary/60 font-light hidden sm:block mb-5"
                 animate={{ opacity: [1, 0.3, 1] }}
                 transition={{ duration: 1, repeat: Infinity }}
               >
