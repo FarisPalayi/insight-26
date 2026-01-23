@@ -1,0 +1,14 @@
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
+
+export const LogoLink = ({ className }: ButtonProps) => {
+  return (
+    <a href="/" className={`flex items-center group align-center ${className}`}>
+      <div className="btn relative w-14 h-14 flex items-center justify-center">
+        <img src="./logo-rotated.png" className="w-full" />
+      </div>
+      <span className="font-bold text-xl tracking-tight text-foreground ml-[-5px]">
+        INSIGHT<span className="text-primary">'26</span>
+      </span>
+    </a >
+  )
+}
