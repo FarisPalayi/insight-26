@@ -3,10 +3,10 @@ import { MapPin, Calendar, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CountdownTimer } from "./CountdownTimer";
 import { StatsCards } from "./Stats";
-import { FloatingOrb } from "./FloatingOrb";
-import { FloatingParticles } from "./FloatingParticles";
-import { FloatingShapes } from "./FloatingShapes";
-import { FloatingDots } from "./FloatingDots";
+import { FloatingOrb } from "../ui/floaters/FloatingOrb";
+import { FloatingParticles } from "../ui/floaters/FloatingParticles";
+import { FloatingShapes } from "../ui/floaters/FloatingShapes";
+import { FloatingDots } from "../ui/floaters/FloatingDots";
 import { HeroBadge } from "./HeroBadge";
 import { HeroTitle } from "./HeroTitle";
 
