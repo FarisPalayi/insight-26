@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LogoLink } from "../ui/LogoLink";
 
 const navItems = [
   { label: "Events", href: "/events" },
@@ -23,15 +24,7 @@ export const Header = () => {
     >
       <div className="glass-surface mx-4 mt-4 rounded-2xl">
         <div className="container flex items-center justify-between h-16 px-6 min-w-full">
-          {/* Logo */}
-          <a href="/" className="flex items-center group align-center">
-            <div className="relative w-14 h-14 flex items-center justify-center mt-[-2px]">
-              <img src="./logo-rotated.png" className="w-full" />
-            </div>
-            <span className="font-bold text-xl tracking-tight text-foreground ml-[-5px]">
-              INSIGHT<span className="text-primary">'26</span>
-            </span>
-          </a>
+          <LogoLink />
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
