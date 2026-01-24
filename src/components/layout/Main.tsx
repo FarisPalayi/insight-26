@@ -7,7 +7,7 @@ type MainProps = {
 
 const Main = ({ children, className }: MainProps) => {
   return (
-    <main className={`relative min-h-screen pb-10 ${className ?? 'pt-32'}`} >
+    <main className={`relative pb-20 md:pb-32 ${className ?? 'pt-32'}`} >
       {children}
     </main >
   )

@@ -52,7 +52,7 @@ const SponsorsSection = () => {
   };
 
   return (
-    <section id="sponsors" className="relative py-20 md:py-32 overflow-hidden">
+    <section id="sponsors" className="relative pt-20 md:pt-32 overflow-hidden">
       {/* Subtle background accent */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/5 via-transparent to-accent/5 rounded-full blur-3xl pointer-events-none" />
 
