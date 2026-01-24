@@ -1,7 +1,7 @@
 import Header from "@/components/layout/Header";
-import HeroSection from "@/components/features/HeroSection";
+import HeroSection from "@/components/features/hero/HeroSection";
 import Footer from "@/components/layout/Footer";
-import EventsSection from "@/components/features/EventsSection";
+import EventsSection from "@/components/features/events/EventsSection";
 
 export function Home() {
   return (
