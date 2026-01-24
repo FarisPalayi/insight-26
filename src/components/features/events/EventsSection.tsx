@@ -33,7 +33,7 @@ const EventsSection = () => {
   ];
 
   return (
-    <section id="events" className="relative py-24 md:py-32 lg:py-40 overflow-hidden">
+    <section id="events" className="relative pt-24 md:pt-32 lg:pt-40 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 grid-pattern opacity-20" />
       <div className="absolute top-1/4 -left-64 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
