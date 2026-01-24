@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import { Calendar, MapPin } from "lucide-react"
-import { LogoLink } from "../ui/LogoLink"
+import { LogoLink } from "../../ui/LogoLink"
 
 export const FooterBrand = () => {
   return (

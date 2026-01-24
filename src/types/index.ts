@@ -18,3 +18,19 @@ export interface SocialLink {
   icon: React.ReactNode;
   hoverColor: string;
 }
+
+export interface Sponsor {
+  name: string;
+  logo?: string;
+  website?: string;
+}
+
+export interface SponsorTier {
+  name: string;
+  icon: React.ReactNode;
+  sponsors: Sponsor[];
+  accentColor: string;
+  description: string;
+}
+
+

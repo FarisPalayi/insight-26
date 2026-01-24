@@ -1,7 +1,8 @@
 import Header from "@/components/layout/Header";
-import HeroSection from "@/components/features/HeroSection";
+import HeroSection from "@/components/features/hero/HeroSection";
 import Footer from "@/components/layout/Footer";
-import EventsSection from "@/components/features/EventsSection";
+import EventsSection from "@/components/features/events/EventsSection";
+import SponsorSection from "@/components/features/sponsor/SponsorSection";
 
 export function Home() {
   return (
@@ -9,6 +10,7 @@ export function Home() {
       <Header />
       <HeroSection />
       <EventsSection />
+      <SponsorSection />
       <Footer />
     </div>
   )

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { ArrowRight, Sparkles, Users, Zap, Trophy } from "lucide-react";
 import { Link } from "react-router";
 

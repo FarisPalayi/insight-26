@@ -1,7 +1,4 @@
-import { FooterQuickLinks } from "../features/FooterQuickLinks";
-import { FooterResources } from "../features/FooterResources";
-import { FooterConnect } from "../features/FooterConnect";
-import { FooterBrand } from "../features/FooterBrand";
+import { FooterBrand, FooterQuickLinks, FooterResources, FooterConnect } from "../features/footer"
 
 const Footer = () => {
   return (
