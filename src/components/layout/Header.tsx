@@ -32,7 +32,7 @@ export const Header = () => {
               <a
                 key={item.label}
                 href={item.href}
-                className="nav-link text-muted-foreground text-sm font-medium tracking-wide uppercase hover:text-foreground"
+                className="nav-link text-muted-foreground text-sm font-medium tracking-wide uppercase "
               >
                 {item.label}
               </a>
