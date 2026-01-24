@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { Button } from "../ui/button";
 import { Link } from "react-router";
 
 interface EventCardProps {
