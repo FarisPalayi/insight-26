@@ -12,6 +12,7 @@ const EventsSection = () => {
       tagline: "Capture the moment, freeze the magic in every frame. Showcase your creative eye and visual storytelling.",
       icon: <Camera className="w-6 h-6" />,
       accentColor: "from-pink-500 to-rose-500",
+      urlPath: "/photography",
     },
     {
       name: "Scavenge Squad",
@@ -19,6 +20,7 @@ const EventsSection = () => {
       tagline: "Race against time, hunt for clues, claim victory. Team up for the ultimate treasure hunt experience.",
       icon: <Users className="w-6 h-6" />,
       accentColor: "from-emerald-500 to-teal-500",
+      urlPath: "/treasure-hunt",
     },
     {
       name: "Talen'X",
@@ -26,6 +28,7 @@ const EventsSection = () => {
       tagline: "Unleash your hidden talents and steal the spotlight. Dance, sing, perform—let your creativity shine.",
       icon: <Star className="w-6 h-6" />,
       accentColor: "from-amber-500 to-orange-500",
+      urlPath: "/talenx",
     },
   ];
 

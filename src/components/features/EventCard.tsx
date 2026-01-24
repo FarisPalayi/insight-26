@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "../ui/button";
+import { Link } from "react-router";
 
 interface EventCardProps {
   name: string;
@@ -9,9 +10,10 @@ interface EventCardProps {
   icon: React.ReactNode;
   accentColor: string;
   index?: number;
+  urlPath: string;
 }
 
-export const EventCard = ({ name, category, tagline, icon, accentColor, index = 0 }: EventCardProps) => {
+export const EventCard = ({ name, category, tagline, icon, accentColor, urlPath, index = 0 }: EventCardProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30, rotateX: -10 }}
@@ -22,10 +24,9 @@ export const EventCard = ({ name, category, tagline, icon, accentColor, index = 
       className="group relative h-full"
     >
       {/* Hover glow */}
-      <div className={`absolute -inset-0.5 bg-gradient-to-br ${accentColor} rounded-2xl blur-lg opacity-0 group-hover:opacity-40 transition-all duration-500`} />
 
       {/* Card */}
-      <div className="relative h-full rounded-2xl border border-border/50 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-lg overflow-hidden group-hover:border-primary/30 transition-all duration-500">
+      <div className="relative h-full rounded-2xl border border-border/50 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-lg overflow-hidden transition-all duration-500">
         {/* Background accent */}
         <div className={`absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl ${accentColor} opacity-10 rounded-full blur-3xl transform translate-x-10 -translate-y-10 group-hover:opacity-20 transition-opacity duration-500`} />
 
@@ -57,14 +58,14 @@ export const EventCard = ({ name, category, tagline, icon, accentColor, index = 
           </p>
 
           {/* CTA */}
-          <Button variant="link" className="flex items-center justify-between pt-4 border-t border-border/50">
+          <Link to={urlPath} className="flex items-center justify-between pt-4 border-t border-border/50">
             <span className="text-sm text-muted-foreground group-hover:text-primary transition-colors">
               Learn more
             </span>
             <div className="w-10 h-10 rounded-full bg-muted/50 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300">
               <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
             </div>
-          </Button>
+          </Link>
         </div>
       </div>
     </motion.div >

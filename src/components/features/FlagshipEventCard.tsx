@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "../ui/button";
 import { ArrowRight, Sparkles, Users, Zap, Trophy } from "lucide-react";
+import { Link } from "react-router";
 
 export const FlagshipEvent = () => {
 
@@ -10,12 +11,11 @@ export const FlagshipEvent = () => {
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="relative group"
+      className="relative group "
     >
 
-      {/* Animated background glow */}
-      <div className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-primary rounded-3xl blur-2xl opacity-30 group-hover:opacity-50 transition-all duration-700 animate-pulse-glow" />
-
+      {/* Subtle hover glow */}
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/50 to-accent/50 rounded-2xl blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
       {/* Main card */}
       <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-br from-background/80 via-background/60 to-background/80 backdrop-blur-xl">
         {/* Decorative elements */}
@@ -32,16 +32,7 @@ export const FlagshipEvent = () => {
           animate={{ y: [-10, 10, -10], x: [-5, 5, -5] }}
           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
           className="absolute top-20 right-20 w-3 h-3 bg-primary/40 rounded-full blur-sm"
-        />
-        <motion.div
-          animate={{ y: [10, -10, 10], x: [5, -5, 5] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-32 right-40 w-2 h-2 bg-accent/40 rounded-full blur-sm"
-        />
-        <motion.div
-          animate={{ y: [-15, 15, -15] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-40 left-20 w-2 h-2 bg-primary/30 rounded-full blur-sm"
+          style={{ willChange: 'transform' }}
         />
 
         <div className="relative z-10 p-8 md:p-12 lg:p-16">
@@ -125,13 +116,13 @@ export const FlagshipEvent = () => {
               transition={{ delay: 0.5, duration: 0.6 }}
               className="flex flex-col items-start lg:items-end gap-4"
             >
-              <Button
-                variant="secondary"
-                size="lg"
-                className="btn-glow bg-primary text-primary-foreground hover:bg-primary/90 gap-3 text-lg px-8 py-6 group/btn"
-              >
-                Explore Event
-                <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
+              <Button asChild>
+                <Link to="/technova"
+                  className="btn-glow bg-primary text-primary-foreground hover:bg-primary/90 gap-3 text-lg px-8 py-6 group/btn"
+                >
+                  Explore Event
+                  <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
+                </Link>
               </Button>
 
               <span className="text-sm text-muted-foreground">Registration opens soon</span>

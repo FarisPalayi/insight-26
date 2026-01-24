@@ -9,6 +9,7 @@ import { FloatingShapes } from "../ui/floaters/FloatingShapes";
 import { FloatingDots } from "../ui/floaters/FloatingDots";
 import { HeroBadge } from "./HeroBadge";
 import { HeroTitle } from "./HeroTitle";
+import { Link } from "react-router";
 
 export const HeroSection = () => {
   return (
@@ -38,7 +39,7 @@ export const HeroSection = () => {
       <FloatingShapes />
       <FloatingDots />
       {/* Main Content */}
-      <div className="container relative z-10 px-4 sm:px-6 pt-32 pb-20">
+      <div className="container relative z-10 px-4 sm:px-6 pt-32 pb-10">
         <motion.div
           className="max-w-5xl mx-auto text-center"
         >
@@ -79,12 +80,14 @@ export const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.65, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
           >
-            <Button
-              size="lg"
-              className="btn-glow bg-primary hover:bg-primary/90 text-primary-foreground group text-base px-6 sm:px-8 py-5 sm:py-6 rounded-xl font-normal w-full sm:w-auto"
-            >
-              Register Now
-              <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
+            <Button asChild>
+              <Link
+                to="/register"
+                className="btn-glow bg-primary hover:bg-primary/90 text-primary-foreground font-semibold group text-base px-6 sm:px-8 py-5 sm:py-6 rounded-xl w-full sm:w-auto"
+              >
+                Register Now
+                <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </Button>
             <Button
               size="lg"
