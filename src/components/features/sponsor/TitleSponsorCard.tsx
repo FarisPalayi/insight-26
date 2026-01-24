@@ -15,10 +15,6 @@ export
 
       {/* Main card */}
       <div className="relative glass-surface-strong rounded-2xl p-8 md:p-12">
-        {/* Corner accents */}
-        <div className={`absolute top-0 left-0 w-16 h-16 bg-gradient-to-br ${accentColor} opacity-20 rounded-tl-2xl`} />
-        <div className={`absolute bottom-0 right-0 w-16 h-16 bg-gradient-to-tl ${accentColor} opacity-20 rounded-br-2xl`} />
-
         <div className="flex flex-col items-center text-center space-y-4">
           <span className={`text-xs font-mono uppercase tracking-[0.3em] bg-gradient-to-r ${accentColor} bg-clip-text text-transparent`}>
             Presenting Partner
