@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LogoLink } from "../ui/LogoLink";
+import { Link } from "react-router";
 
 const navItems = [
   { label: "Events", href: "/events" },
@@ -32,7 +33,7 @@ export const Header = () => {
               <a
                 key={item.label}
                 href={item.href}
-                className="nav-link text-muted-foreground text-sm font-medium tracking-wide uppercase hover:text-foreground"
+                className="nav-link text-muted-foreground text-sm font-medium tracking-wide uppercase "
               >
                 {item.label}
               </a>
@@ -41,8 +42,10 @@ export const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button className="glow-primary">
-              Register Now
+            <Button asChild>
+              <Link to="/register" className="glow-primary">
+                Register Now
+              </Link>
             </Button>
           </div>
 
