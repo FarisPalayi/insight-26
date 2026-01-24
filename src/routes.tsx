@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import { Home } from "./pages/Home";
 import { Event } from "./pages/Event";
+import { NotFound } from "./pages/NotFound";
 
 export const router = createBrowserRouter([
   {
@@ -13,6 +14,6 @@ export const router = createBrowserRouter([
   },
   {
     path: "*",
-    Component: () => (<h1>404 Not Found!</h1>),
+    Component: NotFound,
   }
 ]);
