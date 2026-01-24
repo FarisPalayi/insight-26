@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-import { useIsMobile } from "@/hooks/useIsMobile";
+import { useHighEndDevice } from "@/hooks/useDeviceCapability";
 
 export const FloatingParticles = () => {
-  const isMobile = useIsMobile();
+  const isHighEnd = useHighEndDevice();
 
-  const particleCount = isMobile ? 3 : 6;
+  const particleCount = isHighEnd ? 6 : 3;
 
   return (
     <>
