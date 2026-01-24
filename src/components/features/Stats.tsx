@@ -10,16 +10,36 @@ const AnimatedCounter = ({ value, duration = 2 }: { value: string; duration?: nu
     let start = 0;
     const end = numericValue;
     const increment = end / (duration * 60);
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= end) {
-        setCount(end);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(start));
+    let animationFrame: number;
+    let lastTime = performance.now();
+
+    const animate = (currentTime: number) => {
+      const deltaTime = currentTime - lastTime;
+
+      // Only update ~60 times per second
+      if (deltaTime >= 16.67) {
+        start += increment;
+
+        if (start >= end) {
+          setCount(end);
+          return; // Stop animation
+        } else {
+          setCount(Math.floor(start));
+        }
+
+        lastTime = currentTime;
       }
-    }, 1000 / 60);
-    return () => clearInterval(timer);
+
+      animationFrame = requestAnimationFrame(animate);
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
+    };
   }, [numericValue, duration]);
 
   return <span>{count}{suffix}</span>;
