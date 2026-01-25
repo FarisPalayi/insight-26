@@ -4,6 +4,7 @@ import Footer from "@/components/layout/Footer";
 import EventsSection from "@/components/features/events/EventsSection";
 import SponsorSection from "@/components/features/sponsor/SponsorSection";
 import Main from "@/components/layout/Main";
+import PastEditionHighlights from "@/components/features/pastHighlights/pastHighlightsSection";
 
 export function Home() {
   return (
@@ -12,6 +13,7 @@ export function Home() {
       <Main className="">
         <HeroSection />
         <EventsSection />
+        <PastEditionHighlights />
         <SponsorSection />
       </Main>
       <Footer />
