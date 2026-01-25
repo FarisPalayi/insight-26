@@ -10,12 +10,17 @@ import { FloatingDots } from "../../ui/floaters/FloatingDots";
 import { HeroBadge } from "./HeroBadge";
 import { HeroTitle } from "./HeroTitle";
 import { Link } from "react-router";
+import Scene from "./Scene";
 
 export const HeroSection = () => {
   return (
     <section
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
+
+      <div className="absolute w-full h-full">
+        <Scene />
+      </div>
       {/* Animated Grid Background */}
       <div className="absolute inset-0 grid-pattern opacity-50" />
 
@@ -43,6 +48,7 @@ export const HeroSection = () => {
         <motion.div
           className="max-w-5xl mx-auto text-center"
         >
+
           <HeroBadge />
           <HeroTitle />
 
