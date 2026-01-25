@@ -86,10 +86,10 @@ const PastEditionHighlights = () => {
                 <div className="space-y-2">
                   <p className="text-sm font-mono text-primary">Opening Ceremony</p>
                   <h3 className="text-xl md:text-2xl font-bold text-foreground">
-                    The moment 400+ students came together
+                    Two days of innovation begins
                   </h3>
                   <p className="text-sm text-muted-foreground max-w-md">
-                    CCSIT Auditorium filled to capacity as Insight'25 kicked off with record attendance
+                    The auditorium filled with energy as innovators, creators, and competitors gathered for Insight'25
                   </p>
                 </div>
               </div>
