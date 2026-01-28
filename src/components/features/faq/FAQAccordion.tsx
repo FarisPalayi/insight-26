@@ -23,13 +23,13 @@ export const FAQAccordion = ({ faqs }: FAQAccordionProps) => {
       <Accordion
         type="single"
         collapsible
-        className="space-y-1"
+        className="space-y-2"
       >
         {faqs.map((faq, index) => (
           <AccordionItem
             key={index}
             value={`item-${index}`}
-            className="glass-surface rounded-md rounded-md md:rounded-lg border-0 px-5 md:px-6 overflow-hidden"
+            className="glass-surface rounded-md md:rounded-lg border-0 px-5 md:px-6 overflow-hidden"
           >
             <AccordionTrigger className="py-5 text-left text-base md:text-lg font-medium text-foreground hover:no-underline hover:text-primary transition-colors duration-200 [&[data-state=open]]:text-primary">
               {faq.question}
