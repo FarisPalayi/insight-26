@@ -5,6 +5,7 @@ import EventsSection from "@/components/features/events/EventsSection";
 import SponsorSection from "@/components/features/sponsor/SponsorSection";
 import Main from "@/components/layout/Main";
 import PastEditionHighlights from "@/components/features/pastHighlights/pastHighlightsSection";
+import FAQSection from "@/components/features/faq/FAQSection";
 
 export function Home() {
   return (
@@ -15,6 +16,7 @@ export function Home() {
         <EventsSection />
         <PastEditionHighlights />
         <SponsorSection />
+        <FAQSection />
       </Main>
       <Footer />
     </div>
