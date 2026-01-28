@@ -6,7 +6,6 @@ import SponsorSection from "@/components/features/sponsor/SponsorSection";
 import Main from "@/components/layout/Main";
 import PastEditionHighlights from "@/components/features/pastHighlights/pastHighlightsSection";
 import FAQSection from "@/components/features/faq/FAQSection";
-import EventSchedule from "@/Schedule";
 import { useGSAP } from "@gsap/react";
 import { ScrollSmoother } from "gsap/all";
 
@@ -27,7 +26,6 @@ export function Home() {
           <HeroSection />
           <EventsSection />
           <PastEditionHighlights />
-          <EventSchedule />
           <SponsorSection />
           <FAQSection />
         </Main>
