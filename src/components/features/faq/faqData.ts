@@ -27,11 +27,6 @@ export const faqs: FAQ[] = [
       "Events require minimum participants to proceed. If an event doesn't meet the threshold, participants will be notified and can switch to other events.",
   },
   {
-    question: "Will food be provided during the fest?",
-    answer:
-      "Food stalls and refreshment counters will be available throughout the venue. Lunch coupons are included for registered participants.",
-  },
-  {
     question: "Can I participate in multiple events?",
     answer:
       "Yes! You can register for multiple events as long as their timings don't clash. Check the schedule to plan your participation.",
