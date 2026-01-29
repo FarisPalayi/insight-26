@@ -105,7 +105,7 @@ export function ScheduleSection() {
         </motion.div>
 
         {/* Sticky Tabs & Filters Container */}
-        <div className="sticky top-0 z-40 -mx-4 md:-mx-6 px-4 md:px-6 pb-6 pt-4 bg-background/80 backdrop-blur-xl border-b border-border/40 shadow-sm">
+        <div className="sticky top-0 z-40 -mx-4 md:-mx-6 px-4 md:px-6 pb-6 pt-4 backdrop-blur-xl border-b border-border/40 shadow-sm">
           <Tabs
             value={selectedDay}
             onValueChange={setSelectedDay}
@@ -119,11 +119,11 @@ export function ScheduleSection() {
                     key={day}
                     value={day.toString()}
                     className={cn(
-                      "relative flex-1 rounded-none border-b-2 border-transparent px-8 py-4",
+                      "relative flex-1 rounded-none border-transparent px-8 py-4",
                       "font-display text-base md:text-lg font-semibold transition-all duration-300",
                       "data-[state=inactive]:text-muted-foreground data-[state=inactive]:hover:text-foreground data-[state=inactive]:hover:border-border",
                       "data-[state=active]:text-primary data-[state=active]:border-primary data-[state=active]:shadow-none",
-                      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                      "border-none cursor-pointer"
                     )}
                   >
                     <span className="relative z-10 flex items-center gap-2">
