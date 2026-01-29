@@ -238,7 +238,7 @@ export const scheduleData: DaySchedule[] = [
         name: 'Treasure Hunt',
         venue: 'TRAP',
         category: 'competition',
-        isMultiPeriod: true,
+        isMultiPeriod: false,
         description: 'Campus-wide treasure hunt adventure',
         registrationFee: '₹2,000',
         prizes: {
