@@ -1,6 +1,4 @@
-import { motion } from 'framer-motion';
 import { categories, type EventCategory } from '@/lib/data/schedule';
-import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { MotionButton } from "@/components/ui/MotionButton"
 
