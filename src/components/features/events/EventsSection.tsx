@@ -61,7 +61,7 @@ const EventsSection = () => {
           </motion.div>
 
           <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6" id="featured-events">
-            <span className="text-foreground">Featured</span>
+            <span className="text-foreground">Featured </span>
             <span className="text-gradient">Events</span>
           </h2>
 
