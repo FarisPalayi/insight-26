@@ -17,14 +17,10 @@ export const HeroSection = () => {
     <section
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-
+      {/* Animated Grid Background */}
       <div className="absolute w-full h-full">
         <Scene />
       </div>
-      {/* Animated Grid Background */}
-      <div className="absolute inset-0 grid-pattern opacity-50" />
-
-      {/* Gradient Orbs */}
       <FloatingOrb
         className="bg-primary/30 top-0 -left-48"
         size="w-[350px] h-[320px] sm:w-[500px] sm:h-[500px]"
@@ -48,7 +44,6 @@ export const HeroSection = () => {
         <motion.div
           className="max-w-5xl mx-auto text-center"
         >
-
           <HeroBadge />
           <HeroTitle />
 
@@ -65,7 +60,7 @@ export const HeroSection = () => {
               transition={{ type: "spring", stiffness: 400 }}
             >
               <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-primary group-hover:scale-110 transition-transform" />
-              <span className="font-medium text-foreground">17 & 18 February 2026</span>
+              <span className="font-medium text-foreground">16 & 17 February 2026</span>
             </motion.div>
             <motion.div
               className="flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl group cursor-default w-full sm:w-auto justify-center"
