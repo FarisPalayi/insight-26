@@ -1,13 +1,16 @@
 import { motion } from 'framer-motion';
 import { categories, type EventCategory } from '@/lib/data/schedule';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { MotionButton } from "@/components/ui/MotionButton"
 
 interface CategoryFilterProps {
   selectedCategories: EventCategory[];
   onToggleCategory: (category: EventCategory) => void;
 }
 
-const categoryColorClasses: Record<EventCategory, { active: string; inactive: string }> = {
+// Category colors using Tailwind v4 tokens
+const categoryStyles: Record<EventCategory, { active: string; inactive: string }> = {
   seminar: {
     active: 'bg-event-seminar text-primary-foreground border-event-seminar shadow-[0_0_20px_hsl(200_100%_55%/0.4)]',
     inactive: 'bg-event-seminar/10 text-event-seminar border-event-seminar/30 hover:bg-event-seminar/20 hover:border-event-seminar/50',
@@ -29,47 +32,55 @@ const categoryColorClasses: Record<EventCategory, { active: string; inactive: st
 export function CategoryFilter({ selectedCategories, onToggleCategory }: CategoryFilterProps) {
   const isAll = selectedCategories.length === 0;
 
+  const handleClearAll = () => {
+    categories.forEach((c) => {
+      if (selectedCategories.includes(c.id)) {
+        onToggleCategory(c.id);
+      }
+    });
+  };
+
   return (
     <div className="mb-8">
-      <h4 className="mb-4 text-sm font-medium text-muted-foreground uppercase tracking-wider">Filter by category</h4>
+      <h4 className="mb-4 text-sm font-medium text-muted-foreground uppercase tracking-wider">
+        Filter by category
+      </h4>
       <div className="flex flex-wrap gap-3">
-        <motion.button
+        <MotionButton
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => {
-            // Clear all filters
-            categories.forEach((c) => {
-              if (selectedCategories.includes(c.id)) {
-                onToggleCategory(c.id);
-              }
-            });
-          }}
+          variant={isAll ? "default" : "outline"}
+          size="sm"
+          onClick={handleClearAll}
           className={cn(
-            'rounded-full border px-5 py-2 text-sm font-medium transition-all duration-300',
-            isAll
-              ? 'bg-primary text-primary-foreground border-primary shadow-[0_0_20px_hsl(160_100%_45%/0.4)]'
-              : 'bg-muted/50 text-muted-foreground border-border hover:bg-muted hover:text-foreground hover:border-muted-foreground/30'
+            'rounded-full px-5 transition-all duration-300 text-foreground bg-muted/50',
+            isAll && 'shadow-[0_0_20px_hsl(160_100%_45%/0.4)] bg-primary'
           )}
         >
           All Events
-        </motion.button>
+        </MotionButton>
+
         {categories.map((category) => {
           const isSelected = selectedCategories.includes(category.id);
-          const colors = categoryColorClasses[category.id];
+          const styles = categoryStyles[category.id];
 
           return (
-            <motion.button
+            <MotionButton
               key={category.id}
+              // Motion props
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              // Button props
+              variant="outline"
+              size="sm"
               onClick={() => onToggleCategory(category.id)}
               className={cn(
-                'rounded-full border px-5 py-2 text-sm font-medium transition-all duration-300',
-                isSelected ? colors.active : colors.inactive
+                'rounded-full px-5 transition-colors duration-300 border',
+                isSelected ? styles.active : styles.inactive
               )}
             >
               {category.name}
-            </motion.button>
+            </MotionButton>
           );
         })}
       </div>

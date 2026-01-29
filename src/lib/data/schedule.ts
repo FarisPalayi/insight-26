@@ -29,10 +29,10 @@ export interface DaySchedule {
 export const venues = [
   { id: 'aryabhatta', name: 'Aryabhatta Hall', shortName: 'ARYABHATTA' },
   { id: 'ems', name: 'EMS Hall', shortName: 'EMS' },
-  { id: 'ems-side', name: 'EMS Side Hall', shortName: 'EMS (SIDE)' },
+  { id: 'ems-side', name: 'EMS Side Hall', shortName: 'EMS Hall' },
   { id: 'ccsit', name: 'CCSIT/SC Block', shortName: 'CCSIT' },
   { id: 'ccsit-lab', name: 'CCSIT Lab', shortName: 'CCSIT LAB' },
-  { id: 'trap', name: 'TRAP', shortName: 'TRAP' },
+  { id: 'trap', name: 'Student Trap', shortName: 'TRAP' },
 ];
 
 export const categories: { id: EventCategory; name: string; color: string }[] = [
@@ -186,7 +186,7 @@ export const scheduleData: DaySchedule[] = [
         startTime: '00:00',
         endTime: '23:59',
         name: 'Photo Competition',
-        venue: 'Online Submission',
+        venue: 'CU Campus',
         category: 'competition',
         isAllDay: true,
         description: 'Capture the best moments of the fest',
@@ -200,7 +200,7 @@ export const scheduleData: DaySchedule[] = [
         startTime: '00:00',
         endTime: '23:59',
         name: 'Video Competition',
-        venue: 'Online Submission',
+        venue: 'CU Campus',
         category: 'competition',
         isAllDay: true,
         description: 'Create the best video coverage',
