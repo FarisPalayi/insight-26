@@ -36,6 +36,12 @@
   --color-glow-primary: hsl(160 100% 45%);
   --color-glow-accent: hsl(280 100% 60%);
 
+  /* Event Category Colors */
+  --color-event-seminar: hsl(200 100% 55%);
+  --color-event-competition: hsl(160 100% 45%);
+  --color-event-cultural: hsl(280 100% 60%);
+  --color-event-allday: hsl(35 100% 55%);
+
   /* Font families */
   --font-family-sans: "Space Grotesk", system-ui, sans-serif;
   --font-family-mono: "JetBrains Mono", monospace;
