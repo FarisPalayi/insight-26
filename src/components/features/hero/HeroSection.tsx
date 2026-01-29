@@ -18,7 +18,7 @@ export const HeroSection = () => {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Animated Grid Background */}
-      <div className="absolute w-full h-full">
+      <div className="absolute w-full h-full z-10">
         <Scene />
       </div>
       <FloatingOrb
@@ -90,12 +90,13 @@ export const HeroSection = () => {
                 <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="btn-outline-glow text-base px-6 sm:px-8 py-5 sm:py-6 rounded-xl border-primary/30 hover:bg-primary/10 hover:border-primary/50 font-normal transition-all duration-300 w-full sm:w-auto text-foreground"
-            >
-              View Events
+            <Button variant="outline" size="lg" asChild>
+              <a
+                href="#featured-events"
+                className="btn-outline-glow text-base px-6 sm:px-8 py-5 sm:py-6 rounded-xl border-primary/30 hover:bg-primary/10 hover:border-primary/50 font-normal transition-all duration-300 w-full sm:w-auto text-foreground"
+              >
+                View Events
+              </a>
             </Button>
 
           </motion.div>

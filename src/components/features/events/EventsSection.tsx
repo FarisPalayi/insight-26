@@ -60,9 +60,9 @@ const EventsSection = () => {
             <span className="text-sm font-medium text-muted-foreground">Featured Events</span>
           </motion.div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6">
-            <span className="text-foreground">Events at </span>
-            <span className="text-gradient">Insight'26</span>
+          <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6" id="featured-events">
+            <span className="text-foreground">Featured</span>
+            <span className="text-gradient">Events</span>
           </h2>
 
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
