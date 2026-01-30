@@ -1,113 +1,286 @@
-import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Camera, Users, Star } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { EventCard } from "./EventCard";
-import { FlagshipEvent } from "./FlagshipEventCard";
+import { useState, useEffect, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Search, Sparkles, ArrowRight } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import {
+  EventCard,
+  EventCardSkeleton,
+  EventCategoryFilter,
+  FeaturedEventCard
+} from '@/components/features/events';
+import {
+  type EventCategory,
+  eventsData,
+  getFeaturedEvents,
+  getEventsByCategory
+} from '@/lib/data/events';
+import { Link } from 'react-router';
 
-const EventsSection = () => {
-  const FeaturedEvents = [
-    {
-      name: "Shoot Sync",
-      category: "Photography",
-      tagline: "Capture the moment, freeze the magic in every frame. Showcase your creative eye and visual storytelling.",
-      icon: <Camera className="w-6 h-6" />,
-      accentColor: "from-pink-500 to-rose-500",
-      urlPath: "/photography",
-    },
-    {
-      name: "Scavenge Squad",
-      category: "Team Fun",
-      tagline: "Race against time, hunt for clues, claim victory. Team up for the ultimate treasure hunt experience.",
-      icon: <Users className="w-6 h-6" />,
-      accentColor: "from-emerald-500 to-teal-500",
-      urlPath: "/treasure-hunt",
-    },
-    {
-      name: "Talen'X",
-      category: "Open Stage",
-      tagline: "Unleash your hidden talents and steal the spotlight. Dance, sing, perform—let your creativity shine.",
-      icon: <Star className="w-6 h-6" />,
-      accentColor: "from-amber-500 to-orange-500",
-      urlPath: "/talenx",
-    },
-  ];
+export function EventsSection() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState<EventCategory | 'all'>('all');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Simulate loading state (in real app, this would be from API)
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 1200);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Get featured events
+  const featuredEvents = useMemo(() => getFeaturedEvents(), []);
+
+  // Filter events based on category and search
+  const filteredEvents = useMemo(() => {
+    let events = eventsData.filter(e => !e.isFeatured);
+
+    if (selectedCategory !== 'all') {
+      events = events.filter(e => e.category === selectedCategory);
+    }
+
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      events = events.filter(e =>
+        e.name.toLowerCase().includes(query) ||
+        e.tagline.toLowerCase().includes(query) ||
+        e.venue.toLowerCase().includes(query) ||
+        e.category.toLowerCase().includes(query)
+      );
+    }
+
+    return events;
+  }, [selectedCategory, searchQuery]);
+
+  // Group events by category for display
+  const eventGroups = useMemo(() => {
+    if (selectedCategory !== 'all') {
+      return [{ id: selectedCategory, title: `${selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)}s`, events: filteredEvents }];
+    }
+    return getEventsByCategory().map(group => ({
+      ...group,
+      events: group.events.filter(e => {
+        if (!searchQuery.trim()) return true;
+        const query = searchQuery.toLowerCase();
+        return e.name.toLowerCase().includes(query) ||
+          e.tagline.toLowerCase().includes(query) ||
+          e.venue.toLowerCase().includes(query);
+      })
+    })).filter(g => g.events.length > 0);
+  }, [selectedCategory, searchQuery, filteredEvents]);
 
   return (
-    <section id="events" className="relative pt-24 md:pt-32 lg:pt-40 overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 grid-pattern opacity-20" />
-      <div className="absolute top-1/4 -left-64 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 -right-64 w-[600px] h-[600px] bg-accent/5 rounded-full blur-3xl" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-primary/3 to-transparent rounded-full blur-3xl" />
+    <div className="min-h-screen bg-background">
+      {/* Background Effects */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[100px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-[100px]" />
+        <div className="absolute inset-0 grid-pattern opacity-30" />
+      </div>
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16 md:mb-20"
-        >
+      {/* Header Section */}
+      <header className="relative pt-12 pb-8 px-4">
+        <div className="container mx-auto max-w-7xl">
+          {/* Breadcrumb */}
+          <nav className="mb-8">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
+              <span>/</span>
+              <span className="text-foreground">Events</span>
+            </div>
+          </nav>
+
+          {/* Title */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/50 border border-border/50 mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-10"
           >
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-muted-foreground">Featured Events</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
+              <Sparkles className="w-4 h-4 text-primary" />
+              <span className="text-sm font-medium text-primary">Insight'26 Events</span>
+            </div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4">
+              <span className="text-gradient">Explore Events</span>
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Discover competitions, seminars, and cultural events. Find your passion and register today.
+            </p>
           </motion.div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6" id="featured-events">
-            <span className="text-foreground">Featured </span>
-            <span className="text-gradient">Events</span>
-          </h2>
-
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            From intense tech battles to creative showcases—discover experiences that challenge, inspire, and celebrate talent.
-          </p>
-        </motion.div>
-
-        {/* Featured Event */}
-        <div className="mb-12 md:mb-16">
-          <FlagshipEvent />
-        </div>
-
-        {/* Secondary Events Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          {FeaturedEvents.map((event, index) => (
-            <EventCard
-              key={event.name}
-              {...event}
-              index={index}
-            />
-          ))}
-        </div>
-
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.6 }}
-          className="text-center mt-16"
-        >
-          <p className="text-muted-foreground mb-4">More events coming soon...</p>
-          <Button
-            variant="outline"
-            size="lg"
-            className="btn-outline-glow gap-2 text-foreground"
+          {/* Search & Filter Bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="space-y-6"
           >
-            View All Events
-            <ArrowRight className="w-4 h-4" />
-          </Button>
-        </motion.div>
-      </div>
-    </section>
+            {/* Search */}
+            <div className="max-w-md mx-auto">
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Input
+                  type="text"
+                  placeholder="Search events, venues..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-12 h-12 bg-card/60 border-border/50 rounded-xl focus:border-primary/50 focus:ring-primary/20"
+                />
+              </div>
+            </div>
+
+            {/* Category Filter */}
+            <EventCategoryFilter
+              selectedCategory={selectedCategory}
+              onSelectCategory={setSelectedCategory}
+            />
+          </motion.div>
+        </div>
+      </header>
+
+      <Separator className="bg-border/30" />
+
+      {/* Main Content */}
+      <main className="relative py-12 px-4">
+        <div className="container mx-auto max-w-7xl">
+          {/* Featured Events Section */}
+          {(selectedCategory === 'all' || featuredEvents.some(e => e.category === selectedCategory)) && (
+            <section className="mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="flex items-center justify-between mb-8"
+              >
+                <div>
+                  <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">
+                    Featured Events
+                  </h2>
+                  <p className="text-muted-foreground mt-1">Don't miss these highlight events</p>
+                </div>
+              </motion.div>
+
+              {isLoading ? (
+                <div className="space-y-6">
+                  <EventCardSkeleton />
+                </div>
+              ) : (
+                <div className="space-y-6">
+                  <AnimatePresence>
+                    {featuredEvents
+                      .filter(e => selectedCategory === 'all' || e.category === selectedCategory)
+                      .map((event, index) => (
+                        <FeaturedEventCard key={event.id} event={event} index={index} />
+                      ))}
+                  </AnimatePresence>
+                </div>
+              )}
+            </section>
+          )}
+
+          {/* All Events by Category */}
+          <AnimatePresence>
+            {isLoading ? (
+              <section>
+                <div className="flex items-center justify-between mb-8">
+                  <div className="h-8 w-48 bg-muted rounded animate-pulse" />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {Array.from({ length: 8 }).map((_, i) => (
+                    <EventCardSkeleton key={i} />
+                  ))}
+                </div>
+              </section>
+            ) : (
+              eventGroups.map((group) => (
+                <motion.section
+                  key={group.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.4 }}
+                  className="mb-16"
+                >
+                  <div className="flex items-center justify-between mb-8">
+                    <div>
+                      <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">
+                        {group.title}
+                      </h2>
+                      <p className="text-muted-foreground mt-1">
+                        {group.events.length} event{group.events.length !== 1 ? 's' : ''}
+                      </p>
+                    </div>
+                    {selectedCategory === 'all' && group.events.length > 4 && (
+                      <Button variant="ghost" className="text-primary hover:text-primary/80">
+                        View All <ArrowRight className="w-4 h-4 ml-2" />
+                      </Button>
+                    )}
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    {group.events.map((event, index) => (
+                      <EventCard key={event.id} event={event} index={index} />
+                    ))}
+                  </div>
+                </motion.section>
+              ))
+            )}
+          </AnimatePresence>
+
+          {/* Empty State */}
+          {!isLoading && filteredEvents.length === 0 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-20"
+            >
+              <div className="w-16 h-16 rounded-full bg-muted/50 flex items-center justify-center mx-auto mb-4">
+                <Search className="w-8 h-8 text-muted-foreground" />
+              </div>
+              <h3 className="text-xl font-semibold text-foreground mb-2">No events found</h3>
+              <p className="text-muted-foreground mb-6">
+                Try adjusting your search or filter to find what you're looking for.
+              </p>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setSearchQuery('');
+                  setSelectedCategory('all');
+                }}
+              >
+                Clear Filters
+              </Button>
+            </motion.div>
+          )}
+        </div>
+      </main>
+
+      {/* Quick Legend */}
+      <footer className="relative py-8 px-4 border-t border-border/30">
+        <div className="container mx-auto max-w-7xl">
+          <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
+            <span className="text-muted-foreground">Quick Legend:</span>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full bg-[hsl(var(--event-competition))]" />
+              <span className="text-muted-foreground">Competition</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full bg-[hsl(var(--event-seminar))]" />
+              <span className="text-muted-foreground">Seminar</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full bg-[hsl(var(--event-cultural))]" />
+              <span className="text-muted-foreground">Cultural</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full bg-[hsl(var(--event-allday))]" />
+              <span className="text-muted-foreground">All Day</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
-};
-
-export default EventsSection;
-
+}
