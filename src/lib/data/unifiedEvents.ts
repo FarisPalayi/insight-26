@@ -356,24 +356,6 @@ export const unifiedEvents: UnifiedEvent[] = [
     prizePool: '3,500',
     prizes: { first: '2,500', second: '1,000' },
   },
-  {
-    id: 'spot-competitions',
-    name: 'Spot Competitions',
-    tagline: 'Quick-fire challenges',
-    description: 'Quick-fire spot competitions for those who love spontaneous challenges.',
-    category: 'competition',
-    schedule: {
-      day: 2,
-      startTime: '16:00',
-      endTime: '17:00',
-      displayTime: '04:00 PM - 05:00 PM',
-    },
-    venue: 'TRAP',
-    teamSize: 'any',
-    entryFee: 'Varies',
-    registrationStatus: 'open',
-    imageUrl: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800&q=80',
-  },
 
   // ============ ALL-DAY / BOTH DAYS EVENTS ============
   {
