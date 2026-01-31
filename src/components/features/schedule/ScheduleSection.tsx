@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, Sunrise, Sun, Moon } from 'lucide-react';
+import { Calendar, Sunrise, Sun, Moon, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -12,7 +12,6 @@ import {
   timePeriods,
 } from '@/lib/data/unifiedEvents';
 import { ScheduleEventCard } from './EventCard';
-import { AllDayBanner } from './AllDayBanner';
 import { EventCategoryFilter } from '@/components/features/EventCategoryFilter';
 
 interface TimePeriod {
@@ -22,6 +21,7 @@ interface TimePeriod {
   start: string;
   end: string;
   icon: React.ComponentType<{ className?: string }>;
+  isAllDay?: boolean;
 }
 
 const periods: TimePeriod[] = [
@@ -48,6 +48,15 @@ const periods: TimePeriod[] = [
     start: timePeriods.evening.start,
     end: timePeriods.evening.end,
     icon: Moon
+  },
+  {
+    id: 'allday',
+    label: 'All Day',
+    timeLabel: 'Running throughout the day',
+    start: '00:00',
+    end: '23:59',
+    icon: Zap,
+    isAllDay: true,
   },
 ];
 
@@ -81,6 +90,13 @@ export function ScheduleSection() {
     const usedEventIds = new Set<string>();
 
     periods.forEach((period) => {
+      // Special handling for all-day period
+      if (period.isAllDay) {
+        grouped[period.id] = filteredAllDayEvents;
+        return;
+      }
+
+      // Regular scheduled events
       grouped[period.id] = filteredEvents.filter((event) => {
         // Skip if already assigned to an earlier period
         if (usedEventIds.has(event.id)) return false;
@@ -96,7 +112,7 @@ export function ScheduleSection() {
       });
     });
     return grouped;
-  }, [filteredEvents]);
+  }, [filteredEvents, filteredAllDayEvents]);
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-background py-16 md:py-24">
@@ -137,7 +153,7 @@ export function ScheduleSection() {
                     key={day}
                     value={day.toString()}
                     className={cn(
-                      "relative flex-1 rounded-none border-transparent px-16 py-6",
+                      "relative flex-1 rounded-none border-transparent px-8 py-5",
                       "font-display text-base md:text-lg font-semibold transition-all duration-300",
                       "data-[state=inactive]:text-muted-foreground data-[state=inactive]:hover:text-foreground data-[state=inactive]:hover:border-border",
                       "data-[state=active]:text-primary data-[state=active]:border-primary data-[state=active]:shadow-none",
@@ -175,18 +191,6 @@ export function ScheduleSection() {
                 onToggleCategory={handleToggleCategory}
               />
             </motion.div>
-
-            {/* All Day Events Banner (sticky with tabs) */}
-            {filteredAllDayEvents.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.2 }}
-                className="mt-6"
-              >
-                <AllDayBanner events={filteredAllDayEvents} />
-              </motion.div>
-            )}
 
             {/* Tab Content */}
             <div className="mt-8">
