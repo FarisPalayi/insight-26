@@ -1,22 +1,22 @@
 import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Sparkles, ArrowRight } from 'lucide-react';
+import { Search, ArrowRight } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import {
   EventCard,
   EventCardSkeleton,
-  EventCategoryFilter,
   FeaturedEventCard
 } from '@/components/features/events';
+import { EventCategoryFilter } from '@/components/features/EventCategoryFilter';
 import {
+  unifiedEvents,
   type EventCategory,
-  eventsData,
   getFeaturedEvents,
-  getEventsByCategory
-} from '@/lib/data/events';
-import { Link } from 'react-router';
+  getActiveCategories,
+  categoryLabels,
+} from '@/lib/data/unifiedEvents';
 
 export function EventsSection() {
   const [isLoading, setIsLoading] = useState(true);
@@ -34,7 +34,7 @@ export function EventsSection() {
 
   // Filter events based on category and search
   const filteredEvents = useMemo(() => {
-    let events = eventsData.filter(e => !e.isFeatured);
+    let events = unifiedEvents.filter(e => !e.isFeatured);
 
     if (selectedCategory !== 'all') {
       events = events.filter(e => e.category === selectedCategory);
@@ -44,9 +44,7 @@ export function EventsSection() {
       const query = searchQuery.toLowerCase();
       events = events.filter(e =>
         e.name.toLowerCase().includes(query) ||
-        e.tagline.toLowerCase().includes(query) ||
-        e.venue.toLowerCase().includes(query) ||
-        e.category.toLowerCase().includes(query)
+        e.venue.toLowerCase().includes(query)
       );
     }
 
@@ -56,19 +54,27 @@ export function EventsSection() {
   // Group events by category for display
   const eventGroups = useMemo(() => {
     if (selectedCategory !== 'all') {
-      return [{ id: selectedCategory, title: `${selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)}s`, events: filteredEvents }];
+      const categoryLabel = categoryLabels[selectedCategory];
+      return [{
+        id: selectedCategory,
+        title: categoryLabel + 's',
+        events: filteredEvents
+      }];
     }
-    return getEventsByCategory().map(group => ({
-      ...group,
-      events: group.events.filter(e => {
-        if (!searchQuery.trim()) return true;
-        const query = searchQuery.toLowerCase();
-        return e.name.toLowerCase().includes(query) ||
-          e.tagline.toLowerCase().includes(query) ||
-          e.venue.toLowerCase().includes(query);
+
+    // Group filtered events by category
+    const categories = getActiveCategories();
+    return categories
+      .map(category => {
+        const categoryEvents = filteredEvents.filter(e => e.category === category);
+        return {
+          id: category,
+          title: categoryLabels[category] + 's',
+          events: categoryEvents
+        };
       })
-    })).filter(g => g.events.length > 0);
-  }, [selectedCategory, searchQuery, filteredEvents]);
+      .filter(g => g.events.length > 0);
+  }, [selectedCategory, filteredEvents]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -82,14 +88,6 @@ export function EventsSection() {
       {/* Header Section */}
       <header className="relative pt-12 pb-8 px-4">
         <div className="container mx-auto max-w-7xl">
-          {/* Breadcrumb */}
-          <nav className="mb-8">
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
-              <span>/</span>
-              <span className="text-foreground">Events</span>
-            </div>
-          </nav>
 
           {/* Title */}
           <motion.div
@@ -98,10 +96,6 @@ export function EventsSection() {
             transition={{ duration: 0.5 }}
             className="text-center mb-10"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
-              <Sparkles className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-primary">Insight'26 Events</span>
-            </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4">
               <span className="text-gradient">Explore Events</span>
             </h1>
@@ -126,13 +120,14 @@ export function EventsSection() {
                   placeholder="Search events, venues..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-12 h-12 bg-card/60 border-border/50 rounded-xl focus:border-primary/50 focus:ring-primary/20"
+                  className="text-foreground pl-12 h-12 bg-card/60 border-border/50 rounded-xl focus:border-primary/50 focus:ring-primary/20"
                 />
               </div>
             </div>
 
             {/* Category Filter */}
             <EventCategoryFilter
+              mode="single"
               selectedCategory={selectedCategory}
               onSelectCategory={setSelectedCategory}
             />
@@ -146,7 +141,7 @@ export function EventsSection() {
       <main className="relative py-12 px-4">
         <div className="container mx-auto max-w-7xl">
           {/* Featured Events Section */}
-          {(selectedCategory === 'all' || featuredEvents.some(e => e.category === selectedCategory)) && (
+          {(selectedCategory === 'all' || featuredEvents.some(e => e.category === selectedCategory)) && featuredEvents.length > 0 && (
             <section className="mb-16">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -230,7 +225,7 @@ export function EventsSection() {
           </AnimatePresence>
 
           {/* Empty State */}
-          {!isLoading && filteredEvents.length === 0 && (
+          {!isLoading && filteredEvents.length === 0 && featuredEvents.filter(e => selectedCategory === 'all' || e.category === selectedCategory).length === 0 && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

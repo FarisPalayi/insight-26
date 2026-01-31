@@ -1,14 +1,19 @@
-"use client";
-
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar } from 'lucide-react';
-import { scheduleData, type EventCategory, type ScheduleEvent, eventFallsInPeriod } from '@/lib/data/schedule';
+import { Calendar, Sunrise, Sun, Moon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { EventCard } from './EventCard';
+import {
+  type EventCategory,
+  type UnifiedEvent,
+  getScheduledEvents,
+  getAllDayEvents,
+  eventFallsInPeriod,
+  timePeriods,
+} from '@/lib/data/unifiedEvents';
+import { ScheduleEventCard } from './EventCard';
 import { AllDayBanner } from './AllDayBanner';
-import { CategoryFilter } from './CategoryFilter';
+import { EventCategoryFilter } from '@/components/features/EventCategoryFilter';
 
 interface TimePeriod {
   id: string;
@@ -16,39 +21,52 @@ interface TimePeriod {
   timeLabel: string;
   start: string;
   end: string;
-  icon: string;
+  icon: React.ComponentType<{ className?: string }>;
 }
 
 const periods: TimePeriod[] = [
-  { id: 'morning', label: 'Morning', timeLabel: '9:00 AM - 12:00 PM', start: '09:00', end: '12:00', icon: '🌅' },
-  { id: 'afternoon', label: 'Afternoon', timeLabel: '12:00 PM - 5:00 PM', start: '12:00', end: '17:00', icon: '☀️' },
-  { id: 'evening', label: 'Evening', timeLabel: '5:00 PM onwards', start: '17:00', end: '23:59', icon: '🌙' },
+  {
+    id: 'morning',
+    label: 'Morning',
+    timeLabel: timePeriods.morning.label,
+    start: timePeriods.morning.start,
+    end: timePeriods.morning.end,
+    icon: Sunrise
+  },
+  {
+    id: 'afternoon',
+    label: 'Afternoon',
+    timeLabel: timePeriods.afternoon.label,
+    start: timePeriods.afternoon.start,
+    end: timePeriods.afternoon.end,
+    icon: Sun
+  },
+  {
+    id: 'evening',
+    label: 'Evening',
+    timeLabel: timePeriods.evening.label,
+    start: timePeriods.evening.start,
+    end: timePeriods.evening.end,
+    icon: Moon
+  },
 ];
 
 export function ScheduleSection() {
-  const [selectedDay, setSelectedDay] = useState("1");
+  const [selectedDay, setSelectedDay] = useState<1 | 2>(1);
   const [selectedCategories, setSelectedCategories] = useState<EventCategory[]>([]);
 
-  const currentDayData = useMemo(() =>
-    scheduleData.find((d) => d.day === parseInt(selectedDay)),
-    [selectedDay]
-  );
+  const scheduledEvents = useMemo(() => getScheduledEvents(selectedDay), [selectedDay]);
+  const allDayEvents = useMemo(() => getAllDayEvents(selectedDay), [selectedDay]);
 
   const filteredEvents = useMemo(() => {
-    if (!currentDayData) return [];
-    if (selectedCategories.length === 0) return currentDayData.events;
-    return currentDayData.events.filter((event) =>
-      selectedCategories.includes(event.category)
-    );
-  }, [currentDayData, selectedCategories]);
+    if (selectedCategories.length === 0) return scheduledEvents;
+    return scheduledEvents.filter((event) => selectedCategories.includes(event.category));
+  }, [scheduledEvents, selectedCategories]);
 
   const filteredAllDayEvents = useMemo(() => {
-    if (!currentDayData) return [];
-    if (selectedCategories.length === 0) return currentDayData.allDayEvents;
-    return currentDayData.allDayEvents.filter((event) =>
-      selectedCategories.includes(event.category)
-    );
-  }, [currentDayData, selectedCategories]);
+    if (selectedCategories.length === 0) return allDayEvents;
+    return allDayEvents.filter((event) => selectedCategories.includes(event.category));
+  }, [allDayEvents, selectedCategories]);
 
   const handleToggleCategory = (category: EventCategory) => {
     setSelectedCategories((prev) =>
@@ -59,7 +77,7 @@ export function ScheduleSection() {
   };
 
   const eventsByPeriod = useMemo(() => {
-    const grouped: Record<string, ScheduleEvent[]> = {};
+    const grouped: Record<string, UnifiedEvent[]> = {};
     const usedEventIds = new Set<string>();
 
     periods.forEach((period) => {
@@ -107,8 +125,8 @@ export function ScheduleSection() {
         {/* Sticky Tabs & Filters Container */}
         <div className="sticky top-0 z-40 -mx-4 md:-mx-6 px-4 md:px-6 pb-6 pt-4 backdrop-blur-xl border-b border-border/40 shadow-sm">
           <Tabs
-            value={selectedDay}
-            onValueChange={setSelectedDay}
+            value={selectedDay.toString()}
+            onValueChange={(value) => setSelectedDay(Number(value) as 1 | 2)}
             className="w-full"
           >
             {/* Line Variant Tabs */}
@@ -132,7 +150,7 @@ export function ScheduleSection() {
                     </span>
 
                     {/* Animated underline */}
-                    {selectedDay === day.toString() && (
+                    {selectedDay.toString() === day.toString() && (
                       <motion.div
                         layoutId="activeTabIndicator"
                         className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
@@ -151,7 +169,8 @@ export function ScheduleSection() {
               transition={{ duration: 0.4, delay: 0.1 }}
               className="flex justify-center"
             >
-              <CategoryFilter
+              <EventCategoryFilter
+                mode="multi"
                 selectedCategories={selectedCategories}
                 onToggleCategory={handleToggleCategory}
               />
@@ -198,7 +217,7 @@ export function ScheduleSection() {
                               className="mb-6 flex items-center gap-4"
                             >
                               <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-card to-card/80 border border-border shadow-md">
-                                <span className="text-2xl">{period.icon}</span>
+                                <period.icon className="w-6 h-6 text-primary" />
                               </div>
                               <div className="flex-1">
                                 <h3 className="font-display text-xl md:text-2xl font-semibold text-foreground">
@@ -213,7 +232,7 @@ export function ScheduleSection() {
 
                             <div className="grid gap-4 md:gap-6 sm:grid-cols-2 lg:grid-cols-3">
                               {periodEvents.map((event, index) => (
-                                <EventCard
+                                <ScheduleEventCard
                                   key={`${selectedDay}-${period.id}-${event.id}`}
                                   event={event}
                                   index={index}

@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
 import { Zap, MapPin } from 'lucide-react';
-import { type ScheduleEvent } from '@/lib/data/schedule';
+import { type UnifiedEvent } from '@/lib/data/unifiedEvents';
 
 interface AllDayBannerProps {
-  events: ScheduleEvent[];
+  events: UnifiedEvent[];
 }
 
 export function AllDayBanner({ events }: AllDayBannerProps) {

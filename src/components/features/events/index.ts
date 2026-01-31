@@ -1,5 +1,4 @@
-export { EventCard } from './EventCard';
 export { EventsSection } from './EventsSection';
-export { EventCardSkeleton } from './EventCardSkeleton';
-export { EventCategoryFilter } from './EventCategoryFilter';
+export { EventCard } from './EventCard';
+export { EventCardSkeleton, FeaturedEventCardSkeleton } from './EventCardSkeleton';
 export { FeaturedEventCard } from './FeaturedEventCard';

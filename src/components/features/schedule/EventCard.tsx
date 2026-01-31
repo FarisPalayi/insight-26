@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion';
 import { Clock, MapPin, Timer } from 'lucide-react';
-import { type ScheduleEvent, categories } from '@/lib/data/schedule';
+import { type UnifiedEvent, categoryLabels } from '@/lib/data/unifiedEvents';
 import { cn } from '@/lib/utils';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
 interface EventCardProps {
-  event: ScheduleEvent;
+  event: UnifiedEvent;
   index: number;
   onClick?: () => void;
 }
@@ -43,9 +43,8 @@ const categoryStyles: Record<string, { bg: string; border: string; text: string;
   },
 };
 
-export function EventCard({ event, index, onClick }: EventCardProps) {
+export function ScheduleEventCard({ event, index, onClick }: EventCardProps) {
   const style = categoryStyles[event.category] || categoryStyles.competition;
-  const categoryInfo = categories.find((c) => c.id === event.category);
 
   return (
     <motion.div
@@ -90,7 +89,7 @@ export function EventCard({ event, index, onClick }: EventCardProps) {
                     style.border
                   )}
                 >
-                  {categoryInfo?.name}
+                  {categoryLabels[event.category]}
                 </Badge>
                 {event.isMultiPeriod && (
                   <Badge variant="outline" className="inline-flex items-center gap-1 rounded-full bg-accent/10 border border-accent/30 px-3 py-1 text-xs font-medium text-accent">
@@ -108,7 +107,7 @@ export function EventCard({ event, index, onClick }: EventCardProps) {
               <div className={cn('flex items-center justify-center w-8 h-8 rounded-lg', style.bg)}>
                 <Clock className={cn('h-4 w-4', style.text)} />
               </div>
-              <span className="font-medium text-foreground">{event.time}</span>
+              <span className="font-medium text-foreground">{event.schedule.displayTime}</span>
             </div>
             <div className="flex items-center gap-3 text-muted-foreground">
               <div className={cn('flex items-center justify-center w-8 h-8 rounded-lg', style.bg)}>
