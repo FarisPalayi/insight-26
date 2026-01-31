@@ -3,9 +3,9 @@ import { BookOpen, Calendar } from "lucide-react";
 import { type FooterLink } from "@/types";
 
 const quickLinks: FooterLink[] = [
-  { label: "Events", href: "#events", icon: <Calendar className="w-4 h-4" /> },
-  { label: "Schedule", href: "#schedule", icon: <Calendar className="w-4 h-4" /> },
-  { label: "Brochure", href: "#brochure", icon: <BookOpen className="w-4 h-4" /> },
+  { label: "Events", href: "events", icon: <Calendar className="w-4 h-4" /> },
+  { label: "Schedule", href: "schedule", icon: <Calendar className="w-4 h-4" /> },
+  { label: "Brochure", href: "brochure", icon: <BookOpen className="w-4 h-4" /> },
 ];
 
 export const FooterQuickLinks = () => {

@@ -137,7 +137,7 @@ export function ScheduleSection() {
                     key={day}
                     value={day.toString()}
                     className={cn(
-                      "relative flex-1 rounded-none border-transparent px-8 py-4",
+                      "relative flex-1 rounded-none border-transparent px-16 py-6",
                       "font-display text-base md:text-lg font-semibold transition-all duration-300",
                       "data-[state=inactive]:text-muted-foreground data-[state=inactive]:hover:text-foreground data-[state=inactive]:hover:border-border",
                       "data-[state=active]:text-primary data-[state=active]:border-primary data-[state=active]:shadow-none",

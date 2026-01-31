@@ -97,12 +97,14 @@ export function EventsSection() {
             className="text-center mb-10"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4">
-              <span className="text-gradient">Explore Events</span>
+              <span className="text-gradient">Explore</span>{' '}
+              <span className="text-foreground">Events</span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Discover competitions, seminars, and cultural events. Find your passion and register today.
             </p>
           </motion.div>
+
 
           {/* Search & Filter Bar */}
           <motion.div
@@ -251,31 +253,6 @@ export function EventsSection() {
           )}
         </div>
       </main>
-
-      {/* Quick Legend */}
-      <footer className="relative py-8 px-4 border-t border-border/30">
-        <div className="container mx-auto max-w-7xl">
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
-            <span className="text-muted-foreground">Quick Legend:</span>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-[hsl(var(--event-competition))]" />
-              <span className="text-muted-foreground">Competition</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-[hsl(var(--event-seminar))]" />
-              <span className="text-muted-foreground">Seminar</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-[hsl(var(--event-cultural))]" />
-              <span className="text-muted-foreground">Cultural</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-[hsl(var(--event-allday))]" />
-              <span className="text-muted-foreground">All Day</span>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
