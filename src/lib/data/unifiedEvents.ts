@@ -118,7 +118,7 @@ export const venues = [
 // ================== EVENTS DATA ==================
 
 export const unifiedEvents: UnifiedEvent[] = [
-  // ============ FEATURED EVENTS ============
+  // ============ DAY 1 EVENTS ============
   {
     id: 'technova',
     name: 'Technova 8.0',
@@ -158,10 +158,7 @@ export const unifiedEvents: UnifiedEvent[] = [
     entryFee: 'Free',
     registrationStatus: 'open',
     imageUrl: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80',
-    isFeatured: true,
   },
-
-  // ============ DAY 1 EVENTS ============
   {
     id: 'opening-seminar',
     name: 'Opening Seminar',
@@ -200,6 +197,7 @@ export const unifiedEvents: UnifiedEvent[] = [
     isMultiPeriod: true,
     prizePool: '3,500',
     prizes: { first: '2,500', second: '1,000' },
+    isFeatured: true,
   },
   {
     id: 'paper-presentation',
