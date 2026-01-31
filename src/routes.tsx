@@ -4,6 +4,7 @@ import { NotFound } from "./pages/NotFound";
 import { Schedule } from "./pages/Schedule";
 import { Register } from "./pages/Register";
 import { Events } from "./pages/Events";
+import { Contact } from "./pages/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />
+  },
+  {
+    path: "/contact",
+    element: <Contact />
   },
   {
     path: "*",
