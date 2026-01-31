@@ -217,8 +217,8 @@ export function EventsSection() {
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {group.events.map((event, index) => (
-                      <EventCard key={event.id} event={event} index={index} />
+                    {group.events.map((event) => (
+                      <EventCard key={event.id} event={event} />
                     ))}
                   </div>
                 </motion.section>
