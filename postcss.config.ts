@@ -2,15 +2,17 @@ export default {
   plugins: {
     "@tailwindcss/postcss": {},
     'postcss-preset-env': {
-      stage: 2, // Use moderately stable features
+      stage: 3, // Bump to Stage 3 for better production stability
       features: {
-        'nesting-rules': true, // Enable CSS nesting
-        'custom-media-queries': true, // Enable custom @media
-        'custom-properties': false, // Don't transform CSS variables (we want them!)
+        'nesting-rules': true,
+        'custom-media-queries': true,
+        'custom-properties': false,
       },
       autoprefixer: {
-        flexbox: 'no-2009', // Only use modern flexbox
-        grid: 'autoplace', // Enable IE Grid support with -ms- prefix
+        flexbox: 'no-2009',
+        // backdrop-filter often requires prefixes in Safari, 
+        grid: 'autoplace',
+        remove: false,
       },
     },
   },

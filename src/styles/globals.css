@@ -137,6 +137,7 @@
       hsl(var(--surface-glass) / 0.9) 0%,
       hsl(var(--surface-glass) / 0.5) 100%
     );
+    transform: translateZ(0); /* for hardware acceleration */
   }
 
   .glass-surface-strong {
