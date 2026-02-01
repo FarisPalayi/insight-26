@@ -17,6 +17,7 @@ export const HeroSection = () => {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       <HeroVisual />
+
       <FloatingParticles />
       <FloatingShapes />
       <FloatingDots />
