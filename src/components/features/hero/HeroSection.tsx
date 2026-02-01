@@ -18,20 +18,6 @@ export const HeroSection = () => {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       <HeroVisual />
-      <FloatingOrb
-        className="bg-primary/30 top-0 -left-48"
-        size="w-[350px] h-[320px] sm:w-[500px] sm:h-[500px]"
-      />
-      <FloatingOrb
-        className="bg-accent/25 bottom-0 -right-48"
-        delay={4}
-        size="w-[250px] h-[250px] sm:w-[600px] sm:h-[600px]"
-      />
-      <FloatingOrb
-        className="bg-primary/15 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-        delay={2}
-        size="w-[500px] h-[500px] sm:w-[800px] sm:h-[800px]"
-      />
 
       <FloatingParticles />
       <FloatingShapes />
