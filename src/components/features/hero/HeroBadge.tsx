@@ -8,8 +8,6 @@ export const HeroBadge = () => {
       transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
       className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg glass-surface mb-6 sm:mb-10 cursor-default relative"
     >
-      <div className="absolute top-0 left-0 w-6 h-6 sm:w-8 sm:h-8 border-l-2 border-t-2 border-primary/30 rounded-tl-lg" />
-      <div className="absolute bottom-0 right-0 w-6 h-6 sm:w-8 sm:h-8 border-r-2 border-b-2 border-accent/30 rounded-br-lg" />
 
       <span className="relative text-[10px] sm:text-xs font-mono text-primary font-semibold tracking-wider">
         23RD EDITION
