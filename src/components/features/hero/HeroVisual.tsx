@@ -5,7 +5,7 @@ export const HeroVisual = () => {
       <div
         className="absolute inset-0 w-full h-full"
         style={{
-          backgroundImage: 'url("/hero-tech-bg.jpg")', // Replace with your chosen image
+          backgroundImage: 'url("/circuite-green.webp")', // Replace with your chosen image
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           opacity: 0.25,
