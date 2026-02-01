@@ -5,7 +5,6 @@
 // ================== TYPES ==================
 
 export type EventCategory = 'seminar' | 'competition' | 'cultural' | 'allday';
-export type RegistrationStatus = 'open' | 'filling-fast' | 'closed';
 export type TeamSize = 'solo' | '2-3' | '2-4' | '3-5' | '4-6' | 'any';
 export type EventDay = 1 | 2 | 'both';
 
@@ -13,6 +12,7 @@ export interface EventPrizes {
   first?: string;
   second?: string;
   third?: string;
+  jackpotPrize?: string;
 }
 
 export interface EventCoordinator {
@@ -44,7 +44,7 @@ export interface UnifiedEvent {
   // Participation
   teamSize: TeamSize;
   entryFee: string;
-  registrationStatus: RegistrationStatus;
+  spotRegistration?: boolean;
 
   // Visual
   imageUrl: string;
@@ -78,12 +78,6 @@ export const teamSizeLabels: Record<TeamSize, string> = {
   '3-5': '3-5 Members',
   '4-6': '4-6 Members',
   any: 'Any Size',
-};
-
-export const registrationStatusLabels: Record<RegistrationStatus, string> = {
-  open: 'Open',
-  'filling-fast': 'Filling Fast',
-  closed: 'Closed',
 };
 
 export const dayLabels: Record<EventDay, string> = {
@@ -134,7 +128,6 @@ export const unifiedEvents: UnifiedEvent[] = [
     venue: 'EMS Hall',
     teamSize: '2-4',
     entryFee: '1,000',
-    registrationStatus: 'filling-fast',
     imageUrl: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80',
     isFeatured: true,
     isMultiPeriod: true,
@@ -156,7 +149,6 @@ export const unifiedEvents: UnifiedEvent[] = [
     venue: 'Aryabhatta Hall',
     teamSize: 'any',
     entryFee: 'Free',
-    registrationStatus: 'open',
     imageUrl: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80',
   },
   {
@@ -174,7 +166,6 @@ export const unifiedEvents: UnifiedEvent[] = [
     venue: 'CCSIT Block',
     teamSize: 'solo',
     entryFee: '500',
-    registrationStatus: 'open',
     imageUrl: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80',
     isMultiPeriod: true,
     prizePool: '3,500',
@@ -196,7 +187,6 @@ export const unifiedEvents: UnifiedEvent[] = [
     venue: 'Aryabhatta Hall',
     teamSize: '2-3',
     entryFee: '500',
-    registrationStatus: 'open',
     imageUrl: 'https://images.unsplash.com/photo-1558403194-611308249627?w=800&q=80',
     prizePool: '3,000',
     prizes: { first: '3,000' },
@@ -216,7 +206,6 @@ export const unifiedEvents: UnifiedEvent[] = [
     venue: 'TRAP',
     teamSize: '2-3',
     entryFee: '500',
-    registrationStatus: 'open',
     imageUrl: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
     prizePool: '1,500',
     prizes: { first: '1,000', second: '500' },
@@ -236,7 +225,6 @@ export const unifiedEvents: UnifiedEvent[] = [
     venue: 'Main Stage',
     teamSize: 'any',
     entryFee: 'Free',
-    registrationStatus: 'open',
     imageUrl: 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=800&q=80',
   },
 
@@ -256,7 +244,6 @@ export const unifiedEvents: UnifiedEvent[] = [
     venue: 'EMS Hall',
     teamSize: 'any',
     entryFee: 'Free',
-    registrationStatus: 'open',
     imageUrl: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&q=80',
   },
   {
@@ -274,7 +261,6 @@ export const unifiedEvents: UnifiedEvent[] = [
     venue: 'EMS Hall',
     teamSize: 'any',
     entryFee: 'Free',
-    registrationStatus: 'open',
     imageUrl: 'https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&q=80',
   },
   {
@@ -292,7 +278,6 @@ export const unifiedEvents: UnifiedEvent[] = [
     venue: 'Campus Wide',
     teamSize: '3-5',
     entryFee: '2,000',
-    registrationStatus: 'filling-fast',
     imageUrl: 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=800&q=80',
     isMultiPeriod: true,
     prizePool: '7,000',
@@ -313,7 +298,6 @@ export const unifiedEvents: UnifiedEvent[] = [
     venue: 'CCSIT Lab',
     teamSize: 'solo',
     entryFee: '300',
-    registrationStatus: 'open',
     imageUrl: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80',
     prizePool: '3,000',
     prizes: { first: '2,000', second: '1,000' },
@@ -333,7 +317,6 @@ export const unifiedEvents: UnifiedEvent[] = [
     venue: 'CCSIT Lab',
     teamSize: '2-3',
     entryFee: '400',
-    registrationStatus: 'open',
     imageUrl: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80',
     prizePool: '3,500',
     prizes: { first: '2,500', second: '1,000' },
@@ -355,7 +338,6 @@ export const unifiedEvents: UnifiedEvent[] = [
     venue: 'Student TRAP',
     teamSize: 'any',
     entryFee: 'Varies',
-    registrationStatus: 'open',
     imageUrl: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80',
     isAllDay: true,
   },
@@ -374,7 +356,6 @@ export const unifiedEvents: UnifiedEvent[] = [
     venue: 'Campus Wide',
     teamSize: 'solo',
     entryFee: 'Free',
-    registrationStatus: 'open',
     imageUrl: 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=800&q=80',
     isAllDay: true,
     prizePool: '1,000',
@@ -395,7 +376,6 @@ export const unifiedEvents: UnifiedEvent[] = [
     venue: 'Campus Wide',
     teamSize: 'solo',
     entryFee: 'Free',
-    registrationStatus: 'open',
     imageUrl: 'https://images.unsplash.com/photo-1579566346927-c68383817a25?w=800&q=80',
     isAllDay: true,
     prizePool: '1,000',

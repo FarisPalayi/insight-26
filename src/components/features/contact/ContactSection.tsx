@@ -1,51 +1,30 @@
 import { motion } from "framer-motion";
-import { Phone, MessageCircle, Mail, Send } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Phone, Mail, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { toast } from "sonner";
+import { ContactCard } from "./ContactCard";
+import { contactFormSchema } from "./contact.schema";
+import { CONTACTS } from "./contact.constants";
+import { type ContactFormValues } from "./contact.schema";
+import { contactService } from "./contact.service";
 
-interface ContactPerson {
-  name: string;
-  role: string;
-  phone: string;
-  initials: string;
-}
 
-const contacts: ContactPerson[] = [
-  {
-    name: "Contact Person 1",
-    role: "Event Coordinator",
-    phone: "+919876543210",
-    initials: "CP",
+const TOAST_MESSAGES = {
+  loading: "Sending message...",
+  success: {
+    title: "Message Sent!",
+    description: "We'll get back to you as soon as possible.",
   },
-  {
-    name: "Contact Person 2",
-    role: "Technical Lead",
-    phone: "+919876543211",
-    initials: "TL",
+  error: {
+    title: "Failed to send message",
+    description: "Please try again later.",
   },
-  {
-    name: "Contact Person 3",
-    role: "Registration Head",
-    phone: "+919876543212",
-    initials: "RH",
-  },
-];
-
-const contactFormSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
-  email: z.string().trim().email("Please enter a valid email").max(255, "Email must be less than 255 characters"),
-  subject: z.string().trim().min(1, "Subject is required").max(150, "Subject must be less than 150 characters"),
-  message: z.string().trim().min(10, "Message must be at least 10 characters").max(1000, "Message must be less than 1000 characters"),
-});
-
-type ContactFormValues = z.infer<typeof contactFormSchema>;
+} as const;
 
 const ContactSection = () => {
   const form = useForm<ContactFormValues>({
@@ -58,33 +37,21 @@ const ContactSection = () => {
     },
   });
 
-  const handleCall = (phone: string) => {
-    window.location.href = `tel:${phone}`;
-  };
-
-  const handleWhatsApp = (phone: string) => {
-    window.open(`https://wa.me/${phone.replace("+", "")}`, "_blank");
-  };
-
   const onSubmit = async (data: ContactFormValues) => {
+    const toastId = toast.loading(TOAST_MESSAGES.loading);
     try {
-      // TODO: implement email api
-      toast.loading("Senting message...");
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+      await contactService.sendMessage(data);
+
+      toast.success(TOAST_MESSAGES.success.title, {
+        id: toastId,
+        description: TOAST_MESSAGES.success.description,
       });
 
-      if (!response.ok) throw new Error('Failed to send');
-
-      toast.success("Message Sent!", {
-        description: "We'll get back to you as soon as possible.",
-      });
       form.reset();
     } catch (error) {
-      toast.error("Failed to send message", {
-        description: "Please try again later.",
+      toast.error(TOAST_MESSAGES.error.title, {
+        id: toastId,
+        description: TOAST_MESSAGES.error.description,
       });
     }
   };
@@ -229,7 +196,7 @@ const ContactSection = () => {
             </h3>
 
             {/* Contact Cards */}
-            {contacts.map((person, index) => (
+            {CONTACTS.map((person, index) => (
               <motion.div
                 key={person.name}
                 initial={{ opacity: 0, y: 15 }}
@@ -238,34 +205,7 @@ const ContactSection = () => {
                 transition={{ duration: 0.3, delay: 0.2 + index * 0.1 }}
                 className="glass-surface rounded-xl p-4 group hover:border-primary/30 transition-all duration-300 flex items-center gap-4"
               >
-                <Avatar className="h-12 w-12 border-2 border-primary/20 group-hover:border-primary/40 transition-colors flex-shrink-0">
-                  <AvatarImage src="" alt={person.name} />
-                  <AvatarFallback className="bg-primary/10 text-primary font-semibold text-sm">
-                    {person.initials}
-                  </AvatarFallback>
-                </Avatar>
-
-                <div className="flex-1 min-w-0">
-                  <h4 className="text-foreground font-medium text-sm">{person.name}</h4>
-                  <p className="text-muted-foreground text-xs">{person.role}</p>
-                </div>
-
-                <div className="flex gap-2 flex-shrink-0">
-                  <button
-                    onClick={() => handleCall(person.phone)}
-                    className="p-2.5 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary transition-colors duration-200"
-                    aria-label={`Call ${person.name}`}
-                  >
-                    <Phone className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={() => handleWhatsApp(person.phone)}
-                    className="p-2.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 transition-colors duration-200"
-                    aria-label={`WhatsApp ${person.name}`}
-                  >
-                    <MessageCircle className="w-4 h-4" />
-                  </button>
-                </div>
+                <ContactCard person={person} key={index} />
               </motion.div>
             ))}
 

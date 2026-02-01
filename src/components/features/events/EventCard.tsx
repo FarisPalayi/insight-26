@@ -4,8 +4,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { type UnifiedEvent, categoryLabels, teamSizeLabels, registrationStatusLabels, dayLabels } from '@/lib/data/unifiedEvents';
+import { type UnifiedEvent, categoryLabels, teamSizeLabels, dayLabels } from '@/lib/data/unifiedEvents';
 import { cn } from '@/lib/utils';
+import { Link } from 'react-router';
 
 interface EventCardProps {
   event: UnifiedEvent;
@@ -40,45 +41,14 @@ const CATEGORY_STYLES: Record<string, { bg: string; text: string; border: string
   },
 };
 
-const STATUS_CONFIG: Record<string, { style: string; label: string; actionText: string; priority: 'high' | 'medium' | 'low' }> = {
-  open: {
-    style: 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/30',
-    label: registrationStatusLabels.open,
-    actionText: 'Register Now',
-    priority: 'medium',
-  },
-  'filling-fast': {
-    style: 'bg-amber-500/15 text-amber-700 dark:text-amber-400 border-amber-500/40',
-    label: registrationStatusLabels['filling-fast'],
-    actionText: 'Register Now',
-    priority: 'high',
-  },
-  closed: {
-    style: 'bg-rose-500/10 text-rose-700 dark:text-rose-400 border-rose-500/30',
-    label: registrationStatusLabels.closed,
-    actionText: 'Closed',
-    priority: 'low',
-  },
-};
-
-export function EventCard({ event, onDetailsClick, onRegisterClick }: EventCardProps) {
+export function EventCard({ event, onDetailsClick }: EventCardProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
   const styles = CATEGORY_STYLES[event.category];
-  const statusConfig = STATUS_CONFIG[event.registrationStatus];
-  const isRegistrationClosed = event.registrationStatus === 'closed';
-  const isUrgent = event.registrationStatus === 'filling-fast';
 
   const handleDetailsClick = (e?: React.MouseEvent) => {
     e?.stopPropagation();
     onDetailsClick?.(event);
-  };
-
-  const handleRegisterClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (!isRegistrationClosed) {
-      onRegisterClick?.(event);
-    }
   };
 
   return (
@@ -142,21 +112,6 @@ export function EventCard({ event, onDetailsClick, onRegisterClick }: EventCardP
             </Badge>
           )}
         </div>
-
-        {/* Status Badge - Strategic positioning based on urgency */}
-        {isUrgent && (
-          <div className="absolute bottom-3 left-3 right-3">
-            <Badge
-              className={cn(
-                'w-full justify-center text-xs font-bold backdrop-blur-md border shadow-lg py-1.5',
-                statusConfig.style,
-                'animate-pulse'
-              )}
-            >
-              ⚡ {statusConfig.label}
-            </Badge>
-          </div>
-        )}
       </div>
 
       {/* Content Section - Grows to fill available space */}
@@ -212,18 +167,6 @@ export function EventCard({ event, onDetailsClick, onRegisterClick }: EventCardP
                 </span>
               </div>
             </div>
-
-            {!isUrgent && (
-              <Badge
-                variant="outline"
-                className={cn(
-                  'text-xs font-medium border shrink-0',
-                  statusConfig.style
-                )}
-              >
-                {statusConfig.label}
-              </Badge>
-            )}
           </div>
 
           {/* Action Buttons - Responsive layout */}
@@ -234,31 +177,30 @@ export function EventCard({ event, onDetailsClick, onRegisterClick }: EventCardP
               className="w-full group/btn h-11"
               onClick={handleDetailsClick}
               aria-label={`View details for ${event.name}`}
+              asChild
             >
-              <Info className="w-4 h-4 mr-2 lg:mr-1.5" />
-              <span className="hidden sm:inline">View Details</span>
-              <span className="sm:hidden">Details</span>
-              <ChevronRight className="w-4 h-4 ml-auto opacity-0 -translate-x-2 transition-all group-hover/btn:opacity-100 group-hover/btn:translate-x-0" />
+              <Link to={`/events/${event.id}`}>
+                <Info className="w-4 h-4 mr-2 lg:mr-1.5" />
+                <span className="hidden sm:inline">View Details</span>
+                <span className="sm:hidden">Details</span>
+                <ChevronRight className="w-4 h-4 ml-auto opacity-0 -translate-x-2 transition-all group-hover/btn:opacity-100 group-hover/btn:translate-x-0" />
+              </Link>
             </Button>
 
             <Button
               size="lg"
               className={cn(
                 "w-full font-semibold h-11 relative overflow-hidden",
-                isRegistrationClosed && "opacity-60 cursor-not-allowed",
-                isUrgent && "bg-gradient-to-r from-primary to-primary/80 animate-shimmer"
               )}
-              disabled={isRegistrationClosed}
-              onClick={handleRegisterClick}
-              aria-label={isRegistrationClosed ? 'Registration closed' : `Register for ${event.name}`}
+              aria-label={`Register for ${event.name}`}
+              asChild
             >
-              {isUrgent && !isRegistrationClosed && (
-                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
-              )}
-              <span className="relative flex items-center justify-center gap-1.5">
-                {statusConfig.actionText}
-                {!isRegistrationClosed && <ChevronRight className="w-4 h-4" />}
-              </span>
+              <Link to="/register">
+                <span className="relative flex items-center justify-center gap-1.5">
+                  Register Now
+                  <ChevronRight className="w-4 h-4" />
+                </span>
+              </Link>
             </Button>
           </div>
         </div>

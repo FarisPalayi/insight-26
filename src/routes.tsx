@@ -5,7 +5,7 @@ import { Schedule } from "./pages/Schedule";
 import { Register } from "./pages/Register";
 import { Events } from "./pages/Events";
 import { Contact } from "./pages/Contact";
-import EventDetailPage from "./pages/EventDetail";
+import { EventDetail } from "./pages/EventDetail";
 import { fetchEventById } from "./services/eventService";
 import RootLayout from "./pages/Layout";
 
@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
 
       {
         path: "/events/:eventId",
-        element: <EventDetailPage />,
+        element: <EventDetail />,
         loader: async ({ params }) => {
           const event = await fetchEventById(params.eventId || "");
           console.log(event)

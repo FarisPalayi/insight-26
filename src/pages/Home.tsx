@@ -7,14 +7,12 @@ import FAQSection from "@/components/features/faq/FAQSection";
 
 export function Home() {
   return (
-    <div className="min-h-screen bg-background dark">
-      <Main className="">
-        <HeroSection />
-        <EventsSection />
-        <PastEditionHighlights />
-        <SponsorSection />
-        <FAQSection />
-      </Main>
-    </div>
+    <Main className="min-h-screen bg-background dark">
+      <HeroSection />
+      <EventsSection />
+      <PastEditionHighlights />
+      <SponsorSection />
+      <FAQSection />
+    </Main>
   )
 }

@@ -91,12 +91,12 @@ export const HeroSection = () => {
               </Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <a
-                href="#featured-events"
+              <Link
+                to="/events"
                 className="btn-outline-glow text-base px-6 sm:px-8 py-5 sm:py-6 rounded-xl border-primary/30 hover:bg-primary/10 hover:border-primary/50 font-normal transition-all duration-300 w-full sm:w-auto text-foreground"
               >
                 View Events
-              </a>
+              </Link>
             </Button>
 
           </motion.div>

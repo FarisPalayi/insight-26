@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Clock, MapPin, Users, IndianRupee, Trophy, ArrowRight, Info, Sparkles } from 'lucide-react';
+import { Calendar, Clock, MapPin, Users, IndianRupee, Trophy, Info, Sparkles, ArrowRight } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { type UnifiedEvent, categoryLabels, teamSizeLabels, registrationStatusLabels, dayLabels } from '@/lib/data/unifiedEvents';
+import { type UnifiedEvent, categoryLabels, teamSizeLabels, dayLabels } from '@/lib/data/unifiedEvents';
 import { cn } from '@/lib/utils';
+import { Link } from 'react-router';
 
 interface FeaturedEventCardProps {
   event: UnifiedEvent;
@@ -46,45 +47,14 @@ const CATEGORY_STYLES: Record<string, { bg: string; text: string; border: string
   },
 };
 
-const STATUS_CONFIG: Record<string, { style: string; label: string; actionText: string; showBadge: boolean }> = {
-  open: {
-    style: 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border-emerald-500/30',
-    label: registrationStatusLabels.open,
-    actionText: 'Register Now',
-    showBadge: true,
-  },
-  'filling-fast': {
-    style: 'bg-amber-500/20 text-amber-700 dark:text-amber-400 border-amber-500/40',
-    label: registrationStatusLabels['filling-fast'],
-    actionText: 'Register Now',
-    showBadge: true,
-  },
-  closed: {
-    style: 'bg-rose-500/15 text-rose-700 dark:text-rose-400 border-rose-500/30',
-    label: registrationStatusLabels.closed,
-    actionText: 'Registration Closed',
-    showBadge: true,
-  },
-};
-
-export function FeaturedEventCard({ event, index = 0, onDetailsClick, onRegisterClick }: FeaturedEventCardProps) {
+export function FeaturedEventCard({ event, index = 0, onDetailsClick }: FeaturedEventCardProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
   const styles = CATEGORY_STYLES[event.category];
-  const statusConfig = STATUS_CONFIG[event.registrationStatus];
-  const isRegistrationClosed = event.registrationStatus === 'closed';
-  const isUrgent = event.registrationStatus === 'filling-fast';
 
   const handleDetailsClick = (e?: React.MouseEvent) => {
     e?.stopPropagation();
     onDetailsClick?.(event);
-  };
-
-  const handleRegisterClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (!isRegistrationClosed) {
-      onRegisterClick?.(event);
-    }
   };
 
   return (
@@ -158,21 +128,6 @@ export function FeaturedEventCard({ event, index = 0, onDetailsClick, onRegister
                 {categoryLabels[event.category]}
               </Badge>
             </div>
-
-            {/* Urgent Status Banner - Mobile bottom, Desktop side */}
-            {isUrgent && (
-              <div className="absolute bottom-0 left-0 right-0 lg:bottom-4 lg:left-4 lg:right-4">
-                <Badge
-                  className={cn(
-                    'w-full justify-center text-xs lg:text-sm font-bold backdrop-blur-md border shadow-lg py-2',
-                    statusConfig.style,
-                    'animate-pulse'
-                  )}
-                >
-                  ⚡ {statusConfig.label} - Limited Seats!
-                </Badge>
-              </div>
-            )}
           </div>
 
           {/* Content Section - Flexible padding */}
@@ -251,18 +206,6 @@ export function FeaturedEventCard({ event, index = 0, onDetailsClick, onRegister
                   </p>
                 </div>
               </div>
-
-              {!isUrgent && statusConfig.showBadge && (
-                <Badge
-                  variant="outline"
-                  className={cn(
-                    'ml-auto text-xs lg:text-sm px-3 lg:px-4 py-1.5 lg:py-2 font-semibold border-2',
-                    statusConfig.style
-                  )}
-                >
-                  {statusConfig.label}
-                </Badge>
-              )}
             </div>
 
             {/* Action Buttons - Responsive layout */}
@@ -273,32 +216,29 @@ export function FeaturedEventCard({ event, index = 0, onDetailsClick, onRegister
                 className="w-full group/btn h-11 lg:h-12 text-sm lg:text-base font-semibold"
                 onClick={handleDetailsClick}
                 aria-label={`View details for ${event.name}`}
+                asChild
               >
-                <Info className="w-4 h-4 lg:w-5 lg:h-5 mr-2" />
-                <span className="hidden sm:inline">View Details</span>
-                <span className="sm:hidden">Details</span>
+                <Link to={`/events/${event.id}`}>
+                  <Info className="w-4 h-4 lg:w-5 lg:h-5 mr-2" />
+                  <span className="hidden sm:inline">View Details</span>
+                  <span className="sm:hidden">Details</span>
+                </Link>
               </Button>
 
               <Button
                 size="lg"
                 className={cn(
                   "w-full font-bold h-11 lg:h-12 text-sm lg:text-base group/btn relative overflow-hidden",
-                  isRegistrationClosed && "opacity-60 cursor-not-allowed",
-                  isUrgent && "bg-gradient-to-r from-primary via-primary to-primary/90"
                 )}
-                disabled={isRegistrationClosed}
-                onClick={handleRegisterClick}
-                aria-label={isRegistrationClosed ? 'Registration closed' : `Register for ${event.name}`}
+                aria-label={`Register for ${event.name}`}
+                asChild
               >
-                {isUrgent && !isRegistrationClosed && (
-                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent animate-shimmer" />
-                )}
-                <span className="relative flex items-center justify-center gap-2">
-                  {statusConfig.actionText}
-                  {!isRegistrationClosed && (
+                <Link to="/register">
+                  <span className="relative flex items-center justify-center gap-2">
+                    Register Now
                     <ArrowRight className="w-4 h-4 lg:w-5 lg:h-5 transition-transform group-hover/btn:translate-x-1" />
-                  )}
-                </span>
+                  </span>
+                </Link>
               </Button>
             </div>
           </CardContent>

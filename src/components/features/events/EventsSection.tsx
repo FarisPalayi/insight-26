@@ -23,7 +23,7 @@ export function EventsSection() {
   const [selectedCategory, setSelectedCategory] = useState<EventCategory | 'all'>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Simulate loading state (in real app, this would be from API)
+  // Simulate loading state (TODO: implement api)
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1200);
     return () => clearTimeout(timer);
