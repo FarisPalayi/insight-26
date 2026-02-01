@@ -6,7 +6,7 @@ import { Register } from "./pages/Register";
 import { Events } from "./pages/Events";
 import { Contact } from "./pages/Contact";
 import EventDetailPage from "./pages/EventDetail";
-import { fetchEventById } from "./types/services/eventService";
+import { fetchEventById } from "./services/eventService";
 import RootLayout from "./pages/Layout";
 
 export const router = createBrowserRouter([
