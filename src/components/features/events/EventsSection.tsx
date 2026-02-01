@@ -77,7 +77,7 @@ export function EventsSection() {
   }, [selectedCategory, filteredEvents]);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background container mx-auto">
       {/* Background Effects */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[100px]" />
