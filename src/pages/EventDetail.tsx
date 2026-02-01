@@ -61,45 +61,4 @@ export function EventDetail() {
     </div>
   );
 }
-function EventDetailSkeleton() {
-  return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-6 md:px-6 lg:px-8 space-y-8">
-        <Skeleton className="h-10 w-32" />
-        <div className="grid lg:grid-cols-2 gap-8">
-          <div className="space-y-4">
-            <Skeleton className="h-8 w-3/4" />
-            <Skeleton className="h-6 w-1/2" />
-            <Skeleton className="h-12 w-40" />
-          </div>
-          <Skeleton className="aspect-video rounded-2xl" />
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <Skeleton key={i} className="h-24 rounded-xl" />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function EventNotFound() {
-  const navigate = useNavigate();
-
-  return (
-    <div className="min-h-screen bg-background flex items-center justify-center">
-      <div className="text-center space-y-4 px-4">
-        <AlertCircle className="w-16 h-16 text-muted-foreground mx-auto" />
-        <h1 className="text-2xl font-bold text-foreground">Event Not Found</h1>
-        <p className="text-muted-foreground">The event you're looking for doesn't exist or has been removed.</p>
-        <Button onClick={() => navigate('/events')} className="mt-4">
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Events
-        </Button>
-      </div>
-    </div>
-  );
-}
-
 
