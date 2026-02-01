@@ -1,9 +1,6 @@
 import { useState } from 'react';
-import { useNavigate, useLoaderData } from 'react-router';
+import { useLoaderData } from 'react-router';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
-import { ArrowLeft, AlertCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
 import { CoordinatorFooter, LogisticsGrid, EventHero, EventAccordion, PrizeModule } from '@/components/features/event-detail/';
 import { StickyMobileCTA } from '@/components/features/event-detail/StickyMobileCTA';
 import { type UnifiedEvent } from '@/lib/data/unifiedEvents';
