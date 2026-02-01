@@ -1,13 +1,10 @@
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import Main from "@/components/layout/Main";
 import { Link } from "react-router";
 
 export function NotFound() {
   return (
-    <div className="min-h-screen bg-background dark">
-      <Header />
-      <Main className="pt-40 px-4 md:px-6 mx-auto flex justify-center">
+    <div>
+      <Main className="bg-background pt-40 px-4 md:px-6 mx-auto flex justify-center">
         <div className="text-center">
           <h1 className="text-foreground text-2xl md:text-3xl lg:text-5xl font-bold mb-6">
             <span>404</span> <span className="text-gradient">Not Found</span>
@@ -17,7 +14,6 @@ export function NotFound() {
           </Link>
         </div>
       </Main>
-      <Footer />
     </div>
   )
 }
