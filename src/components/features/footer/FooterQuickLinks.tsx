@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"
 import { BookOpen, Calendar } from "lucide-react";
 import { type FooterLink } from "@/types";
+import { Link } from "react-router";
 
 const quickLinks: FooterLink[] = [
   { label: "Events", href: "events", icon: <Calendar className="w-4 h-4" /> },
@@ -22,15 +23,15 @@ export const FooterQuickLinks = () => {
       <ul className="space-y-3">
         {quickLinks.map((link) => (
           <li key={link.label}>
-            <a
-              href={link.href}
+            <Link
+              to={link.href}
               className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-200 text-sm group"
             >
               <span className="text-muted-foreground/50 group-hover:text-primary/70 transition-colors">
                 {link.icon}
               </span>
               {link.label}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

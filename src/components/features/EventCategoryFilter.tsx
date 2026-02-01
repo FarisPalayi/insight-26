@@ -125,6 +125,7 @@ export function EventCategoryFilter(props: EventCategoryFilterProps) {
           return (
             <MotionButton
               variant="outline"
+              key={category}
               size="sm"
               onClick={() => handleCategoryClick(category)}
               className={cn(
