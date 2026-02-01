@@ -13,6 +13,5 @@ export default {
         grid: 'autoplace', // Enable IE Grid support with -ms- prefix
       },
     },
-    'autoprefixer': {},
   },
 }
