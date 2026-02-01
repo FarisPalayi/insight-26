@@ -10,17 +10,14 @@ import { FloatingDots } from "../../ui/floaters/FloatingDots";
 import { HeroBadge } from "./HeroBadge";
 import { HeroTitle } from "./HeroTitle";
 import { Link } from "react-router";
-import Scene from "./Scene";
+import { HeroVisual } from "./HeroVisual";
 
 export const HeroSection = () => {
   return (
     <section
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Animated Grid Background */}
-      <div className="absolute w-full h-full z-10">
-        <Scene />
-      </div>
+      <HeroVisual />
       <FloatingOrb
         className="bg-primary/30 top-0 -left-48"
         size="w-[350px] h-[320px] sm:w-[500px] sm:h-[500px]"
