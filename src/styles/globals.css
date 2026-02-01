@@ -130,7 +130,6 @@
 
   .glass-surface {
     backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: linear-gradient(
       135deg,
@@ -142,7 +141,6 @@
 
   .glass-surface-strong {
     backdrop-filter: blur(64px);
-    -webkit-backdrop-filter: blur(64px);
     border: 1px solid rgba(255, 255, 255, 0.15);
     background: linear-gradient(
       180deg,
