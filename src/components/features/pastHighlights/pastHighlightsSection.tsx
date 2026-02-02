@@ -27,9 +27,9 @@ const galleryImages = [
 
   },
   {
-    src: "/gallery/teachers.jpeg",
-    alt: "CCSIT faculty group photo",
-    caption: "CCSIT Faculty"
+    src: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=450&fit=crop",
+    alt: "Cultural night performance",
+    caption: "Cultural Night"
   },
 ];
 
