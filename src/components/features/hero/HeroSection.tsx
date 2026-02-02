@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { MapPin, Calendar, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CountdownTimer } from "./CountdownTimer";
-import { StatsCards } from "../Stats";
 import { FloatingParticles } from "../../ui/floaters/FloatingParticles";
 import { FloatingShapes } from "../../ui/floaters/FloatingShapes";
 import { FloatingDots } from "../../ui/floaters/FloatingDots";
@@ -82,12 +81,11 @@ export const HeroSection = () => {
             </Button>
 
           </motion.div>
-
-          <StatsCards />
         </motion.div>
       </div>
 
     </section>
+
   );
 };
 
