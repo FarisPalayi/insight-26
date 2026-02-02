@@ -86,7 +86,7 @@ export const FlagshipEvent = () => {
                 transition={{ delay: 0.4, duration: 0.6 }}
                 className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed"
               >
-                The ultimate battleground for tech enthusiasts. Code, compete, and conquer in our flagship technical championship.
+                Five rounds. Five challenges. One ultimate geek team. Navigate through Initium, Techsense, Intersepto, Extremist, and Jackpot to prove your technical supremacy.
               </motion.p>
 
               {/* Stats row */}
@@ -117,7 +117,7 @@ export const FlagshipEvent = () => {
               className="flex flex-col items-start lg:items-end gap-4"
             >
               <Button asChild>
-                <Link to="/technova"
+                <Link to="/events/technova"
                   className="btn-glow bg-primary text-primary-foreground hover:bg-primary/90 gap-3 text-lg px-8 py-6 group/btn"
                 >
                   Explore Event
@@ -125,7 +125,7 @@ export const FlagshipEvent = () => {
                 </Link>
               </Button>
 
-              <span className="text-sm text-muted-foreground">Registration opens soon</span>
+              <span className="text-sm text-muted-foreground">Registration started</span>
             </motion.div>
           </div>
         </div>

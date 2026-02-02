@@ -15,58 +15,73 @@ interface EventCardProps {
 export const EventCard = ({ name, category, tagline, icon, accentColor, urlPath, index = 0 }: EventCardProps) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30, rotateX: -10 }}
-      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.15 }}
-      whileHover={{ y: -8, transition: { duration: 0.3 } }}
+      transition={{
+        duration: 0.6,
+        delay: index * 0.1,
+        ease: [0.25, 0.46, 0.45, 0.94]
+      }}
       className="group relative h-full"
     >
-      {/* Hover glow */}
+      {/* Outer glow effect */}
+      <div className={`absolute -inset-0.5 bg-gradient-to-br ${accentColor} rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500`} />
 
       {/* Card */}
-      <div className="relative h-full rounded-2xl border border-border/50 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-lg overflow-hidden transition-all duration-500">
-        {/* Background accent */}
-        <div className={`absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl ${accentColor} opacity-10 rounded-full blur-3xl transform translate-x-10 -translate-y-10 group-hover:opacity-20 transition-opacity duration-500`} />
+      <Link to={urlPath} className="block h-full">
+        <div className="relative h-full rounded-2xl border border-border/40 glass-surface overflow-hidden transition-all duration-500 group-hover:border-border/80 group-hover:shadow-2xl">
 
-        {/* Content */}
-        <div className="relative z-10 p-6 md:p-8 h-full flex flex-col">
-          {/* Icon & Category header */}
-          <div className="flex items-start justify-between mb-6">
-            <motion.div
-              whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
-              transition={{ duration: 0.5 }}
-              className={`w-14 h-14 rounded-xl bg-gradient-to-br ${accentColor} flex items-center justify-center shadow-lg`}
-            >
-              <div className="text-white">{icon}</div>
-            </motion.div>
+          {/* Animated background gradient */}
+          <div className={`absolute inset-0 bg-gradient-to-br ${accentColor} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
 
-            <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider bg-muted/50 px-3 py-1.5 rounded-full">
-              {category}
-            </span>
-          </div>
+          {/* Subtle corner accent */}
+          <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl ${accentColor} opacity-8 rounded-full blur-2xl`} />
 
-          {/* Event Name */}
-          <h4 className="text-2xl md:text-3xl font-bold text-foreground mb-3 group-hover:text-gradient transition-all duration-300">
-            {name}
-          </h4>
+          {/* Content */}
+          <div className="relative z-10 p-6 sm:p-7 md:p-8 h-full flex flex-col">
 
-          {/* Tagline */}
-          <p className="text-muted-foreground leading-relaxed mb-8 flex-1">
-            {tagline}
-          </p>
+            {/* Header: Icon + Category */}
+            <div className="flex items-center justify-between mb-6">
+              <motion.div
+                whileHover={{ scale: 1.05, rotate: 5 }}
+                transition={{ type: "spring", stiffness: 400 }}
+                className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br ${accentColor} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300`}
+              >
+                <div className="text-white scale-90 sm:scale-100">{icon}</div>
+              </motion.div>
 
-          {/* CTA */}
-          <Link to={urlPath} className="flex items-center justify-between pt-4 border-t border-border/50">
-            <span className="text-sm text-muted-foreground group-hover:text-primary transition-colors">
-              Learn more
-            </span>
-            <div className="w-10 h-10 rounded-full bg-muted/50 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300">
-              <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
+              <span className="text-[10px] sm:text-xs font-semibold text-muted-foreground uppercase tracking-widest px-3 py-1.5 rounded-full bg-muted/30 border border-border/30">
+                {category}
+              </span>
             </div>
-          </Link>
+
+            {/* Event Name */}
+            <h4 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-3 sm:mb-4 group-hover:text-gradient transition-all duration-300 leading-tight">
+              {name}
+            </h4>
+
+            {/* Tagline */}
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 sm:mb-8 flex-1">
+              {tagline}
+            </p>
+
+            {/* CTA Footer */}
+            <div className="flex items-center justify-between pt-4 sm:pt-5 border-t border-border/30 group-hover:border-border/60 transition-colors duration-300">
+              <span className="text-xs sm:text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors duration-300">
+                Learn more
+              </span>
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-muted/40 flex items-center justify-center group-hover:bg-primary/20 border border-border/20 group-hover:border-primary/30 transition-all duration-300"
+              >
+                <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all duration-300" />
+              </motion.div>
+            </div>
+          </div>
         </div>
-      </div>
-    </motion.div >
+      </Link>
+    </motion.div>
   );
 };
