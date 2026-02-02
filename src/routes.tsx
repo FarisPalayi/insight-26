@@ -4,7 +4,6 @@ import { NotFound } from "./pages/NotFound";
 import { Schedule } from "./pages/Schedule";
 import { Register } from "./pages/Register";
 import { Events } from "./pages/Events";
-import { Contact } from "./pages/Contact";
 import { EventDetail } from "./pages/EventDetail";
 import { fetchEventById } from "./services/eventService";
 import RootLayout from "./pages/Layout";
@@ -33,7 +32,13 @@ export const router = createBrowserRouter([
       },
       { path: "/schedule", element: <Schedule />, },
       { path: "/register", element: <Register /> },
-      { path: "/contact", element: <Contact /> },
+      {
+        path: "/contact",
+        lazy: async () => {
+          const { Contact } = await import("./pages/Contact");
+          return { Component: Contact };
+        },
+      },
       { path: "*", Component: NotFound }
     ]
   }])
