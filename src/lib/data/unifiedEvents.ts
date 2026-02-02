@@ -31,6 +31,7 @@ export interface UnifiedEvent {
   // Core Identity
   id: string;
   name: string;
+  fancyName?: string; // TODO: implement this
   tagline: string;
   description: string;
   category: EventCategory;
@@ -116,6 +117,7 @@ export const unifiedEvents: UnifiedEvent[] = [
   {
     id: 'technova',
     name: 'Technova 8.0',
+    fancyName: 'Technova 8.0',
     tagline: 'The ultimate tech showdown',
     description: 'Premier technology competition showcasing innovation and coding prowess. Battle it out with the best minds in a 6-hour hackathon.',
     category: 'competition',
@@ -154,6 +156,7 @@ export const unifiedEvents: UnifiedEvent[] = [
   {
     id: 'talenx',
     name: "Talen'X",
+    fancyName: "Talen'x",
     tagline: 'Showcase your unique talents',
     description: 'A platform to display your hidden talents - be it singing, dancing, mimicry, or any special skill.',
     category: 'competition',
@@ -173,27 +176,8 @@ export const unifiedEvents: UnifiedEvent[] = [
     isFeatured: true,
   },
   {
-    id: 'paper-presentation',
-    name: 'Paper Presentation',
-    tagline: 'Present your research',
-    description: 'Present your research papers and innovative ideas to a panel of expert judges.',
-    category: 'seminar',
-    schedule: {
-      day: 1,
-      startTime: '13:30',
-      endTime: '15:00',
-      displayTime: '01:30 PM - 03:00 PM',
-    },
-    venue: 'Aryabhatta Hall',
-    teamSize: '2-3',
-    entryFee: '500',
-    imageUrl: 'https://images.unsplash.com/photo-1558403194-611308249627?w=800&q=80',
-    prizePool: '3,000',
-    prizes: { first: '3,000' },
-  },
-  {
     id: 'debate',
-    name: 'Debate Championship',
+    name: 'Debate',
     tagline: 'Battle of words and ideas',
     description: 'Put your argumentative skills to the test in this intense debate competition on contemporary topics.',
     category: 'competition',
@@ -231,7 +215,7 @@ export const unifiedEvents: UnifiedEvent[] = [
   // ============ DAY 2 EVENTS ============
   {
     id: 'inauguration',
-    name: 'Inauguration Ceremony',
+    name: 'Inauguration',
     tagline: 'Official opening of the fest',
     description: 'Official opening ceremony of the fest with distinguished guests and dignitaries.',
     category: 'seminar',
@@ -265,6 +249,7 @@ export const unifiedEvents: UnifiedEvent[] = [
   },
   {
     id: 'treasure-hunt',
+    fancyName: 'Scavenge Squad',
     name: 'Treasure Hunt',
     tagline: 'Campus-wide adventure awaits',
     description: 'Navigate through clues scattered across the campus. Work with your team to find the ultimate treasure!',
@@ -278,13 +263,14 @@ export const unifiedEvents: UnifiedEvent[] = [
     venue: 'Campus Wide',
     teamSize: '3-5',
     entryFee: '2,000',
-    imageUrl: 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=800&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=2000&auto=format&fit=crop',
     isMultiPeriod: true,
     prizePool: '7,000',
     prizes: { first: '5,000', second: '2,000' },
   },
   {
     id: 'prompt-engineering',
+    fancyName: 'AskRight',
     name: 'Prompt Engineering',
     tagline: 'Master the art of AI prompts',
     description: 'Test your skills in crafting the perfect prompts to get the best results from AI models.',
@@ -304,6 +290,7 @@ export const unifiedEvents: UnifiedEvent[] = [
   },
   {
     id: 'vibe-coding',
+    fancyName: 'Vibe-coding',
     name: 'Vibe Coding',
     tagline: 'Code with the vibes',
     description: 'Collaborative coding session where you build projects while enjoying good music and vibes.',
@@ -344,6 +331,7 @@ export const unifiedEvents: UnifiedEvent[] = [
   {
     id: 'photo-competition',
     name: 'Photo Competition',
+    fancyName: 'Lenza',
     tagline: 'Capture the moment',
     description: 'Capture the best moments of the fest through your lens. Best photographs will be featured and awarded.',
     category: 'competition',

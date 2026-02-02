@@ -1,283 +1,140 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Clock, MapPin, Users, IndianRupee, Trophy, Info, Sparkles, ArrowRight } from 'lucide-react';
+import { Calendar, Clock, MapPin, Users, Sparkles, ArrowRight, Cpu } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { type UnifiedEvent, categoryLabels, teamSizeLabels, dayLabels } from '@/lib/data/unifiedEvents';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router';
 
-interface FeaturedEventCardProps {
-  event: UnifiedEvent;
-  index?: number;
-  onDetailsClick?: (event: UnifiedEvent) => void;
-  onRegisterClick?: (event: UnifiedEvent) => void;
-}
-
-const CATEGORY_STYLES: Record<string, { bg: string; text: string; border: string; glow: string; gradient: string }> = {
-  seminar: {
-    bg: 'bg-event-seminar/10',
-    text: 'text-event-seminar',
-    border: 'border-event-seminar/30',
-    glow: 'hover:shadow-event-seminar/20',
-    gradient: 'from-event-seminar/30',
-  },
-  competition: {
-    bg: 'bg-event-competition/10',
-    text: 'text-event-competition',
-    border: 'border-event-competition/30',
-    glow: 'hover:shadow-event-competition/20',
-    gradient: 'from-event-competition/30',
-  },
-  cultural: {
-    bg: 'bg-event-cultural/10',
-    text: 'text-event-cultural',
-    border: 'border-event-cultural/30',
-    glow: 'hover:shadow-event-cultural/20',
-    gradient: 'from-event-cultural/30',
-  },
-  allday: {
-    bg: 'bg-event-allday/10',
-    text: 'text-event-allday',
-    border: 'border-event-allday/30',
-    glow: 'hover:shadow-event-allday/20',
-    gradient: 'from-event-allday/30',
-  },
-};
-
-export function FeaturedEventCard({ event, index = 0, onDetailsClick }: FeaturedEventCardProps) {
+export function FeaturedEventCard({ event, index = 0 }: any) {
   const [imageLoaded, setImageLoaded] = useState(false);
-  const [imageError, setImageError] = useState(false);
-  const styles = CATEGORY_STYLES[event.category];
-
-  const handleDetailsClick = (e?: React.MouseEvent) => {
-    e?.stopPropagation();
-    onDetailsClick?.(event);
-  };
+  const hasFancyName = !!event.fancyName;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -30 }}
-      transition={{ duration: 0.5, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
       className="w-full"
     >
-      <Card
-        className={cn(
-          'group overflow-hidden border-2 transition-all duration-500',
-          styles.border,
-          'hover:shadow-2xl hover:-translate-y-2',
-          styles.glow,
-          'focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2',
-          'py-0'
-        )}
-        role="article"
-        aria-label={`Featured event: ${event.name}`}
-      >
-        {/* Mobile: Vertical Layout | Desktop: Horizontal Layout */}
-        <div className="flex flex-col lg:flex-row">
-          {/* Image Section - Responsive sizing */}
-          <div className="relative w-full lg:w-2/5 xl:w-1/2 aspect-[16/10] lg:aspect-auto overflow-hidden bg-muted shrink-0">
-            {!imageLoaded && !imageError && <Skeleton className="absolute inset-0" />}
+      <Card className="py-0 group relative overflow-hidden bg-card border-border/60 hover:border-primary/50 transition-all duration-500 rounded-[var(--radius-lg)] shadow-2xl">
+        <div className="flex flex-col lg:flex-row min-h-[400px]">
 
-            {!imageError ? (
-              <img
-                src={event.imageUrl}
-                alt={`${event.name} featured event banner`}
-                loading="lazy"
-                onLoad={() => setImageLoaded(true)}
-                onError={() => setImageError(true)}
-                className={cn(
-                  'w-full h-full object-cover transition-all duration-700',
-                  'group-hover:scale-110 group-hover:brightness-110',
-                  !imageLoaded && 'opacity-0'
-                )}
-              />
-            ) : (
-              <div className="absolute inset-0 flex items-center justify-center bg-muted">
-                <Trophy className="w-20 h-20 text-muted-foreground/20" />
-              </div>
-            )}
+          {/* 1. VISUAL ANCHOR - Left Side (Desktop) */}
+          <div className="relative w-full lg:w-[45%] overflow-hidden bg-muted">
+            {!imageLoaded && <Skeleton className="absolute inset-0 bg-muted/20" />}
+            <img
+              src={event.imageUrl}
+              alt={event.name}
+              onLoad={() => setImageLoaded(true)}
+              className={cn(
+                "h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105",
+                !imageLoaded && "opacity-0"
+              )}
+            />
 
-            {/* Gradient Overlay - Adapts to layout direction */}
-            <div className={cn(
-              "absolute inset-0 transition-opacity duration-500",
-              "bg-gradient-to-t lg:bg-gradient-to-r",
-              "from-background/95 via-background/50 to-transparent",
-              styles.gradient
-            )} />
+            {/* Visual Overlays for Accessibility */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--color-background))] via-transparent to-black/40 lg:bg-gradient-to-r" />
 
-            {/* Badges - Responsive positioning */}
-            <div className="absolute top-3 left-3 right-3 lg:top-4 lg:left-4 lg:right-4 flex items-start justify-between gap-2 flex-wrap">
-              <Badge className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-bold shadow-xl backdrop-blur-sm px-3 py-1.5 flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span className="text-xs lg:text-sm">Featured</span>
+            {/* Featured Badge */}
+            <div className="absolute top-4 left-4 flex gap-2">
+              <Badge className="bg-primary text-primary-foreground font-bold px-3 py-1 rounded-full shadow-lg border-none flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 fill-current" />
+                <span className="text-[10px] uppercase tracking-wider">Featured Event</span>
               </Badge>
-
-              <Badge
-                className={cn(
-                  'text-xs lg:text-sm font-semibold border backdrop-blur-md shadow-lg',
-                  styles.bg,
-                  styles.text,
-                  styles.border
-                )}
-              >
-                {categoryLabels[event.category]}
+              <Badge variant="outline" className="bg-black/40 backdrop-blur-md text-white border-white/20 text-[10px] uppercase tracking-wider rounded-full">
+                {event.category}
               </Badge>
             </div>
           </div>
 
-          {/* Content Section - Flexible padding */}
-          <CardContent className="flex-1 p-5 sm:p-6 lg:p-8 flex flex-col">
-            {/* Header */}
-            <div className="space-y-2 mb-4 lg:mb-6">
-              <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-display font-bold text-foreground leading-tight group-hover:text-primary transition-colors">
-                {event.name}
-              </h2>
-              {event.tagline && (
-                <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed">
-                  {event.tagline}
-                </p>
-              )}
-            </div>
+          {/* 2. CONTENT HUB - Right Side (Desktop) */}
+          <CardContent className="flex-1 p-6 lg:p-10 flex flex-col justify-center">
 
-            {/* Description - Hidden on small mobile, visible on larger screens */}
-            {event.description && (
-              <p className="hidden sm:block text-sm lg:text-base text-muted-foreground line-clamp-2 lg:line-clamp-3 leading-relaxed mb-4 lg:mb-6">
-                {event.description}
+            <div className="space-y-4 mb-8">
+              <div className="space-y-2">
+                <h2 className={cn(
+                  "font-sans font-bold leading-none tracking-tight text-foreground group-hover:text-primary transition-colors duration-300",
+                  hasFancyName ? "text-4xl lg:text-5xl uppercase italic" : "text-3xl lg:text-4xl"
+                )}>
+                  {event.fancyName || event.name}
+                </h2>
+
+                {hasFancyName && (
+                  <div className="flex items-center gap-2 text-primary/80 font-mono text-xs uppercase tracking-[0.2em] font-bold">
+                    <Cpu className="w-4 h-4" />
+                    <span>{event.name}</span>
+                  </div>
+                )}
+              </div>
+
+              <p className="text-base lg:text-lg text-foreground/70 leading-relaxed font-light line-clamp-3">
+                {event.tagline || "Join the flagship competition of Insight'26 and prove your technical supremacy on the grand stage."}
               </p>
-            )}
-
-            {/* Event Details Grid - Responsive columns */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-5 lg:mb-6">
-              <DetailItem
-                icon={Calendar}
-                label="Day"
-                text={dayLabels[event.schedule.day]}
-                primary
-              />
-              <DetailItem
-                icon={Clock}
-                label="Time"
-                text={event.schedule.displayTime.split(' - ')[0]}
-              />
-              <DetailItem
-                icon={MapPin}
-                label="Venue"
-                text={event.venue}
-              />
-              <DetailItem
-                icon={Users}
-                label="Team"
-                text={teamSizeLabels[event.teamSize]}
-              />
             </div>
 
-            {/* Spacer to push footer to bottom */}
-            <div className="flex-1" />
+            {/* 3. METADATA GRID - High Readability Specs */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 p-4 bg-secondary/30 border border-border/40 rounded-2xl">
+              <StatItem icon={Calendar} label="Day" value={event.schedule?.day || "Day 01"} />
+              <StatItem icon={Clock} label="Time" value={event.schedule?.displayTime?.split(' - ')[0] || "10:00 AM"} />
+              <StatItem icon={MapPin} label="Venue" value={event.venue || "Main Hall"} />
+              <StatItem icon={Users} label="Size" value={event.maxTeam || "Team of 5"} />
+            </div>
 
-            {/* Prize Pool & Entry Fee Section */}
-            <div className="flex flex-wrap items-center gap-4 lg:gap-6 py-4 lg:py-5 border-t-2 border-border/50 mb-4 lg:mb-5">
-              {event.prizePool && (
-                <div className="flex items-center gap-2.5 lg:gap-3">
-                  <div className="p-2.5 lg:p-3 rounded-xl bg-primary/10">
-                    <Trophy className="w-5 h-5 lg:w-6 lg:h-6 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground leading-none mb-1">Prize Pool</p>
-                    <p className="font-bold text-base lg:text-xl text-primary leading-tight">
-                      {event.prizePool.replace('Prize Pool: ', '')}
-                    </p>
-                  </div>
+            {/* 4. FINANCIALS & CTA */}
+            <div className="flex flex-col sm:flex-row items-center gap-6 mt-auto pt-6 border-t border-border/40">
+              <div className="flex items-center gap-4 w-full sm:w-auto">
+                <div className="flex flex-col">
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Prize Pool</span>
+                  <span className="text-2xl font-black text-primary">₹{event.prizePool || "25,000"}</span>
                 </div>
-              )}
+                <div className="w-[1px] h-10 bg-border/60 mx-2 hidden sm:block" />
+                <div className="flex flex-col">
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Entry Fee</span>
+                  <span className="text-xl font-bold text-foreground">₹{event.entryFee}</span>
+                </div>
+              </div>
 
-              <div className="flex items-center gap-2.5 lg:gap-3">
-                <div className={cn("p-2.5 lg:p-3 rounded-xl", styles.bg)}>
-                  <IndianRupee className={cn("w-5 h-5 lg:w-6 lg:h-6", styles.text)} />
-                </div>
-                <div>
-                  <p className="text-xs text-muted-foreground leading-none mb-1">Entry Fee</p>
-                  <p className="font-bold text-base lg:text-xl text-foreground leading-tight">
-                    {event.entryFee}
-                  </p>
-                </div>
+              <div className="flex gap-3 w-full sm:w-auto sm:ml-auto">
+                <Button
+                  asChild
+                  variant="outline"
+                  className="flex-1 sm:flex-none h-12 px-6 border-border/60 hover:bg-secondary rounded-full font-bold uppercase text-[11px] tracking-widest"
+                >
+                  <Link to={`/events/${event.id}`}>Guidelines</Link>
+                </Button>
+                <Button
+                  asChild
+                  className="flex-1 sm:flex-none h-12 px-8 glow-primary bg-primary text-primary-foreground font-bold uppercase text-[11px] tracking-widest rounded-full hover:scale-105 transition-transform"
+                >
+                  <Link to="/register" className="flex items-center gap-2">
+                    Register Now
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </Button>
               </div>
             </div>
 
-            {/* Action Buttons - Responsive layout */}
-            <div className="grid grid-cols-2 gap-3">
-              <Button
-                variant="outline"
-                size="lg"
-                className="w-full group/btn h-11 lg:h-12 text-sm lg:text-base font-semibold"
-                onClick={handleDetailsClick}
-                aria-label={`View details for ${event.name}`}
-                asChild
-              >
-                <Link to={`/events/${event.id}`}>
-                  <Info className="w-4 h-4 lg:w-5 lg:h-5 mr-2" />
-                  <span className="hidden sm:inline">View Details</span>
-                  <span className="sm:hidden">Details</span>
-                </Link>
-              </Button>
-
-              <Button
-                size="lg"
-                className={cn(
-                  "w-full font-bold h-11 lg:h-12 text-sm lg:text-base group/btn relative overflow-hidden",
-                )}
-                aria-label={`Register for ${event.name}`}
-                asChild
-              >
-                <Link to="/register">
-                  <span className="relative flex items-center justify-center gap-2">
-                    Register Now
-                    <ArrowRight className="w-4 h-4 lg:w-5 lg:h-5 transition-transform group-hover/btn:translate-x-1" />
-                  </span>
-                </Link>
-              </Button>
-            </div>
           </CardContent>
         </div>
+
+        {/* Animated Background Decor */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[100px] rounded-full pointer-events-none" />
       </Card>
     </motion.div>
   );
 }
 
-interface DetailItemProps {
-  icon: React.ComponentType<{ className?: string }>;
-  label: string;
-  text: string;
-  primary?: boolean;
-}
-
-function DetailItem({ icon: Icon, label, text, primary }: DetailItemProps) {
+function StatItem({ icon: Icon, label, value }: any) {
   return (
-    <div className="flex flex-col gap-1.5 group/detail">
-      <div className="flex items-center gap-2">
-        <div className={cn(
-          "p-1.5 lg:p-2 rounded-lg transition-colors shrink-0",
-          primary
-            ? "bg-primary/15 group-hover/detail:bg-primary/20"
-            : "bg-muted group-hover/detail:bg-muted/80"
-        )}>
-          <Icon className={cn(
-            "w-4 h-4",
-            primary ? "text-primary" : "text-muted-foreground"
-          )} />
-        </div>
-        <p className="text-xs text-muted-foreground leading-none">{label}</p>
+    <div className="flex flex-col gap-1">
+      <div className="flex items-center gap-1.5 text-muted-foreground">
+        <Icon className="w-3.5 h-3.5 text-primary/70" />
+        <span className="font-mono text-[9px] uppercase tracking-tighter font-bold">{label}</span>
       </div>
-      <p className={cn(
-        "text-sm lg:text-base font-semibold truncate pl-0.5",
-        primary ? "text-foreground" : "text-muted-foreground"
-      )}>
-        {text}
-      </p>
+      <span className="text-sm font-bold text-foreground truncate">{value}</span>
     </div>
   );
 }

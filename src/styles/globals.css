@@ -290,6 +290,9 @@
 }
 
 @layer utilities {
+  .font-sans {
+    font-family: var(--font-family-sans);
+  }
   .font-mono {
     font-family: var(--font-family-mono);
   }
@@ -301,6 +304,13 @@
 
 /* Add this to your CSS file */
 @keyframes pulse-slow {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.05); }
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
 }

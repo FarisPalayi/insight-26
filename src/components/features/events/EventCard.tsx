@@ -1,240 +1,108 @@
-import { useState } from 'react';
-import { Calendar, Clock, MapPin, Users, IndianRupee, Trophy, ChevronRight, Info } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
+import { ChevronRight, Trophy, IndianRupee, Users, ArrowUpRight, Cpu } from 'lucide-react';
+import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
-import { type UnifiedEvent, categoryLabels, teamSizeLabels, dayLabels } from '@/lib/data/unifiedEvents';
-import { cn } from '@/lib/utils';
 import { Link } from 'react-router';
 
-interface EventCardProps {
-  event: UnifiedEvent;
-  onDetailsClick?: (event: UnifiedEvent) => void;
-  onRegisterClick?: (event: UnifiedEvent) => void;
-}
-
-const CATEGORY_STYLES: Record<string, { bg: string; text: string; border: string; gradient: string }> = {
-  seminar: {
-    bg: 'bg-event-seminar/10',
-    text: 'text-event-seminar',
-    border: 'border-event-seminar/30',
-    gradient: 'from-event-seminar/20',
-  },
-  competition: {
-    bg: 'bg-event-competition/10',
-    text: 'text-event-competition',
-    border: 'border-event-competition/30',
-    gradient: 'from-event-competition/20',
-  },
-  cultural: {
-    bg: 'bg-event-cultural/10',
-    text: 'text-event-cultural',
-    border: 'border-event-cultural/30',
-    gradient: 'from-event-cultural/20',
-  },
-  allday: {
-    bg: 'bg-event-allday/10',
-    text: 'text-event-allday',
-    border: 'border-event-allday/30',
-    gradient: 'from-event-allday/20',
-  },
-};
-
-export function EventCard({ event, onDetailsClick }: EventCardProps) {
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [imageError, setImageError] = useState(false);
-  const styles = CATEGORY_STYLES[event.category];
-
-  const handleDetailsClick = (e?: React.MouseEvent) => {
-    e?.stopPropagation();
-    onDetailsClick?.(event);
-  };
+export function EventCard({ event }: { event: any }) {
+  const hasFancyName = !!event.fancyName;
 
   return (
-    <Card
-      className={cn(
-        'group h-full overflow-hidden border transition-all duration-300',
-        styles.border,
-        'hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1',
-        'focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2',
-        'flex flex-col pt-0'
-      )}
-      role="article"
-      aria-label={`${event.name} - ${categoryLabels[event.category]} event`}
-    >
-      {/* Image Section */}
-      <div className="relative aspect-video overflow-hidden bg-muted shrink-0">
-        {!imageLoaded && !imageError && <Skeleton className="absolute inset-0" />}
+    <Card className="py-0 group relative h-full flex flex-col bg-card border-border/60 overflow-hidden transition-all duration-300 hover:border-primary rounded-[var(--radius-lg)] shadow-md">
 
-        {!imageError ? (
-          <img
-            src={event.imageUrl}
-            alt={`${event.name} event banner`}
-            loading="lazy"
-            onLoad={() => setImageLoaded(true)}
-            onError={() => setImageError(true)}
-            className={cn(
-              'w-full h-full object-cover transition-all duration-700',
-              'group-hover:scale-110 group-hover:brightness-110',
-              !imageLoaded && 'opacity-0'
-            )}
-          />
-        ) : (
-          <div className="absolute inset-0 flex items-center justify-center bg-muted">
-            <Trophy className="w-16 h-16 text-muted-foreground/20" />
+      {/* 1. VISUAL HEADER - High Contrast Overlays */}
+      <div className="relative aspect-[16/10] overflow-hidden bg-muted">
+        <img
+          src={event.imageUrl}
+          alt={event.name}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+
+        {/* Stronger gradient for accessibility (ensures top badges are readable) */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--color-background))] via-transparent to-transparent" />
+
+        {/* Prize Badge - High Visibility Primary Color */}
+        {event.prizePool && (
+          <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 bg-primary rounded-full shadow-xl">
+            <Trophy className="w-3.5 h-3.5 text-primary-foreground" />
+            <span className="font-sans text-[12px] font-bold text-primary-foreground">
+              ₹{event.prizePool}
+            </span>
           </div>
         )}
 
-        {/* Gradient Overlay */}
-        <div className={cn(
-          "absolute inset-0 bg-gradient-to-t to-transparent via-background/5",
-          styles.gradient
-        )} />
-
-        {/* Top Badges */}
-        <div className="absolute top-3 left-3 right-3 flex items-start justify-between gap-2">
-          <Badge
-            className={cn(
-              'text-xs font-semibold border backdrop-blur-md shadow-lg',
-              styles.bg,
-              styles.text,
-              styles.border
-            )}
-          >
-            {categoryLabels[event.category]}
+        {/* Category Label - High Contrast Secondary */}
+        <div className="absolute top-4 left-4">
+          <Badge className="bg-white text-black text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded-full border-none">
+            {event.category}
           </Badge>
-
-          {event.prizePool && (
-            <Badge className="bg-primary/95 text-primary-foreground text-xs font-bold gap-1.5 backdrop-blur-md shadow-lg px-2.5 py-1">
-              <Trophy className="w-3.5 h-3.5" />
-              <span>{event.prizePool.replace('Prize Pool: ', '')}</span>
-            </Badge>
-          )}
         </div>
       </div>
 
-      {/* Content Section - Grows to fill available space */}
-      <CardContent className="p-4 lg:p-5 flex flex-col flex-1">
-        {/* Title & Tagline */}
-        <div className="space-y-1.5 mb-4">
-          <h3 className="font-bold text-lg lg:text-xl text-foreground line-clamp-2 leading-tight group-hover:text-primary transition-colors">
-            {event.name}
-          </h3>
-          {event.tagline && (
-            <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
-              {event.tagline}
-            </p>
-          )}
+      {/* 2. CONTENT SECTION - Legibility First */}
+      <div className="flex flex-1 flex-col p-6">
+
+        <div className="space-y-3 mb-6">
+          <div className="space-y-1">
+            {/* Primary Heading - Pure White for maximum contrast */}
+            <h3 className="font-sans font-bold text-2xl lg:text-3xl text-foreground leading-tight tracking-tight">
+              {event.fancyName || event.name}
+            </h3>
+
+            {hasFancyName && (
+              <div className="flex items-center gap-2 text-primary font-mono text-[11px] uppercase tracking-wider font-semibold">
+                <Cpu className="w-3.5 h-3.5" />
+                <span>{event.name}</span>
+              </div>
+            )}
+          </div>
+
+          {/* Tagline - Increased contrast to 80% white */}
+          <p className="text-[14px] text-foreground/80 leading-relaxed line-clamp-2">
+            {event.tagline || "Redefining the boundaries of technology and innovation."}
+          </p>
         </div>
 
-        {/* Event Details Grid - Responsive columns */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
-          <DetailItem
-            icon={Calendar}
-            text={dayLabels[event.schedule.day]}
-            primary
-          />
-          <DetailItem
-            icon={Clock}
-            text={event.schedule.displayTime}
-          />
-          <DetailItem
-            icon={MapPin}
-            text={event.venue}
-          />
-          <DetailItem
-            icon={Users}
-            text={teamSizeLabels[event.teamSize]}
-          />
-        </div>
-
-        {/* Spacer to push footer to bottom */}
-        <div className="flex-1" />
-
-        {/* Footer Section - Always at bottom */}
-        <div className="space-y-3 pt-4 border-t border-border/50">
-          {/* Entry Fee & Status Row */}
-          <div className="flex items-center justify-between gap-3">
-            <div className="flex items-center gap-2">
-              <div className={cn("p-2 rounded-lg", styles.bg)}>
-                <IndianRupee className={cn("w-4 h-4", styles.text)} />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xs text-muted-foreground leading-none">Entry Fee</span>
-                <span className="font-bold text-lg text-foreground leading-tight mt-0.5">
-                  {event.entryFee}
-                </span>
-              </div>
+        {/* 3. METADATA SECTION - Solid Background for Readability */}
+        <div className="grid grid-cols-2 gap-px bg-border/40 rounded-xl overflow-hidden mb-6 border border-border/40">
+          <div className="bg-secondary/40 p-4 flex flex-col gap-1">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Entry Fee</span>
+            <div className="flex items-center gap-1.5 text-foreground">
+              <IndianRupee className="w-4 h-4 text-primary" />
+              <span className="text-base font-bold">{event.entryFee}</span>
             </div>
           </div>
-
-          {/* Action Buttons - Responsive layout */}
-          <div className="grid grid-cols-2 gap-2">
-            <Button
-              variant="outline"
-              size="lg"
-              className="w-full group/btn h-11"
-              onClick={handleDetailsClick}
-              aria-label={`View details for ${event.name}`}
-              asChild
-            >
-              <Link to={`/events/${event.id}`}>
-                <Info className="w-4 h-4 mr-2 lg:mr-1.5" />
-                <span className="hidden sm:inline">View Details</span>
-                <span className="sm:hidden">Details</span>
-                <ChevronRight className="w-4 h-4 ml-auto opacity-0 -translate-x-2 transition-all group-hover/btn:opacity-100 group-hover/btn:translate-x-0" />
-              </Link>
-            </Button>
-
-            <Button
-              size="lg"
-              className={cn(
-                "w-full font-semibold h-11 relative overflow-hidden",
-              )}
-              aria-label={`Register for ${event.name}`}
-              asChild
-            >
-              <Link to="/register">
-                <span className="relative flex items-center justify-center gap-1.5">
-                  Register Now
-                  <ChevronRight className="w-4 h-4" />
-                </span>
-              </Link>
-            </Button>
+          <div className="bg-secondary/40 p-4 flex flex-col gap-1">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Team Size</span>
+            <div className="flex items-center gap-1.5 text-foreground">
+              <Users className="w-4 h-4 text-primary" />
+              <span className="text-base font-bold">{event.maxTeam || 'Solo'}</span>
+            </div>
           </div>
         </div>
-      </CardContent>
-    </Card>
-  );
-}
 
-interface DetailItemProps {
-  icon: React.ComponentType<{ className?: string }>;
-  text: string;
-  primary?: boolean;
-}
+        {/* 4. ACTIONS - High Affordance */}
+        <div className="mt-auto space-y-4">
+          <Button
+            asChild
+            className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase text-[12px] tracking-widest shadow-lg shadow-primary/20 rounded-full transition-all active:scale-[0.97]"
+          >
+            <Link to="/register" className="flex items-center justify-center gap-2">
+              Register for Event
+              <ChevronRight className="w-4 h-4" />
+            </Link>
+          </Button>
 
-function DetailItem({ icon: Icon, text, primary }: DetailItemProps) {
-  return (
-    <div className="flex items-center gap-2.5 group/detail">
-      <div className={cn(
-        "p-2 rounded-lg transition-colors shrink-0",
-        primary
-          ? "bg-primary/10 group-hover/detail:bg-primary/15"
-          : "bg-muted group-hover/detail:bg-muted/80"
-      )}>
-        <Icon className={cn(
-          "w-4 h-4",
-          primary ? "text-primary" : "text-muted-foreground"
-        )} />
+          <Link
+            to={`/events/${event.id}`}
+            className="flex items-center justify-center gap-2 font-mono text-[11px] uppercase tracking-widest text-foreground hover:text-primary transition-colors py-2 underline underline-offset-4 decoration-primary/30"
+          >
+            Detailed Guidelines
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
       </div>
-      <span className={cn(
-        "text-sm font-medium truncate",
-        primary ? "text-foreground" : "text-muted-foreground"
-      )}>
-        {text}
-      </span>
-    </div>
+    </Card>
   );
 }
