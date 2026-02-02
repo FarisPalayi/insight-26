@@ -1,82 +1,75 @@
 import { motion } from 'framer-motion';
-import { Phone, MessageCircle, User } from 'lucide-react';
+import { Phone, MessageCircle, User, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { type UnifiedEvent } from '@/lib/data/unifiedEvents';
 
-interface CoordinatorFooterProps {
-  event: UnifiedEvent;
-}
-
-// Default coordinators if event doesn't have specific ones
-const defaultCoordinators = [
-  { name: 'Event Coordinator', phone: '+91 98765 43210' },
-  { name: 'Technical Support', phone: '+91 98765 43211' },
-];
-
-export function CoordinatorFooter({ event }: CoordinatorFooterProps) {
-  const coordinators = event.coordinators?.length ? event.coordinators : defaultCoordinators;
+export function CoordinatorFooter({ event }: { event: UnifiedEvent }) {
+  const coordinators = event.coordinators?.length
+    ? event.coordinators
+    : [{ name: 'Event Desk', phone: '919876543210' }];
 
   return (
-    <motion.section
-      className="mt-12 pt-8 border-t border-border/50"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.5, duration: 0.4 }}
-    >
-      <div className="text-center mb-6">
-        <h2 className="text-lg font-semibold text-foreground">Need Help?</h2>
-        <p className="text-sm text-muted-foreground mt-1">
-          Contact our event coordinators for any queries
-        </p>
+    <section className="mt-20 pt-12 border-t border-white/5">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-10">
+        <div className="space-y-2">
+          <div className="flex items-center gap-2 text-primary font-mono text-xs uppercase tracking-widest">
+            <ShieldCheck className="w-4 h-4" />
+            <span>Support Protocol</span>
+          </div>
+          <h2 className="text-3xl font-bold tracking-tight">Need Assistance?</h2>
+          <p className="text-muted-foreground text-sm max-w-sm">
+            Our coordinators are on standby to help with technical or logistical queries.
+          </p>
+        </div>
       </div>
 
-      <div className="flex flex-wrap justify-center gap-4">
-        {coordinators.map((coordinator, index) => (
+      <div className="grid sm:grid-cols-2 gap-4">
+        {coordinators.map((person, idx) => (
           <motion.div
-            key={coordinator.name}
-            className="glass-surface rounded-xl p-4 min-w-[200px]"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.55 + index * 0.1, duration: 0.3 }}
+            key={person.name}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: idx * 0.1 }}
+            className="group relative bg-[#0A0A0A] border border-white/5 p-6 rounded-2xl hover:border-primary/30 transition-all"
           >
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                <User className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <p className="font-medium text-foreground text-sm">{coordinator.name}</p>
-                {coordinator.phone && (
-                  <p className="text-xs text-muted-foreground">{coordinator.phone}</p>
-                )}
+            <div className="flex items-start justify-between mb-6">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20">
+                  <User className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-lg leading-none">{person.name}</h3>
+                  <p className="text-xs text-muted-foreground mt-1 font-mono">{person.phone}</p>
+                </div>
               </div>
             </div>
 
-            {coordinator.phone && (
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  className="flex-1 h-9 text-xs gap-1.5 text-foreground"
-                  onClick={() => window.open(`tel:${coordinator.phone}`, '_self')}
-                >
-                  <Phone className="w-3.5 h-3.5" />
-                  Call
-                </Button>
-                <Button
-                  variant="outline"
-                  className="flex-1 h-9 text-xs gap-1.5 text-event-competition border-event-competition/30 hover:bg-event-competition/10"
-                  onClick={() => {
-                    const phone = coordinator.phone?.replace(/\s/g, '').replace('+', '');
-                    window.open(`https://wa.me/${phone}`, '_blank');
-                  }}
-                >
-                  <MessageCircle className="w-3.5 h-3.5" />
-                  WhatsApp
-                </Button>
-              </div>
-            )}
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                className="flex-1 bg-transparent border-white/10 hover:bg-white/5 rounded-xl h-10 font-mono text-[10px] uppercase tracking-wider"
+                onClick={() => window.open(`tel:${person.phone}`, '_self')}
+              >
+                <Phone className="w-3 h-3 mr-2" />
+                Voice Call
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="flex-1 bg-transparent border-primary/20 text-primary hover:bg-primary/5 rounded-xl h-10 font-mono text-[10px] uppercase tracking-wider"
+                onClick={() => {
+                  const cleanPhone = person?.phone?.replace(/\D/g, '');
+                  window.open(`https://wa.me/${cleanPhone}`, '_blank');
+                }}
+              >
+                <MessageCircle className="w-3 h-3 mr-2" />
+                WhatsApp
+              </Button>
+            </div>
           </motion.div>
         ))}
       </div>
-    </motion.section>
+    </section>
   );
 }

@@ -134,7 +134,7 @@ export const unifiedEvents: UnifiedEvent[] = [
     isFeatured: true,
     isMultiPeriod: true,
     prizePool: '15,000',
-    prizes: { first: '8,000', second: '5,000', third: '2,000' },
+    prizes: { jackpotPrize: '25,000', first: '8,000', second: '5,000', third: '2,000' },
   },
   {
     id: 'opening-seminar',
