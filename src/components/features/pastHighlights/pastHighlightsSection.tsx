@@ -11,25 +11,26 @@ const stats = [
 
 const galleryImages = [
   {
-    src: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&h=450&fit=crop",
+    src: "/gallery/workshop.jpg",
     alt: "Workshop session with students",
     caption: "Technical Workshop"
   },
   {
-    src: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=600&h=450&fit=crop",
-    alt: "Debate competition in progress",
-    caption: "Debate Finals"
+    src: "/gallery/robo-a-team.jpeg",
+    alt: "Trap events in progress",
+    caption: "Trap Events"
   },
   {
-    src: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&h=450&fit=crop",
-    alt: "Gaming tournament setup",
-    caption: "Gaming Arena"
+    src: "/gallery/group.jpeg",
+    alt: "Insight team",
+    caption: "Technova team",
+
   },
   {
-    src: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=450&fit=crop",
-    alt: "Cultural night performance",
-    caption: "Cultural Night"
-  }
+    src: "/gallery/teachers.jpeg",
+    alt: "CCSIT faculty group photo",
+    caption: "CCSIT Faculty"
+  },
 ];
 
 const PastEditionHighlights = () => {
@@ -72,7 +73,7 @@ const PastEditionHighlights = () => {
               className="lg:col-span-3 relative aspect-[16/10] md:aspect-[16/9] rounded-2xl overflow-hidden group"
             >
               <img
-                src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=675&fit=crop"
+                src="/gallery/inauguration.jpeg"
                 alt="Insight'25 main event crowd"
                 loading="lazy"
                 className="w-full h-full object-cover"
