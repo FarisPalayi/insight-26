@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { getEventsByDay } from '@/lib/data/unifiedEvents';
+import { Link } from 'react-router';
 
 export function TimelineOverview({ className }: { className?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -89,6 +90,7 @@ export function TimelineOverview({ className }: { className?: string }) {
             </div>
           </Tabs>
         </div>
+        <ScheduleCta />
       </div>
     </section>
   );
@@ -155,6 +157,21 @@ function EventList({ day }: { day: 1 | 2 }) {
           </motion.div>
         );
       })}
+    </div>
+  );
+}
+
+function ScheduleCta({ className }: { className?: string }) {
+  return (
+    <div className={cn("py-10 flex justify-center border-t border-white/5", className)}>
+      <Link
+        to="/schedules"
+        className="group flex items-center gap-3 transition-opacity hover:opacity-80"
+      >
+        <span className="border-b border-primary pb-0.5 text-primary font-mono text-[10px] md:text-xs font-bold tracking-widest uppercase">
+          See Full Schedule
+        </span>
+      </Link>
     </div>
   );
 }

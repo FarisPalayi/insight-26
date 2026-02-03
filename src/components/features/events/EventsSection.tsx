@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, ArrowRight } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -6,50 +6,49 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import {
   EventCard,
-  EventCardSkeleton,
   FeaturedEventCard
 } from '@/components/features/events';
 import { EventCategoryFilter } from '@/components/features/EventCategoryFilter';
 import {
-  unifiedEvents,
   type EventCategory,
-  getFeaturedEvents,
   getActiveCategories,
   categoryLabels,
+  type UnifiedEvent,
 } from '@/lib/data/unifiedEvents';
 
-export function EventsSection() {
-  const [isLoading, setIsLoading] = useState(true);
+interface EventsSectionProps {
+  events: UnifiedEvent[];
+}
+
+export function EventsSection({ events }: EventsSectionProps) {
   const [selectedCategory, setSelectedCategory] = useState<EventCategory | 'all'>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Simulate loading state (TODO: implement api)
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1200);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Get featured events
-  const featuredEvents = useMemo(() => getFeaturedEvents(), []);
+  // Get featured and regular events
+  const { featuredEvents, regularEvents } = useMemo(() => {
+    const featured = events.filter(e => e.isFeatured);
+    const regular = events.filter(e => !e.isFeatured);
+    return { featuredEvents: featured, regularEvents: regular };
+  }, [events]);
 
   // Filter events based on category and search
   const filteredEvents = useMemo(() => {
-    let events = unifiedEvents.filter(e => !e.isFeatured);
+    let filtered = regularEvents;
 
     if (selectedCategory !== 'all') {
-      events = events.filter(e => e.category === selectedCategory);
+      filtered = filtered.filter(e => e.category === selectedCategory);
     }
 
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
-      events = events.filter(e =>
+      filtered = filtered.filter(e =>
         e.name.toLowerCase().includes(query) ||
         e.venue.toLowerCase().includes(query)
       );
     }
 
-    return events;
-  }, [selectedCategory, searchQuery]);
+    return filtered;
+  }, [regularEvents, selectedCategory, searchQuery]);
 
   // Group events by category for display
   const eventGroups = useMemo(() => {
@@ -62,7 +61,6 @@ export function EventsSection() {
       }];
     }
 
-    // Group filtered events by category
     const categories = getActiveCategories();
     return categories
       .map(category => {
@@ -76,6 +74,13 @@ export function EventsSection() {
       .filter(g => g.events.length > 0);
   }, [selectedCategory, filteredEvents]);
 
+  // Filter featured events by category
+  const displayedFeaturedEvents = useMemo(() => {
+    return selectedCategory === 'all'
+      ? featuredEvents
+      : featuredEvents.filter(e => e.category === selectedCategory);
+  }, [featuredEvents, selectedCategory]);
+
   return (
     <div className="min-h-screen bg-background container mx-auto">
       {/* Background Effects */}
@@ -88,7 +93,6 @@ export function EventsSection() {
       {/* Header Section */}
       <header className="relative pt-12 pb-8 px-4">
         <div className="container mx-auto max-w-7xl">
-
           {/* Title */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -104,7 +108,6 @@ export function EventsSection() {
               Discover competitions, seminars, and cultural events. Find your passion and register today.
             </p>
           </motion.div>
-
 
           {/* Search & Filter Bar */}
           <motion.div
@@ -143,7 +146,7 @@ export function EventsSection() {
       <main className="relative py-12 px-4">
         <div className="container mx-auto max-w-7xl">
           {/* Featured Events Section */}
-          {(selectedCategory === 'all' || featuredEvents.some(e => e.category === selectedCategory)) && featuredEvents.length > 0 && (
+          {displayedFeaturedEvents.length > 0 && (
             <section className="mb-16">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -159,75 +162,54 @@ export function EventsSection() {
                 </div>
               </motion.div>
 
-              {isLoading ? (
-                <div className="space-y-6">
-                  <EventCardSkeleton />
-                </div>
-              ) : (
-                <div className="space-y-6">
-                  <AnimatePresence>
-                    {featuredEvents
-                      .filter(e => selectedCategory === 'all' || e.category === selectedCategory)
-                      .map((event, index) => (
-                        <FeaturedEventCard key={event.id} event={event} index={index} />
-                      ))}
-                  </AnimatePresence>
-                </div>
-              )}
+              <div className="space-y-6">
+                <AnimatePresence>
+                  {displayedFeaturedEvents.map((event, index) => (
+                    <FeaturedEventCard key={event.id} event={event} index={index} />
+                  ))}
+                </AnimatePresence>
+              </div>
             </section>
           )}
 
           {/* All Events by Category */}
           <AnimatePresence>
-            {isLoading ? (
-              <section>
+            {eventGroups.map((group) => (
+              <motion.section
+                key={group.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4 }}
+                className="mb-16"
+              >
                 <div className="flex items-center justify-between mb-8">
-                  <div className="h-8 w-48 bg-muted rounded animate-pulse" />
+                  <div>
+                    <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">
+                      {group.title}
+                    </h2>
+                    <p className="text-muted-foreground mt-1">
+                      {group.events.length} event{group.events.length !== 1 ? 's' : ''}
+                    </p>
+                  </div>
+                  {selectedCategory === 'all' && group.events.length > 4 && (
+                    <Button variant="ghost" className="text-primary hover:text-primary/80">
+                      View All <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  )}
                 </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {Array.from({ length: 8 }).map((_, i) => (
-                    <EventCardSkeleton key={i} />
+                  {group.events.map((event) => (
+                    <EventCard key={event.id} event={event} />
                   ))}
                 </div>
-              </section>
-            ) : (
-              eventGroups.map((group) => (
-                <motion.section
-                  key={group.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.4 }}
-                  className="mb-16"
-                >
-                  <div className="flex items-center justify-between mb-8">
-                    <div>
-                      <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">
-                        {group.title}
-                      </h2>
-                      <p className="text-muted-foreground mt-1">
-                        {group.events.length} event{group.events.length !== 1 ? 's' : ''}
-                      </p>
-                    </div>
-                    {selectedCategory === 'all' && group.events.length > 4 && (
-                      <Button variant="ghost" className="text-primary hover:text-primary/80">
-                        View All <ArrowRight className="w-4 h-4 ml-2" />
-                      </Button>
-                    )}
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {group.events.map((event) => (
-                      <EventCard key={event.id} event={event} />
-                    ))}
-                  </div>
-                </motion.section>
-              ))
-            )}
+              </motion.section>
+            ))}
           </AnimatePresence>
 
           {/* Empty State */}
-          {!isLoading && filteredEvents.length === 0 && featuredEvents.filter(e => selectedCategory === 'all' || e.category === selectedCategory).length === 0 && (
+          {filteredEvents.length === 0 && displayedFeaturedEvents.length === 0 && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

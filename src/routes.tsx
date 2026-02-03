@@ -5,7 +5,7 @@ import { Schedule } from "./pages/Schedule";
 import { Register } from "./pages/Register";
 import { Events } from "./pages/Events";
 import { EventDetail } from "./pages/EventDetail";
-import { fetchEventById } from "./services/eventService";
+import { fetchAllEvents, fetchEventById } from "./services/eventService";
 import RootLayout from "./pages/Layout";
 
 export const router = createBrowserRouter([
@@ -13,9 +13,24 @@ export const router = createBrowserRouter([
     path: "/",
     element: <RootLayout />,
     errorElement: <NotFound />,
+    hydrateFallbackElement: <div>Loading...</div>,
     children: [
       { index: true, element: <Home /> },
-      { path: "/events", element: <Events /> },
+      {
+        path: "/events",
+        element: <Events />,
+        loader: async () => {
+          console.log("start")
+          const events = await fetchAllEvents();
+          console.log(events)
+
+          if (!events || events.length === 0) {
+            throw new Response("Events not found", { status: 404 });
+          }
+
+          return events;
+        }
+      },
 
       {
         path: "/events/:eventId",

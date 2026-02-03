@@ -38,10 +38,7 @@ const EventsSection = () => {
   return (
     <section id="events" className="text-foreground relative py-20 md:py-28 lg:py-36 overflow-hidden bg-[#0a0a0a]">
       {/* The Grid Layer - Using a cleaner CSS-based mask for better visibility */}
-      <div className="absolute inset-0 grid-pattern" />
-
-      {/* 1. The Grid: Visible but delicate */}
-      <div className="absolute inset-0 grid-pattern opacity-[0.15]" />
+      <div className="absolute inset-0 grid-lines" />
 
       {/* 2. The Radial Fading Mask: Softens the grid lines toward the edges */}
       <div

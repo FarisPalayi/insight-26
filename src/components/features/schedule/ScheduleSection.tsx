@@ -115,7 +115,7 @@ export function ScheduleSection() {
   }, [filteredEvents, filteredAllDayEvents]);
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-background py-16 md:py-24">
+    <section className="relative min-h-screen overflow-hidden py-16 md:py-24">
       {/* Background Effects */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 grid-pattern opacity-50" />
@@ -139,7 +139,7 @@ export function ScheduleSection() {
         </motion.div>
 
         {/* Sticky Tabs & Filters Container */}
-        <div className="sticky top-0 z-40 -mx-4 md:-mx-6 px-4 md:px-6 pb-6 pt-4 backdrop-blur-xl border-b border-border/40 shadow-sm">
+        <div className="sticky top-0 z-40 -mx-4 md:-mx-6 px-4 md:px-6 pb-6 pt-4">
           <Tabs
             value={selectedDay.toString()}
             onValueChange={(value) => setSelectedDay(Number(value) as 1 | 2)}
