@@ -86,17 +86,18 @@ const EventsSection = () => {
             <FlagshipEvent />
           </div>
 
-          {/* Minimalist Responsive Divider */}
-          <div className="relative flex items-center justify-center">
-            {/* Line: Fades out at edges, very thin */}
-            <div className="absolute inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-border/50 to-transparent" />
+          <div className="relative flex items-center gap-6 my-24 opacity-50">
+            {/* Left Line - Fades in from left, solidifies towards text */}
+            <div className="flex-1 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-white/40" />
 
-            {/* Label: Small, high-tracking, clear background to "cut" the line */}
-            <span className="relative z-10 px-4 bg-[#030303] text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-medium">
-              Highlights
+            {/* Center Text - High tracking, muted but crisp */}
+            <span className="shrink-0 text-[10px] sm:text-[11px] uppercase tracking-[0.5em] text-white/80 font-semibold">
+              Other Highlights
             </span>
-          </div>
-        </div>
+
+            {/* Right Line - Solidifies from text, fades out to right */}
+            <div className="flex-1 h-[1px] bg-gradient-to-l from-transparent via-white/20 to-white/40" />
+          </div>        </div>
 
         {/* Secondary Events Grid - Improved */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16 md:mb-20">
