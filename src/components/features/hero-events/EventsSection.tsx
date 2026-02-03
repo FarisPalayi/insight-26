@@ -91,13 +91,14 @@ const EventsSection = () => {
             <div className="flex-1 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-white/40" />
 
             {/* Center Text - High tracking, muted but crisp */}
-            <span className="shrink-0 text-[10px] sm:text-[11px] uppercase tracking-[0.5em] text-white/80 font-semibold">
+            <span className="shrink-0 text-[10px] sm:text-[11px] uppercase tracking-[0.5em] text-white font-semibold">
               Other Highlights
             </span>
 
             {/* Right Line - Solidifies from text, fades out to right */}
             <div className="flex-1 h-[1px] bg-gradient-to-l from-transparent via-white/20 to-white/40" />
-          </div>        </div>
+          </div>
+        </div>
 
         {/* Secondary Events Grid - Improved */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16 md:mb-20">

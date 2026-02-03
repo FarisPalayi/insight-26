@@ -1,114 +1,85 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Trophy, Users, Calendar, Award } from "lucide-react";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Link } from "react-router";
 
 const stats = [
-  { label: "Years of Legacy", value: "23+", icon: Calendar, color: "text-primary" },
-  { label: "Partner Colleges", value: "20+", icon: Users, color: "text-accent" },
-  { label: "Prize Pool", value: "₹1 Lakh+", icon: Trophy, color: "text-yellow-500" },
-  { label: "Flagship Events", value: "10+", icon: Award, color: "text-blue-400" },
+  { label: "Years of Legacy", value: "23+", icon: Calendar, color: "var(--color-primary)" },
+  { label: "Partner Colleges", value: "20+", icon: Users, color: "var(--color-accent)" },
+  { label: "Prize Pool", value: "₹1L+", icon: Trophy, color: "hsl(45 100% 50%)" },
+  { label: "Flagship Events", value: "10+", icon: Award, color: "hsl(200 100% 55%)" },
 ];
 
 export default function InsightAbout() {
   return (
-    <section className="relative py-16 md:py-24 px-4 sm:px-6 lg:px-8 pt-24 md:pt-32 lg:pt-40 overflow-hidden">
-      {/* Background Ambience */}
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-72 md:w-[500px] h-72 md:h-[500px] bg-primary/10 rounded-full blur-[80px] md:blur-[120px] -z-10 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-64 md:w-[400px] h-64 md:h-[400px] bg-accent/10 rounded-full blur-[70px] md:blur-[100px] -z-10 pointer-events-none" />
+    <section className="relative py-24 md:py-32 overflow-hidden bg-background">
+      {/* Seamless Grid Background */}
+      <div className="grid-lines opacity-[0.08]" />
 
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      {/* Soft Ambient Glows */}
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
 
-          {/* Left Column: The Story */}
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+          {/* Left Column: Typography & Story */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="space-y-6 md:space-y-8 text-center lg:text-left"
+            transition={{ duration: 0.6 }}
+            className="space-y-8"
           >
-            <div className="inline-flex items-center space-x-2 px-3 py-1 mx-auto lg:mx-0 glow-text-accent hidden">
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_10px_hsla(var(--accent),0.5)]" />
-              <span className="text-xs md:text-sm text-accent font-medium tracking-wide uppercase">INSIGHT LEGACY</span>
-            </div>
+            <span className="inline-block px-3 py-1 border border-white/10 rounded-sm bg-white/5 text-[10px] uppercase tracking-[0.2em] text-primary font-medium">
+              Insight Legacy
+            </span>
 
-            {/* Improved heading with better mobile sizing and line breaks */}
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-display leading-[1.15] sm:leading-[1.1] tracking-tight text-balance">
-              <span className="text-gradient">23 Years of</span>
-              <br />
-              <span className="text-foreground">Digital Frontier.</span>
+            <h2 className="text-5xl text-foreground md:text-7xl font-bold tracking-tighter leading-[0.95] text-balance">
+              23 Years of <br />
+              <span className="text-gradient">Digital Frontier.</span>
             </h2>
 
-            {/* Better paragraph spacing and sizing */}
-            <div className="space-y-5 md:space-y-6 max-w-xl mx-auto lg:mx-0">
-              <div className="flex gap-3 md:gap-4 items-start text-left group">
-                <div className="mt-1.5 md:mt-2 w-1.5 h-1.5 rounded-full bg-primary glow-primary shrink-0 transition-transform duration-300" />
-                <p className="text-sm sm:text-base md:text-xl text-foreground/90 leading-relaxed md:leading-snug transition-colors duration-300">
-                  Kerala's premier National IT Fest, hosted by CCSIT, University of Calicut since 2003.
-                </p>
-              </div>
-
-              <div className="flex gap-3 md:gap-4 items-start text-left group">
-                <div className="mt-1.5 md:mt-2 w-1.5 h-1.5 rounded-full bg-accent [box-shadow:0_0_10px_hsla(var(--accent),0.5)] shrink-0 transition-transform duration-300" />
-                <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed transition-colors duration-300">
-                  Insight '26 merges two decades of tradition with raw future-tech energy. A proving ground built by students, for students.
-                </p>
-              </div>
+            <div className="space-y-6 max-w-lg">
+              <p className="text-lg md:text-xl text-foreground/80 leading-relaxed font-sans">
+                Kerala's premier National IT Fest, hosted by CCSIT, University of Calicut since 2003.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                Insight '26 merges two decades of tradition with raw future-tech energy. A proving ground built by students, for students.
+              </p>
             </div>
 
-            <div className="pt-2 md:pt-4 hidden lg:block">
-              <Button
-                variant="ghost"
-                className="group text-primary hover:text-primary hover:bg-primary/10 transition-all duration-300 text-sm sm:text-base md:text-lg btn-outline-glow"
-                asChild
+            <div className="pt-4">
+              <Link
+                to="/events"
+                className="inline-flex items-center gap-2 text-sm uppercase tracking-widest font-bold text-primary hover:gap-4 transition-all"
               >
-                <Link to="/events">
-                  Explore all events
-                  <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Button>
+                Explore all events <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </motion.div>
 
-          {/* Right Column: The Proof (Bento Grid) */}
-          <div className="grid grid-cols-2 gap-3 md:gap-6">
+          {/* Right Column: The Stats Grid (Bento) */}
+          <div className="grid grid-cols-2 gap-4 text-foreground">
             {stats.map((stat, index) => (
               <motion.div
                 key={stat.label}
-                initial={{ opacity: 0, y: 30, scale: 0.9 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.1,
-                  type: "spring",
-                  stiffness: 100
-                }}
-                className="stat-card"
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                className="glass-surface-strong p-6 border border-white/5 rounded-lg flex flex-col justify-between min-h-[160px] group hover:border-primary/30 transition-colors"
               >
-                <Card className="glass-surface glass-surface-strong h-full p-4 sm:p-5 md:p-6 flex flex-col justify-between group border-white/5 relative overflow-hidden transition-all duration-500 hover:border-primary/30 min-h-[140px] sm:min-h-[160px] md:min-h-[180px]">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="p-2 rounded-md bg-white/5 w-fit mb-4 group-hover:bg-primary/10 transition-colors">
+                  <stat.icon size={20} style={{ color: stat.color }} />
+                </div>
 
-                  <div className={`p-2 md:p-3 rounded-lg md:rounded-xl bg-background/50 w-fit mb-3 md:mb-4 group-hover:scale-110 transition-transform duration-300 ${stat.color}`}>
-                    <stat.icon className="w-5 h-5 md:w-6 md:h-6" />
-                  </div>
-
-                  <div>
-                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold font-mono tracking-tighter mb-1 md:mb-1.5 group-hover:text-glow transition-all duration-300">
-                      {stat.value}
-                    </h3>
-                    <p className="text-[11px] sm:text-xs md:text-sm text-muted-foreground font-medium uppercase tracking-wide">
-                      {stat.label}
-                    </p>
-                  </div>
-
-                  {/* Decorative Corner */}
-                  <div className="absolute top-0 right-0 p-2 md:p-3 opacity-20">
-                    <div className="w-10 h-10 md:w-16 md:h-16 border-t border-r md:border-t-2 md:border-r-2 border-white/20 rounded-tr-lg md:rounded-tr-2xl" />
-                  </div>
-                </Card>
+                <div>
+                  <h3 className="text-3xl md:text-4xl font-bold font-mono tracking-tighter">
+                    {stat.value}
+                  </h3>
+                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1">
+                    {stat.label}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>
