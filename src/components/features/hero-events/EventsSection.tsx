@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Camera, Users, Star, ArrowRight, Sparkles } from "lucide-react";
+import { Camera, Users, Star, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EventCard } from "./EventCard";
 import { FlagshipEvent } from "./FlagshipEventCard";
