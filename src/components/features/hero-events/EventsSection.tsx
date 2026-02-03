@@ -34,14 +34,24 @@ const EventsSection = () => {
   ];
 
   return (
-    <section id="events" className="relative py-20 md:py-28 lg:py-36 overflow-hidden">
-      {/* Refined background elements */}
-      <div className="absolute inset-0 grid-pattern opacity-10" />
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/8 rounded-full blur-[100px]" />
-      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-accent/8 rounded-full blur-[100px]" />
+    <section id="events" className="relative py-20 md:py-28 lg:py-36 overflow-hidden bg-[#0a0a0a]">
+      {/* The Grid Layer - Using a cleaner CSS-based mask for better visibility */}
+      <div className="absolute inset-0 grid-pattern" />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header - Improved */}
+      {/* 1. The Grid: Visible but delicate */}
+      <div className="absolute inset-0 grid-pattern opacity-[0.15]" />
+
+      {/* 2. The Radial Fading Mask: Softens the grid lines toward the edges */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle at center, transparent 20%, #030303 100%)'
+        }}
+      />
+
+      {/* Ambient Glows - Made slightly more opaque */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[120px]" />      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -56,7 +66,6 @@ const EventsSection = () => {
             transition={{ delay: 0.2 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-surface mb-6 md:mb-8"
           >
-            <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-xs sm:text-sm font-medium text-muted-foreground uppercase tracking-wide">Featured Events</span>
           </motion.div>
 
@@ -71,24 +80,23 @@ const EventsSection = () => {
         </motion.div>
 
         {/* Flagship Event - Better spacing */}
-        <div className="mb-16 md:mb-20 lg:mb-24">
-          <FlagshipEvent />
-        </div>
+        <div className="mb-24 md:mb-32">
+          {/* Flagship Section */}
+          <div className="mb-16 md:mb-24">
+            <FlagshipEvent />
+          </div>
 
-        {/* Divider with text */}
-        <motion.div
-          initial={{ opacity: 0, scaleX: 0 }}
-          whileInView={{ opacity: 1, scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="flex items-center gap-4 mb-12 md:mb-16 max-w-4xl mx-auto"
-        >
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
-          <span className="text-xs sm:text-sm text-muted-foreground uppercase tracking-wider font-medium px-4">
-            More Highlights
-          </span>
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
-        </motion.div>
+          {/* Minimalist Responsive Divider */}
+          <div className="relative flex items-center justify-center">
+            {/* Line: Fades out at edges, very thin */}
+            <div className="absolute inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-border/50 to-transparent" />
+
+            {/* Label: Small, high-tracking, clear background to "cut" the line */}
+            <span className="relative z-10 px-4 bg-[#030303] text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-medium">
+              Highlights
+            </span>
+          </div>
+        </div>
 
         {/* Secondary Events Grid - Improved */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16 md:mb-20">
