@@ -1,5 +1,5 @@
 import { db } from "@/firebase/config";
-import { collection, query, where, getDocs, doc, getDoc } from 'firebase/firestore';
+import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
 
 const USE_FIREBASE = true;
 
