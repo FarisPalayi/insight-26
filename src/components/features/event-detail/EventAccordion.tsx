@@ -8,91 +8,65 @@ import {
 import { type UnifiedEvent } from '@/lib/data/unifiedEvents';
 import { motion } from 'framer-motion';
 
-// Sample content based on event category - in production, this would come from the event data
-function getGuidelinesContent(event: UnifiedEvent): string[] {
-  const baseGuidelines = [
-    'All participants must carry a valid college ID card.',
-    'Registration must be completed before the event starts.',
-    'Decisions made by the judges will be final and binding.',
-    'Any form of malpractice will lead to immediate disqualification.',
-    'Participants should report to the venue 15 minutes before the scheduled time.',
-  ];
-
-  if (event.category === 'competition') {
-    return [
-      ...baseGuidelines,
-      'Teams cannot be changed after registration.',
-      'Use of external resources is prohibited unless specified.',
-      'All submissions must be original work.',
-    ];
-  }
-
-  return baseGuidelines;
-}
-
-function getEligibilityContent(event: UnifiedEvent): string[] {
-  const baseEligibility = [
-    'Open to all undergraduate and postgraduate students.',
-    'Participants from any college/university can participate.',
-    'Age limit: 18-25 years.',
-  ];
-
-  if (event.teamSize !== 'solo' && event.teamSize !== 'any') {
-    baseEligibility.push(`Team must consist of ${event.teamSize.replace('-', ' to ')} members.`);
-  }
-
-  return baseEligibility;
-}
-
-function getPrerequisitesContent(event: UnifiedEvent): string[] {
-  const basePrereqs = [
-    'Bring your own laptop (if required for the event).',
-    'Carry your registration confirmation.',
-    'Bring a valid photo ID proof.',
-  ];
-
-  if (event.category === 'competition') {
-    return [
-      ...basePrereqs,
-      'Ensure your laptop has all necessary software installed.',
-      'Bring chargers and extension cords.',
-      'Prepare any presentations in advance.',
-    ];
-  }
-
-  if (event.category === 'seminar') {
-    return [
-      'Notebook and pen for taking notes.',
-      'Questions prepared for the Q&A session.',
-      'Business cards for networking (optional).',
-    ];
-  }
-
-  return basePrereqs;
-}
-
-const accordionSections = [
-  {
-    id: 'guidelines',
-    title: 'Guidelines & Rules',
-    icon: FileText,
-    getContent: getGuidelinesContent,
-  },
-  {
-    id: 'eligibility',
-    title: 'Eligibility Criteria',
-    icon: CheckCircle,
-    getContent: getEligibilityContent,
-  },
-  {
-    id: 'prerequisites',
-    title: 'What to Bring',
-    icon: Briefcase,
-    getContent: getPrerequisitesContent,
-  },
-];
-
 export function EventAccordion({ event }: { event: UnifiedEvent }) {
+  // This object mimics the structure of UnifiedEvent interface
+  // In the future, imply use 'event[section.id]' directly
+  const contentMap: Record<string, string[]> = {
+    rulesAndGuidelines: event.rulesAndGuidelines || [
+      'All participants must carry a valid college ID card.',
+      'Registration must be completed before the event starts.',
+      'Decisions made by the judges will be final and binding.',
+      'Any form of malpractice will lead to immediate disqualification.',
+      'Participants should report to the venue 15 minutes before the scheduled time.',
+      ...(event.category === 'competition' ? [
+        'Teams cannot be changed after registration.',
+        'Use of external resources is prohibited unless specified.',
+        'All submissions must be original work.'
+      ] : [])
+    ],
+    eligibility: event.eligibility || [
+      'Open to all undergraduate and postgraduate students.',
+      'Participants from any college/university can participate.',
+      'Age limit: 18-25 years.',
+      ...(event.teamSize !== 'solo' && event.teamSize !== 'any'
+        ? [`Team must consist of ${event.teamSize.replace('-', ' to ')} members.`]
+        : [])
+    ],
+    whatToBring: event.whatToBring || [
+      'Bring your own laptop (if required for the event).',
+      'Carry your registration confirmation.',
+      'Bring a valid photo ID proof.',
+      ...(event.category === 'competition' ? [
+        'Ensure your laptop has all necessary software installed.',
+        'Bring chargers and extension cords.',
+        'Prepare any presentations in advance.'
+      ] : []),
+      ...(event.category === 'seminar' ? [
+        'Notebook and pen for taking notes.',
+        'Questions prepared for the Q&A session.',
+        'Business cards for networking (optional).'
+      ] : [])
+    ]
+  };
+
+  const accordionSections = [
+    {
+      id: 'rulesAndGuidelines',
+      title: 'Guidelines & Rules',
+      icon: FileText,
+    },
+    {
+      id: 'eligibility',
+      title: 'Eligibility Criteria',
+      icon: CheckCircle,
+    },
+    {
+      id: 'whatToBring',
+      title: 'What to Bring',
+      icon: Briefcase,
+    },
+  ];
+
   return (
     <div className="space-y-6">
       {/* Section Header */}
@@ -108,9 +82,11 @@ export function EventAccordion({ event }: { event: UnifiedEvent }) {
         <div className="hidden md:block h-px flex-1 mx-8 bg-gradient-to-r from-primary/20 to-transparent" />
       </div>
 
-      <Accordion type="single" collapsible defaultValue="guidelines" className="space-y-4">
+      <Accordion type="single" collapsible className="space-y-4">
         {accordionSections.map((section, idx) => {
           const Icon = section.icon;
+          const displayContent = contentMap[section.id] || [];
+
           return (
             <AccordionItem
               key={section.id}
@@ -140,7 +116,7 @@ export function EventAccordion({ event }: { event: UnifiedEvent }) {
 
               <AccordionContent className="pt-4 pb-2">
                 <div className="grid md:grid-cols-2 gap-3 pl-4 md:pl-14">
-                  {section.getContent(event).map((item, i) => (
+                  {displayContent.map((item, i) => (
                     <motion.div
                       key={i}
                       initial={{ opacity: 0, x: -10 }}

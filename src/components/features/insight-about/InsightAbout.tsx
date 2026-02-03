@@ -3,10 +3,10 @@ import { ArrowRight, Trophy, Users, Calendar, Award } from "lucide-react";
 import { Link } from "react-router";
 
 const stats = [
-  { label: "Years of Legacy", value: "23+", icon: Calendar, color: "var(--color-primary)" },
+  { label: "Years of Legacy", value: "23", icon: Calendar, color: "var(--color-primary)" },
   { label: "Partner Colleges", value: "20+", icon: Users, color: "var(--color-accent)" },
   { label: "Prize Pool", value: "₹1L+", icon: Trophy, color: "hsl(45 100% 50%)" },
-  { label: "Flagship Events", value: "10+", icon: Award, color: "hsl(200 100% 55%)" },
+  { label: "Competitions", value: "10+", icon: Award, color: "hsl(200 100% 55%)" },
 ];
 
 export default function InsightAbout() {

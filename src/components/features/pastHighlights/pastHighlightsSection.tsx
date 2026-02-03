@@ -5,7 +5,7 @@ import { StatCard } from "./StatsCard";
 
 const stats = [
   { value: "200+", label: "Students Participated", icon: <Users className="w-5 h-5" /> },
-  { value: "12", label: "Colleges Represented", icon: <Building2 className="w-5 h-5" /> },
+  { value: "15", label: "Colleges Represented", icon: <Building2 className="w-5 h-5" /> },
   { value: "₹80K+", label: "Prize Money Distributed", icon: <Trophy className="w-5 h-5" /> },
 ];
 
@@ -57,7 +57,7 @@ const PastEditionHighlights = () => {
               Last Year's <span className="text-gradient">Highlights</span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg">
-              Over 400 students. 12 colleges. Two days of unforgettable moments that
+              Over 200 students. 15 colleges. Two days of unforgettable moments that
               defined Kerala's biggest tech celebration.
             </p>
           </motion.div>

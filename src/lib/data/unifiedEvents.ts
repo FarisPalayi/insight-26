@@ -61,6 +61,11 @@ export interface UnifiedEvent {
 
   // Contact
   coordinators?: EventCoordinator[];
+
+  // Other infos
+  rulesAndGuidelines?: string[],
+  eligibility?: string[],
+  whatToBring?: string[]
 }
 
 // ================== LABELS ==================

@@ -1,83 +1,92 @@
-import { useRef, useMemo } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Sparkles, Clock } from 'lucide-react';
+import { useRef, useMemo, useState } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { Sparkles, Clock, MapPin } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { getEventsByDay } from '@/lib/data/unifiedEvents';
 
-interface TimelineProps {
-  className?: string;
-}
-
-export function TimelineOverview({ className }: TimelineProps) {
+export function TimelineOverview({ className }: { className?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [activeDay, setActiveDay] = useState<string>("1");
 
-  // Scroll Animation Logic for the filling line
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start 70%', 'end 70%'],
+    offset: ['start 80%', 'end 20%'],
   });
 
   const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   return (
-    <section className={cn('relative py-16 md:py-24 overflow-hidden relative', className)}>
-      {/* Background Glows to match InsightAbout */}
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px] -z-10 pointer-events-none" />
+    <section className={cn('relative py-16 md:py-24 bg-background overflow-hidden', className)}>
+      <div className="grid-lines opacity-30" />
 
-      <div className="container relative z-10 mx-auto px-4 sm:px-6">
-        {/* Header */}
-        <div className="flex flex-col items-center text-center mb-16">
+      <div className="text-foreground container relative z-10 mx-auto px-4 sm:px-6">
+        <div className="flex flex-col items-center text-center mb-12 md:mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="space-y-4"
           >
-            <Badge variant="outline" className="border-primary/30 bg-primary/10 text-primary py-1 px-4">
+            <Badge variant="outline" className="border-primary/30 bg-primary/10 text-primary py-1 px-4 font-mono">
               <Sparkles className="mr-2 h-3.5 w-3.5" />
-              Event Schedule
+              SCHEDULE
             </Badge>
-            <h2 className="text-4xl md:text-6xl font-bold text-foreground font-display tracking-tight text-balance">
-              Event <span className="text-gradient">Overview</span>
+            <h2 className="text-4xl md:text-7xl font-bold font-sans tracking-tight">
+              Event <span className="text-gradient">Timeline</span>
             </h2>
           </motion.div>
 
-          {/* Day Toggle using Shadcn Tabs */}
-          <Tabs defaultValue="1" className="mt-10 relative">
-            <TabsList className="bg-muted/50 border border-white/5 p-1 h-12">
-              <TabsTrigger value="1" className="px-8 rounded-md data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                Day 01
-              </TabsTrigger>
-              <TabsTrigger value="2" className="px-8 rounded-md data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                Day 02
-              </TabsTrigger>
-            </TabsList>
+          <Tabs value={activeDay} onValueChange={setActiveDay} className="mt-8 md:mt-12 w-full max-w-3xl">
+            <div className="flex justify-center mb-12 md:mb-20">
+              <TabsList className="bg-muted/30 border border-white/10 p-1 md:p-1.5 h-12 md:h-14 glass-surface-strong rounded-full">
+                <TabsTrigger
+                  value="1"
+                  className="px-6 md:px-10 rounded-full font-mono text-xs md:text-sm font-semibold transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:glow-primary"
+                >
+                  DAY 01
+                </TabsTrigger>
+                <TabsTrigger
+                  value="2"
+                  className="px-6 md:px-10 rounded-full font-mono text-xs md:text-sm font-semibold transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:glow-primary"
+                >
+                  DAY 02
+                </TabsTrigger>
+              </TabsList>
+            </div>
 
-            {/* Day 1 Content */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              className="mt-12"
-            >
-              <div ref={containerRef} className="relative max-w-2xl mx-auto">
-                {/* The Scrolling Line Track */}
-                <div className="absolute left-[11px] md:left-[15px] top-2 bottom-2 w-[2px] rounded-full" />
+            <div ref={containerRef} className="relative min-h-[500px]">
+              {/* Responsive Central Line */}
+              {/* Mobile: Left-aligned (16px from edge) | Desktop: Centered */}
+              <div className="absolute left-[15.5px] md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-px bg-white/10" />
 
-                {/* The Filling Animation */}
-                <div className="absolute left-[11px] md:left-[15px] top-2 bottom-2 w-[2px] overflow-hidden">
-                  <motion.div
-                    className="w-full bg-gradient-to-b from-primary via-accent to-primary shadow-[0_0_15px_rgba(var(--color-primary),0.5)]"
-                    style={{ height: lineHeight }}
-                  />
-                </div>
-
-                <div className="space-y-8 md:space-y-10">
-                  <EventList day={1} />
-                </div>
+              <div className="absolute left-[15.5px] md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-px overflow-hidden">
+                <motion.div
+                  className="w-full origin-top"
+                  style={{
+                    height: lineHeight,
+                    background: `linear-gradient(to bottom, transparent, hsl(var(--gradient-mid)), hsl(var(--gradient-end)))`
+                  }}
+                />
               </div>
-            </motion.div>
+
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeDay}
+                  initial={{ opacity: 0, x: 10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -10 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <TabsContent value={activeDay} forceMount className="outline-none">
+                    <div className="space-y-0">
+                      <EventList day={Number(activeDay) as 1 | 2} />
+                    </div>
+                  </TabsContent>
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </Tabs>
         </div>
       </div>
@@ -93,40 +102,59 @@ function EventList({ day }: { day: 1 | 2 }) {
   }, [day]);
 
   return (
-    <>
-      {events.map((event) => (
-        <motion.div
-          key={event.id}
-          initial={{ opacity: 0, x: -10 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          className="group relative pl-10 md:pl-14"
-        >
-          {/* Central Bullet */}
-          <div className="absolute left-0 top-1.5 z-20">
-            <div className="h-6 w-6 md:h-8 md:w-8 rounded-full bg-background border border-white/10 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-              <div className="h-2 w-2 rounded-full bg-primary group-hover:shadow-[0_0_10px_hsl(var(--color-primary))]" />
-            </div>
-          </div>
+    <div className="relative">
+      {events.map((event, index) => {
+        const isEven = index % 2 === 0;
+        return (
+          <motion.div
+            key={event.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            className={cn(
+              "relative flex flex-col md:flex-row items-start md:items-center mb-12 md:mb-24 last:mb-0",
+              isEven ? "md:flex-row" : "md:flex-row-reverse"
+            )}
+          >
+            {/* Content Side */}
+            <div className={cn(
+              "w-full md:w-[45%] pl-12 md:pl-0", // Mobile: Padding-left for the line | Desktop: 0
+              isEven ? "md:text-right md:pr-12" : "md:text-left md:pl-12"
+            )}>
+              <div className={cn(
+                "inline-flex items-center gap-2 text-primary font-mono text-[10px] md:text-xs mb-2 px-2 py-0.5 rounded border border-primary/20 bg-primary/5",
+                isEven ? "md:flex-row-reverse" : "flex-row"
+              )}>
+                <Clock className="w-3 h-3" />
+                {event.schedule.displayTime}
+              </div>
 
-          {/* Event Details - Single Side for Readability */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 md:gap-8 pb-4 border-b border-white/5 transition-colors group-hover:border-primary/20">
-            <div className="space-y-1">
-              <h3 className="text-lg md:text-2xl font-bold font-display text-foreground transition-colors group-hover:text-primary">
+              <h3 className="text-xl md:text-3xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">
                 {event.name}
               </h3>
-              <p className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-mono text-muted-foreground font-semibold">
+
+              <div className={cn(
+                "flex items-center gap-2 text-muted-foreground text-xs md:text-sm",
+                isEven ? "md:justify-end" : "md:justify-start"
+              )}>
+                <MapPin className="w-3.5 h-3.5 text-primary/50" />
                 {event.venue}
-              </p>
+              </div>
             </div>
 
-            <div className="flex items-center gap-2 text-primary/80 font-mono text-xs md:text-sm bg-primary/5 px-3 py-1.5 rounded-lg border border-primary/10 w-fit">
-              <Clock className="w-3 h-3 md:w-4 md:h-4" />
-              {event.schedule.displayTime}
+            {/* The Responsive Bullet Point */}
+            <div className="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-1.5 md:top-auto z-20">
+              <div className="h-8 w-8 md:h-10 md:w-10 rounded-full glass-surface-strong border-white/20 flex items-center justify-center shadow-2xl">
+                <div className="h-2.5 w-2.5 md:h-3 md:w-3 rounded-full bg-primary glow-primary" />
+                <div className="absolute inset-0 rounded-full border border-primary/20 animate-pulse" />
+              </div>
             </div>
-          </div>
-        </motion.div>
-      ))}
-    </>
+
+            {/* Empty space for desktop zig-zag */}
+            <div className="hidden md:block md:w-[45%]" />
+          </motion.div>
+        );
+      })}
+    </div>
   );
 }

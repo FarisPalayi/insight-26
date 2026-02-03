@@ -5,6 +5,7 @@ import Main from "@/components/layout/Main";
 import PastEditionHighlights from "@/components/features/pastHighlights/pastHighlightsSection";
 import FAQSection from "@/components/features/faq/FAQSection";
 import InsightAbout from "@/components/features/insight-about/InsightAbout";
+import { TimelineOverview } from "@/components/features/schedule-overview/TimelineOverview";
 
 export function Home() {
   return (
@@ -12,6 +13,7 @@ export function Home() {
       <HeroSection />
       <InsightAbout />
       <EventsSection />
+      <TimelineOverview />
       <PastEditionHighlights />
       <SponsorSection />
       <FAQSection />
