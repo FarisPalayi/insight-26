@@ -15,69 +15,61 @@ interface EventCardProps {
 export const EventCard = ({ name, category, tagline, icon, accentColor, urlPath, index = 0 }: EventCardProps) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{
-        duration: 0.6,
-        delay: index * 0.1,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
       className="group relative h-full"
     >
-      {/* Outer glow effect */}
-      <div className={`absolute -inset-0.5 bg-gradient-to-br ${accentColor} rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500`} />
-
-      {/* Card */}
       <Link to={urlPath} className="block h-full">
-        <div className="relative h-full rounded-2xl border border-border/40 glass-surface overflow-hidden transition-all duration-500 group-hover:border-border/80 group-hover:shadow-2xl">
+        <div className="relative h-full glass-surface border border-white/5 rounded-xl overflow-hidden transition-all duration-500 hover:border-white/20">
 
-          {/* Animated background gradient */}
-          <div className={`absolute inset-0 bg-gradient-to-br ${accentColor} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+          {/* Subtle Accent Glow - Top Right */}
+          <div
+            className="absolute -top-12 -right-12 w-32 h-32 rounded-full opacity-10 blur-3xl transition-opacity duration-500 group-hover:opacity-20"
+            style={{ backgroundColor: accentColor }}
+          />
 
-          {/* Subtle corner accent */}
-          <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl ${accentColor} opacity-8 rounded-full blur-2xl`} />
+          <div className="relative z-10 p-7 flex flex-col h-full">
 
-          {/* Content */}
-          <div className="relative z-10 p-6 sm:p-7 md:p-8 h-full flex flex-col">
-
-            {/* Header: Icon + Category */}
-            <div className="flex items-center justify-between mb-6">
-              <motion.div
-                whileHover={{ scale: 1.05, rotate: 5 }}
-                transition={{ type: "spring", stiffness: 400 }}
-                className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br ${accentColor} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300`}
-              >
-                <div className="text-white scale-90 sm:scale-100">{icon}</div>
-              </motion.div>
-
-              <span className="text-[10px] sm:text-xs font-semibold text-muted-foreground uppercase tracking-widest px-3 py-1.5 rounded-full bg-muted/30 border border-border/30">
-                {category}
-              </span>
+            {/* Header: Icon with adaptive glow */}
+            <div className="mb-8">
+              <div className="w-12 h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center transition-all duration-500 group-hover:border-white/30 group-hover:bg-white/10 relative">
+                <div className="text-white/70 group-hover:text-white transition-colors">
+                  {icon}
+                </div>
+                {/* Internal Glow on Hover */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-20 blur-lg transition-opacity"
+                  style={{ backgroundColor: accentColor }}
+                />
+              </div>
             </div>
 
-            {/* Event Name */}
-            <h4 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-3 sm:mb-4 group-hover:text-gradient transition-all duration-300 leading-tight">
-              {name}
-            </h4>
+            {/* Content: Title & Tagline */}
+            <div className="flex-1">
+              <h4 className="text-2xl font-bold tracking-tight text-white mb-3 group-hover:text-primary transition-colors">
+                {name}
+              </h4>
+              <p className="text-sm leading-relaxed text-muted-foreground line-clamp-3">
+                {tagline}
+              </p>
+            </div>
 
-            {/* Tagline */}
-            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 sm:mb-8 flex-1">
-              {tagline}
-            </p>
+            {/* Footer: Metadata & CTA */}
+            <div className="mt-8 pt-5 border-t border-white/5 flex items-center justify-between">
+              <div className="flex flex-col gap-1">
+                <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground">
+                  Category
+                </span>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-white/90">
+                  {category}
+                </span>
+              </div>
 
-            {/* CTA Footer */}
-            <div className="flex items-center justify-between pt-4 sm:pt-5 border-t border-border/30 group-hover:border-border/60 transition-colors duration-300">
-              <span className="text-xs sm:text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors duration-300">
-                Learn more
-              </span>
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-muted/40 flex items-center justify-center group-hover:bg-primary/20 border border-border/20 group-hover:border-primary/30 transition-all duration-300"
-              >
-                <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all duration-300" />
-              </motion.div>
+              <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-primary opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+                View <ArrowRight size={14} />
+              </div>
             </div>
           </div>
         </div>
