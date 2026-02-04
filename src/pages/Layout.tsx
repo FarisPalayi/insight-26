@@ -2,8 +2,8 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Outlet, ScrollRestoration, useNavigation } from "react-router";
 import { EventsPageSkeleton } from "@/components/features/events/skeletons/EventPageSkeleton";
-import { useGSAP } from "@gsap/react";
-import { ScrollSmoother } from "gsap/all";
+
+import { useGSAP, ScrollSmoother } from "@/lib/gsap";
 
 export default function RootLayout() {
   useGSAP(() => {
