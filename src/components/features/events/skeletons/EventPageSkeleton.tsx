@@ -4,6 +4,7 @@ import {
   EventCardSkeleton,
 } from "@/components/features/events/skeletons/EventCardSkeleton";
 import Main from "@/components/layout/Main";
+import { EventCategoryFilterSkeleton } from "./EventFilterPillSkeleton";
 
 export function EventsPageSkeleton() {
   return (
@@ -25,14 +26,7 @@ export function EventsPageSkeleton() {
             </div>
 
             {/* Category Pills */}
-            <div className="flex flex-wrap justify-center gap-3">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <Skeleton
-                  key={i}
-                  className="h-9 w-24 rounded-full"
-                />
-              ))}
-            </div>
+            <EventCategoryFilterSkeleton />
 
           </div>
         </div>

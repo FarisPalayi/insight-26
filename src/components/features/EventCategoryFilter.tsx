@@ -74,7 +74,7 @@ function getCategoryLabel(category: EventCategory | 'all'): string {
 export function EventCategoryFilter(props: EventCategoryFilterProps) {
   const {
     mode = 'single',
-    showLabel = true,
+    showLabel = false,
     labelText = 'Filter by category',
     className,
   } = props;
@@ -113,11 +113,11 @@ export function EventCategoryFilter(props: EventCategoryFilterProps) {
   return (
     <div className={cn('w-full', className)}>
       {showLabel && (
-        <h4 className="mb-3 md:mb-4 text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wider">
+        <h4 className="sm:text-center mb-3 md:mb-4 text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wider">
           {labelText}
         </h4>
       )}
-      <div className="flex gap-2 md:gap-3 overflow-x-auto pb-2 md:pb-0 md:flex-wrap scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
+      <div className="flex sm:justify-center gap-2 md:gap-3 overflow-x-auto pb-2 md:pb-0 md:flex-wrap scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
         {CATEGORIES.map((category) => {
           const isSelected = isCategorySelected(category);
           const styles = CATEGORY_STYLES[category];
