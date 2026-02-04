@@ -21,7 +21,7 @@ export const FloatingOrb = ({
       delay,
       ease: "easeInOut"
     }}
-    className={`absolute ${size} rounded-full ${className}`}
+    className={`floating-layer absolute ${size} rounded-full ${className}`}
     style={{
       // to hint GPU acceleration
       willChange: 'transform, opacity',

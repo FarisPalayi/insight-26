@@ -1,39 +1,93 @@
-import { motion } from "framer-motion"
+import { useRef } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
 
 export const HeroTitle = () => {
+  const titleRef = useRef<HTMLDivElement | null>(null);
+
+  useGSAP(
+    () => {
+      const insight = titleRef.current!.querySelector(
+        ".title-insight"
+      ) as HTMLElement;
+      const year = titleRef.current!.querySelector(
+        ".title-year"
+      ) as HTMLElement;
+      const underline = titleRef.current!.querySelector(
+        ".title-underline"
+      ) as HTMLElement;
+
+      /* -----------------------------
+         MODERN ENTRANCE: SHARPEN & SETTLE
+      ------------------------------*/
+      const tl = gsap.timeline({ delay: 0.18 });
+
+      tl.from(insight, {
+        opacity: 0,
+        y: 18,
+        duration: 0.7,
+        ease: "power2.out",
+      })
+        .from(
+          year,
+          {
+            opacity: 0,
+            y: 14,
+            duration: 0.55,
+            ease: "power2.out",
+          },
+          "-=0.35"
+        )
+        .from(
+          underline,
+          {
+            scaleX: 0.85,
+            opacity: 0,
+            duration: 0.5,
+            ease: "power2.out",
+          },
+          "-=0.3"
+        );
+
+      /* -----------------------------
+         SCROLL-BASED COMPRESSION (UNCHANGED)
+      ------------------------------*/
+      gsap.to(titleRef.current, {
+        scale: 0.94,
+        y: -24,
+        ease: "none",
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: "top 45%",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    },
+    { scope: titleRef }
+  );
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="mb-6 sm:mb-8"
+    <div
+      ref={titleRef}
+      className="mb-6 sm:mb-8 select-none"
     >
       <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-none">
-        <motion.span
-          className="text-gradient inline-block"
-          whileHover={{ scale: 1.02 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
+        <span className="title-insight inline-block text-gradient">
           INSIGHT
-        </motion.span>
-        <motion.span
-          className="text-foreground inline-block ml-1 sm:ml-2"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          '26
-        </motion.span>
+        </span>
+        <span className="inline-block ml-2">
+          <span className="title-year inline-block text-foreground">
+            ’26
+          </span>
+        </span>
       </h1>
 
-      {/* Glowing underline */}
-      <motion.div
-        initial={{ scaleX: 0, opacity: 0 }}
-        animate={{ scaleX: 1, opacity: 1 }}
-        transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
-        className="h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mt-4 sm:mt-6 max-w-xs sm:max-w-md"
-        style={{ boxShadow: '0 0 30px hsl(var(--primary) / 0.5)' }}
+      <div
+        className="title-underline h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mt-4 sm:mt-6 max-w-xs sm:max-w-md origin-center"
+        style={{
+          boxShadow: "0 0 22px hsl(var(--primary) / 0.35)",
+        }}
       />
-    </motion.div >
-  )
-}
+    </div>
+  );
+};
