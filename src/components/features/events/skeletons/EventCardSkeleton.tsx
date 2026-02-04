@@ -1,7 +1,6 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 
-// TODO: use this component
 export function FeaturedEventCardSkeleton() {
   return (
     <Card className="overflow-hidden border-none">

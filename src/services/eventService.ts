@@ -1,11 +1,12 @@
 import { db } from "@/firebase/config";
+import { unifiedEvents } from "@/lib/data/unifiedEvents";
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
 
 const USE_FIREBASE = true;
 
 export const fetchEventById = async (id: string) => {
   if (!USE_FIREBASE) {
-    // return unifiedEvents.find(e => e.id === id) || null;
+    return unifiedEvents.find(e => e.id === id) || null;
   }
 
   try {
@@ -30,10 +31,9 @@ export const fetchEventById = async (id: string) => {
 export const fetchAllEvents = async () => {
   console.log('fetchAllEvents called');
   console.log('USE_FIREBASE:', USE_FIREBASE);
-
   if (!USE_FIREBASE) {
     console.log('Using static data');
-    // return unifiedEvents;
+    return unifiedEvents;
   }
 
   console.log('Using Firebase');

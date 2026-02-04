@@ -1,7 +1,7 @@
+import { useLoaderData } from "react-router";
 import Main from "@/components/layout/Main";
 import { EventsSection } from "@/components/features/events";
 import type { UnifiedEvent } from "@/lib/data/unifiedEvents";
-import { useLoaderData } from "react-router";
 
 export function Events() {
   const events = useLoaderData() as UnifiedEvent[];
@@ -12,5 +12,5 @@ export function Events() {
         <EventsSection events={events} />
       </Main>
     </div>
-  )
+  );
 }
