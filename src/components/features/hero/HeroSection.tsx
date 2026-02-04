@@ -2,39 +2,20 @@ import { motion } from "framer-motion";
 import { MapPin, Calendar, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CountdownTimer } from "./CountdownTimer";
-import { StatsCards } from "../Stats";
-import { FloatingOrb } from "../../ui/floaters/FloatingOrb";
 import { FloatingParticles } from "../../ui/floaters/FloatingParticles";
 import { FloatingShapes } from "../../ui/floaters/FloatingShapes";
 import { FloatingDots } from "../../ui/floaters/FloatingDots";
 import { HeroBadge } from "./HeroBadge";
 import { HeroTitle } from "./HeroTitle";
 import { Link } from "react-router";
-import Scene from "./Scene";
+import { HeroVisual } from "./HeroVisual";
 
 export const HeroSection = () => {
   return (
     <section
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Animated Grid Background */}
-      <div className="absolute w-full h-full z-10">
-        <Scene />
-      </div>
-      <FloatingOrb
-        className="bg-primary/30 top-0 -left-48"
-        size="w-[350px] h-[320px] sm:w-[500px] sm:h-[500px]"
-      />
-      <FloatingOrb
-        className="bg-accent/25 bottom-0 -right-48"
-        delay={4}
-        size="w-[250px] h-[250px] sm:w-[600px] sm:h-[600px]"
-      />
-      <FloatingOrb
-        className="bg-primary/15 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-        delay={2}
-        size="w-[500px] h-[500px] sm:w-[800px] sm:h-[800px]"
-      />
+      <HeroVisual />
 
       <FloatingParticles />
       <FloatingShapes />
@@ -91,21 +72,20 @@ export const HeroSection = () => {
               </Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <a
-                href="#featured-events"
+              <Link
+                to="/events"
                 className="btn-outline-glow text-base px-6 sm:px-8 py-5 sm:py-6 rounded-xl border-primary/30 hover:bg-primary/10 hover:border-primary/50 font-normal transition-all duration-300 w-full sm:w-auto text-foreground"
               >
                 View Events
-              </a>
+              </Link>
             </Button>
 
           </motion.div>
-
-          <StatsCards />
         </motion.div>
       </div>
 
     </section>
+
   );
 };
 

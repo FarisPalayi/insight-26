@@ -3,22 +3,57 @@ import { Home } from "./pages/Home";
 import { NotFound } from "./pages/NotFound";
 import { Schedule } from "./pages/Schedule";
 import { Register } from "./pages/Register";
+import { Events } from "./pages/Events";
+import { EventDetail } from "./pages/EventDetail";
+import { fetchAllEvents, fetchEventById } from "./services/eventService";
+import RootLayout from "./pages/Layout";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/schedule",
-    element: <Schedule />,
-  },
-  {
-    path: "/register",
-    element: <Register />
-  },
-  {
-    path: "*",
-    Component: NotFound,
-  }
-]);
+    element: <RootLayout />,
+    errorElement: <NotFound />,
+    hydrateFallbackElement: <div>Loading...</div>,
+    children: [
+      { index: true, element: <Home /> },
+      {
+        path: "/events",
+        element: <Events />,
+        loader: async () => {
+          console.log("start")
+          const events = await fetchAllEvents();
+          console.log(events)
+
+          if (!events || events.length === 0) {
+            throw new Response("Events not found", { status: 404 });
+          }
+
+          return events;
+        }
+      },
+
+      {
+        path: "/events/:eventId",
+        element: <EventDetail />,
+        loader: async ({ params }) => {
+          const event = await fetchEventById(params.eventId || "");
+          console.log(event)
+
+          if (!event)
+            throw new Response("Event not found", { status: 404 });
+
+          return event;
+        }
+      },
+      { path: "/schedule", element: <Schedule />, },
+      { path: "/register", element: <Register /> },
+      {
+        path: "/contact",
+        lazy: async () => {
+          const { Contact } = await import("./pages/Contact");
+          return { Component: Contact };
+        },
+      },
+      { path: "*", Component: NotFound }
+    ]
+  }])

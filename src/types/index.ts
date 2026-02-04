@@ -38,3 +38,10 @@ export interface FAQ {
   answer: string;
 }
 
+export interface ContactPerson {
+  name: string;
+  role: string;
+  phone: string;
+  initials: string;
+}
+

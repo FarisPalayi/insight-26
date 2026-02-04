@@ -130,18 +130,17 @@
 
   .glass-surface {
     backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: linear-gradient(
       135deg,
       hsl(var(--surface-glass) / 0.9) 0%,
       hsl(var(--surface-glass) / 0.5) 100%
     );
+    transform: translateZ(0); /* for hardware acceleration */
   }
 
   .glass-surface-strong {
     backdrop-filter: blur(64px);
-    -webkit-backdrop-filter: blur(64px);
     border: 1px solid rgba(255, 255, 255, 0.15);
     background: linear-gradient(
       180deg,
@@ -151,14 +150,57 @@
   }
 
   .grid-pattern {
+    position: absolute;
+    inset: 0;
+    /* Increased weight to 1.5px and color to 10% opacity white/blue */
     background-image:
-      linear-gradient(hsl(var(--color-primary) / 0.03) 1px, transparent 1px),
       linear-gradient(
-        90deg,
-        hsl(var(--color-primary) / 0.03) 1px,
-        transparent 1px
+        to right,
+        rgba(56, 189, 248, 0.1) 1.5px,
+        transparent 1.5px
+      ),
+      linear-gradient(
+        to bottom,
+        rgba(56, 189, 248, 0.1) 1.5px,
+        transparent 1.5px
       );
-    background-size: 80px 80px;
+    background-size: 60px 60px;
+  }
+
+  .premium-grid-container {
+    position: relative;
+    background-color: #030303; /* Deep obsidian instead of pure black */
+    overflow: hidden;
+  }
+
+  .grid-lines {
+    position: absolute;
+    inset: 0;
+    background-size: 100px 100px;
+    /* Increased opacity from 0.03 to 0.08 for visibility */
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+
+    /* Adjusted mask: 50% of the center is fully visible before it starts fading */
+    mask-image: radial-gradient(circle at 50% 50%, black 50%, transparent 95%);
+    -webkit-mask-image: radial-gradient(
+      circle at 50% 50%,
+      black 50%,
+      transparent 95%
+    );
+  }
+  /* Subtle moving light effect */
+  .ambient-shimmer {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(59, 130, 246, 0.1) 0%,
+      transparent 50%
+    );
+    opacity: 0.5;
+    transition: opacity 0.3s;
   }
 
   .nav-link {
@@ -291,11 +333,27 @@
 }
 
 @layer utilities {
+  .font-sans {
+    font-family: var(--font-family-sans);
+  }
   .font-mono {
     font-family: var(--font-family-mono);
   }
 
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+/* Add this to your CSS file */
+@keyframes pulse-slow {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.05);
   }
 }

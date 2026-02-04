@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LogoLink } from "../ui/LogoLink";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 
 const navItems = [
   { label: "Events", href: "/events" },
@@ -15,6 +15,7 @@ const navItems = [
 
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   return (
     <motion.header
@@ -26,20 +27,21 @@ export const Header = () => {
       <div className="glass-surface mx-4 mt-4 rounded-2xl">
         <div className="container flex items-center justify-between h-16 px-6 min-w-full">
           <LogoLink />
-
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.label}
-                href={item.href}
-                className="nav-link text-muted-foreground text-sm font-medium tracking-wide uppercase "
+                to={item.href}
+                className={`nav-link text-sm font-medium tracking-wide uppercase transition-colors ${location.pathname === item.href
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-primary"
+                  }`}
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </nav>
-
           {/* CTA Button */}
           <div className="hidden md:block">
             <Button asChild>
@@ -48,7 +50,6 @@ export const Header = () => {
               </Link>
             </Button>
           </div>
-
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -59,7 +60,6 @@ export const Header = () => {
           </button>
         </div>
       </div>
-
       {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
@@ -72,20 +72,26 @@ export const Header = () => {
           >
             <nav className="flex flex-col p-6 gap-4">
               {navItems.map((item, index) => (
-                <motion.a
+                <motion.div
                   key={item.label}
-                  href={item.href}
                   initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: index * 0.1 }}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-foreground hover:text-primary transition-colors text-lg font-medium"
                 >
-                  {item.label}
-                </motion.a>
+                  <Link
+                    to={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`block text-lg font-medium transition-colors ${location.pathname === item.href
+                      ? "text-primary font-semibold"
+                      : "text-foreground hover:text-primary"
+                      }`}
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
               ))}
-              <Button className="mt-4 glow-primary w-full">
-                Register Now
+              <Button asChild className="mt-4 glow-primary w-full">
+                <Link to="/register">Register Now</Link>
               </Button>
             </nav>
           </motion.div>
