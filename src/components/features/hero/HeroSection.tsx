@@ -29,25 +29,30 @@ export const HeroSection = () => {
           <HeroTitle />
 
           {/* Event Details */}
-          <motion.div className="text-foreground flex flex-col sm:flex-row items-center justify-center gap-8 mb-16">
-            <div className="flex flex-col items-center sm:items-start gap-1">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-primary/70">Timeline</span>
-              <div className="flex items-center gap-2">
-                <Calendar size={16} className="text-primary" />
-                <span className="text-sm font-bold tracking-tight">16—17 FEB 2026</span>
-              </div>
-            </div>
-
-            <div className="hidden sm:block w-[1px] h-8 bg-white/10" />
-
-            <div className="flex flex-col items-center sm:items-start gap-1">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-accent/70">Location</span>
-              <div className="flex items-center gap-2">
-                <MapPin size={16} className="text-accent" />
-                <span className="text-sm font-bold tracking-tight">CCSIT CU CAMPUS</span>
-              </div>
-            </div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.55, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 mb-10 sm:mb-14"
+          >
+            <motion.div
+              className="flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl group cursor-default w-full sm:w-auto justify-center"
+              whileHover={{ scale: 1.03, y: -2 }}
+              transition={{ type: "spring", stiffness: 400 }}
+            >
+              <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-primary group-hover:scale-110 transition-transform" />
+              <span className="font-medium text-foreground">16 & 17 February 2026</span>
+            </motion.div>
+            <motion.div
+              className="flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl group cursor-default w-full sm:w-auto justify-center"
+              whileHover={{ scale: 1.03, y: -2 }}
+              transition={{ type: "spring", stiffness: 400 }}
+            >
+              <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-accent group-hover:scale-110 transition-transform" />
+              <span className="font-medium text-foreground">CCSIT CU Campus</span>
+            </motion.div>
           </motion.div>
+
           <CountdownTimer />
 
           {/* CTA Buttons */}
