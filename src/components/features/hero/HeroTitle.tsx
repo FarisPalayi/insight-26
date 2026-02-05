@@ -49,7 +49,7 @@ export const HeroTitle = () => {
         );
 
       /* -----------------------------
-         SCROLL-BASED COMPRESSION (UNCHANGED)
+         SCROLL-BASED COMPRESSION 
       ------------------------------*/
       gsap.to(titleRef.current, {
         scale: 0.94,

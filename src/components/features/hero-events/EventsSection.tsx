@@ -87,7 +87,7 @@ const EventsSection = () => {
 
         {/* 2. Secondary Events Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16 md:mb-20">
-          {secondaryHighlights.map((event, index) => {
+          {secondaryHighlights.map((event, i) => {
             const visuals = categoryVisuals[event.category];
             return (
               <EventCard
@@ -95,7 +95,8 @@ const EventsSection = () => {
                 event={event}
                 icon={visuals.icon}
                 accentColor={visuals.accent}
-                index={index}
+                index={i}
+                {...(i === i && { 'data-lag': i * 0.1 })}
               />
             );
           })}

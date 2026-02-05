@@ -62,7 +62,7 @@ export const HeroSection = () => {
           "-=0.3"
         );
 
-      // Scroll-based compression (premium exit prep)
+      // Scroll-based compression 
       gsap.to(content, {
         scale: 0.96,
         y: -40,
@@ -74,67 +74,6 @@ export const HeroSection = () => {
           scrub: true,
         },
       });
-    },
-    { scope: sectionRef }
-  );
-
-  /* --------------------------------
-     CURSOR REACTIVE GLOW (OPTION B)
-  ---------------------------------*/
-  useGSAP(
-    () => {
-      const glow = cursorGlowRef.current;
-      if (!glow) return;
-
-      // Initial visual setup
-      gsap.set(glow, {
-        background:
-          "radial-gradient(circle, hsl(160 100% 45% / 0.18) 0%, transparent 70%)",
-      });
-
-      // Smooth position setters (no jitter)
-      const xTo = gsap.quickTo(glow, "x", {
-        duration: 0.25,
-        ease: "power3.out",
-      });
-
-      const yTo = gsap.quickTo(glow, "y", {
-        duration: 0.25,
-        ease: "power3.out",
-      });
-
-      const show = () => {
-        gsap.to(glow, {
-          opacity: 1,
-          duration: 0.2,
-          ease: "power2.out",
-        });
-      };
-
-      const hide = () => {
-        gsap.to(glow, {
-          opacity: 0,
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      };
-
-      const move = (e: MouseEvent) => {
-        xTo(e.clientX);
-        yTo(e.clientY);
-      };
-
-      // Attach listeners
-      window.addEventListener("mousemove", move);
-      window.addEventListener("mouseenter", show);
-      window.addEventListener("mouseleave", hide);
-
-      // Cleanup
-      return () => {
-        window.removeEventListener("mousemove", move);
-        window.removeEventListener("mouseenter", show);
-        window.removeEventListener("mouseleave", hide);
-      };
     },
     { scope: sectionRef }
   );
@@ -152,20 +91,6 @@ export const HeroSection = () => {
       {/* Background */}
       <HeroVisual />
 
-      {/* Cursor glow */}
-      <div
-        ref={cursorGlowRef}
-        className="
-          pointer-events-none
-          absolute top-0 left-0
-          w-40 h-40
-          -translate-x-1/2 -translate-y-1/2
-          rounded-full
-          z-[1]
-          opacity-0
-        "
-      />
-
       {/* Floaters */}
       <FloatingParticles />
       <FloatingShapes />
@@ -178,7 +103,7 @@ export const HeroSection = () => {
           <HeroTitle />
 
           {/* Event Meta */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 mb-10 sm:mb-14">
+          <div className="hero-meta flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 mb-10 sm:mb-14">
             <DateMeta />
             <LocationMeta />
           </div>

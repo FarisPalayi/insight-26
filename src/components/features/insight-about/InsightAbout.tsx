@@ -58,7 +58,7 @@ export default function InsightAbout() {
           </motion.div>
 
           {/* Right Column: The Stats Grid (Bento) */}
-          <div className="grid grid-cols-2 gap-4 text-foreground">
+          <div className="grid grid-cols-2 gap-4 text-foreground" data-speed="0.9">
             {stats.map((stat, index) => (
               <motion.div
                 key={stat.label}

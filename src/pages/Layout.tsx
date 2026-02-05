@@ -11,7 +11,6 @@ export default function RootLayout() {
       smooth: 2,
       effects: true,
       normalizeScroll: true,
-      smoothTouch: 0.1,
     })
   })
 
