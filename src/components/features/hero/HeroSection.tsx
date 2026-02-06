@@ -15,7 +15,6 @@ import { useMagneticButton } from "@/hooks/useMagneticButton";
 
 export const HeroSection = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
-  const cursorGlowRef = useRef<HTMLDivElement | null>(null);
 
   /* --------------------------------
      HERO ORCHESTRATION + SCROLL LOGIC
