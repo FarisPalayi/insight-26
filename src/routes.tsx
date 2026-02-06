@@ -45,7 +45,20 @@ export const router = createBrowserRouter([
           return event;
         }
       },
-      { path: "/schedule", element: <Schedule />, },
+      {
+        path: "/schedule",
+        element: <Schedule />,
+        loader: async () => {
+          const events = await fetchAllEvents();
+          console.log(events)
+
+          if (!events || events.length === 0) {
+            throw new Response("Events not found", { status: 404 });
+          }
+
+          return events;
+        },
+      },
       { path: "/register", element: <Register /> },
       {
         path: "/contact",
