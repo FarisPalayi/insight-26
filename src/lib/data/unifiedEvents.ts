@@ -105,14 +105,14 @@ export type TimePeriod = keyof typeof timePeriods;
 // ================== VENUES ==================
 
 export const venues = [
-  { id: 'aryabhatta', name: 'Aryabhatta Hall', shortName: 'ARYABHATTA' },
-  { id: 'ems', name: 'EMS Hall', shortName: 'EMS' },
-  { id: 'ems-side', name: 'EMS Side Hall', shortName: 'EMS (SIDE)' },
-  { id: 'ccsit', name: 'CCSIT/SC Block', shortName: 'CCSIT' },
-  { id: 'ccsit-lab', name: 'CCSIT Lab', shortName: 'CCSIT LAB' },
-  { id: 'trap', name: 'Student TRAP', shortName: 'TRAP' },
-  { id: 'main-stage', name: 'Main Stage', shortName: 'MAIN STAGE' },
-  { id: 'campus', name: 'Campus Wide', shortName: 'CAMPUS' },
+  { id: 'aryabhatta', name: 'Aryabhatta Hall', shortName: 'ARYABHATTA', mapLink: "", },
+  { id: 'ems', name: 'EMS Hall', shortName: 'EMS', mapLink: "", },
+  { id: 'ems-side', name: 'EMS Side Hall', shortName: 'EMS (SIDE)', mapLink: "" },
+  { id: 'ccsit', name: 'CCSIT/SC Block', shortName: 'CCSIT', mapLink: "", },
+  { id: 'ccsit-lab', name: 'CCSIT Lab', shortName: 'CCSIT LAB', mapLink: "", },
+  { id: 'trap', name: 'Student TRAP', shortName: 'TRAP', mapLink: "", },
+  { id: 'main-stage', name: 'Main Stage', shortName: 'MAIN STAGE', mapLink: "", },
+  { id: 'campus', name: 'Campus Wide', shortName: 'CAMPUS', mapLink: "", },
 ] as const;
 
 // ================== EVENTS DATA ==================

@@ -56,7 +56,7 @@ export function FeaturedEventCard({ event, index = 0 }: any) {
             <div className="space-y-4 mb-8">
               <div className="space-y-2">
                 <h2 className={cn(
-                  "font-sans font-bold leading-none tracking-tight text-foreground group-hover:text-primary transition-colors duration-300",
+                  "font-sans uppercase font-bold leading-none tracking-tight text-foreground group-hover:text-primary transition-colors duration-300",
                   hasFancyName ? "text-4xl lg:text-5xl uppercase italic" : "text-3xl lg:text-4xl"
                 )}>
                   {event.fancyName || event.name}

@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { EventCategoryFilter } from "@/components/features/EventCategoryFilter";
 import type { EventCategory } from "@/lib/data/unifiedEvents";
 
-interface EventsSectionHeaderProps {
+interface EventsHeaderBarProps {
   searchQuery: string;
   onSearchChange: (value: string) => void;
   selectedCategory: EventCategory | "all";
@@ -16,7 +16,7 @@ export function EventsSectionHeader({
   onSearchChange,
   selectedCategory,
   onCategoryChange,
-}: EventsSectionHeaderProps) {
+}: EventsHeaderBarProps) {
   return (
     <header className="relative pt-12 pb-8 px-4">
       <div className="container mx-auto max-w-7xl">
