@@ -66,16 +66,9 @@ const SponsorsSection = () => {
         >
           {/* Section header */}
           <motion.div variants={itemVariants} className="text-center space-y-4">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/50 border border-border text-sm text-muted-foreground font-mono">
-              <Sparkles className="w-3.5 h-3.5 text-primary" />
-              Partners & Sponsors
-            </span>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground">
               Backed by <span className="text-gradient">Industry Leaders</span>
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg">
-              Join the brands shaping the future of technology and education in Kerala
-            </p>
           </motion.div>
 
           {/* Title Sponsor - Prominent placement */}

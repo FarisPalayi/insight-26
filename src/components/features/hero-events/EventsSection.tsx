@@ -40,7 +40,7 @@ const EventsSection = () => {
   );
 
   return (
-    <section id="events" className="text-foreground relative py-20 md:py-28 lg:py-36 overflow-hidden bg-[#0a0a0a]">
+    <section id="events" className="text-foreground relative pt-20 md:py-28 lg:py-36 overflow-hidden bg-[#0a0a0a]">
       {/* The Grid Layer - Using a cleaner CSS-based mask for better visibility */}
       <div className="absolute inset-0 grid-lines" />
 
@@ -60,20 +60,11 @@ const EventsSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12 md:mb-16 lg:mb-20"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-surface mb-8">
-            <span className="text-xs sm:text-sm font-medium text-muted-foreground uppercase tracking-wide">
-              Featured Events
-            </span>
-          </div>
 
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
             <span className="text-foreground">Discover </span>
             <span className="text-gradient">Experiences</span>
           </h2>
-
-          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4">
-            From intense tech battles to creative showcases—events that challenge, inspire, and celebrate talent.
-          </p>
         </motion.div>
 
         {/* 1. Flagship Highlight */}

@@ -20,7 +20,7 @@ export const ContactCard = () => {
             Still have questions?
           </h3>
           <p className="text-muted-foreground text-sm md:text-base">
-            Our coordinators are just a message or call away.
+            Our coordinators are just a call away
           </p>
         </div>
 

@@ -50,16 +50,9 @@ const PastEditionHighlights = () => {
             viewport={{ once: true }}
             className="text-center space-y-4"
           >
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/50 border border-border text-sm text-muted-foreground font-mono">
-              Insight'25 Recap
-            </span>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground">
               Last Year's <span className="text-gradient">Highlights</span>
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg">
-              Over 200 students. 15 colleges. Two days of unforgettable moments that
-              defined Kerala's biggest tech celebration.
-            </p>
           </motion.div>
 
           {/* Hero Image + Stats - Asymmetric Layout */}

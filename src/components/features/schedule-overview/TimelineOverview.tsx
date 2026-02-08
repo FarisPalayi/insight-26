@@ -1,8 +1,7 @@
 import { useRef, useMemo, useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { Sparkles, Clock, MapPin } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { getEventsByDay } from '@/lib/data/unifiedEvents';
 import { Link } from 'react-router';
@@ -20,7 +19,7 @@ export function TimelineOverview({ className }: { className?: string }) {
   const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   return (
-    <section className={cn('relative py-16 md:py-24 bg-background overflow-hidden', className)}>
+    <section className={cn('relative pt-24 md:pt-32 lg:pt-40 bg-background overflow-hidden', className)}>
       <div className="grid-lines opacity-30" />
 
       <div className="text-foreground container relative z-10 mx-auto px-4 sm:px-6">
@@ -31,10 +30,6 @@ export function TimelineOverview({ className }: { className?: string }) {
             viewport={{ once: true }}
             className="space-y-4"
           >
-            <Badge variant="outline" className="border-primary/30 bg-primary/10 text-primary py-1 px-4 font-mono">
-              <Sparkles className="mr-2 h-3.5 w-3.5" />
-              SCHEDULE
-            </Badge>
             <h2 className="text-4xl md:text-7xl font-bold font-sans tracking-tight">
               Event <span className="text-gradient">Timeline</span>
             </h2>
@@ -125,10 +120,9 @@ function EventList({ day }: { day: '1' | '2' }) {
               isEven ? "md:text-right md:pr-12" : "md:text-left md:pl-12"
             )}>
               <div className={cn(
-                "inline-flex items-center gap-2 text-primary font-mono text-[10px] md:text-xs mb-2 px-2 py-0.5 rounded border border-primary/20 bg-primary/5",
+                "inline-flex items-center gap-2 text-primary font-mono text-[10px] md:text-xs mb-2 px-2 py-0.5 rounded ",
                 isEven ? "md:flex-row-reverse" : "flex-row"
               )}>
-                <Clock className="w-3 h-3" />
                 {event.schedule.displayTime}
               </div>
 
@@ -164,12 +158,12 @@ function EventList({ day }: { day: '1' | '2' }) {
 
 function ScheduleCta({ className }: { className?: string }) {
   return (
-    <div className={cn("py-10 flex justify-center border-t border-white/5", className)}>
+    <div className={cn("flex justify-center border-t border-white/5", className)}>
       <Link
         to="/schedule"
         className="group flex items-center gap-3 transition-opacity hover:opacity-80"
       >
-        <span className="border-b border-primary pb-0.5 text-primary font-mono text-[10px] md:text-xs font-bold tracking-widest uppercase">
+        <span className="border-b border-primary text-primary font-mono text-xs md:text-xs font-bold tracking-widest uppercase">
           See Full Schedule
         </span>
       </Link>

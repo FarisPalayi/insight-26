@@ -11,7 +11,7 @@ const stats = [
 
 export default function InsightAbout() {
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden bg-background">
+    <section className="relative pt-20 md:py-28 lg:py-36 overflow-hidden bg-background">
       {/* Seamless Grid Background */}
       <div className="grid-lines opacity-[0.08]" />
 
@@ -41,9 +41,6 @@ export default function InsightAbout() {
             <div className="space-y-6 max-w-lg">
               <p className="text-lg md:text-xl text-foreground/80 leading-relaxed font-sans">
                 Kerala's premier National IT Fest, hosted by CCSIT, University of Calicut since 2003.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Insight '26 merges two decades of tradition with raw future-tech energy. A proving ground built by students, for students.
               </p>
             </div>
 
