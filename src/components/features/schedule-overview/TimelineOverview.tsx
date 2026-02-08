@@ -131,7 +131,7 @@ function EventList({ day }: { day: '1' | '2' }) {
               </h3>
 
               <div className={cn(
-                "flex items-center gap-2 text-muted-foreground text-xs md:text-sm",
+                "hidden lg:flex items-center gap-2 text-muted-foreground text-xs md:text-sm",
                 isEven ? "md:justify-end" : "md:justify-start"
               )}>
                 <MapPin className="w-3.5 h-3.5 text-primary/50" />
