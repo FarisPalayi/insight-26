@@ -2,7 +2,7 @@ import { db } from "@/lib/firebase_config";
 import { unifiedEvents } from "@/lib/data/unifiedEvents";
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
 
-const USE_FIREBASE = false;
+const USE_FIREBASE = true;
 
 export const fetchEventById = async (id: string) => {
   if (!USE_FIREBASE) {

@@ -166,7 +166,7 @@ function ScheduleCta({ className }: { className?: string }) {
   return (
     <div className={cn("py-10 flex justify-center border-t border-white/5", className)}>
       <Link
-        to="/schedules"
+        to="/schedule"
         className="group flex items-center gap-3 transition-opacity hover:opacity-80"
       >
         <span className="border-b border-primary pb-0.5 text-primary font-mono text-[10px] md:text-xs font-bold tracking-widest uppercase">

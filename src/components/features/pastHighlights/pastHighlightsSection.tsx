@@ -11,17 +11,17 @@ const stats = [
 
 const galleryImages = [
   {
-    src: "/gallery/workshop.jpg",
+    src: "/gallery/workshop-sm.jpg",
     alt: "Workshop session with students",
     caption: "Technical Workshop"
   },
   {
-    src: "/gallery/robo-a-team.jpeg",
+    src: "/gallery/robo-a-team-sm.jpg",
     alt: "Trap events in progress",
     caption: "Trap Events"
   },
   {
-    src: "/gallery/group.jpeg",
+    src: "/gallery/group-sm.jpg",
     alt: "Insight team",
     caption: "Technova team",
 
