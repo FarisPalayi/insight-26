@@ -73,12 +73,14 @@ export default defineConfig([
 ```
 
 
-- [] favicon
-- [] metadata
+- [x] favicon
+- [] meta tags
 - [] events loader scroll bottom shows home page
 - [] add contacts link to the home page
 - [] add venue link and page 
 - [] add maps links
 - [] add registration
-
-3XRMjPBDdgqKoMRaZ
+- [] update social media links(in the footer and stuff)
+- [] loading page
+- [] add actual map links
+- [] add venue photos

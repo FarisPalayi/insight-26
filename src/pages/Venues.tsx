@@ -81,7 +81,7 @@ export function VenuesPage() {
             {/* Header */}
             <h2 className="text-center mt-10 font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl mb-4">
                 <span className="text-gradient">Event</span>{' '}
-                <span className="text-foreground">Schedule</span>
+                <span className="text-foreground">Venues</span>
             </h2>
 
             <Main className="container py-6 space-y-6">
