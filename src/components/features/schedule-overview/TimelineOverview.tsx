@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { getEventsByDay } from '@/lib/data/unifiedEvents';
 import { Link } from 'react-router';
+import { unifiedEvents } from '@/lib/data/updatedEvents';
 
 export function TimelineOverview({ className }: { className?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -98,7 +99,7 @@ export function TimelineOverview({ className }: { className?: string }) {
 
 function EventList({ day }: { day: '1' | '2' }) {
   const events = useMemo(() => {
-    return getEventsByDay(day)
+    return getEventsByDay(day, unifiedEvents)
       .filter((e) => !e.isAllDay)
       .sort((a, b) => a.schedule.startTime.localeCompare(b.schedule.startTime));
   }, [day]);

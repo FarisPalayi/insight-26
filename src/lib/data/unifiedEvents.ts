@@ -188,8 +188,6 @@ export function getVenueMapLink(id: VenueId) {
 }
 
 // ================== EVENTS DATA ==================
-
-import {unifiedEvents} from './updatedEvents';
 export { unifiedEvents } from './updatedEvents';
 // export const unifiedEvents: UnifiedEvent[] = [
 //   // ============ DAY 1 EVENTS ============
@@ -454,25 +452,25 @@ export { unifiedEvents } from './updatedEvents';
 // ================== HELPER FUNCTIONS ==================
 
 /** Get all events for a specific day */
-export function getEventsByDay(day: EventDay): UnifiedEvent[] {
-  return unifiedEvents.filter(
+export function getEventsByDay(day: EventDay, events: UnifiedEvent[]): UnifiedEvent[] {
+  return events.filter(
     (event) => event.schedule.day === day || event.schedule.day === 'both'
   );
 }
 
 /** Get events by category */
-export function getEventsByCategory(category: EventCategory): UnifiedEvent[] {
-  return unifiedEvents.filter((event) => event.category === category);
+export function getEventsByCategory(category: EventCategory, events: UnifiedEvent[]): UnifiedEvent[] {
+  return events.filter((event) => event.category === category);
 }
 
 /** Get featured events */
-export function getFeaturedEvents(): UnifiedEvent[] {
-  return unifiedEvents.filter((event) => event.isFeatured);
+export function getFeaturedEvents(events: UnifiedEvent[]): UnifiedEvent[] {
+  return events.filter((event) => event.isFeatured);
 }
 
 /** Get all-day events for a specific day */
-export function getAllDayEvents(day: '1' | '2'): UnifiedEvent[] {
-  return unifiedEvents.filter(
+export function getAllDayEvents(day: EventDay, events: UnifiedEvent[]): UnifiedEvent[] {
+  return events?.filter(
     (event) =>
       event.isAllDay &&
       (event.schedule.day === day || event.schedule.day === 'both')
@@ -480,9 +478,9 @@ export function getAllDayEvents(day: '1' | '2'): UnifiedEvent[] {
 }
 
 /** Get scheduled (non all-day) events for a specific day */
-export function getScheduledEvents(day: '1' | '2'): UnifiedEvent[] {
-  return unifiedEvents
-    .filter(
+export function getScheduledEvents(day: EventDay, events: UnifiedEvent[]): UnifiedEvent[] {
+  return events
+    ?.filter(
       (event) =>
         !event.isAllDay &&
         (event.schedule.day === day || event.schedule.day === 'both')
@@ -501,8 +499,8 @@ export function eventFallsInPeriod(
 }
 
 /** Get events grouped by time period for a specific day */
-export function getEventsByTimePeriod(day: '1' | '2') {
-  const scheduled = getScheduledEvents(day);
+export function getEventsByTimePeriod(day: '1' | '2', events: UnifiedEvent[]) {
+  const scheduled = getScheduledEvents(day, events);
 
   return {
     morning: scheduled.filter((e) =>
@@ -518,7 +516,7 @@ export function getEventsByTimePeriod(day: '1' | '2') {
 }
 
 /** Get unique categories that have events */
-export function getActiveCategories(): EventCategory[] {
-  const categories = new Set(unifiedEvents.map((e) => e.category));
+export function getActiveCategories(events: UnifiedEvent[]): EventCategory[] {
+  const categories = new Set(events.map((e) => e.category));
   return Array.from(categories);
 }

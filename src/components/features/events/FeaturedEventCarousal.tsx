@@ -63,7 +63,7 @@ export function FeaturedEventsCarousel({ events }: FeaturedEventsCarouselProps) 
     if (!emblaApi) return;
     
     // Start autoplay
-    emblaApi.plugins().autoplay?.play();
+    if (emblaApi.plugins().autoplay) emblaApi.plugins().autoplay.stop(); // Ensure it starts fresh
     
     onSelect();
     updateSlidesInView();

@@ -6,6 +6,7 @@ import { Events } from "./pages/Events";
 import { EventDetail } from "./pages/EventDetail";
 import { fetchAllEvents, fetchEventById } from "./services/eventService";
 import RootLayout from "./pages/Layout";
+import { Schedule } from "./pages/Schedule";
 
 export const router = createBrowserRouter([
   {
@@ -46,10 +47,18 @@ export const router = createBrowserRouter([
       },
       {
         path: "/schedule",
-        lazy: async () => {
-          const { Schedule } = await import("./pages/Schedule")
-          return { Component: Schedule }
-        },
+        element: <Schedule />,
+        loader: async () => {
+          console.log("start")
+          const events = await fetchAllEvents();
+          console.log(events)
+
+          if (!events || events.length === 0) {
+            throw new Response("Events not found", { status: 404 });
+          }
+
+          return events;
+        }
       },
       { path: "/register", element: <Register /> },
       {

@@ -55,14 +55,14 @@ export function EventsSection({ events = [] }: EventsSectionProps) {
     if (selectedCategory !== "all") {
       return [{ id: selectedCategory, title: categoryLabels[selectedCategory] + "s", events: filteredEvents }];
     }
-    return getActiveCategories()
+    return getActiveCategories(events)
       .map(cat => ({
         id: cat,
         title: categoryLabels[cat] + "s",
         events: filteredEvents.filter(e => e.category === cat)
       }))
       .filter(g => g.events.length > 0);
-  }, [selectedCategory, filteredEvents]);
+  }, [selectedCategory, filteredEvents, events]);
 
   return (
     <div className="min-h-screen bg-background container mx-auto pb-20">

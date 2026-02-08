@@ -89,7 +89,7 @@ const PastEditionHighlights = () => {
                   <h3 className="text-xl md:text-2xl font-bold text-foreground">
                     Two days of innovation begins
                   </h3>
-                  <p className="text-sm text-muted-foreground max-w-md">
+                  <p className="hidden sm:block text-sm text-muted-foreground max-w-md">
                     The auditorium filled with energy as innovators, creators, and competitors gathered for Insight'25
                   </p>
                 </div>
