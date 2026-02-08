@@ -1,21 +1,24 @@
-// src/pages/VenuesPage.tsx
 import { useState, useMemo } from 'react';
 import { useLoaderData } from 'react-router';
-import { Search } from 'lucide-react';
+import { Search, MapPin } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import {
     GoogleMapsEmbed,
     VenueList,
     VenueBottomSheet,
 } from '@/components/features/venues';
-import { venueData, getActiveVenues } from '@/lib/data/venueData';
-import type { UnifiedEvent } from '@/lib/data/unifiedEvents';
-import Main from '@/components/layout/Main';
+import {
+    venueData,
+    getActiveVenues,
+} from '@/lib/data/venueData';
+import { type UnifiedEvent } from '@/lib/data/unifiedEvents';
 
 
 export function VenuesPage() {
-    const { events } = useLoaderData() as { events: UnifiedEvent[] };
 
+    const { events } = useLoaderData() as { events: UnifiedEvent[] };
     const [selectedVenueId, setSelectedVenueId] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -44,8 +47,6 @@ export function VenuesPage() {
 
         return grouped;
     }, [events]);
-
-    console.log('Active Venues:', activeVenues);
 
     // Filter venues based on search
     const filteredVenues = useMemo(() => {
@@ -77,65 +78,192 @@ export function VenuesPage() {
     // ============================================
 
     return (
-        <div className="min-h-screen bg-background pt-26 px-5">
+        <div className="min-h-screen bg-background pt-20">
             {/* Header */}
             <h2 className="text-center mt-10 font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl mb-4">
                 <span className="text-gradient">Event</span>{' '}
                 <span className="text-foreground">Venues</span>
             </h2>
 
-            <Main className="container py-6 space-y-6">
-                {/* Map Section */}
-                <section className="w-full" aria-label="Interactive venue map">
-                    <div className="h-[400px] lg:h-[500px]">
+            {/* Mobile Layout - Stacked */}
+            <main className="lg:hidden">
+                <div className="container py-6 space-y-6 px-4">
+                    {/* Map Section */}
+                    <section className="w-full" aria-label="Interactive venue map">
                         <GoogleMapsEmbed
                             selectedVenue={selectedVenue}
                             venues={filteredVenues}
                             onVenueSelect={setSelectedVenueId}
                         />
-                    </div>
-                </section>
+                    </section>
 
-                {/* Venues List Section */}
-                <section aria-label="Venue list">
-                    {/* Header & Search */}
-                    <div className="mb-4 space-y-3 ">
-                        <div className="flex items-center justify-between">
-                            <h2 className="text-lg font-semibold">All Venues</h2>
-                            <p className="text-sm text-muted-foreground">
-                                {filteredVenues.length} of {activeVenues.length} shown
-                            </p>
+                    <Separator />
+
+                    {/* Venues List Section */}
+                    <section aria-label="Venue list">
+                        {/* Header & Search */}
+                        <div className="mb-4 space-y-4">
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <h2 className="text-2xl font-bold tracking-tight">
+                                        All Venues
+                                    </h2>
+                                    <p className="text-sm text-muted-foreground mt-1">
+                                        {filteredVenues.length} of {activeVenues.length}{' '}
+                                        {activeVenues.length === 1 ? 'venue' : 'venues'}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Search Bar */}
+                            {activeVenues.length > 0 && (
+                                <div className="relative">
+                                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                                    <Input
+                                        type="text"
+                                        placeholder="Search venues..."
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                        className="pl-9"
+                                    />
+                                </div>
+                            )}
                         </div>
 
-                        {/* Search Bar */}
-                        <div className="relative">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                            <Input
-                                type="text"
-                                placeholder="Search venues..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                className="pl-9"
+                        {/* Venues Grid */}
+                        <VenueList
+                            venues={filteredVenues}
+                            selectedVenueId={selectedVenueId}
+                            eventsByVenue={eventsByVenue}
+                            onVenueSelect={setSelectedVenueId}
+                        />
+                    </section>
+                </div>
+
+                {/* Mobile Bottom Sheet */}
+                <VenueBottomSheet
+                    venue={selectedVenue}
+                    events={selectedVenueEvents}
+                    onClose={() => setSelectedVenueId(null)}
+                />
+            </main>
+
+            {/* Desktop Layout - Side by Side */}
+            <main className="hidden lg:block h-[calc(100vh-3.5rem)]">
+                <div className="grid grid-cols-2 h-full">
+                    {/* Left: Map */}
+                    <section className="relative" aria-label="Interactive venue map">
+                        <div className="sticky top-14 h-[calc(100vh-3.5rem)] p-6">
+                            <GoogleMapsEmbed
+                                selectedVenue={selectedVenue}
+                                venues={filteredVenues}
+                                onVenueSelect={setSelectedVenueId}
                             />
                         </div>
-                    </div>
+                    </section>
 
-                    {/* Venues Grid */}
-                    <VenueList
-                        venues={filteredVenues}
-                        selectedVenueId={selectedVenueId}
-                        eventsByVenue={eventsByVenue}
-                        onVenueSelect={setSelectedVenueId}
-                    />
-                </section>
-            </Main>
+                    {/* Right: Venues List */}
+                    <section aria-label="Venue list">
+                        <ScrollArea className="h-[calc(100vh-3.5rem)]">
+                            <div className="p-6 space-y-6">
+                                {/* Header & Search */}
+                                <div className="space-y-4">
+                                    <div>
+                                        <h2 className="text-2xl font-bold tracking-tight">
+                                            All Venues
+                                        </h2>
+                                        <p className="text-sm text-muted-foreground mt-1">
+                                            {filteredVenues.length} of {activeVenues.length}{' '}
+                                            {activeVenues.length === 1 ? 'venue' : 'venues'}
+                                        </p>
+                                    </div>
 
-            {/* Mobile Bottom Sheet */}
-            <VenueBottomSheet
-                venue={selectedVenue}
-                events={selectedVenueEvents}
-                onClose={() => setSelectedVenueId(null)}
-            />
+                                    {/* Search Bar */}
+                                    {activeVenues.length > 0 && (
+                                        <div className="relative">
+                                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                                            <Input
+                                                type="text"
+                                                placeholder="Search venues..."
+                                                value={searchQuery}
+                                                onChange={(e) => setSearchQuery(e.target.value)}
+                                                className="pl-9"
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Venues List - Single Column on Desktop */}
+                                <div className="space-y-3">
+                                    {filteredVenues.length === 0 ? (
+                                        <div className="text-center py-12">
+                                            <p className="text-muted-foreground">No venues found</p>
+                                        </div>
+                                    ) : (
+                                        filteredVenues.map((venue) => {
+                                            const venueEvents = eventsByVenue.get(venue.id) || [];
+                                            return (
+                                                <div key={venue.id}>
+                                                    {/* Using inline card instead of VenueCard for better desktop UX */}
+                                                    <button
+                                                        onClick={() => setSelectedVenueId(venue.id)}
+                                                        className={`
+                                                            w-full text-left rounded-xl overflow-hidden transition-all duration-200
+                                                            flex gap-3 p-4 items-center
+                                                            border hover:shadow-md active:scale-[0.98]
+                                                            ${venue.id === selectedVenueId
+                                                                ? 'ring-2 ring-primary border-primary shadow-md bg-primary/5'
+                                                                : 'bg-card border-border hover:border-primary/30'
+                                                            }
+                                                       `}
+                                                    >
+                                                        {/* Thumbnail */}
+                                                        <div className="relative w-20 h-20 rounded-lg overflow-hidden shrink-0 bg-muted">
+                                                            {venue.imageUrl ? (
+                                                                <img
+                                                                    src={venue.imageUrl}
+                                                                    alt={venue.name}
+                                                                    className="w-full h-full object-cover"
+                                                                    onError={(e) => {
+                                                                        e.currentTarget.style.display = 'none';
+                                                                    }}
+                                                                />
+                                                            ) : (
+                                                                <div className="w-full h-full flex items-center justify-center">
+                                                                    <MapPin className="w-5 h-5 text-muted-foreground/30" />
+                                                                </div>
+                                                            )}
+                                                        </div>
+
+                                                        {/* Info */}
+                                                        <div className="flex-1 min-w-0 space-y-1.5">
+                                                            <div className="flex items-center justify-between gap-2">
+                                                                <h3 className="font-semibold text-base truncate">
+                                                                    {venue.name}
+                                                                </h3>
+                                                                {venueEvents.length > 0 && (
+                                                                    <span className="text-xs text-muted-foreground shrink-0">
+                                                                        {venueEvents.length}{' '}
+                                                                        {venueEvents.length === 1 ? 'event' : 'events'}
+                                                                    </span>
+                                                                )}
+                                                            </div>
+
+                                                            <p className="text-sm text-muted-foreground line-clamp-2">
+                                                                {venue.directions}
+                                                            </p>
+                                                        </div>
+                                                    </button>
+                                                </div>
+                                            );
+                                        })
+                                    )}
+                                </div>
+                            </div>
+                        </ScrollArea>
+                    </section>
+                </div>
+            </main>
         </div>
     );
 }

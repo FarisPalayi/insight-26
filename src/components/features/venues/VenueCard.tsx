@@ -32,7 +32,7 @@ export function VenueCard({
   return (
     <Card
       className={cn(
-        'cursor-pointer transition-all duration-200 hover:shadow-md active:scale-[0.98] py-0',
+        'cursor-pointer transition-all duration-200 hover:shadow-md active:scale-[0.98] py-0 border-border',
         isSelected && 'ring-2 ring-primary border-primary shadow-md'
       )}
       onClick={onClick}
