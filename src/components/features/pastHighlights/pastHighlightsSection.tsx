@@ -73,7 +73,7 @@ const PastEditionHighlights = () => {
               className="lg:col-span-3 relative aspect-[16/10] md:aspect-[16/9] rounded-2xl overflow-hidden group"
             >
               <img
-                src="/gallery/inauguration.jpeg"
+                src="/gallery/inauguration-sm.jpg"
                 alt="Insight'25 main event crowd"
                 loading="lazy"
                 className="w-full h-full object-cover"
