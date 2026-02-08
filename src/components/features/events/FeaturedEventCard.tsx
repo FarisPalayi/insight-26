@@ -7,8 +7,14 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router';
+import type { UnifiedEvent } from '@/lib/data/unifiedEvents';
 
-export function FeaturedEventCard({ event, index = 0 }: any) {
+interface FeaturedEventCardProps {
+  event: UnifiedEvent;
+  index?: number;
+}
+
+export function FeaturedEventCard({ event, index = 0 }: FeaturedEventCardProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const hasFancyName = !!event.fancyName;
 
@@ -20,10 +26,10 @@ export function FeaturedEventCard({ event, index = 0 }: any) {
       className="w-full"
     >
       <Card className="py-0 group relative overflow-hidden bg-card border-border/60 hover:border-primary/50 transition-all duration-500 rounded-[var(--radius-lg)] shadow-2xl">
-        <div className="flex flex-col lg:flex-row min-h-[400px]">
+        <div className="flex flex-col lg:flex-row lg:min-h-[400px]">
 
           {/* 1. VISUAL ANCHOR - Left Side (Desktop) */}
-          <div className="relative w-full lg:w-[45%] overflow-hidden bg-muted">
+          <div className="relative w-full h-64 sm:h-80 lg:h-auto lg:w-[45%] overflow-hidden bg-muted">
             {!imageLoaded && <Skeleton className="absolute inset-0 bg-muted/20" />}
             <img
               src={event.imageUrl}
@@ -51,36 +57,43 @@ export function FeaturedEventCard({ event, index = 0 }: any) {
           </div>
 
           {/* 2. CONTENT HUB - Right Side (Desktop) */}
-          <CardContent className="flex-1 p-6 lg:p-10 flex flex-col justify-center">
+          <CardContent className="flex-1 p-5 sm:p-6 lg:p-10 flex flex-col justify-center">
 
-            <div className="space-y-4 mb-8">
-              <div className="space-y-2">
-                <h2 className={cn(
-                  "font-sans font-bold leading-none tracking-tight text-foreground group-hover:text-primary transition-colors duration-300",
-                  hasFancyName ? "text-4xl lg:text-5xl uppercase italic" : "text-3xl lg:text-4xl"
-                )}>
-                  {event.fancyName || event.name}
-                </h2>
+            <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+              <Link to={`/events/${event.id}`} className="block">
 
-                {hasFancyName && (
-                  <div className="flex items-center gap-2 text-primary/80 font-mono text-xs uppercase tracking-[0.2em] font-bold">
-                    <Cpu className="w-4 h-4" />
-                    <span>{event.name}</span>
-                  </div>
-                )}
-              </div>
+                <div className="space-y-2">
 
-              <p className="text-base lg:text-lg text-foreground/70 leading-relaxed font-light line-clamp-3">
+                  <h2 className={cn(
+                    "font-sans uppercase font-bold leading-none tracking-tight text-foreground group-hover:text-primary transition-colors duration-300",
+                    hasFancyName ? "text-3xl sm:text-4xl lg:text-5xl uppercase italic" : "text-2xl sm:text-3xl lg:text-4xl"
+                  )}>
+                    {event.fancyName || event.name}
+                  </h2>
+
+                  {hasFancyName && (
+                    <div className="flex items-center gap-2 text-primary/80 font-mono text-xs uppercase tracking-[0.2em] font-bold">
+                      <Cpu className="w-4 h-4" />
+                      <span>{event.name}</span>
+                    </div>
+                  )}
+                </div>
+              </Link>
+              <p className="text-sm sm:text-base lg:text-lg text-foreground/70 leading-relaxed font-light line-clamp-3">
                 {event.tagline || "Join the flagship competition of Insight'26 and prove your technical supremacy on the grand stage."}
               </p>
             </div>
 
             {/* 3. METADATA GRID - High Readability Specs */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 p-4 bg-secondary/30 border border-border/40 rounded-2xl">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8 p-3 sm:p-4 bg-secondary/30 border border-border/40 rounded-2xl">
               <StatItem icon={Calendar} label="Day" value={event.schedule?.day || "Day 01"} />
               <StatItem icon={Clock} label="Time" value={event.schedule?.displayTime?.split(' - ')[0] || "10:00 AM"} />
-              <StatItem icon={MapPin} label="Venue" value={event.venue || "Main Hall"} />
-              <StatItem icon={Users} label="Size" value={event.maxTeam || "Team of 5"} />
+              <StatItem icon={MapPin} label="Venue" value={event.venue || "CCSIT"} />
+              {event.category === "seminar" ? (
+                null
+              ) : (
+                <StatItem icon={Users} label="Team Size" value={event.teamSize || "Team of 5"} />
+              )}
             </div>
 
             {/* 4. FINANCIALS & CTA */}
@@ -90,27 +103,20 @@ export function FeaturedEventCard({ event, index = 0 }: any) {
                   <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Prize Pool</span>
                   <span className="text-2xl font-black text-primary">₹{event.prizePool || "25,000"}</span>
                 </div>
-                <div className="w-[1px] h-10 bg-border/60 mx-2 hidden sm:block" />
+                <div className="w-[1px] h-10 bg-border/60 mx-2" />
                 <div className="flex flex-col">
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Entry Fee</span>
-                  <span className="text-xl font-bold text-foreground">₹{event.entryFee}</span>
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Entry</span>
+                  <span className="text-xl font-bold text-foreground">{event.entryFee.toLowerCase() === "free" ? "Free" : `₹${event.entryFee}`}</span>
                 </div>
               </div>
 
               <div className="flex gap-3 w-full sm:w-auto sm:ml-auto">
                 <Button
                   asChild
-                  variant="outline"
-                  className="flex-1 sm:flex-none h-12 px-6 border-border/60 hover:bg-secondary rounded-full font-bold uppercase text-[11px] tracking-widest"
+                  className="flex-1 sm:flex-initial h-12 px-8 glow-primary bg-primary text-primary-foreground font-bold uppercase text-[11px] tracking-widest rounded-full hover:scale-105 transition-transform"
                 >
-                  <Link to={`/events/${event.id}`}>Guidelines</Link>
-                </Button>
-                <Button
-                  asChild
-                  className="flex-1 sm:flex-none h-12 px-8 glow-primary bg-primary text-primary-foreground font-bold uppercase text-[11px] tracking-widest rounded-full hover:scale-105 transition-transform"
-                >
-                  <Link to="/register" className="flex items-center gap-2">
-                    Register Now
+                  <Link to={`/events/${event.id}`} className="flex items-center gap-2">
+                    Explore
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </Button>
@@ -127,7 +133,13 @@ export function FeaturedEventCard({ event, index = 0 }: any) {
   );
 }
 
-function StatItem({ icon: Icon, label, value }: any) {
+interface StatItemProps {
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  label: string;
+  value: string;
+}
+
+function StatItem({ icon: Icon, label, value }: StatItemProps) {
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-center gap-1.5 text-muted-foreground">

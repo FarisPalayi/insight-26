@@ -88,9 +88,9 @@ export const FlagshipEvent = ({
                   <span className="text-foreground">{firstName}</span>
                   <span className="text-gradient">{secondName}</span>
                   {event.tagline && (
-                    <span className="text-foreground/60 ml-3 text-3xl md:text-4xl lg:text-5xl font-light italic">
+                    <div className="text-foreground/60 ml-3 text-xl md:text-2xl lg:text-3xl font-light italic">
                       {event.tagline}
-                    </span>
+                    </div>
                   )}
                 </h3>
               </motion.div>

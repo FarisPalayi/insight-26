@@ -71,3 +71,9 @@ export default defineConfig([
   },
 ])
 ```
+
+
+- [] favicon
+- [] metadata
+- [] events loader scroll bottom shows home page
+- []  

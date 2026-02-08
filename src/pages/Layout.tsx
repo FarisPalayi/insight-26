@@ -28,8 +28,7 @@ export default function RootLayout() {
         {/* to ensure that page starts from the top of a page */}
         <ScrollRestoration />
         <Header />
-        {showEventsSkeleton && <EventsPageSkeleton />}
-        <Outlet />
+        {showEventsSkeleton ? <EventsPageSkeleton /> : <Outlet />}
         <Footer />
       </div>
     </div>

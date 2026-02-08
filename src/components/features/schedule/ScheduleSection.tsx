@@ -61,7 +61,7 @@ const periods: TimePeriod[] = [
 ];
 
 export function ScheduleSection() {
-  const [selectedDay, setSelectedDay] = useState<1 | 2>(1);
+  const [selectedDay, setSelectedDay] = useState<'1' | '2'>('1');
   const [selectedCategories, setSelectedCategories] = useState<EventCategory[]>([]);
 
   const scheduledEvents = useMemo(() => getScheduledEvents(selectedDay), [selectedDay]);
@@ -142,7 +142,7 @@ export function ScheduleSection() {
         <div className="sticky top-0 z-40 -mx-4 md:-mx-6 px-4 md:px-6 pb-6 pt-4">
           <Tabs
             value={selectedDay.toString()}
-            onValueChange={(value) => setSelectedDay(Number(value) as 1 | 2)}
+            onValueChange={(value) => setSelectedDay(value as '1' | '2')}
             className="w-full"
           >
             {/* Line Variant Tabs */}

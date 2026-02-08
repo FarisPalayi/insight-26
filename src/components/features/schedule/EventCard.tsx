@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Clock, MapPin, Timer } from 'lucide-react';
-import { type UnifiedEvent, categoryLabels } from '@/lib/data/unifiedEvents';
+import { type UnifiedEvent } from '@/lib/data/unifiedEvents';
 import { cn } from '@/lib/utils';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -79,18 +79,6 @@ export function ScheduleEventCard({ event, index, onClick }: EventCardProps) {
                 {event.name}
               </h3>
               <div className="mt-2 flex flex-wrap items-center gap-2">
-                <Badge
-                  variant="outline"
-                  className={cn(
-                    'inline-flex items-center rounded-full px-3 py-1 text-xs font-medium',
-                    style.bg,
-                    style.text,
-                    'border',
-                    style.border
-                  )}
-                >
-                  {categoryLabels[event.category]}
-                </Badge>
                 {event.isMultiPeriod && (
                   <Badge variant="outline" className="inline-flex items-center gap-1 rounded-full bg-accent/10 border border-accent/30 px-3 py-1 text-xs font-medium text-accent">
                     <Timer className="h-3 w-3" />

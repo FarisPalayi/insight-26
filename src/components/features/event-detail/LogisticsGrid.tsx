@@ -47,11 +47,16 @@ export function LogisticsGrid({ event }: LogisticsGridProps) {
       label: 'Venue',
       value: event.venue,
     },
-    {
-      icon: <Users className="w-4 h-4 text-event-seminar" />,
-      label: 'Team Size',
-      value: teamSizeLabels[event.teamSize],
-    },
+    // Only show Team Size if NOT a seminar
+    ...(event.category !== "seminar"
+      ? [
+        {
+          icon: <Users className="w-4 h-4 text-event-seminar" />,
+          label: 'Team Size',
+          value: teamSizeLabels[event.teamSize],
+        },
+      ]
+      : []),
     {
       icon: <IndianRupee className="w-4 h-4 text-event-allday" />,
       label: 'Entry Fee',

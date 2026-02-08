@@ -2,91 +2,94 @@ import { type UnifiedEvent } from "@/lib/data/unifiedEvents";
 
 export const MOCK_TECHNOVA: UnifiedEvent = {
   id: "technova",
-  name: "Technova",
-  fancyName: "Technova",
-  tagline: "8.0",
-  description: "Five rounds. Five challenges. One ultimate geek team. Navigate through Initium, Techsense, Intersepto, Extremist, and Jackpot to prove your technical supremacy.",
+  name: "Technova 8.0",
+  fancyName: "Technova 8.0",
+  tagline: "Build. Break. Innovate.",
+  description:
+    "A full-day hackathon where teams design and build innovative tech solutions. Judged on creativity, usefulness, and execution.",
   category: "competition",
   schedule: {
-    day: 1,
-    startTime: "09:00",
+    day: '2',
+    startTime: "11:00",
     endTime: "17:00",
-    displayTime: "09:00 AM - 05:00 PM"
+    displayTime: "11:00 AM - 05:00 PM",
   },
-  venue: "Main Stage",
-  teamSize: "3-5",
-  entryFee: "₹300",
-  imageUrl: "/images/technova.jpg",
-  isFeatured: true,
-  prizePool: "40K+",
+  venue: "EMS Hall",
+  teamSize: "2-5",
+  entryFee: "200",
+  prizePool: "25,000",
   prizes: {
-    first: "₹20,000",
-    second: "₹10,000",
-    third: "₹5,000",
-    jackpotPrize: "Surprise Gift"
+    first: "15,000",
+    second: "7,000",
+    third: "3,000",
   },
-  rulesAndGuidelines: [
-    "Malpractice leads to disqualification",
-    "Bring your own hardware if required"
-  ]
+  imageUrl: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80',
+  isFeatured: true,
+  whatToBring: ["Laptop", "Chargers", "Extension board", "Ideas"],
 };
 
 
 export const FEATURED_EVENTS_MOCK: UnifiedEvent[] = [
   MOCK_TECHNOVA, // Included here so the filter in EventsSection handles it
+
   {
-    id: "shoot-sync",
-    name: "Shoot Sync",
-    tagline: "Visual Magic",
-    description: "Capture the moment, freeze the magic in every frame. Showcase your creative eye and visual storytelling in this high-octane photography challenge.",
+    id: "seminar-2",
+    name: "Tech Seminar",
+    fancyName: "InnovateX",
+    tagline: "Innovation & Startups Unplugged",
+    description:
+      "An interactive session discussing innovation, startups, and emerging technology ecosystems.",
+    category: "seminar",
+    schedule: {
+      day: '1',
+      startTime: "14:00",
+      endTime: "15:00",
+      displayTime: "02:00 PM - 03:00 PM",
+    },
+    venue: "Aryabhatta Hall",
+    teamSize: "solo",
+    entryFee: "Free",
+    imageUrl: 'https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&q=80',
+
+  },
+
+  {
+    id: "treasure-hunt",
+    name: "Treasure Hunt",
+    fancyName: "Treasure Quest",
+    tagline: "Solve. Search. Win.",
+    description:
+      "Teams solve clues and explore the campus to find hidden checkpoints. Speed and accuracy matter.",
     category: "competition",
     schedule: {
-      day: 2,
-      startTime: "10:00",
-      endTime: "14:00",
-      displayTime: "10:00 AM - 02:00 PM"
+      day: '2',
+      startTime: "11:00",
+      endTime: "16:00",
+      displayTime: "11:00 AM - 04:00 PM",
     },
-    venue: "Campus Grounds",
-    teamSize: "solo",
-    entryFee: "₹100",
-    imageUrl: "/images/photo.jpg",
-    spotRegistration: true,
-    eligibility: ["Open to all students with a DSLR or Smartphone"]
-  },
-  {
-    id: "scavenge-squad",
-    name: "Scavenge Squad",
-    tagline: "Hunt for Clues",
-    description: "Race against time, hunt for clues, claim victory. Team up for the ultimate treasure hunt experience across the hidden corners of the campus.",
-    category: "allday",
-    schedule: {
-      day: "both",
-      startTime: "09:00",
-      endTime: "18:00",
-      displayTime: "Full Day Event"
-    },
-    venue: "Entire Campus",
-    teamSize: "2-4",
-    entryFee: "₹150",
-    imageUrl: "/images/hunt.jpg",
-    prizePool: "10K"
+    venue: "Student TRAP",
+    teamSize: "any",
+    entryFee: "100",
+    prizePool: "5,000",
+    imageUrl: 'https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=2000&auto=format&fit=crop',
   },
   {
     id: "talenx",
     name: "Talen'X",
-    tagline: "Unleash the Star",
-    description: "Unleash your hidden talents and steal the spotlight. Dance, sing, perform—let your creativity shine in our premier open-stage showcase.",
+    fancyName: "Talen'X",
+    tagline: "Unleash your talent",
+    description:
+      "An open talent showcase featuring performances, creativity, and artistic expression.",
     category: "cultural",
     schedule: {
-      day: 2,
-      startTime: "17:00",
-      endTime: "21:00",
-      displayTime: "05:00 PM Onwards"
+      day: '2',
+      startTime: "11:00",
+      endTime: "17:00",
+      displayTime: "11:00 AM - 05:00 PM",
     },
-    venue: "Open Air Theatre",
+    venue: "CCSIT Seminar Hall",
     teamSize: "any",
     entryFee: "Free",
-    imageUrl: "/images/talenx.jpg",
-    isFeatured: false
-  }
+    imageUrl: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80',
+  },
 ];

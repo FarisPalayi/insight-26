@@ -8,30 +8,52 @@ import {
 import { type UnifiedEvent } from '@/lib/data/unifiedEvents';
 import { motion } from 'framer-motion';
 
-export function EventAccordion({ event }: { event: UnifiedEvent }) {
+interface EventAccordionProps {
+  event: UnifiedEvent;
+}
+
+export function EventAccordion({ event }: EventAccordionProps) {
   // This object mimics the structure of UnifiedEvent interface
   // In the future, imply use 'event[section.id]' directly
   const contentMap: Record<string, string[]> = {
-    rulesAndGuidelines: event.rulesAndGuidelines || [
-      'All participants must carry a valid college ID card.',
-      'Registration must be completed before the event starts.',
-      'Decisions made by the judges will be final and binding.',
-      'Any form of malpractice will lead to immediate disqualification.',
-      'Participants should report to the venue 15 minutes before the scheduled time.',
-      ...(event.category === 'competition' ? [
-        'Teams cannot be changed after registration.',
-        'Use of external resources is prohibited unless specified.',
-        'All submissions must be original work.'
-      ] : [])
-    ],
-    eligibility: event.eligibility || [
-      'Open to all undergraduate and postgraduate students.',
-      'Participants from any college/university can participate.',
-      'Age limit: 18-25 years.',
-      ...(event.teamSize !== 'solo' && event.teamSize !== 'any'
-        ? [`Team must consist of ${event.teamSize.replace('-', ' to ')} members.`]
-        : [])
-    ],
+    rulesAndGuidelines: event.rulesAndGuidelines || (
+      event.category === "seminar"
+        ? [
+          "Please be seated before the session begins.",
+          "Keep mobile phones on silent mode.",
+          "Maintain decorum during the talk.",
+          "Questions can be asked during the Q&A session.",
+          "Avoid interrupting the speaker."
+        ]
+        : [
+          'All participants must carry a valid college ID card.',
+          'Registration must be completed before the event starts.',
+          'Decisions made by the judges will be final and binding.',
+          'Any form of malpractice will lead to immediate disqualification.',
+          'Participants should report to the venue 15 minutes before the scheduled time.',
+          ...(event.category === 'competition' ? [
+            'Teams cannot be changed after registration.',
+            'Use of external resources is prohibited unless specified.',
+            'All submissions must be original work.'
+          ] : [])
+        ]
+    ),
+    eligibility: event.eligibility || (
+      event.category === "seminar"
+        ? [
+          "Open to all students interested in the topic.",
+          "No prior technical knowledge required.",
+          "Recommended for learners, enthusiasts, and researchers.",
+        ]
+        : [
+          'Open to all undergraduate and postgraduate students.',
+          'Participants from any college/university can participate.',
+          'Age limit: 18-25 years.',
+          ...(event.teamSize !== 'solo' && event.teamSize !== 'any'
+            ? [`Team must consist of ${event.teamSize.replace('-', ' to ')} members.`]
+            : [])
+        ]
+    ),
     whatToBring: event.whatToBring || [
       'Bring your own laptop (if required for the event).',
       'Carry your registration confirmation.',

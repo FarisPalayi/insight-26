@@ -82,7 +82,7 @@ export function TimelineOverview({ className }: { className?: string }) {
                 >
                   <TabsContent value={activeDay} forceMount className="outline-none">
                     <div className="space-y-0">
-                      <EventList day={Number(activeDay) as 1 | 2} />
+                      <EventList day={activeDay as '1' | '2'} />
                     </div>
                   </TabsContent>
                 </motion.div>
@@ -96,7 +96,7 @@ export function TimelineOverview({ className }: { className?: string }) {
   );
 }
 
-function EventList({ day }: { day: 1 | 2 }) {
+function EventList({ day }: { day: '1' | '2' }) {
   const events = useMemo(() => {
     return getEventsByDay(day)
       .filter((e) => !e.isAllDay)
@@ -171,7 +171,6 @@ function ScheduleCta({ className }: { className?: string }) {
         <span className="border-b border-primary pb-0.5 text-primary font-mono text-[10px] md:text-xs font-bold tracking-widest uppercase">
           See Full Schedule
         </span>
-        <div className="h-px w-8 bg-white/20 transition-all group-hover:w-12 group-hover:bg-primary" />
       </Link>
     </div>
   );

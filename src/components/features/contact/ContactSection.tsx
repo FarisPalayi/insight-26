@@ -48,7 +48,7 @@ const ContactSection = () => {
       });
 
       form.reset();
-    } catch (error) {
+    } catch {
       toast.error(TOAST_MESSAGES.error.title, {
         id: toastId,
         description: TOAST_MESSAGES.error.description,

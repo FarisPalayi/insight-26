@@ -3,8 +3,9 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router';
+import type { UnifiedEvent } from '@/lib/data/unifiedEvents';
 
-export function EventCard({ event }: { event: any }) {
+export function EventCard({ event }: { event: UnifiedEvent }) {
   const hasFancyName = !!event.fancyName;
 
   return (
@@ -65,22 +66,34 @@ export function EventCard({ event }: { event: any }) {
         </div>
 
         {/* 3. METADATA SECTION - Solid Background for Readability */}
-        <div className="grid grid-cols-2 gap-px bg-border/40 rounded-xl overflow-hidden mb-6 border border-border/40">
-          <div className="bg-secondary/40 p-4 flex flex-col gap-1">
-            <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Entry Fee</span>
-            <div className="flex items-center gap-1.5 text-foreground">
-              <IndianRupee className="w-4 h-4 text-primary" />
-              <span className="text-base font-bold">{event.entryFee}</span>
+        {event.category !== "seminar" ? (
+          <div className="grid grid-cols-2 gap-px bg-border/40 rounded-xl overflow-hidden mb-6 border border-border/40">
+            <div className="bg-secondary/40 p-4 flex flex-col gap-1">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Entry Fee</span>
+              <div className="flex items-center gap-1.5 text-foreground">
+                <IndianRupee className="w-4 h-4 text-primary" />
+                <span className="text-base font-bold">{event.entryFee}</span>
+              </div>
+            </div>
+            <div className="bg-secondary/40 p-4 flex flex-col gap-1">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Team Size</span>
+              <div className="flex items-center gap-1.5 text-foreground">
+                <Users className="w-4 h-4 text-primary" />
+                <span className="text-base font-bold">{event.teamSize || 'Solo'}</span>
+              </div>
             </div>
           </div>
-          <div className="bg-secondary/40 p-4 flex flex-col gap-1">
-            <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Team Size</span>
-            <div className="flex items-center gap-1.5 text-foreground">
-              <Users className="w-4 h-4 text-primary" />
-              <span className="text-base font-bold">{event.maxTeam || 'Solo'}</span>
+        ) : (
+          <div className='grid grid-cols-1 gap-px bg-border/40 rounded-xl overflow-hidden mb-6 border border-border/40 items-center'>
+            <div className="bg-secondary/40 p-4 flex flex-col gap-1">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Entry Fee</span>
+              <div className="flex items-center gap-1.5 text-foreground">
+                <IndianRupee className="w-4 h-4 text-primary" />
+                <span className="text-base font-bold">{event.entryFee}</span>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* 4. ACTIONS - High Affordance */}
         <div className="mt-auto space-y-4">
