@@ -1,7 +1,7 @@
 import { type UnifiedEvent } from "./unifiedEvents";
 
 export const unifiedEvents: UnifiedEvent[] = [
-        {
+    {
         id: "technova",
         name: "Technova 8.0",
         fancyName: "Technova 8.0",
@@ -212,6 +212,7 @@ export const unifiedEvents: UnifiedEvent[] = [
         entryFee: "100",
         prizePool: "4,000",
         imageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+        spotRegistration: true,
     },
 
     {

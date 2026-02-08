@@ -6,6 +6,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   type EventCategory,
   type UnifiedEvent,
+  getScheduledEvents,
+  getAllDayEvents,
   eventFallsInPeriod,
   timePeriods,
 } from '@/lib/data/unifiedEvents';
@@ -62,19 +64,8 @@ export function ScheduleSection() {
   const [selectedDay, setSelectedDay] = useState<'1' | '2'>('1');
   const [selectedCategories, setSelectedCategories] = useState<EventCategory[]>([]);
 
-  // Ported logic: Replacing static helpers with filtering from props
-  const { scheduledEvents, allDayEvents } = useMemo(() => {
-    const dayEvents = events.filter(
-      (event) => event.schedule.day === selectedDay || event.schedule.day === 'both'
-    );
-
-    return {
-      scheduledEvents: dayEvents
-        .filter((event) => !event.isAllDay)
-        .sort((a, b) => a.schedule.startTime.localeCompare(b.schedule.startTime)),
-      allDayEvents: dayEvents.filter((event) => event.isAllDay),
-    };
-  }, [events, selectedDay]);
+  const scheduledEvents = useMemo(() => getScheduledEvents(selectedDay), [selectedDay]);
+  const allDayEvents = useMemo(() => getAllDayEvents(selectedDay), [selectedDay]);
 
   const filteredEvents = useMemo(() => {
     if (selectedCategories.length === 0) return scheduledEvents;
@@ -99,14 +90,20 @@ export function ScheduleSection() {
     const usedEventIds = new Set<string>();
 
     periods.forEach((period) => {
+      // Special handling for all-day period
       if (period.isAllDay) {
         grouped[period.id] = filteredAllDayEvents;
         return;
       }
 
+      // Regular scheduled events
       grouped[period.id] = filteredEvents.filter((event) => {
+        // Skip if already assigned to an earlier period
         if (usedEventIds.has(event.id)) return false;
+
+        // Check if event starts in this period
         const eventStartsInPeriod = eventFallsInPeriod(event, period.start, period.end);
+
         if (eventStartsInPeriod) {
           usedEventIds.add(event.id);
           return true;
@@ -148,6 +145,7 @@ export function ScheduleSection() {
             onValueChange={(value) => setSelectedDay(value as '1' | '2')}
             className="w-full"
           >
+            {/* Line Variant Tabs */}
             <div className="flex justify-center mb-6">
               <TabsList className="h-auto p-0 bg-transparent border-b border-border/50 rounded-none w-full max-w-md">
                 {[1, 2].map((day) => (
@@ -167,6 +165,7 @@ export function ScheduleSection() {
                       Day {day}
                     </span>
 
+                    {/* Animated underline */}
                     {selectedDay.toString() === day.toString() && (
                       <motion.div
                         layoutId="activeTabIndicator"
@@ -179,6 +178,7 @@ export function ScheduleSection() {
               </TabsList>
             </div>
 
+            {/* Category Filters */}
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -192,6 +192,7 @@ export function ScheduleSection() {
               />
             </motion.div>
 
+            {/* Tab Content */}
             <div className="mt-8">
               <AnimatePresence mode="wait">
                 {[1, 2].map((day) => (
@@ -246,6 +247,7 @@ export function ScheduleSection() {
                         );
                       })}
 
+                      {/* Empty State */}
                       {filteredEvents.length === 0 && filteredAllDayEvents.length === 0 && (
                         <motion.div
                           initial={{ opacity: 0, scale: 0.95 }}
@@ -272,7 +274,7 @@ export function ScheduleSection() {
           </Tabs>
         </div>
 
-        {/* Legend */}
+        {/* Legend - Below sticky section */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
