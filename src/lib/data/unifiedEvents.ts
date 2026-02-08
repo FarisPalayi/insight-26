@@ -62,6 +62,10 @@ export interface UnifiedEvent {
   // Contact
   coordinators?: EventCoordinator[];
 
+  // Registration
+  registrationLink?: string;
+  registrationDeadline?: string; // ISO date string
+
   // Other infos
   rulesAndGuidelines?: string[],
   eligibility?: string[],
