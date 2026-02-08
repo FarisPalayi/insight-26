@@ -73,7 +73,7 @@ export default defineConfig([
 ```
 
 
-- [x] favicon
+- [] favicon
 - [] metadata
 - [] events loader scroll bottom shows home page
 - [] add contacts link to the home page
