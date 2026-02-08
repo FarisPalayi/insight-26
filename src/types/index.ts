@@ -1,3 +1,5 @@
+import type { Timestamp } from "firebase/firestore";
+
 export type EventData = {
   id: string,
   name: string,
@@ -45,3 +47,12 @@ export interface ContactPerson {
   initials: string;
 }
 
+  
+export interface Update {
+  id: string;
+  title: string;
+  body: string;
+  type: "info" | "important";
+  isPublished: boolean;
+  createdAt: Timestamp;
+}

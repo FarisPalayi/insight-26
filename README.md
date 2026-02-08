@@ -73,8 +73,10 @@ export default defineConfig([
 ```
 
 
-- [] favicon
+- [x] favicon
 - [] metadata
 - [] events loader scroll bottom shows home page
 - [] add contacts link to the home page
 - [] add venue link and page 
+- [] add maps links
+- [] add registration

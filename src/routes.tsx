@@ -4,14 +4,19 @@ import { NotFound } from "./pages/NotFound";
 import { Register } from "./pages/Register";
 import { Events } from "./pages/Events";
 import { EventDetail } from "./pages/EventDetail";
-import { fetchAllEvents, fetchEventById } from "./services/eventService";
+import { fetchAllEvents, fetchEventById, fetchUpdates } from "./services/eventService";
 import RootLayout from "./pages/Layout";
 import { Schedule } from "./pages/Schedule";
+import { Updates } from "./pages/Updates";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
+    loader: async () => {
+      const updates = await fetchUpdates();
+      return { updates };
+    },
     errorElement: <NotFound />,
     hydrateFallbackElement: <div>Loading...</div>,
     children: [
@@ -67,6 +72,18 @@ export const router = createBrowserRouter([
           const { Contact } = await import("./pages/Contact");
           return { Component: Contact };
         },
+      },
+      {
+        path: "/updates",
+        element: <Updates />,
+        loader: async () => {
+          const updates = await fetchUpdates();
+          console.log(updates)
+          if (!updates || updates.length === 0) {
+            throw new Response("Updates not found", { status: 404 });
+          }
+          return updates;
+        }
       },
       { path: "*", Component: NotFound }
     ]
