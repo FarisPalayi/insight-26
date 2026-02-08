@@ -8,6 +8,7 @@ import { fetchAllEvents, fetchEventById, fetchUpdates } from "./services/eventSe
 import RootLayout from "./pages/Layout";
 import { Schedule } from "./pages/Schedule";
 import { Updates } from "./pages/Updates";
+import { VenuesPage } from "./pages/Venues";
 
 export const router = createBrowserRouter([
   {
@@ -83,6 +84,18 @@ export const router = createBrowserRouter([
             throw new Response("Updates not found", { status: 404 });
           }
           return updates;
+        }
+      },
+      {
+        path: '/venues',
+        element: <VenuesPage />,
+        loader: async () => {
+          const events = await fetchAllEvents();
+          console.log(events)
+          if (!events || events.length === 0) {
+            throw new Response("Events not found", { status: 404 });
+          }
+          return { events };
         }
       },
       { path: "*", Component: NotFound }

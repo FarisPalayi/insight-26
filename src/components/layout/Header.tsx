@@ -11,7 +11,7 @@ import { getLastSeenAt } from "@/lib/utils";
 const navItems = [
   { label: "Events", href: "/events" },
   { label: "Schedule", href: "/schedule" },
-  { label: "Venue", href: "/venue" },
+  { label: "Venues", href: "/venues" },
   { label: "Contact", href: "/contact" },
 ];
 

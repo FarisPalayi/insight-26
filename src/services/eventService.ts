@@ -3,7 +3,7 @@ import { unifiedEvents } from "@/lib/data/unifiedEvents";
 import { collection, getDocs, doc, getDoc, } from 'firebase/firestore';
 import type { Update } from "@/types";
 
-const USE_FIREBASE = true;
+const USE_FIREBASE = false;
 
 export const fetchEventById = async (id: string) => {
   if (!USE_FIREBASE) {
