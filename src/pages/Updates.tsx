@@ -36,17 +36,17 @@ export function Updates() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-background dark">
+        <div className="min-h-screen bg-background dark px-4 sm:px-8">
             <Main>
                 {/* Header */}
-                <header className="mx-auto max-w-2xl px-4 pt-6 pb-8 sm:px-0 sm:pt-10 sm:pb-12">
+                <div className="mx-auto max-w-2xl px-4 pt-6 pb-8 sm:px-0 sm:pt-10 sm:pb-12">
                     <h1 className="text-2xl font-medium tracking-tight sm:text-4xl">
                         Updates
                     </h1>
                     <p className="mt-2 text-sm text-muted-foreground sm:text-base">
                         Event announcements and important updates.
                     </p>
-                </header>
+                </div>
 
                 {/* Updates */}
                 <section className="mx-auto max-w-2xl px-4 sm:px-0">
