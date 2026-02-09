@@ -19,7 +19,7 @@ export const router = createBrowserRouter([
       return { updates };
     },
     errorElement: <NotFound />,
-    hydrateFallbackElement: <div>Loading...</div>,
+    hydrateFallbackElement: <div></div>,
     children: [
       { index: true, element: <Home /> },
       {
