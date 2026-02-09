@@ -1,398 +1,398 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
-@import "tailwindcss";
+  @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
+  @import "tailwindcss";
 
-/* Tech Festival Design System - Insight'26 */
+  /* Tech Festival Design System - Insight'26 */
 
-@theme {
-  /* Colors - these automatically generate bg-*, text-*, border-* utilities */
-  --color-background: hsl(240 15% 3%);
-  --color-foreground: hsl(0 0% 98%);
+  @theme {
+    /* Colors - these automatically generate bg-*, text-*, border-* utilities */
+    --color-background: hsl(240 15% 3%);
+    --color-foreground: hsl(0 0% 98%);
 
-  --color-card: hsl(240 15% 5%);
-  --color-card-foreground: hsl(0 0% 98%);
+    --color-card: hsl(240 15% 5%);
+    --color-card-foreground: hsl(0 0% 98%);
 
-  --color-popover: hsl(240 15% 5%);
-  --color-popover-foreground: hsl(0 0% 98%);
+    --color-popover: hsl(240 15% 5%);
+    --color-popover-foreground: hsl(0 0% 98%);
 
-  --color-primary: hsl(160 100% 45%);
-  --color-primary-foreground: hsl(240 15% 3%);
+    --color-primary: hsl(160 100% 45%);
+    --color-primary-foreground: hsl(240 15% 3%);
 
-  --color-secondary: hsl(240 12% 10%);
-  --color-secondary-foreground: hsl(0 0% 98%);
+    --color-secondary: hsl(240 12% 10%);
+    --color-secondary-foreground: hsl(0 0% 98%);
 
-  --color-muted: hsl(240 12% 12%);
-  --color-muted-foreground: hsl(240 8% 55%);
+    --color-muted: hsl(240 12% 12%);
+    --color-muted-foreground: hsl(240 8% 55%);
 
-  --color-accent: hsl(280 100% 60%);
-  --color-accent-foreground: hsl(0 0% 98%);
+    --color-accent: hsl(280 100% 60%);
+    --color-accent-foreground: hsl(0 0% 98%);
 
-  --color-destructive: hsl(0 84% 60%);
-  --color-destructive-foreground: hsl(0 0% 98%);
+    --color-destructive: hsl(0 84% 60%);
+    --color-destructive-foreground: hsl(0 0% 98%);
 
-  --color-border: hsl(240 12% 14%);
-  --color-input: hsl(240 12% 14%);
-  --color-ring: hsl(160 100% 45%);
+    --color-border: hsl(240 12% 14%);
+    --color-input: hsl(240 12% 14%);
+    --color-ring: hsl(160 100% 45%);
 
-  --color-glow-primary: hsl(160 100% 45%);
-  --color-glow-accent: hsl(280 100% 60%);
+    --color-glow-primary: hsl(160 100% 45%);
+    --color-glow-accent: hsl(280 100% 60%);
 
-  /* Event Category Colors */
-  --color-event-seminar: hsl(200 100% 55%);
-  --color-event-competition: hsl(160 100% 45%);
-  --color-event-cultural: hsl(280 100% 60%);
-  --color-event-allday: hsl(35 100% 55%);
+    /* Event Category Colors */
+    --color-event-seminar: hsl(200 100% 55%);
+    --color-event-competition: hsl(160 100% 45%);
+    --color-event-cultural: hsl(280 100% 60%);
+    --color-event-allday: hsl(35 100% 55%);
 
-  /* Font families */
-  --font-family-sans: "Space Grotesk", system-ui, sans-serif;
-  --font-family-mono: "JetBrains Mono", monospace;
+    /* Font families */
+    --font-family-sans: "Space Grotesk", system-ui, sans-serif;
+    --font-family-mono: "JetBrains Mono", monospace;
 
-  /* Border radius */
-  --radius: 0.75rem;
-  --radius-lg: 0.75rem;
-  --radius-md: calc(0.75rem - 2px);
-  --radius-sm: calc(0.75rem - 4px);
-}
-
-@layer base {
-  :root {
-    /* Additional custom tokens for effects - not color utilities */
-    --gradient-start: 160 100% 50%;
-    --gradient-mid: 200 100% 50%;
-    --gradient-end: 280 100% 65%;
-    --surface-glass: 240 15% 6%;
+    /* Border radius */
+    --radius: 0.75rem;
+    --radius-lg: 0.75rem;
+    --radius-md: calc(0.75rem - 2px);
+    --radius-sm: calc(0.75rem - 4px);
   }
 
-  .dark {
-    /* Override colors for dark mode if needed */
-    --color-destructive: hsl(0 62% 30%);
-  }
-
-  * {
-    border-color: hsl(var(--color-border));
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    background-color: hsl(var(--color-background));
-    color: hsl(var(--color-foreground));
-    font-family: var(--font-family-sans);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  ::selection {
-    background-color: hsla(162, 100%, 66%, 0.457);
-    color: var(--color-foreground);
-  }
-
-  /* ========================================
-   USABLE MODERN SCROLLBAR (VISIBLE)
-   ======================================== */
-
-  /* WebKit — Chrome / Edge / Safari */
-  ::-webkit-scrollbar {
-    width: 12px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: hsl(var(--color-background));
-  }
-
-  /* Thumb — visible base */
-  ::-webkit-scrollbar-thumb {
-    background: hsl(156, 97%, 44%);
-    border-radius: 30px;
-    background-clip: padding-box;
-    border: 2px solid transparent;
-
-    transition:
-      background 0.2s ease,
-      box-shadow 0.2s ease,
-      transform 0.1s ease;
-  }
-
-  /* hover — strongest visibility */
-  ::-webkit-scrollbar-thumb:hover {
-    border: 2px solid transparent;
-    background: hsl(160deg 98.41% 32.75%);
-  }
-
-  /* active/ dragging — subtle premium glow */
-  ::-webkit-scrollbar-thumb:active {
-    background: hsl(160, 98%, 25%);
-  }
-
-  ::-webkit-scrollbar-corner {
-    background: transparent;
-  }
-
-  :root {
-    scrollbar-color: hsl(156, 97%, 44%) transparent;
-    scrollbar-width: thin;
-  }
-}
-
-@layer components {
-  .text-gradient {
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    background-image: linear-gradient(135deg,
-        hsl(var(--gradient-start)) 0%,
-        hsl(var(--gradient-mid)) 50%,
-        hsl(var(--gradient-end)) 100%);
-  }
-
-  .text-gradient-subtle {
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    background-image: linear-gradient(90deg,
-        hsl(var(--color-foreground)) 0%,
-        hsl(var(--color-muted-foreground)) 100%);
-  }
-
-  .glow-primary {
-    box-shadow:
-      0 0 20px hsl(var(--color-primary) / 0.4),
-      0 0 60px hsl(var(--color-primary) / 0.2),
-      0 0 100px hsl(var(--color-primary) / 0.1);
-  }
-
-  .glow-text {
-    text-shadow:
-      0 0 20px hsl(var(--color-primary) / 0.6),
-      0 0 40px hsl(var(--color-primary) / 0.4),
-      0 0 60px hsl(var(--color-primary) / 0.2);
-  }
-
-  .glow-text-accent {
-    text-shadow:
-      0 0 30px hsl(var(--color-accent) / 0.5),
-      0 0 60px hsl(var(--color-accent) / 0.3);
-  }
-
-  .glass-surface {
-    backdrop-filter: blur(40px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: linear-gradient(135deg,
-        hsl(var(--surface-glass) / 0.9) 0%,
-        hsl(var(--surface-glass) / 0.5) 100%);
-    transform: translateZ(0);
-    /* for hardware acceleration */
-  }
-
-  .glass-surface-strong {
-    backdrop-filter: blur(64px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    background: linear-gradient(180deg,
-        hsl(var(--surface-glass) / 0.95) 0%,
-        hsl(var(--surface-glass) / 0.8) 100%);
-  }
-
-  .grid-pattern {
-    position: absolute;
-    inset: 0;
-    /* Increased weight to 1.5px and color to 10% opacity white/blue */
-    background-image:
-      linear-gradient(to right,
-        rgba(56, 189, 248, 0.1) 1.5px,
-        transparent 1.5px),
-      linear-gradient(to bottom,
-        rgba(56, 189, 248, 0.1) 1.5px,
-        transparent 1.5px);
-    background-size: 60px 60px;
-  }
-
-  .premium-grid-container {
-    position: relative;
-    background-color: #030303;
-    /* Deep obsidian instead of pure black */
-    overflow: hidden;
-  }
-
-  .grid-lines {
-    position: absolute;
-    inset: 0;
-    background-size: 100px 100px;
-    /* Increased opacity from 0.03 to 0.08 for visibility */
-    background-image:
-      linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-
-    /* Adjusted mask: 50% of the center is fully visible before it starts fading */
-    mask-image: radial-gradient(circle at 50% 50%, black 50%, transparent 95%);
-    -webkit-mask-image: radial-gradient(circle at 50% 50%,
-        black 50%,
-        transparent 95%);
-  }
-
-  /* Subtle moving light effect */
-  .ambient-shimmer {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-        rgba(59, 130, 246, 0.1) 0%,
-        transparent 50%);
-    opacity: 0.5;
-    transition: opacity 0.3s;
-  }
-
-  .nav-link {
-    position: relative;
-    color: hsl(var(--color-muted-foreground));
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 300ms;
-  }
-
-  .nav-link:hover {
-    color: hsl(var(--color-foreground));
-  }
-
-  .nav-link::after {
-    content: "";
-    position: absolute;
-    bottom: -0.25rem;
-    left: 0;
-    width: 0;
-    height: 0.125rem;
-    background-image: linear-gradient(to right,
-        hsl(var(--color-primary)),
-        hsl(var(--color-accent)));
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 300ms;
-  }
-
-  .nav-link:hover::after {
-    width: 100%;
-  }
-
-  .stat-card {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .stat-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: linear-gradient(to bottom right,
-        hsl(var(--color-primary) / 0.05),
-        hsl(var(--color-accent) / 0.05));
-    opacity: 0;
-    transition-property: opacity;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 500ms;
-  }
-
-  .stat-card:hover::before {
-    opacity: 1;
-  }
-
-  .btn-glow {
-    position: relative;
-    overflow: hidden;
-    box-shadow:
-      0 0 20px hsl(var(--color-primary) / 0.3),
-      inset 0 1px 0 hsl(var(--color-foreground) / 0.1);
-  }
-
-  .btn-glow::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: linear-gradient(to right,
-        transparent,
-        rgba(255, 255, 255, 0.2),
-        transparent);
-    transform: translateX(-100%);
-    transition: transform 0.6s ease;
-  }
-
-  .btn-glow:hover::before {
-    transform: translateX(100%);
-  }
-
-  .btn-outline-glow {
-    position: relative;
-    box-shadow:
-      inset 0 0 20px hsl(var(--color-primary) / 0.1),
-      0 0 20px hsl(var(--color-primary) / 0.05);
-  }
-
-  .btn-outline-glow:hover {
-    box-shadow:
-      inset 0 0 30px hsl(var(--color-primary) / 0.15),
-      0 0 30px hsl(var(--color-primary) / 0.1);
-  }
-
-  .floating-element {
-    animation: float 6s ease-in-out infinite;
-  }
-
-  @keyframes float {
-
-    0%,
-    100% {
-      transform: translateY(0px) rotate(0deg);
+  @layer base {
+    :root {
+      /* Additional custom tokens for effects - not color utilities */
+      --gradient-start: 160 100% 50%;
+      --gradient-mid: 200 100% 50%;
+      --gradient-end: 280 100% 65%;
+      --surface-glass: 240 15% 6%;
     }
 
-    50% {
-      transform: translateY(-20px) rotate(3deg);
+    .dark {
+      /* Override colors for dark mode if needed */
+      --color-destructive: hsl(0 62% 30%);
+    }
+
+    * {
+      border-color: hsl(var(--color-border));
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: hsl(var(--color-background));
+      color: hsl(var(--color-foreground));
+      font-family: var(--font-family-sans);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    ::selection {
+      background-color: hsla(162, 100%, 66%, 0.457);
+      color: var(--color-foreground);
+    }
+
+    /* ========================================
+    USABLE MODERN SCROLLBAR (VISIBLE)
+    ======================================== */
+
+    /* WebKit — Chrome / Edge / Safari */
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: hsl(var(--color-background));
+    }
+
+    /* Thumb — visible base */
+    ::-webkit-scrollbar-thumb {
+      background: hsl(156, 97%, 44%);
+      border-radius: 30px;
+      background-clip: padding-box;
+      border: 2px solid transparent;
+
+      transition:
+        background 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.1s ease;
+    }
+
+    /* hover — strongest visibility */
+    ::-webkit-scrollbar-thumb:hover {
+      border: 2px solid transparent;
+      background: hsl(160deg 98.41% 32.75%);
+    }
+
+    /* active/ dragging — subtle premium glow */
+    ::-webkit-scrollbar-thumb:active {
+      background: hsl(160, 98%, 25%);
+    }
+
+    ::-webkit-scrollbar-corner {
+      background: transparent;
+    }
+
+    :root {
+      scrollbar-color: hsl(156, 97%, 44%) transparent;
+      scrollbar-width: thin;
     }
   }
 
-  .particle {
-    position: absolute;
-    border-radius: 9999px;
-    animation: particle-float 8s ease-in-out infinite;
-  }
-
-  @keyframes particle-float {
-
-    0%,
-    100% {
-      transform: translateY(0) translateX(0);
-      opacity: 0.6;
+  @layer components {
+    .text-gradient {
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      background-image: linear-gradient(135deg,
+          hsl(var(--gradient-start)) 0%,
+          hsl(var(--gradient-mid)) 50%,
+          hsl(var(--gradient-end)) 100%);
     }
 
-    50% {
-      transform: translateY(-30px) translateX(10px);
+    .text-gradient-subtle {
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      background-image: linear-gradient(90deg,
+          hsl(var(--color-foreground)) 0%,
+          hsl(var(--color-muted-foreground)) 100%);
+    }
+
+    .glow-primary {
+      box-shadow:
+        0 0 20px hsl(var(--color-primary) / 0.4),
+        0 0 60px hsl(var(--color-primary) / 0.2),
+        0 0 100px hsl(var(--color-primary) / 0.1);
+    }
+
+    .glow-text {
+      text-shadow:
+        0 0 20px hsl(var(--color-primary) / 0.6),
+        0 0 40px hsl(var(--color-primary) / 0.4),
+        0 0 60px hsl(var(--color-primary) / 0.2);
+    }
+
+    .glow-text-accent {
+      text-shadow:
+        0 0 30px hsl(var(--color-accent) / 0.5),
+        0 0 60px hsl(var(--color-accent) / 0.3);
+    }
+
+    .glass-surface {
+      backdrop-filter: blur(40px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: linear-gradient(135deg,
+          hsl(var(--surface-glass) / 0.9) 0%,
+          hsl(var(--surface-glass) / 0.5) 100%);
+      transform: translateZ(0);
+      /* for hardware acceleration */
+    }
+
+    .glass-surface-strong {
+      backdrop-filter: blur(64px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: linear-gradient(180deg,
+          hsl(var(--surface-glass) / 0.95) 0%,
+          hsl(var(--surface-glass) / 0.8) 100%);
+    }
+
+    .grid-pattern {
+      position: absolute;
+      inset: 0;
+      /* Increased weight to 1.5px and color to 10% opacity white/blue */
+      background-image:
+        linear-gradient(to right,
+          rgba(56, 189, 248, 0.1) 1.5px,
+          transparent 1.5px),
+        linear-gradient(to bottom,
+          rgba(56, 189, 248, 0.1) 1.5px,
+          transparent 1.5px);
+      background-size: 60px 60px;
+    }
+
+    .premium-grid-container {
+      position: relative;
+      background-color: #030303;
+      /* Deep obsidian instead of pure black */
+      overflow: hidden;
+    }
+
+    .grid-lines {
+      position: absolute;
+      inset: 0;
+      background-size: 100px 100px;
+      /* Increased opacity from 0.03 to 0.08 for visibility */
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+
+      /* Adjusted mask: 50% of the center is fully visible before it starts fading */
+      mask-image: radial-gradient(circle at 50% 50%, black 50%, transparent 95%);
+      -webkit-mask-image: radial-gradient(circle at 50% 50%,
+          black 50%,
+          transparent 95%);
+    }
+
+    /* Subtle moving light effect */
+    .ambient-shimmer {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+          rgba(59, 130, 246, 0.1) 0%,
+          transparent 50%);
+      opacity: 0.5;
+      transition: opacity 0.3s;
+    }
+
+    .nav-link {
+      position: relative;
+      color: hsl(var(--color-muted-foreground));
+      transition-property: all;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 300ms;
+    }
+
+    .nav-link:hover {
+      color: hsl(var(--color-foreground));
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      bottom: -0.25rem;
+      left: 0;
+      width: 0;
+      height: 0.125rem;
+      background-image: linear-gradient(to right,
+          hsl(var(--color-primary)),
+          hsl(var(--color-accent)));
+      transition-property: all;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 300ms;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .stat-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(to bottom right,
+          hsl(var(--color-primary) / 0.05),
+          hsl(var(--color-accent) / 0.05));
+      opacity: 0;
+      transition-property: opacity;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 500ms;
+    }
+
+    .stat-card:hover::before {
       opacity: 1;
     }
-  }
-}
 
-@layer utilities {
-  .font-sans {
-    font-family: var(--font-family-sans);
+    .btn-glow {
+      position: relative;
+      overflow: hidden;
+      box-shadow:
+        0 0 20px hsl(var(--color-primary) / 0.3),
+        inset 0 1px 0 hsl(var(--color-foreground) / 0.1);
+    }
+
+    .btn-glow::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(to right,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .btn-glow:hover::before {
+      transform: translateX(100%);
+    }
+
+    .btn-outline-glow {
+      position: relative;
+      box-shadow:
+        inset 0 0 20px hsl(var(--color-primary) / 0.1),
+        0 0 20px hsl(var(--color-primary) / 0.05);
+    }
+
+    .btn-outline-glow:hover {
+      box-shadow:
+        inset 0 0 30px hsl(var(--color-primary) / 0.15),
+        0 0 30px hsl(var(--color-primary) / 0.1);
+    }
+
+    .floating-element {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-20px) rotate(3deg);
+      }
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 9999px;
+      animation: particle-float 8s ease-in-out infinite;
+    }
+
+    @keyframes particle-float {
+
+      0%,
+      100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.6;
+      }
+
+      50% {
+        transform: translateY(-30px) translateX(10px);
+        opacity: 1;
+      }
+    }
   }
 
-  .font-mono {
-    font-family: var(--font-family-mono);
+  @layer utilities {
+    .font-sans {
+      font-family: var(--font-family-sans);
+    }
+
+    .font-mono {
+      font-family: var(--font-family-mono);
+    }
+
+    .text-balance {
+      text-wrap: balance;
+    }
   }
 
-  .text-balance {
-    text-wrap: balance;
-  }
-}
+  /* Add this to your CSS file */
+  @keyframes pulse-slow {
 
-/* Add this to your CSS file */
-@keyframes pulse-slow {
+    0%,
+    100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
 
-  0%,
-  100% {
-    opacity: 0.4;
-    transform: scale(1);
+    50% {
+      opacity: 0.5;
+      transform: scale(1.05);
+    }
   }
-
-  50% {
-    opacity: 0.5;
-    transform: scale(1.05);
-  }
-}
