@@ -18,7 +18,7 @@ export const ContactCard = ({ person }: ContactCardProps) => {
   return (
     <>
       <Avatar className="h-12 w-12 border-2 border-primary/20 group-hover:border-primary/40 transition-colors flex-shrink-0">
-        <AvatarImage src="" alt={person.name} />
+        <AvatarImage src={person?.img ?? ""} alt={person.name} />
         <AvatarFallback className="bg-primary/10 text-primary font-semibold text-sm">
           {person.initials}
         </AvatarFallback>
