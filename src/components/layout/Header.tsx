@@ -81,7 +81,7 @@ export const Header = ({ updates }: { updates: Update[] }) => {
             {/* CTA Button */}
             <div className="hidden md:block">
               <Button asChild>
-                <Link to="/register" className="glow-primary">
+                <Link to="/events" className="glow-primary">
                   Register Now
                 </Link>
               </Button>
@@ -131,7 +131,7 @@ export const Header = ({ updates }: { updates: Update[] }) => {
               ))}
 
               <Button asChild className="mt-4 glow-primary w-full">
-                <Link to="/register">Register Now</Link>
+                <Link to="/events">Register Now</Link>
               </Button>
             </nav>
           </motion.div>

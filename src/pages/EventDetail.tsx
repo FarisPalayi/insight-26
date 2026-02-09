@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLoaderData } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import { useScroll, useMotionValueEvent } from 'framer-motion';
 import { CoordinatorFooter, LogisticsGrid, EventHero, EventAccordion, PrizeModule } from '@/components/features/event-detail/';
 import { StickyMobileCTA } from '@/components/features/event-detail/StickyMobileCTA';
@@ -41,13 +41,17 @@ export function EventDetail() {
             {/* Added a secondary CTA in sidebar for desktop */}
             <div className="hidden lg:block glass-surface p-6 rounded-2xl border-primary/20 bg-primary/5">
               <p className="text-sm text-muted-foreground mb-4 font-mono uppercase tracking-widest">Status: Registration Open</p>
-              <Button className="w-full h-14 text-lg font-bold glow-primary">Register for Event</Button>
+              <Button className="w-full h-14 text-lg font-bold glow-primary">
+                <Link to={`${event.registrationLink}`} >
+                  Register for Event
+                </Link>
+              </Button>
             </div>
           </aside>
         </div>
-      </div>
+      </div >
 
       <StickyMobileCTA event={event} isVisible={showStickyBar} />
-    </div>
+    </div >
   );
 }

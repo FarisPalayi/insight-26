@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { type UnifiedEvent } from '@/lib/data/unifiedEvents';
+import { Link } from 'react-router';
 
 interface EventHeroProps {
   event: UnifiedEvent;
@@ -31,7 +32,9 @@ export function EventHero({ event }: EventHeroProps) {
 
           <div className="flex gap-4">
             <Button size="lg" className="rounded-full px-10 h-14 bg-primary text-primary-foreground font-black uppercase tracking-widest hover:scale-105 transition-transform">
-              Claim Your Spot
+              <Link to={`${event.registrationLink}`}>
+                Claim Your Spot
+              </Link>
             </Button>
           </div>
         </div>
