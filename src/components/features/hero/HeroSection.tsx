@@ -103,7 +103,7 @@ export const HeroSection = () => {
           <div className="hero-cta flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <Button asChild>
               <Link
-                to="/register"
+                to="/events"
                 className="btn-glow max-w-90 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold group text-base px-6 sm:px-8 py-5 sm:py-6 rounded-xl w-full sm:w-auto"
               >
                 Register Now
