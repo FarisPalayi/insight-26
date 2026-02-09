@@ -8,25 +8,11 @@ import {
 } from "react-router";
 import { EventsPageSkeleton } from "@/components/features/events/skeletons/EventPageSkeleton";
 
-import { useGSAP, ScrollSmoother } from "@/lib/gsap";
 import { fetchUpdates } from "@/services/eventService";
 import type { Update } from "@/types";
 
 export default function RootLayout() {
-  /* ===============================
-     GSAP smooth scroll
-  ================================ */
-  useGSAP(() => {
-    ScrollSmoother.create({
-      smooth: 1,
-      effects: true,
-      normalizeScroll: true,
-    });
-  });
-
-  /* ===============================
-     Route transition handling
-  ================================ */
+  /* Route transition handling */
   const navigation = useNavigation();
   const isPending = navigation.state === "loading";
   const nextPath = navigation.location?.pathname;
@@ -34,9 +20,7 @@ export default function RootLayout() {
   const showEventsSkeleton =
     isPending && (nextPath === "/events" || nextPath === "/events/");
 
-  /* ===============================
-     Global updates (non-blocking)
-  ================================ */
+  /* Global updates (non-blocking) */
   const [updates, setUpdates] = useState<Update[]>([]);
 
   useEffect(() => {
