@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Clock, MapPin, Users, ArrowRight, Cpu } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Clock, MapPin, Users, ArrowRight, Cpu } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router';
 import type { UnifiedEvent } from '@/lib/data/unifiedEvents';
@@ -23,14 +21,17 @@ export function FeaturedEventCard({ event, index = 0 }: FeaturedEventCardProps) 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="w-full"
+      className="w-full group"
     >
-      <Card className="py-0 group relative overflow-hidden bg-card border-border/60 hover:border-primary/50 transition-all duration-500 rounded-[var(--radius-lg)] shadow-2xl">
+      {/* Premium Outer Glow */}
+      <div className="absolute -inset-[2px] bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 rounded-[28px] blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-700" />
+
+      <div className="relative py-0 overflow-hidden glass-surface-strong border-white/10 group-hover:border-white/20 transition-all duration-500 rounded-[26px] shadow-2xl">
         <div className="flex flex-col lg:flex-row lg:min-h-[400px]">
 
-          {/* 1. VISUAL ANCHOR - Left Side (Desktop) */}
-          <div className="relative w-full h-64 sm:h-80 lg:h-auto lg:w-[45%] overflow-hidden bg-muted">
-            {!imageLoaded && <Skeleton className="absolute inset-0 bg-muted/20" />}
+          {/* VISUAL ANCHOR - Image Section */}
+          <div className="relative w-full h-64 sm:h-80 lg:h-auto lg:w-[45%] overflow-hidden bg-black/40">
+            {!imageLoaded && <Skeleton className="absolute inset-0 bg-white/5" />}
             <img
               src={event.imageUrl}
               alt={event.name}
@@ -41,27 +42,33 @@ export function FeaturedEventCard({ event, index = 0 }: FeaturedEventCardProps) 
               )}
             />
 
-            {/* Visual Overlays for Accessibility */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--color-background))] via-transparent to-black/40 lg:bg-gradient-to-r" />
+            {/* Universal Dark Gradient - Works with Any Image Color */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-black/40 to-transparent lg:bg-gradient-to-r lg:from-[#050505] lg:via-black/50 lg:to-transparent" />
 
-            {/* Featured Badge */}
+            {/* Subtle Grid Pattern */}
+            <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none">
+              <div className="grid-lines" />
+            </div>
+
+            {/* Premium Badges */}
             <div className="absolute top-4 left-4 flex gap-2">
-              <Badge variant="outline" className="bg-black/40 backdrop-blur-md text-white border-white/20 text-[10px] uppercase tracking-wider rounded-full">
+              <div className="px-3 py-1.5 bg-black/40 backdrop-blur-xl border border-white/20 text-white text-[10px] font-mono uppercase tracking-wider rounded-full font-bold">
                 {event.category}
-              </Badge>
+              </div>
             </div>
           </div>
 
-          {/* 2. CONTENT HUB - Right Side (Desktop) */}
-          <CardContent className="flex-1 p-5 sm:p-6 lg:p-10 flex flex-col justify-center">
+          {/* CONTENT HUB */}
+          <div className="flex-1 p-5 sm:p-6 lg:p-10 flex flex-col justify-center">
 
             <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-              <Link to={`/events/${event.id}`} className="block">
+              <Link to={`/events/${event.id}`} className="block group/link">
 
                 <div className="space-y-2">
-
                   <h2 className={cn(
-                    "font-sans uppercase font-bold leading-none tracking-tight text-foreground group-hover:text-primary transition-colors duration-300",
+                    "font-sans uppercase font-bold leading-none tracking-tight transition-all duration-300",
+                    "bg-gradient-to-br from-foreground via-foreground to-foreground/80 bg-clip-text text-transparent",
+                    "group-hover/link:from-primary group-hover/link:via-foreground group-hover/link:to-accent",
                     hasFancyName ? "text-3xl sm:text-4xl lg:text-5xl uppercase italic" : "text-2xl sm:text-3xl lg:text-4xl"
                   )}>
                     {event.fancyName || event.name}
@@ -75,33 +82,29 @@ export function FeaturedEventCard({ event, index = 0 }: FeaturedEventCardProps) 
                   )}
                 </div>
               </Link>
-              <p className="text-sm sm:text-base lg:text-lg text-foreground/70 leading-relaxed font-light line-clamp-3">
+
+              <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed font-light line-clamp-3">
                 {event.tagline || "Join the flagship competition of Insight'26 and prove your technical supremacy on the grand stage."}
               </p>
             </div>
 
-            {/* 3. METADATA GRID - High Readability Specs */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8 p-3 sm:p-4 bg-secondary/30 border border-border/40 rounded-2xl">
-              <StatItem icon={Calendar} label="Day" value={event.schedule?.day || "Day 01"} />
+            {/* METADATA GRID - Premium Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
               <StatItem icon={Clock} label="Time" value={event.schedule?.displayTime?.split(' - ')[0] || "10:00 AM"} />
               <StatItem icon={MapPin} label="Venue" value={event.venue || "CCSIT"} />
-              {event.category === "seminar" ? (
-                null
-              ) : (
-                <StatItem icon={Users} label="Team Size" value={event.teamSize || "Team of 5"} />
-              )}
+              <StatItem icon={Users} label="Team Size" value={event.teamSize || "Team of 5"} />
             </div>
 
-            {/* 4. FINANCIALS & CTA */}
-            <div className="flex flex-col sm:flex-row items-center gap-6 mt-auto pt-6 border-t border-border/40">
+            {/* FINANCIALS & CTA */}
+            <div className="flex flex-col sm:flex-row items-center gap-6 mt-auto pt-6 border-t border-white/5">
               <div className="flex items-center gap-4 w-full sm:w-auto">
                 <div className="flex flex-col">
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Prize Pool</span>
-                  <span className="text-2xl font-black text-primary">₹{event.prizePool || "25,000"}</span>
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/60 font-bold">Prize Pool</span>
+                  <span className="text-2xl font-black text-primary glow-text">₹{event.prizePool || "25,000"}</span>
                 </div>
-                <div className="w-[1px] h-10 bg-border/60 mx-2" />
+                <div className="w-[1px] h-10 bg-white/10 mx-2" />
                 <div className="flex flex-col">
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Entry</span>
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/60 font-bold">Entry</span>
                   <span className="text-xl font-bold text-foreground">{event.entryFee.toLowerCase() === "free" ? "Free" : `₹${event.entryFee}`}</span>
                 </div>
               </div>
@@ -109,22 +112,22 @@ export function FeaturedEventCard({ event, index = 0 }: FeaturedEventCardProps) 
               <div className="flex gap-3 w-full sm:w-auto sm:ml-auto">
                 <Button
                   asChild
-                  className="flex-1 sm:flex-initial h-12 px-8 glow-primary bg-primary text-primary-foreground font-bold uppercase text-[11px] tracking-widest rounded-full hover:scale-105 transition-transform"
+                  className="flex-1 sm:flex-initial h-12 px-8 btn-glow bg-primary text-primary-foreground font-bold uppercase text-[11px] tracking-widest rounded-full hover:scale-105 transition-transform shadow-lg shadow-primary/20 group/btn"
                 >
                   <Link to={`/events/${event.id}`} className="flex items-center gap-2">
                     Explore
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
                   </Link>
                 </Button>
               </div>
             </div>
 
-          </CardContent>
+          </div>
         </div>
 
         {/* Animated Background Decor */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[100px] rounded-full pointer-events-none" />
-      </Card>
+        <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/5 via-accent/5 to-transparent blur-3xl rounded-full pointer-events-none" />
+      </div>
     </motion.div>
   );
 }
@@ -137,12 +140,19 @@ interface StatItemProps {
 
 function StatItem({ icon: Icon, label, value }: StatItemProps) {
   return (
-    <div className="flex flex-col gap-1">
-      <div className="flex items-center gap-1.5 text-muted-foreground">
-        <Icon className="w-3.5 h-3.5 text-primary/70" />
-        <span className="font-mono text-[9px] uppercase tracking-tighter font-bold">{label}</span>
+    <div className="group/stat relative">
+      {/* Subtle Hover Glow */}
+      <div className="absolute -inset-[1px] bg-gradient-to-br from-primary/0 to-accent/0 group-hover/stat:from-primary/20 group-hover/stat:to-accent/10 rounded-xl blur opacity-0 group-hover/stat:opacity-100 transition-opacity duration-500" />
+
+      <div className="relative flex flex-col gap-1 p-3 sm:p-4 rounded-xl bg-white/[0.02] border border-white/5 group-hover/stat:border-white/10 backdrop-blur-sm transition-all duration-300">
+        <div className="flex items-center gap-1.5">
+          <div className="p-1.5 rounded-lg bg-primary/10 group-hover/stat:bg-primary/20 transition-colors">
+            <Icon className="w-3.5 h-3.5 text-primary" />
+          </div>
+          <span className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground/50 font-bold">{label}</span>
+        </div>
+        <span className="text-sm font-bold text-foreground truncate pl-1">{value}</span>
       </div>
-      <span className="text-sm font-bold text-foreground truncate">{value}</span>
     </div>
   );
 }

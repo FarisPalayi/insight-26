@@ -96,7 +96,7 @@ export function EventsSection({ events = [] }: EventsSectionProps) {
           {/* Search Feedback Header */}
           {isSearching && (
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-xl font-semibold italic text-muted-foreground">
+              <h2 className="text-sm sm:text-lg text-muted-foreground">
                 Showing {filteredEvents.length} results for "{debouncedSearch}"
               </h2>
               <Button variant="ghost" size="sm" onClick={() => setSearchQuery("")}>
@@ -123,8 +123,8 @@ export function EventsSection({ events = [] }: EventsSectionProps) {
                 {isSearching ? (
                   /* Results List View */
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {filteredEvents.map(event => (
-                      <EventCard key={`search-${event.id}`} event={event} />
+                    {filteredEvents.map((event, i) => (
+                      <EventCard key={`search-${event.id}`} event={event} index={i}/>
                     ))}
                   </div>
                 ) : (
@@ -138,8 +138,8 @@ export function EventsSection({ events = [] }: EventsSectionProps) {
                         </Button>
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        {group.events.map(event => (
-                          <EventCard key={`group-${group.id}-${event.id}`} event={event} />
+                        {group.events.map((event, i) => (
+                          <EventCard key={`group-${group.id}-${event.id}`} event={event} index={i} />
                         ))}
                       </div>
                     </section>
