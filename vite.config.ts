@@ -16,7 +16,8 @@ export default defineConfig(({ mode }) => ({
       output: {
         manualChunks: {
           'framer-motion': ['framer-motion'],
-          'vendor': ['react', 'react-dom']
+          'vendor': ['react', 'react-dom'],
+          'embla-carousel-react': ['embla-carousel-react']
         }
       }
     }
