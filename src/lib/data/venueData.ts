@@ -38,7 +38,7 @@ export const venueData: VenueData[] = [
     {
         id: 'ems-electron',
         name: 'EMS Hall - Electron',
-        shortName: 'EMS HALL',
+        shortName: 'EMS ELECTRON',
         directions: 'Near Main Building, 2nd Floor',
         coordinates: { lat: 11.0207, lng: 75.9368 },
         imageUrl: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80'
