@@ -105,14 +105,14 @@ const EventsSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mt-12 md:mt-20"
         >
-          <div className="inline-flex flex-col items-center gap-8 px-10 py-12 rounded-3xl glass-surface border border-white/5 max-w-2xl mx-auto">
+          <div className="inline-flex flex-col items-center gap-8 px-10 py-12 rounded-3xl max-w-2xl mx-auto">
 
             <div className="space-y-3">
               <h3 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">
                 Explore the Full Program
               </h3>
               <p className="text-sm sm:text-base text-muted-foreground max-w-sm mx-auto">
-                From the main stage competitions to niche workshops—see everything we've planned.
+                From the competitions to seminars—see everything we've planned.
               </p>
             </div>
 
@@ -126,13 +126,6 @@ const EventsSection = () => {
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
-
-              <Link
-                to="/schedule"
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
-              >
-                View Full Schedule
-              </Link>
             </div>
           </div>
         </motion.div>

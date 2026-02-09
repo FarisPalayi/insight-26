@@ -17,7 +17,6 @@ import { type UnifiedEvent } from '@/lib/data/unifiedEvents';
 
 
 export function VenuesPage() {
-
     const { events } = useLoaderData() as { events: UnifiedEvent[] };
     const [selectedVenueId, setSelectedVenueId] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
@@ -87,7 +86,7 @@ export function VenuesPage() {
 
             {/* Mobile Layout - Stacked */}
             <main className="lg:hidden">
-                <div className="container py-6 space-y-6 px-4">
+                <div className="container py-6 space-y-6 px-4 mx-auto">
                     {/* Map Section */}
                     <section className="w-full" aria-label="Interactive venue map">
                         <GoogleMapsEmbed

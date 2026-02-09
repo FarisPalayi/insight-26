@@ -130,7 +130,7 @@ export function GoogleMapsEmbed({
             <Button
               variant="secondary"
               size="sm"
-              className="gap-2 shadow-lg backdrop-blur-sm bg-card/95 hover:bg-card border"
+              className="gap-2 shadow-lg backdrop-blur-sm bg-card/95 hover:bg-card border-border"
             >
               {isExpanded ? (
                 <>
@@ -163,7 +163,7 @@ export function GoogleMapsEmbed({
                 'lg:bottom-3 lg:left-auto lg:right-3 lg:max-w-sm'
               )}
             >
-              <div className="bg-card/95 backdrop-blur-sm rounded-xl p-3 shadow-lg border">
+              <div className="bg-card/95 backdrop-blur-sm rounded-xl p-3 shadow-lg border-border">
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0 flex-1">
                     <h4 className="font-semibold text-sm truncate">
