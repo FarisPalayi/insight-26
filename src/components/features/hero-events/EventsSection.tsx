@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Zap, Music, Mic2, Star, Flag } from "lucide-react";
+import { ArrowRight, Zap, Music, Star, Flag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EventCard } from "./EventCard";
 import { FlagshipEvent } from "./FlagshipEventCard";
@@ -14,10 +14,6 @@ const categoryVisuals: Record<EventCategory, { icon: React.ReactNode; accent: st
   competition: {
     icon: <Zap className="w-6 h-6" />,
     accent: "from-blue-500 to-indigo-500"
-  },
-  seminar: {
-    icon: <Mic2 className="w-6 h-6" />,
-    accent: "from-emerald-500 to-teal-500"
   },
   cultural: {
     icon: <Music className="w-6 h-6" />,

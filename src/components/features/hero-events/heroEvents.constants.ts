@@ -33,24 +33,46 @@ export const FEATURED_EVENTS_MOCK: UnifiedEvent[] = [
   MOCK_TECHNOVA, // Included here so the filter in EventsSection handles it
 
   {
-    id: "seminar-2",
-    name: "Tech Seminar",
-    fancyName: "InnovateX",
-    tagline: "Innovation & Startups Unplugged",
+    id: "vibe-coding",
+    name: "Vibe Coding",
+    fancyName: "Vibe Coding",
+    tagline: "Code with rhythm",
     description:
-      "An interactive session discussing innovation, startups, and emerging technology ecosystems.",
-    category: "seminar",
+      "A fast-paced coding challenge focused on logic, speed, and clean problem-solving skills.",
+    category: "competition",
     schedule: {
-      day: '1',
-      startTime: "14:00",
-      endTime: "15:00",
-      displayTime: "02:00 PM - 03:00 PM",
+      day: '2',
+      startTime: "13:45",
+      endTime: "14:45",
+      displayTime: "01:45 PM - 02:45 PM",
     },
-    venue: "Aryabhatta Hall",
+    venue: "ccsit-lab",
     teamSize: "solo",
-    entryFee: "Free",
-    imageUrl: 'https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&q=80',
+    entryFee: "100",
+    registrationLink: "/register",
+    prizePool: "4,000",
+    imageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+    spotRegistration: true,
+  },
 
+    {
+    id: "talenx",
+    name: "Talen'X",
+    fancyName: "Talen'X",
+    tagline: "Unleash your talent",
+    description:
+      "An open talent showcase featuring performances, creativity, and artistic expression.",
+    category: "cultural",
+    schedule: {
+      day: '2',
+      startTime: "11:00",
+      endTime: "17:00",
+      displayTime: "11:00 AM - 05:00 PM",
+    },
+    venue: "CCSIT Seminar Hall",
+    teamSize: "any",
+    entryFee: "Free",
+    imageUrl: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80',
   },
 
   {
@@ -73,23 +95,5 @@ export const FEATURED_EVENTS_MOCK: UnifiedEvent[] = [
     prizePool: "5,000",
     imageUrl: 'https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=2000&auto=format&fit=crop',
   },
-  {
-    id: "talenx",
-    name: "Talen'X",
-    fancyName: "Talen'X",
-    tagline: "Unleash your talent",
-    description:
-      "An open talent showcase featuring performances, creativity, and artistic expression.",
-    category: "cultural",
-    schedule: {
-      day: '2',
-      startTime: "11:00",
-      endTime: "17:00",
-      displayTime: "11:00 AM - 05:00 PM",
-    },
-    venue: "CCSIT Seminar Hall",
-    teamSize: "any",
-    entryFee: "Free",
-    imageUrl: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80',
-  },
+
 ];

@@ -33,7 +33,7 @@ type EventCategoryFilterProps = SingleSelectProps | MultiSelectProps;
 // CONSTANTS
 // ============================================
 
-const CATEGORIES: (EventCategory | 'all')[] = ['all', 'competition', 'seminar', 'cultural', 'allday'];
+const CATEGORIES: (EventCategory | 'all')[] = ['all', 'competition', 'cultural', 'allday'];
 
 const CATEGORY_STYLES: Record<string, { active: string; inactive: string }> = {
   all: {

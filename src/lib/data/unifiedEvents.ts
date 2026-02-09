@@ -4,7 +4,7 @@
 
 // ================== TYPES ==================
 
-export type EventCategory = 'seminar' | 'competition' | 'cultural' | 'allday' | 'inauguration';
+export type EventCategory = 'competition' | 'cultural' | 'allday' | 'inauguration';
 export type TeamSize = 'solo' | '2' | '4' | '5' | '2-5' | 'any';
 export type EventDay = '1' | '2' | 'both';
 
@@ -76,7 +76,6 @@ export interface UnifiedEvent {
 // ================== LABELS ==================
 
 export const categoryLabels: Record<EventCategory, string> = {
-  seminar: 'Seminar',
   competition: 'Competition',
   cultural: 'Cultural',
   allday: 'All Day',
