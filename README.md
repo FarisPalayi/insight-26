@@ -74,13 +74,13 @@ export default defineConfig([
 
 
 - [x] favicon
-- [] meta tags
 - [x] events loader scroll bottom shows home page
 - [x] add contacts link to the home page
 - [x] add maps links
 - [x] add actual map links
 - [x] add venue link and page 
 
+- [] meta tags
 - [] update social media links(in the footer and stuff)
 - [] add venue photos
 - [] add registration
@@ -96,3 +96,4 @@ export default defineConfig([
 - [] host fonts
 - [] home page events can't be changed
 - [] schedule page showing already shown page more than once
+- [] laggy carousal. check if chunk splitting is working
