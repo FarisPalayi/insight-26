@@ -75,12 +75,24 @@ export default defineConfig([
 
 - [x] favicon
 - [] meta tags
-- [] events loader scroll bottom shows home page
-- [] add contacts link to the home page
-- [] add venue link and page 
-- [] add maps links
-- [] add registration
+- [x] events loader scroll bottom shows home page
+- [x] add contacts link to the home page
+- [x] add maps links
+- [x] add actual map links
+- [x] add venue link and page 
+
 - [] update social media links(in the footer and stuff)
-- [] loading page
-- [] add actual map links
 - [] add venue photos
+- [] add registration
+- [] loading page
+- [] add brochure link
+- [] sponsor db connect
+- [] event cards showing venueId instead of venue full name
+- [] event card and page redesign
+- [] hero section problems
+- [] reload bar not showing in mobile
+- [] event page images are bandwidth heavy and large
+- [] loading page
+- [] host fonts
+- [] home page events can't be changed
+- [] schedule page showing already shown page more than once
