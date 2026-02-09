@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Clock, MapPin, Users, Sparkles, ArrowRight, Cpu } from 'lucide-react';
+import { Calendar, Clock, MapPin, Users, ArrowRight, Cpu } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -46,10 +46,6 @@ export function FeaturedEventCard({ event, index = 0 }: FeaturedEventCardProps) 
 
             {/* Featured Badge */}
             <div className="absolute top-4 left-4 flex gap-2">
-              <Badge className="bg-primary text-primary-foreground font-bold px-3 py-1 rounded-full shadow-lg border-none flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 fill-current" />
-                <span className="text-[10px] uppercase tracking-wider">Featured Event</span>
-              </Badge>
               <Badge variant="outline" className="bg-black/40 backdrop-blur-md text-white border-white/20 text-[10px] uppercase tracking-wider rounded-full">
                 {event.category}
               </Badge>

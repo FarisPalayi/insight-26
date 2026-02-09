@@ -11,7 +11,6 @@ import { HeroTitle } from "./HeroTitle";
 import { HeroVisual } from "./HeroVisual";
 import { Link } from "react-router";
 import { LocationMeta, DateMeta } from "./MetaItem";
-import { useMagneticButton } from "@/hooks/useMagneticButton";
 
 export const HeroSection = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -36,7 +35,6 @@ export const HeroSection = () => {
 
       tl.from(content, {
         opacity: 0,
-        y: 30,
         duration: 0.9,
         ease: "power3.out",
       })
@@ -44,7 +42,6 @@ export const HeroSection = () => {
           meta,
           {
             opacity: 0,
-            y: 20,
             duration: 0.6,
             ease: "power2.out",
           },
@@ -54,7 +51,6 @@ export const HeroSection = () => {
           cta,
           {
             opacity: 0,
-            y: 20,
             duration: 0.6,
             ease: "power2.out",
           },
@@ -64,7 +60,6 @@ export const HeroSection = () => {
       // Scroll-based compression 
       gsap.to(content, {
         scale: 0.96,
-        y: -40,
         ease: "none",
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -77,15 +72,10 @@ export const HeroSection = () => {
     { scope: sectionRef }
   );
 
-  const primaryMagnet = useMagneticButton({
-    strength: 0.22,
-    radius: 80
-  });
-
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-0"
     >
       {/* Background */}
       <HeroVisual />
@@ -111,29 +101,25 @@ export const HeroSection = () => {
 
           {/* CTA */}
           <div className="hero-cta flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-            <div ref={primaryMagnet.ref} className="inline-block">
-              <Button asChild>
-                <Link
-                  to="/register"
-                  className="btn-glow bg-primary text-primary-foreground font-semibold group text-base px-8 py-6 rounded-xl"
-                >
-                  <span className="inline-flex items-center">
-                    Register Now
-                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </Link>
-              </Button>
-            </div>
-
+            <Button asChild>
+              <Link
+                to="/register"
+                className="btn-glow max-w-90 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold group text-base px-6 sm:px-8 py-5 sm:py-6 rounded-xl w-full sm:w-auto"
+              >
+                Register Now
+                <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
             <Button variant="outline" size="lg" asChild>
               <Link
                 to="/events"
-                className="btn-outline-glow text-base px-8 py-6 rounded-xl border-primary/30 hover:bg-primary/10"
+                className="btn-outline-glow max-w-90 text-base px-6 sm:px-8 py-5 sm:py-6 rounded-xl border-primary/30 hover:bg-primary/10 hover:border-primary/50 font-normal transition-all duration-300 w-full sm:w-auto text-foreground"
               >
                 View Events
               </Link>
             </Button>
           </div>
+
         </div>
       </div>
     </section>
