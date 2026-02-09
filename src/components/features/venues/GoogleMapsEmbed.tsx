@@ -1,13 +1,13 @@
 // src/components/venues/GoogleMapsEmbed.tsx
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Loader2, 
-  ExternalLink, 
-  Navigation, 
-  ChevronDown, 
+import {
+  Loader2,
+  ExternalLink,
+  Navigation,
+  ChevronDown,
   ChevronUp,
-  Maximize2 
+  Maximize2
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -15,7 +15,7 @@ import {
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
 import {
-  CAMPUS_CENTER,
+  CCSIT,
   venueData,
   type VenueData,
   getGoogleMapsViewUrl,
@@ -39,15 +39,13 @@ export function GoogleMapsEmbed({
 
   // Build map URL with venue markers
   const mapUrl = useMemo(() => {
-    const coords = selectedVenue?.coordinates || CAMPUS_CENTER;
+    const coords = selectedVenue?.coordinates || CCSIT;
     const lonOffset = 0.006;
     const latOffset = 0.004;
 
-    return `https://www.openstreetmap.org/export/embed.html?bbox=${
-      coords.lng - lonOffset
-    },${coords.lat - latOffset},${coords.lng + lonOffset},${
-      coords.lat + latOffset
-    }&layer=mapnik&marker=${coords.lat},${coords.lng}`;
+    return `https://www.openstreetmap.org/export/embed.html?bbox=${coords.lng - lonOffset
+      },${coords.lat - latOffset},${coords.lng + lonOffset},${coords.lat + latOffset
+      }&layer=mapnik&marker=${coords.lat},${coords.lng}`;
   }, [selectedVenue]);
 
   const handleOpenInMaps = () => {
@@ -59,7 +57,7 @@ export function GoogleMapsEmbed({
       );
     } else {
       window.open(
-        `https://www.google.com/maps/search/?api=1&query=${CAMPUS_CENTER.lat},${CAMPUS_CENTER.lng}`,
+        `https://www.google.com/maps/search/?api=1&query=${CCSIT.lat},${CCSIT.lng}`,
         '_blank',
         'noopener,noreferrer'
       );

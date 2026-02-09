@@ -1,4 +1,3 @@
-// src/data/venueData.ts
 export interface VenueData {
     id: string;
     name: string;
@@ -11,10 +10,10 @@ export interface VenueData {
     imageUrl?: string;
 }
 
-// Campus center coordinates (fallback/default view)
-export const CAMPUS_CENTER = {
-    lat: 11.1271,
-    lng: 75.8357,
+// CCSIT coordinates (fallback/default view)
+export const CCSIT = {
+    lat: 11.136227083791793,
+    lng: 75.88840349398161
 };
 
 // All venue data
@@ -23,64 +22,64 @@ export const venueData: VenueData[] = [
         id: 'aryabhatta',
         name: 'Aryabhatta Hall',
         shortName: 'ARYABHATTA',
-        directions: 'Near Main Entrance, Ground Floor',
-        coordinates: { lat: 11.0203, lng: 75.9364 },
+        directions: 'Near Computer Science Block',
+        coordinates: { lat: 11.134364112286272, lng: 75.88804732195877 },
         imageUrl: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80'
     },
     {
         id: 'ems',
-        name: 'EMS Hall',
+        name: 'EMS Seminar Hall',
         shortName: 'EMS',
-        directions: 'Near Main Building, 2nd Floor',
-        coordinates: { lat: 11.0205, lng: 75.9366 },
+        directions: 'Main Hall of EMS Seminar Complex',
+        coordinates: { lat: 11.133823216033345, lng: 75.89311231298794 },
         imageUrl: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80'
     },
     {
         id: 'ems-electron',
         name: 'EMS Hall - Electron',
         shortName: 'EMS ELECTRON',
-        directions: 'Near Main Building, 2nd Floor',
-        coordinates: { lat: 11.0207, lng: 75.9368 },
+        directions: 'Left Hall of EMS Seminar Complex',
+        coordinates: { lat: 11.133823216033345, lng: 75.89311231298794 },
         imageUrl: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80'
     },
     {
         id: 'ccsit',
         name: 'CCSIT CU Campus',
         shortName: 'CCSIT',
-        directions: 'Near Main Building, 2nd Floor',
-        coordinates: { lat: 11.0209, lng: 75.9370 },
+        directions: 'Near CH Library',
+        coordinates: { lat: 11.136227083791793, lng: 75.88840349398161 },
         imageUrl: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80'
     },
     {
         id: 'ccsit-lab',
         name: 'CCSIT Computer Lab',
         shortName: 'CCSIT LAB',
-        directions: 'Near Main Building, 2nd Floor',
-        coordinates: { lat: 11.0211, lng: 75.9372 },
+        directions: 'Near CH Library, 2nd Floor',
+        coordinates: { lat: 11.136227083791793, lng: 75.88840349398161 },
         imageUrl: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80'
     },
     {
         id: 'ccsit-seminar',
         name: 'CCSIT Seminar Hall',
         shortName: 'CCSIT SEMINAR',
-        directions: 'Near Main Building, 2nd Floor',
-        coordinates: { lat: 11.0213, lng: 75.9374 },
+        directions: 'Near CH Library, 3rd Floor',
+        coordinates: { lat: 11.136227083791793, lng: 75.88840349398161 },
         imageUrl: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80'
     },
     {
         id: 'trap',
         name: 'Student TRAP',
         shortName: 'STUDENT TRAP',
-        directions: 'Near Main Building, 2nd Floor',
-        coordinates: { lat: 11.0215, lng: 75.9376 },
+        directions: 'Near Calicut University Park',
+        coordinates: { lat: 11.135936892643628, lng: 75.88942328970543 },
         imageUrl: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80'
     },
     {
         id: 'main-stage',
         name: 'Silver Jubilee Auditorium',
-        shortName: 'MAIN STAGE',
-        directions: 'Near Main Entrance, Ground Floor',
-        coordinates: { lat: 11.0217, lng: 75.9378 },
+        shortName: 'Calicut University Open Auditorium',
+        directions: 'Near Student Trap',
+        coordinates: { lat: 11.136752341056354, lng: 75.8891521773991 },
         imageUrl: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80'
     },
     {
@@ -88,7 +87,7 @@ export const venueData: VenueData[] = [
         name: 'Campus Wide',
         shortName: 'CAMPUS',
         directions: 'Throughout the Campus',
-        coordinates: { lat: 11.0219, lng: 75.9380 },
+        coordinates: { lat: 11.136227083791793, lng: 75.88840349398161 },
         imageUrl: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80'
     },
 ]

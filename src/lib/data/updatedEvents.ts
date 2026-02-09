@@ -56,40 +56,77 @@ export const unifiedEvents: UnifiedEvent[] = [
     },
 
     {
+        // Core Identity
         id: "paper-presentation",
         name: "Paper Presentation",
-        fancyName: "TechTalks",
-        tagline: "Present. Impress. Inspire.",
+        fancyName: "Papyrus",
+        tagline: "Where ideas speak louder than words.",
         description:
-            "Participants present technical papers on innovative topics. Judges evaluate based on originality, clarity, and technical depth.",
+            "Papyrus provides a platform for young minds to present innovative ideas, research findings, and technical insights. Participants can showcase their knowledge, communication skills, and creativity before an expert panel.",
         category: "competition",
+
+        // Schedule
         schedule: {
-            day: '1',
-            startTime: "11:00",
-            endTime: "13:00",
-            displayTime: "11:00 AM - 01:00 PM",
+            day: "2",
+            startTime: "14:00",
+            endTime: "15:00",
+            displayTime: "02:00 PM - 03:00 PM",
         },
+
+        // Location
         venue: "aryabhatta",
+
+        // Participation
         teamSize: "solo",
         entryFee: "100",
-        registrationLink: "/register",
-        prizePool: "6,000",
+        spotRegistration: true,
+
+        // Visual
+        imageUrl:
+            "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80",
+
+        // Flags
+        isFeatured: false,
+        isAllDay: false,
+        isMultiPeriod: false,
+
+        // Prizes
+        prizePool: "6000",
         prizes: {
-            first: "3,000",
-            second: "2,000",
-            third: "1,000",
+            first: "3000",
+            second: "2000",
+            third: "1000",
         },
-        imageUrl: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80',
+
+        // Contact
         coordinators: [
-            { name: "Rahul S", phone: "9876501234" },
-            { name: "Megha R", phone: "9895012345" },
+            { name: "Parvathi", phone: "7559829575" },
+            { name: "Anjana", phone: "8606386771" },
         ],
+
+        // Registration
+        registrationLink: "",
+        registrationDeadline: "2026-02-17",
+
+        // Other infos
         rulesAndGuidelines: [
-            "Max 10 slides",
-            "Presentation time: 8 minutes",
-            "Bring PPT in pen drive",
+            "Participants may choose any recent technical topic in the field of Computer Science or Information Technology.",
+            "The paper or abstract must be submitted in PDF format and strictly follow the IEEE format.",
+            "Selected participants must bring one hard copy of the paper for the judges and their presentation slides on a flash drive.",
+            "Each participant will be allotted 15 minutes for the presentation followed by 5 minutes for a Q&A with the judges.",
+            "A projector and laptop will be provided at the venue.",
+            "The decision of the judges will be final and binding.",
         ],
-        whatToBring: ["Laptop", "Presentation file"],
+
+        eligibility: [
+            "Open to undergraduate (UG) and postgraduate (PG) students.",
+        ],
+
+        whatToBring: [
+            "Soft copy of the presentation (PPT) on a flash drive.",
+            "One hard copy of the paper.",
+            "Valid student ID card.",
+        ],
     },
 
     {
@@ -181,24 +218,73 @@ export const unifiedEvents: UnifiedEvent[] = [
 
     {
         id: "debate",
-        name: "Tech Debate",
-        fancyName: "Debate Arena",
-        tagline: "Speak. Argue. Dominate.",
-        description:
-            "Participants debate on trending technology and societal issues. Judged on clarity, argument strength, and confidence.",
+        name: "Debate",
+        fancyName: "ArgueX",
+        tagline: "Speak. Defend. Dominate.",
+        description: "Competitive debating platform that challenges participants to think critically, \
+                     argue logically, and speak persuasively. \
+                     The event promotes healthy discussion on contemporary and thought-provoking topics.",
         category: "competition",
         schedule: {
-            day: '2',
-            startTime: "13:30",
-            endTime: "15:00",
-            displayTime: "01:30 PM - 03:00 PM",
+            day: "2",
+            startTime: "15:00",
+            endTime: "16:00",
+            displayTime: "03:00 PM - 04:00 PM",
         },
+
+        // Location
         venue: "trap",
+
+        // Participation
         teamSize: "solo",
-        entryFee: "50",
-        registrationLink: "/register",
-        prizePool: "2,000",
-        imageUrl: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
+        entryFee: "100",
+        spotRegistration: true,
+
+        // Visual
+        imageUrl:
+            "https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=1200&q=80",
+
+        // Flags
+        isFeatured: false,
+        isAllDay: false,
+        isMultiPeriod: false,
+
+        // Prizes
+        prizePool: "5,000",
+        prizes: {
+            first: "2,000",
+            second: "",
+            third: "",
+        },
+
+        // Contact
+        coordinators: [
+            { name: "Parvathi", phone: "7559829575" },
+            { name: "Anjana", phone: "8606386771" },
+        ],
+
+        // Registration
+        registrationLink: "",
+        registrationDeadline: "2026-02-17",
+
+        // Other infos
+        rulesAndGuidelines: [
+            "Debate topics will be announced on the spot.",
+            "Each participant will be given 3-4 minutes to present their arguments.",
+            "Use of offensive or inappropriate language is strictly prohibited.",
+            "The decision of the judges will be final and binding.",
+            "Participants must strictly adhere to the allotted time limit.",
+        ],
+
+        eligibility: [
+            "Open to undergraduate (UG) and postgraduate (PG) students from all departments.",
+            "Participants must carry a valid student ID card.",
+        ],
+
+        whatToBring: [
+            "Valid student ID card.",
+            "Basic stationery for noting key points (optional).",
+        ],
     },
 
     {
@@ -223,27 +309,84 @@ export const unifiedEvents: UnifiedEvent[] = [
         imageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475",
         spotRegistration: true,
     },
-
     {
+        // Core Identity
         id: "prompt-engineering",
-        fancyName: "AskRight",
         name: "Prompt Engineering",
-        tagline: "Talk to AI like a pro",
+        fancyName: "Python Snippet Prompt Challenge",
+        tagline: "Say it once. Mean it exactly.",
         description:
-            "Participants compete to craft the most effective prompts to solve creative and technical challenges using AI tools.",
+            "In this precision-based challenge, participants are given a Python code snippet and must craft a single prompt that makes ChatGPT generate the exact same code. Even the smallest difference in characters results in failure, testing participants' prompt design skills, attention to detail, and understanding of structured output generation.",
         category: "competition",
+
+        // Schedule
         schedule: {
-            day: '2',
+            day: "2",
             startTime: "15:00",
-            endTime: "17:00",
-            displayTime: "03:00 PM - 05:00 PM",
+            endTime: "16:00",
+            displayTime: "03:00 PM - 04:00 PM",
         },
+
+        // Location
         venue: "ccsit-lab",
+
+        // Participation
         teamSize: "solo",
         entryFee: "100",
-        registrationLink: "/register",
-        prizePool: "3,000",
-        imageUrl: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80',
+        spotRegistration: true,
+
+        // Visual
+        imageUrl:
+            "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200&q=80",
+
+        // Flags
+        isFeatured: false,
+        isAllDay: false,
+        isMultiPeriod: false,
+
+        // Prizes
+        prizePool: "",
+        prizes: {
+            first: "",
+            second: "",
+        },
+
+        // Contact
+        coordinators: [
+            { name: "Hrishinandan P", phone: "8547620138" },
+            { name: "Akhila", phone: "9061251299" },
+            { name: "Navaneeth", phone: "9995499150" },
+        ],
+
+        // Registration
+        registrationLink: "",
+        registrationDeadline: "2026-02-17",
+
+        // Other infos
+        rulesAndGuidelines: [
+            "Individual participation only.",
+            "Participants will be provided with a Python code snippet.",
+            "The objective is to write a single prompt that makes ChatGPT generate the exact same code snippet.",
+            "Total time limit is 10 minutes, including understanding the problem, writing the prompt, and generating the output.",
+            "Only one prompt submission is allowed. Regenerating, editing, continuing, or submitting another prompt will result in immediate disqualification.",
+            "The generated output must exactly match the provided code character-for-character, including indentation and quotation marks.",
+            "If no participant achieves an exact match, evaluation will be based on the highest number of correctly matched lines in the correct order with no extra lines.",
+            "Evaluation is based strictly on textual matching of the output. Program logic, behavior, or correctness will not be considered.",
+            "Logical equivalence, partial matches, or alternative implementations are not accepted.",
+            "The output must contain only Python code. Any additional text such as explanations, headings, markdown formatting, or extra symbols will result in disqualification.",
+            "Participants are evaluated only on the final output; the method used to construct the prompt is not considered.",
+            "Any violation of the rules will result in immediate disqualification.",
+            "The final decision of the organizing committee will be binding.",
+        ],
+
+        eligibility: [
+            "Open to all participants except students of Calicut University.",
+        ],
+
+        whatToBring: [
+            "Notebook and pen (optional).",
+            "Valid ID card.",
+        ],
     },
 
     {

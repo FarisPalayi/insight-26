@@ -45,6 +45,7 @@ export interface ContactPerson {
   role: string;
   phone: string;
   initials: string;
+  img?: string;
 }
 
   
