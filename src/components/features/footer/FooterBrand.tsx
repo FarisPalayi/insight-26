@@ -22,7 +22,7 @@ export const FooterBrand = () => {
       <div className="flex flex-wrap gap-2 mb-6">
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20">
           <Calendar className="w-3.5 h-3.5 text-primary" />
-          <span className="text-xs font-medium text-foreground">Feb 17, 2026</span>
+          <span className="text-xs font-medium text-foreground">Feb 16-17, 2026</span>
         </div>
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/20">
           <MapPin className="w-3.5 h-3.5 text-accent" />
