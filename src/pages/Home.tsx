@@ -7,16 +7,21 @@ import FAQSection from "@/components/features/faq/FAQSection";
 import InsightAbout from "@/components/features/insight-about/InsightAbout";
 import { TimelineOverview } from "@/components/features/schedule-overview/TimelineOverview";
 import { useGSAP, ScrollSmoother } from "@/lib/gsap";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 
 export function Home() {
   /*  GSAP smooth scroll  */
+  const isMobile = useIsMobile();
+
   useGSAP(() => {
-    ScrollSmoother.create({
-      smooth: 1,
-      effects: true,
-      normalizeScroll: true,
-    });
+    if (!isMobile) {
+      ScrollSmoother.create({
+        smooth: 1,
+        effects: true,
+        normalizeScroll: true,
+      });
+    }
   });
 
   return (
