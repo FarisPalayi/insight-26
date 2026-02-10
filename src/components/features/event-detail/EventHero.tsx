@@ -43,9 +43,9 @@ export function EventHero({ event }: EventHeroProps) {
         <div className="relative group overflow-hidden">
           <img
             src={event.imageUrl}
-            className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
+            className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110 hidden lg:block"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-transparent to-transparent lg:block hidden" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-transparent to-transparent lg:block hidden " />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent lg:hidden block" />
 
           {/* Floating Jackpot Badge */}
