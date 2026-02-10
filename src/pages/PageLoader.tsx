@@ -3,11 +3,6 @@ import { motion } from 'framer-motion';
 export default function PageLoader() {
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background">
-      {/* Background effects */}
-      <div className="absolute inset-0 grid-pattern opacity-20" />
-      <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-primary/10 rounded-full blur-[128px]" />
-      <div className="absolute bottom-1/3 right-1/3 w-96 h-96 bg-accent/10 rounded-full blur-[128px]" />
-
       <div className="relative flex flex-col items-center gap-8">
         {/* Circuit Node Loader */}
         <div className="relative w-20 h-20">
@@ -65,24 +60,6 @@ export default function PageLoader() {
           <span className="text-sm font-mono tracking-[0.3em] text-primary/80 uppercase">
             Insight'26
           </span>
-          {/* Animated loading bar */}
-          <div className="w-32 h-0.5 rounded-full bg-muted overflow-hidden">
-            <motion.div
-              className="h-full rounded-full"
-              style={{
-                background: 'linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--primary)))',
-                backgroundSize: '200% 100%',
-              }}
-              animate={{
-                x: ['-100%', '100%'],
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-            />
-          </div>
         </motion.div>
       </div>
     </div>
