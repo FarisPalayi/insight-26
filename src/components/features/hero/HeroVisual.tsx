@@ -48,17 +48,32 @@ export const HeroVisual = () => {
       ref={visualRef}
       className="absolute inset-0 overflow-hidden z-0"
     >
-      {/* Background image layer */}
+      {/* Background video layer */}
       <div
         ref={bgRef}
         className="absolute inset-0 will-change-transform"
-        style={{
-          backgroundImage: 'url("/hero-tech-bg.jpg")',
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          opacity: 0.28,
-        }}
-      />
+        style={{ opacity: 0.38 }}
+      >
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="videos/173243-848944201.mp4" type="video/mp4" />
+          <source src="/hero-tech-bg.webm" type="video/webm" />
+          {/* Fallback for browsers that don't support video */}
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: 'url("/hero-tech-bg.jpg")',
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+        </video>
+      </div>
 
       {/* Atmospheric glow */}
       <div
@@ -73,13 +88,6 @@ export const HeroVisual = () => {
       />
 
       {/* Darkening overlays (static = premium) */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(180deg, transparent 0%, hsl(240 15% 3%) 100%)",
-        }}
-      />
 
       <div
         className="absolute inset-0"

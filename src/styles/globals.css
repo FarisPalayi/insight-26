@@ -14,7 +14,7 @@
     --color-popover: hsl(240 15% 5%);
     --color-popover-foreground: hsl(0 0% 98%);
 
-    --color-primary: hsl(160 100% 45%);
+    --color-primary: cyan;
     --color-primary-foreground: hsl(240 15% 3%);
 
     --color-secondary: hsl(240 12% 10%);
@@ -84,7 +84,7 @@
     }
 
     ::selection {
-      background-color: hsla(162, 100%, 66%, 0.457);
+      background-color: hsla(189, 100%, 66%, 0.457);
       color: var(--color-foreground);
     }
 
@@ -103,7 +103,7 @@
 
     /* Thumb — visible base */
     ::-webkit-scrollbar-thumb {
-      background: hsl(156, 97%, 44%);
+      background: cyan;
       border-radius: 30px;
       background-clip: padding-box;
       border: 2px solid transparent;
@@ -117,7 +117,7 @@
     /* hover — strongest visibility */
     ::-webkit-scrollbar-thumb:hover {
       border: 2px solid transparent;
-      background: hsl(160deg 98.41% 32.75%);
+      background: cyan;
     }
 
     /* active/ dragging — subtle premium glow */
@@ -130,7 +130,7 @@
     }
 
     :root {
-      scrollbar-color: hsl(156, 97%, 44%) transparent;
+      scrollbar-color: cyan transparent;
       scrollbar-width: thin;
     }
   }
