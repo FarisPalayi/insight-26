@@ -61,7 +61,7 @@ export const HeroVisual = () => {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="videos/121885-724720140.mp4" type="video/mp4" />
+          <source src="videos/188743-883619745.mp4" type="video/mp4" />
           <source src="/hero-tech-bg.webm" type="video/webm" />
           {/* Fallback for browsers that don't support video */}
           <div
