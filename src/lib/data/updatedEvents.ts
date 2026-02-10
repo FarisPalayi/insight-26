@@ -30,30 +30,6 @@ export const unifiedEvents: UnifiedEvent[] = [
         isMultiPeriod: true,
         whatToBring: ["Laptop", "Chargers", "Extension board", "Ideas"],
     },
-    {
-        id: "seminar-1",
-        name: "Expert Talk: Future of AI",
-        fancyName: "AI Unveiled",
-        tagline: "Where intelligence meets imagination",
-        description:
-            "A keynote seminar exploring modern AI, industry trends, and research opportunities. Ideal for students interested in machine learning, automation, and future technologies.",
-        category: "seminar",
-        schedule: {
-            day: '1',
-            startTime: "10:00",
-            endTime: "11:00",
-            displayTime: "10:00 AM - 11:00 AM",
-        },
-        venue: "aryabhatta",
-        teamSize: "solo",
-        entryFee: "Free",
-        registrationLink: "/register",
-        imageUrl: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952',
-        isFeatured: true,
-        coordinators: [
-            { name: "Dr. Anil Kumar", phone: "9876543210" },
-        ],
-    },
 
     {
         // Core Identity
@@ -127,28 +103,6 @@ export const unifiedEvents: UnifiedEvent[] = [
             "One hard copy of the paper.",
             "Valid student ID card.",
         ],
-    },
-
-    {
-        id: "seminar-2",
-        name: "Tech Seminar",
-        fancyName: "InnovateX",
-        tagline: "Innovation & Startups Unplugged",
-        description:
-            "An interactive session discussing innovation, startups, and emerging technology ecosystems.",
-        category: "seminar",
-        schedule: {
-            day: '1',
-            startTime: "14:00",
-            endTime: "15:00",
-            displayTime: "02:00 PM - 03:00 PM",
-        },
-        venue: "aryabhatta",
-        teamSize: "solo",
-        entryFee: "Free",
-        registrationLink: "/register",
-        imageUrl: 'https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&q=80',
-
     },
 
     {
