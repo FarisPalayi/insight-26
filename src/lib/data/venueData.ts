@@ -32,7 +32,7 @@ export const venueData: VenueData[] = [
         shortName: 'EMS',
         directions: 'Main Hall of EMS Seminar Complex',
         coordinates: { lat: 11.133823216033345, lng: 75.89311231298794 },
-        imageUrl: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80'
+        imageUrl: '/venues/ems.jpeg'
     },
     {
         id: 'ems-electron',
