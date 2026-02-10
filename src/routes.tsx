@@ -9,6 +9,7 @@ import RootLayout from "./pages/Layout";
 import { Schedule } from "./pages/Schedule";
 import { Updates } from "./pages/Updates";
 import { VenuesPage } from "./pages/Venues";
+import PageLoader from "./pages/PageLoader";
 
 export const router = createBrowserRouter([
   {
@@ -19,7 +20,7 @@ export const router = createBrowserRouter([
       return { updates };
     },
     errorElement: <NotFound />,
-    hydrateFallbackElement: <div></div>,
+    hydrateFallbackElement: <PageLoader />,
     children: [
       { index: true, element: <Home /> },
       {
