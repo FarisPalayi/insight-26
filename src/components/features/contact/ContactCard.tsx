@@ -30,14 +30,14 @@ export const ContactCard = ({ person }: ContactCardProps) => {
       <div className="flex gap-2 flex-shrink-0">
         <button
           onClick={() => handleCall(person.phone)}
-          className="p-2.5 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary transition-colors duration-200"
+          className="p-2.5 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary transition-colors duration-200 cursor-pointer"
           aria-label={`Call ${person.name}`} // Fixed syntax
         >
           <Phone className="w-4 h-4" />
         </button>
         <button
           onClick={() => handleWhatsApp(person.phone)}
-          className="p-2.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 transition-colors duration-200"
+          className="p-2.5 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary transition-colors duration-200 cursor-pointer"
           aria-label={`WhatsApp ${person.name}`} // Fixed syntax
         >
           <MessageCircle className="w-4 h-4" />

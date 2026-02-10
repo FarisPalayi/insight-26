@@ -31,7 +31,7 @@
 
     --color-border: hsl(240 12% 14%);
     --color-input: hsl(240 12% 14%);
-    --color-ring: hsl(160 100% 45%);
+    --color-ring: cyan;
 
     --color-glow-primary: hsl(160 100% 45%);
     --color-glow-accent: hsl(280 100% 60%);
