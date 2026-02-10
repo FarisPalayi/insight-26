@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Clock, MapPin, Timer, AlertTriangle } from 'lucide-react';
-import { type UnifiedEvent } from '@/lib/data/unifiedEvents';
+import { getVenueName, type UnifiedEvent } from '@/lib/data/unifiedEvents';
 import { cn } from '@/lib/utils';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -92,14 +92,6 @@ function getEventName(event: UnifiedEvent | null | undefined): string {
 }
 
 /**
- * Safely gets event venue with fallback
- */
-function getEventVenue(event: UnifiedEvent | null | undefined): string {
-  if (!event) return 'CCSIT CU Campus';
-  return event.venue || 'CCSIT CU Campus';
-}
-
-/**
  * Safely gets event display time with fallback
  */
 function getEventTime(event: UnifiedEvent | null | undefined): string {
@@ -158,7 +150,7 @@ export function ScheduleEventCard({ event, index = 0, onClick }: EventCardProps)
   // Get safe values
   const eventId = getEventId(event);
   const eventName = getEventName(event);
-  const eventVenue = getEventVenue(event);
+  const eventVenue = getVenueName(event.venue);
   const eventTime = getEventTime(event);
   const style = getCategoryStyle(event.category);
 

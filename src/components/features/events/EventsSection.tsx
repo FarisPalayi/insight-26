@@ -9,6 +9,7 @@ import {
   getActiveCategories,
   categoryLabels,
   type UnifiedEvent,
+  getVenueName,
 } from "@/lib/data/unifiedEvents";
 import { EventsSectionHeader } from "@/components/features/events/EventsSectionHeader";
 import { FeaturedEventsCarousel } from "./FeaturedEventCarousal";
@@ -37,7 +38,7 @@ export function EventsSection({ events = [] }: EventsSectionProps) {
       const query = debouncedSearch.toLowerCase().trim();
       const searchMatch = !query || 
         e.name.toLowerCase().includes(query) || 
-        (e.venue?.toLowerCase() ?? "").includes(query) ||
+        (getVenueName(e.venue)?.toLowerCase() ?? "").includes(query) ||
         (e.description?.toLowerCase() ?? "").includes(query);
 
       return categoryMatch && searchMatch;
