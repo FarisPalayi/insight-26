@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { MapPin } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { getEventsByDay } from '@/lib/data/unifiedEvents';
+import { getEventsByDay, getVenueName } from '@/lib/data/unifiedEvents';
 import { Link } from 'react-router';
 import { unifiedEvents } from '@/lib/data/updatedEvents';
 
@@ -116,7 +116,7 @@ function EventList({ day }: { day: '1' | '2' }) {
           >
             {/* Content Side */}
             <div className={cn(
-              "w-full md:w-[45%] pl-12 md:pl-0", // Mobile: Padding-left for the line | Desktop: 0
+              "w-full md:w-[45%] pl-12 md:pl-0 text-left", // Mobile: Padding-left for the line | Desktop: 0
               isEven ? "md:text-right md:pr-12" : "md:text-left md:pl-12"
             )}>
               <div className={cn(
@@ -135,7 +135,7 @@ function EventList({ day }: { day: '1' | '2' }) {
                 isEven ? "md:justify-end" : "md:justify-start"
               )}>
                 <MapPin className="w-3.5 h-3.5 text-primary/50" />
-                {event.venue}
+                {getVenueName(event.venue)}
               </div>
             </div>
 
