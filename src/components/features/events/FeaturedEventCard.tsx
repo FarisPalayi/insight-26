@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Clock, MapPin, Users, ArrowRight, Cpu } from 'lucide-react';
+import { Clock, Users, ArrowRight, Cpu } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router';
-import { getVenueName, type UnifiedEvent } from '@/lib/data/unifiedEvents';
+import { type UnifiedEvent } from '@/lib/data/unifiedEvents';
 
 interface FeaturedEventCardProps {
   event: UnifiedEvent;
@@ -101,7 +101,6 @@ export function FeaturedEventCard({ event, index = 0 }: FeaturedEventCardProps) 
             {/* METADATA GRID - Premium Stats */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
               <StatItem icon={Clock} label="Time" value={event.schedule?.displayTime?.split(' - ')[0] || "10:00 AM"} />
-              <StatItem icon={MapPin} label="Venue" value={getVenueName(event.venue) || "CCSIT"} />
               <StatItem icon={Users} label="Team Size" value={event.teamSize || "Team of 5"} />
             </div>
 
