@@ -13,23 +13,22 @@ interface FeaturedEventsCarouselProps {
 
 export function FeaturedEventsCarousel({ events }: FeaturedEventsCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel(
-    {
-      loop: true,
-      align: 'center',
-      skipSnaps: false,
-      dragFree: false,
-      duration: 40, // 🎯 Slower, smoother animation (default: 25, higher = smoother)
-      inViewThreshold: 0, // Better slide tracking
-    },
-    [
-      Autoplay({
-        delay: 4000,
-        stopOnInteraction: false,
-        stopOnMouseEnter: true,
-        stopOnFocusIn: true,
-      })
-    ]
-  );
+  {
+    loop: true,
+    align: 'center',
+    skipSnaps: false,
+    dragFree: false,
+    duration: 25,          // default physics (smoothest)
+    containScroll: 'trimSnaps',
+  },
+  [
+    Autoplay({
+      delay: 3500,
+      stopOnInteraction: false,
+      stopOnMouseEnter: true,
+    })
+  ]
+);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [slidesInView, setSlidesInView] = useState<number[]>([]);

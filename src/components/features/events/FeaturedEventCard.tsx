@@ -27,33 +27,43 @@ export function FeaturedEventCard({ event, index = 0 }: FeaturedEventCardProps) 
       <div className="absolute -inset-[2px] bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 rounded-[28px] blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-700" />
 
       <div className="relative py-0 overflow-hidden glass-surface-strong border-white/10 group-hover:border-white/20 transition-all duration-500 rounded-[26px] shadow-2xl">
-        <div className="flex flex-col lg:flex-row lg:min-h-[400px]">
+        <div className="flex flex-col lg:flex-row lg:h-[420px]">
 
           {/* VISUAL ANCHOR - Image Section */}
-          <div className="relative w-full h-64 sm:h-80 lg:h-auto lg:w-[45%] overflow-hidden bg-black/40">
-            {!imageLoaded && <Skeleton className="absolute inset-0 bg-white/5" />}
-            <img
-              src={event.imageUrl}
-              alt={event.name}
-              onLoad={() => setImageLoaded(true)}
-              className={cn(
-                "h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105",
-                !imageLoaded && "opacity-0"
+          <div className="relative w-full lg:w-[45%] overflow-hidden bg-black/40">
+
+            {/* Fixed aspect ratio container */}
+            <div className="relative w-full aspect-[16/10] lg:h-full">
+
+              {!imageLoaded && (
+                <Skeleton className="absolute inset-0 bg-white/5" />
               )}
-            />
 
-            {/* Universal Dark Gradient - Works with Any Image Color */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-black/40 to-transparent lg:bg-gradient-to-r lg:from-[#050505] lg:via-black/50 lg:to-transparent" />
+              <img
+                src={event.imageUrl}
+                alt={event.name}
+                loading="lazy"
+                decoding="async"
+                onLoad={() => setImageLoaded(true)}
+                className={cn(
+                  "absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105",
+                  !imageLoaded && "opacity-0"
+                )}
+              />
 
-            {/* Subtle Grid Pattern */}
-            <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none">
-              <div className="grid-lines" />
-            </div>
+              {/* Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-black/40 to-transparent lg:bg-gradient-to-r lg:from-[#050505] lg:via-black/50 lg:to-transparent" />
 
-            {/* Premium Badges */}
-            <div className="absolute top-4 left-4 flex gap-2">
-              <div className="px-3 py-1.5 bg-black/40 backdrop-blur-xl border border-white/20 text-white text-[10px] font-mono uppercase tracking-wider rounded-full font-bold">
-                {event.category}
+              {/* Grid overlay */}
+              <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none">
+                <div className="grid-lines" />
+              </div>
+
+              {/* Badge */}
+              <div className="absolute top-4 left-4 flex gap-2">
+                <div className="px-3 py-1.5 bg-black/40 backdrop-blur-xl border border-white/20 text-white text-[10px] font-mono uppercase tracking-wider rounded-full font-bold">
+                  {event.category}
+                </div>
               </div>
             </div>
           </div>
