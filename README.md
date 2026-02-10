@@ -80,20 +80,23 @@ export default defineConfig([
 - [x] add actual map links
 - [x] add venue link and page 
 
-- [] meta tags
-- [] update social media links(in the footer and stuff)
-- [] add venue photos
-- [] add registration
-- [] loading page
+- [x] add registration
 - [] add brochure link
 - [] sponsor db connect
+- [] add venue photos
 - [] event cards showing venueId instead of venue full name
+- [] add both days
+- [] home page events can't be changed
+- [] schedule page showing already shown page more than once
+- [] day 2 mentioned should be in date
+- [] remove gsap dependencies (unused)
+
+- [] laggy carousal. check if chunk splitting is working
+- [] update social media links(in the footer and stuff)
+- [] meta tags
+- [] loading page
 - [] event card and page redesign
 - [] hero section problems
 - [] reload bar not showing in mobile
 - [] event page images are bandwidth heavy and large
-- [] loading page
 - [] host fonts
-- [] home page events can't be changed
-- [] schedule page showing already shown page more than once
-- [] laggy carousal. check if chunk splitting is working
