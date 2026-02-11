@@ -56,12 +56,12 @@ export function TimelineOverview({ className }: { className?: string }) {
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  className="relative flex justify-center mb-12 md:mb-20"
+                  className="relative flex md:justify-center mb-12 md:mb-20"
                 >
                   <div className="relative z-30">
                     <div className="glass-surface-strong border border-white/20 rounded-full px-6 md:px-10 py-3 md:py-4 shadow-2xl">
-                      <h3 className="text-xl md:text-3xl font-bold font-sans tracking-tight">
-                        D<span className="text-gradient">ay 1</span>
+                      <h3 className="text-xl md:text-3xl font-semibold font-sans tracking-tight">
+                        Day 1
                       </h3>
                     </div>
                   </div>
@@ -75,12 +75,12 @@ export function TimelineOverview({ className }: { className?: string }) {
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  className="relative flex justify-center mb-12 md:mb-20"
+                  className="relative flex md:justify-center mb-12 md:mb-20"
                 >
                   <div className="relative z-30">
                     <div className="glass-surface-strong border border-white/20 rounded-full px-6 md:px-10 py-3 md:py-4 shadow-2xl">
-                      <h3 className="text-xl md:text-3xl font-bold font-sans tracking-tight">
-                        D<span className="text-gradient">ay 2</span>
+                      <h3 className="text-xl md:text-3xl font-semibold font-sans tracking-tight">
+                        Day 1
                       </h3>
                     </div>
                   </div>
