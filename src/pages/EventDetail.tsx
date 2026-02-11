@@ -5,6 +5,7 @@ import { CoordinatorFooter, LogisticsGrid, EventHero, EventAccordion, PrizeModul
 import { StickyMobileCTA } from '@/components/features/event-detail/StickyMobileCTA';
 import { type UnifiedEvent } from '@/lib/data/unifiedEvents';
 import { Button } from '@/components/ui/button';
+import { SpotRegistrationBadge } from '@/components/features/event-detail/SpotRegistrationBadge';
 
 export function EventDetail() {
   const event = useLoaderData() as UnifiedEvent;
@@ -38,6 +39,7 @@ export function EventDetail() {
           {/* Sidebar */}
           <aside className="lg:col-span-4 space-y-8 sticky top-28 h-fit">
             <PrizeModule event={event} />
+            <SpotRegistrationBadge event={event} />
             {/* Added a secondary CTA in sidebar for desktop */}
             <div className="hidden lg:block glass-surface p-6 rounded-2xl border-primary/20 bg-primary/5">
               <p className="text-sm text-muted-foreground mb-4 font-mono uppercase tracking-widest">Status: Registration Open</p>
