@@ -1,33 +1,38 @@
-// src/components/venues/VenueCard.tsx
+import { memo, useCallback, useState } from 'react';
 import { MapPin, Navigation, Calendar } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { type VenueData, getGoogleMapsDirectionsUrl } from '@/lib/data/venueData';
-import type { UnifiedEvent } from '@/lib/data/unifiedEvents';
 import { cn } from '@/lib/utils';
 
 interface VenueCardProps {
   venue: VenueData;
-  events: UnifiedEvent[];
+  eventCount: number;
   isSelected: boolean;
   onClick: () => void;
 }
 
-export function VenueCard({
+export const VenueCard = memo(function VenueCard({
   venue,
-  events,
+  eventCount,
   isSelected,
   onClick,
 }: VenueCardProps) {
-  const handleDirectionsClick = (e: React.MouseEvent) => {
+  const [imageError, setImageError] = useState(false);
+
+  const handleDirectionsClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
     window.open(
       getGoogleMapsDirectionsUrl(venue),
       '_blank',
       'noopener,noreferrer'
     );
-  };
+  }, [venue]);
+
+  const handleImageError = useCallback(() => {
+    setImageError(true);
+  }, []);
 
   return (
     <Card
@@ -40,14 +45,13 @@ export function VenueCard({
       <CardContent className="p-3 flex gap-3 items-center">
         {/* Thumbnail */}
         <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden shrink-0 bg-muted">
-          {venue.imageUrl ? (
+          {venue.imageUrl && !imageError ? (
             <img
               src={venue.imageUrl}
               alt={venue.name}
               className="w-full h-full object-cover"
-              onError={(e) => {
-                e.currentTarget.style.display = 'none';
-              }}
+              onError={handleImageError}
+              loading="lazy"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
@@ -62,13 +66,13 @@ export function VenueCard({
             <h3 className="font-semibold text-sm sm:text-base truncate text-foreground">
               {venue.name}
             </h3>
-            {events.length > 0 && (
+            {eventCount > 0 && (
               <Badge
                 variant="secondary"
                 className="text-[10px] px-1.5 py-0 shrink-0 gap-1"
               >
                 <Calendar className="w-2.5 h-2.5" />
-                {events.length}
+                {eventCount}
               </Badge>
             )}
           </div>
@@ -92,4 +96,4 @@ export function VenueCard({
       </CardContent>
     </Card>
   );
-}
+});

@@ -1,17 +1,17 @@
+import { memo } from 'react';
 import { VenueCard } from './VenueCard';
 import { AlertCircle } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { type VenueData } from '@/lib/data/venueData';
-import type { UnifiedEvent } from '@/lib/data/unifiedEvents';
 
 interface VenueListProps {
   venues: VenueData[];
   selectedVenueId: string | null;
-  eventsByVenue: Map<string, UnifiedEvent[]>;
+  eventsByVenue: Map<string, number>;
   onVenueSelect: (venueId: string) => void;
 }
 
-export function VenueList({
+export const VenueList = memo(function VenueList({
   venues,
   selectedVenueId,
   eventsByVenue,
@@ -31,19 +31,15 @@ export function VenueList({
 
   return (
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {venues.map((venue) => {
-        const venueEvents = eventsByVenue.get(venue.id) || [];
-
-        return (
-          <VenueCard
-            key={venue.id}
-            venue={venue}
-            events={venueEvents}
-            isSelected={venue.id === selectedVenueId}
-            onClick={() => onVenueSelect(venue.id)}
-          />
-        );
-      })}
+      {venues.map((venue) => (
+        <VenueCard
+          key={venue.id}
+          venue={venue}
+          eventCount={eventsByVenue.get(venue.id) || 0}
+          isSelected={venue.id === selectedVenueId}
+          onClick={() => onVenueSelect(venue.id)}
+        />
+      ))}
     </div>
   );
-}
+});
