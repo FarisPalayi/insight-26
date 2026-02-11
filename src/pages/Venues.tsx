@@ -72,6 +72,11 @@ export function VenuesPage() {
         [selectedVenueId, eventsByVenue]
     );
 
+    // Handler to close the venue bottom sheet
+    const handleCloseVenueSheet = () => {
+        setSelectedVenueId(null);
+    };
+
     // ============================================
     // RENDER
     // ============================================
@@ -143,6 +148,7 @@ export function VenuesPage() {
                 <VenueBottomSheet
                     venue={selectedVenue}
                     events={selectedVenueEvents}
+                    onClose={handleCloseVenueSheet}
                 />
             </main>
 
