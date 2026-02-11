@@ -198,31 +198,6 @@ export function GoogleMapsEmbed({
             </motion.div>
           )}
         </AnimatePresence>
-
-        {/* Hint when no venue selected */}
-        <AnimatePresence>
-          {!selectedVenue && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className={cn(
-                'absolute z-30',
-                // Mobile: adjust based on expanded state
-                !isExpanded && 'bottom-16 left-3 right-3',
-                isExpanded && 'bottom-3 left-3 right-3',
-                // Desktop: always bottom-right
-                'lg:bottom-3 lg:left-auto lg:right-3 lg:max-w-sm'
-              )}
-            >
-              <div className="bg-card/80 backdrop-blur-sm rounded-lg px-3 py-2 text-center border">
-                <p className="text-xs text-muted-foreground">
-                  Tap a venue above or below to see it on the map
-                </p>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
 
       {/* Quick Actions Bar - Shows when collapsed on mobile */}
