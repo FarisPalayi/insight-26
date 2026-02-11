@@ -1,9 +1,35 @@
 import { useRef } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
 
 export const HeroBadge = () => {
   const badgeRef = useRef<HTMLDivElement | null>(null);
 
+  useGSAP(
+    () => {
+      const badge = badgeRef.current!;
 
+      // 1. Capture the badge's natural position
+      const initialY = badge.getBoundingClientRect().top + window.scrollY;
+
+      // 2. Force GSAP to treat this as the baseline
+      gsap.set(badge, { y: 0 });
+
+      // 3. Scroll animation RELATIVE to layout position
+      gsap.to(badge, {
+        y: -14,
+        scale: 0.94,
+        opacity: 0.65,
+        ease: "none",
+        scrollTrigger: {
+          trigger: badge,
+          start: () => `top+=${initialY * 0.15} top`,
+          end: () => `top+=${initialY * 0.35} top`,
+          scrub: true,
+        },
+      });
+    },
+    { scope: badgeRef }
+  );
 
   return (
     <div

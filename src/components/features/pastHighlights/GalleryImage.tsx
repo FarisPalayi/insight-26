@@ -1,4 +1,6 @@
+import { gsap } from "@/lib/gsap";
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 
 interface GalleryImageProps {
   src: string;
@@ -8,10 +10,43 @@ interface GalleryImageProps {
 }
 
 export const GalleryImage = ({ src, alt, caption, index }: GalleryImageProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+  const gradientRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    if (!containerRef.current || !imageRef.current || !gradientRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // Vary parallax intensity based on index for visual interest
+      const intensity = 15 + (index % 3) * 10; // 15px, 25px, or 35px movement
+
+      // Apply parallax to both image AND gradient to prevent rendering gaps
+      gsap.fromTo(
+        [imageRef.current, gradientRef.current],
+        {
+          y: -intensity,
+        },
+        {
+          y: intensity,
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.5,
+            invalidateOnRefresh: true,
+          },
+        }
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [index]);
 
   return (
     <motion.div
+      ref={containerRef}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -21,6 +56,7 @@ export const GalleryImage = ({ src, alt, caption, index }: GalleryImageProps) =>
       {/* Image wrapper with extra height for parallax movement */}
       <div className="absolute inset-0 -top-8 -bottom-8">
         <img
+          ref={imageRef}
           src={src}
           alt={alt}
           loading="lazy"
@@ -30,6 +66,7 @@ export const GalleryImage = ({ src, alt, caption, index }: GalleryImageProps) =>
 
       {/* Gradient overlay - positioned inside parallax wrapper to move with image */}
       <div 
+        ref={gradientRef}
         className="absolute inset-0 -top-8 -bottom-8 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" 
       />
 

@@ -1,9 +1,47 @@
 import { useRef } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
 
 export const HeroVisual = () => {
   const visualRef = useRef<HTMLDivElement | null>(null);
   const bgRef = useRef<HTMLDivElement | null>(null);
   const glowRef = useRef<HTMLDivElement | null>(null);
+
+  useGSAP(
+    () => {
+      const bg = bgRef.current!;
+      const glow = glowRef.current!;
+
+      // Initial states (important: no animation yet)
+      gsap.set(bg, { scale: 1.08, y: 0 });
+      gsap.set(glow, { y: 0 });
+
+      // Scroll-driven camera drift
+      gsap.to(bg, {
+        y: -60,
+        scale: 1.12,
+        ease: "none",
+        scrollTrigger: {
+          trigger: visualRef.current,
+          start: "top top+=80",   // dead zone
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      // Glow drifts slower for depth
+      gsap.to(glow, {
+        y: -30,
+        ease: "none",
+        scrollTrigger: {
+          trigger: visualRef.current,
+          start: "top top+=80",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    },
+    { scope: visualRef }
+  );
 
   return (
     <div
@@ -26,7 +64,7 @@ export const HeroVisual = () => {
           className="absolute inset-0 w-full h-full object-cover"
         >
           <source src="/videos/hero_video.webm" type="video/webm" />
-          <source src="/videos/hero_video_optimized.mp4" type="video/mp4" />
+          <source src="/videos/hero_video.mp4" type="video/mp4" />
         </video>
       </div>
 
