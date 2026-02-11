@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import { gsap, useGSAP } from "@/lib/gsap";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CountdownTimer } from "./CountdownTimer";
@@ -11,70 +10,9 @@ import { HeroTitle } from "./HeroTitle";
 import { HeroVisual } from "./HeroVisual";
 import { Link } from "react-router";
 import { LocationMeta, DateMeta } from "./MetaItem";
-import { useIsMobile } from "@/hooks/useIsMobile";
 
 export const HeroSection = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
-  const isMobile = useIsMobile();
-
-  /* --------------------------------
-     HERO ORCHESTRATION + SCROLL LOGIC
-  ---------------------------------*/
-  useGSAP(
-    () => {
-      const content = sectionRef.current!.querySelector(
-        ".hero-content"
-      ) as HTMLElement;
-      const meta = sectionRef.current!.querySelector(
-        ".hero-meta"
-      ) as HTMLElement;
-      const cta = sectionRef.current!.querySelector(
-        ".hero-cta"
-      ) as HTMLElement;
-
-      // Entrance choreography
-      const tl = gsap.timeline({ delay: 0.15 });
-
-      tl.from(content, {
-        opacity: 0,
-        duration: 0.9,
-        ease: "power3.out",
-      })
-        .from(
-          meta,
-          {
-            opacity: 0,
-            duration: 0.6,
-            ease: "power2.out",
-          },
-          "-=0.4"
-        )
-        .from(
-          cta,
-          {
-            opacity: 0,
-            duration: 0.6,
-            ease: "power2.out",
-          },
-          "-=0.3"
-        );
-
-      if (!isMobile) {
-        // Scroll-based compression 
-        gsap.to(content, {
-          scale: 0.96,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-      }
-    },
-    { scope: sectionRef }
-  );
 
   return (
     <section

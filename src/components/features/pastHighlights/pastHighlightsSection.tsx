@@ -1,7 +1,5 @@
-import { gsap } from "@/lib/gsap";
 import { motion } from "framer-motion";
 import { Users, Building2, Trophy } from "lucide-react";
-import { useEffect, useRef } from "react";
 import { GalleryImage } from "./GalleryImage";
 import { StatCard } from "./StatsCard";
 
@@ -35,39 +33,6 @@ const galleryImages = [
 ];
 
 const PastEditionHighlights = () => {
-  const heroContainerRef = useRef<HTMLDivElement>(null);
-  const heroImageRef = useRef<HTMLImageElement>(null);
-  const heroGradientRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!heroContainerRef.current || !heroImageRef.current || !heroGradientRef.current) return;
-
-    const ctx = gsap.context(() => {
-      // Apply parallax to both image and gradient
-      gsap.fromTo(
-        [heroImageRef.current, heroGradientRef.current],
-        {
-          y: -40,
-          scale: 1.1,
-        },
-        {
-          y: 40,
-          scale: 1.1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: heroContainerRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1.5,
-            invalidateOnRefresh: true,
-          },
-        }
-      );
-    }, heroContainerRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <section id="highlights" className="relative pt-24 md:pt-32 lg:pt-40 overflow-hidden">
       {/* Background accents */}
@@ -93,7 +58,6 @@ const PastEditionHighlights = () => {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
             {/* Main Hero Image - Takes 3 columns on large screens */}
             <motion.div
-              ref={heroContainerRef}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -103,7 +67,6 @@ const PastEditionHighlights = () => {
               {/* Image wrapper with extra height for parallax */}
               <div className="absolute inset-0 -top-12 -bottom-12">
                 <img
-                  ref={heroImageRef}
                   src="/gallery/inauguration-sm.jpg"
                   alt="Insight'25 main event crowd"
                   loading="lazy"
@@ -113,7 +76,6 @@ const PastEditionHighlights = () => {
 
               {/* Gradient overlay from bottom - moves with image */}
               <div 
-                ref={heroGradientRef}
                 className="absolute inset-0 -top-12 -bottom-12 bg-gradient-to-t from-background via-background/40 to-transparent pointer-events-none" 
               />
 

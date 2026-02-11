@@ -1,70 +1,7 @@
 import { useRef } from "react";
-import { gsap, useGSAP } from "@/lib/gsap";
 
 export const HeroTitle = () => {
   const titleRef = useRef<HTMLDivElement | null>(null);
-
-  useGSAP(
-    () => {
-      const insight = titleRef.current!.querySelector(
-        ".title-insight"
-      ) as HTMLElement;
-      const year = titleRef.current!.querySelector(
-        ".title-year"
-      ) as HTMLElement;
-      const underline = titleRef.current!.querySelector(
-        ".title-underline"
-      ) as HTMLElement;
-
-      /* -----------------------------
-         MODERN ENTRANCE: SHARPEN & SETTLE
-      ------------------------------*/
-      const tl = gsap.timeline({ delay: 0.18 });
-
-      tl.from(insight, {
-        opacity: 0,
-        y: 18,
-        duration: 0.7,
-        ease: "power2.out",
-      })
-        .from(
-          year,
-          {
-            opacity: 0,
-            y: 14,
-            duration: 0.55,
-            ease: "power2.out",
-          },
-          "-=0.35"
-        )
-        .from(
-          underline,
-          {
-            scaleX: 0.85,
-            opacity: 0,
-            duration: 0.5,
-            ease: "power2.out",
-          },
-          "-=0.3"
-        );
-
-      /* -----------------------------
-         SCROLL-BASED COMPRESSION 
-      ------------------------------*/
-      gsap.to(titleRef.current, {
-        scale: 0.94,
-        y: -24,
-        ease: "none",
-        scrollTrigger: {
-          trigger: titleRef.current,
-          start: "top 45%",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-    },
-    { scope: titleRef }
-  );
 
   return (
     <div
