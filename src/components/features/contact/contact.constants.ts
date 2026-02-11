@@ -15,10 +15,10 @@ export const CONTACTS: ContactPerson[] = [
     initials: "AK",
   },
   {
-    name: "Muhammed Faris P",
-    role: "Technical Lead",
-    phone: "9072402532",
-    initials: "MF",
+    name: "Rahul V",
+    role: "Finance",
+    phone: "7909226491",
+    initials: "RV",
   },
 ];
 
