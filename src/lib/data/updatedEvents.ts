@@ -3,7 +3,7 @@ import { type UnifiedEvent } from "./unifiedEvents";
 export const unifiedEvents: UnifiedEvent[] = [
     {
         // Core Identity
-        id: "technova-8-2026",
+        id: "technova",
         name: "Technova 8.0",
         fancyName: "Technova 8.0",
         tagline: "Build. Break. Innovate.",
@@ -53,7 +53,7 @@ export const unifiedEvents: UnifiedEvent[] = [
         ],
 
         // Registration
-        registrationLink: "/register",
+        registrationLink: "https://tiqr.events/e/Technova-8.0-1792",
         registrationDeadline: "2026-02-17",
 
         // Other infos
@@ -140,7 +140,7 @@ export const unifiedEvents: UnifiedEvent[] = [
         ],
 
         // Registration
-        registrationLink: "",
+        registrationLink: "https://tiqr.events/e/PAPER-PRESENTATION-(Papyrus)-1805",
         registrationDeadline: "2026-02-17",
 
         // Other infos
@@ -234,7 +234,7 @@ export const unifiedEvents: UnifiedEvent[] = [
         ],
 
         // Registration
-        registrationLink: "",
+        registrationLink: "https://tiqr.events/e/Treasure-hunt-(The-Cipher-Quest)-1804",
         registrationDeadline: "2026-02-17",
 
         // Other infos
@@ -310,7 +310,7 @@ export const unifiedEvents: UnifiedEvent[] = [
         ],
 
         // Registration
-        registrationLink: "",
+        registrationLink: "https://tiqr.events/e/ArgueX-(DEBATE)-1802",
         registrationDeadline: "2026-02-17",
 
         // Other infos
@@ -381,7 +381,7 @@ export const unifiedEvents: UnifiedEvent[] = [
         ],
 
         // Registration
-        registrationLink: "",
+        registrationLink: "https://tiqr.events/e/Vibe-Coding(Build-It-Right)-1812",
         registrationDeadline: "2026-02-17",
 
         // Other infos
@@ -458,7 +458,7 @@ export const unifiedEvents: UnifiedEvent[] = [
         ],
 
         // Registration
-        registrationLink: "",
+        registrationLink: "https://tiqr.events/e/PROMPT-ENGINEERING-(Python-Snippet-Challenge)-1801",
         registrationDeadline: "2026-02-17",
 
         // Other infos
@@ -538,7 +538,7 @@ export const unifiedEvents: UnifiedEvent[] = [
         ],
 
         // Registration
-        registrationLink: "",
+        registrationLink: "https://tiqr.events/e/TalenX-3.0-1803",
         registrationDeadline: "2026-02-17",
 
         // Other infos
@@ -688,7 +688,7 @@ export const unifiedEvents: UnifiedEvent[] = [
         coordinators: [],
 
         // Registration
-        registrationLink: "",
+        registrationLink: "https://tiqr.events/e/Videography-1807",
         registrationDeadline: "2026-02-17",
 
         // Other infos
@@ -761,7 +761,7 @@ export const unifiedEvents: UnifiedEvent[] = [
         coordinators: [],
 
         // Registration
-        registrationLink: "",
+        registrationLink: "https://tiqr.events/e/Photography-(Freeze-Frame)-1806",
         registrationDeadline: "2026-02-17",
 
         // Other infos
@@ -785,6 +785,78 @@ export const unifiedEvents: UnifiedEvent[] = [
 
         whatToBring: [
             "Camera or smartphone.",
+            "Valid student ID card.",
+        ],
+    },
+
+    {
+        // Core Identity
+        id: "stage-program",
+        name: "Stage Program",
+        fancyName: "Sakalakala",
+        tagline: "Unleash the Art Within You!",
+        description:
+            "Sakalakala is a grand stage program celebrating diverse talents and artistic creativity. The event offers performers a platform to showcase their skills, passion, and expressive abilities before a live audience. With an incentive prize worth 5000, the evening promises vibrant performances and unforgettable entertainment.",
+
+        category: "cultural",
+
+        // Schedule
+        schedule: {
+            day: "2",
+            startTime: "17:30",
+            endTime: "21:00",
+            displayTime: "05:30 PM - 09:00 PM",
+        },
+
+        // Location
+        venue: "trap",
+
+        // Participation
+        teamSize: "5",
+        entryFee: "Free",
+        spotRegistration: false,
+
+        // Visual
+        imageUrl:
+            "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?w=1200&q=80",
+
+        // Flags
+        isFeatured: true,
+        isAllDay: false,
+        isMultiPeriod: false,
+
+        // Prizes
+        prizePool: "5000",
+        prizes: {
+            first: "5000",
+        },
+
+        // Contact
+        coordinators: [
+            { name: "Shafreena", phone: "7306238073" },
+        ],
+
+        // Registration
+        registrationLink: "https://tiqr.events/e/Sakalakala(Stage-Program)-1809",
+        registrationDeadline: "2026-02-17",
+
+        // Other infos
+        rulesAndGuidelines: [
+            "Each team is allotted a maximum of 10 minutes on stage.",
+            "Out of the total time, 6 minutes are allocated for performance and 4 minutes for setup.",
+            "Participants must report to the venue at least 5 minutes before their allotted time.",
+            "Performances must adhere to festival decorum and content guidelines.",
+            "The decision of the judges and organizing committee will be final and binding.",
+        ],
+
+        eligibility: [
+            "Open to all students.",
+            "Team participation allowed with a maximum of five members.",
+            "Participants must carry a valid student ID card.",
+        ],
+
+        whatToBring: [
+            "All required performance materials or props.",
             "Valid student ID card.",
         ],
     },

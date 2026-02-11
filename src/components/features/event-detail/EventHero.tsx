@@ -31,11 +31,13 @@ export function EventHero({ event }: EventHeroProps) {
           </p>
 
           <div className="flex gap-4">
-            <Button size="lg" className="rounded-full px-10 h-14 bg-primary text-primary-foreground font-black uppercase tracking-widest hover:scale-105 transition-transform">
-              <Link to={`${event.registrationLink}`}>
-                Claim Your Spot
-              </Link>
-            </Button>
+            {event.registrationLink && (
+              <Button size="lg" className="rounded-full px-10 h-14 bg-primary text-primary-foreground font-black uppercase tracking-widest hover:scale-105 transition-transform">
+                <Link to={`${event.registrationLink}`}>
+                  Claim Your Spot
+                </Link>
+              </Button>
+            )}
           </div>
         </div>
 

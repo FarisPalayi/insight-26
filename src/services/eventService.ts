@@ -1,5 +1,5 @@
 import { db } from "@/lib/firebase_config";
-import { unifiedEvents } from "@/lib/data/unifiedEvents";
+import { unifiedEvents } from "@/lib/data/updatedEvents";
 import { collection, getDocs, doc, getDoc, } from 'firebase/firestore';
 import type { Update } from "@/types";
 
