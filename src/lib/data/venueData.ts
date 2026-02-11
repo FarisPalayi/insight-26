@@ -23,8 +23,8 @@ export const venueData: VenueData[] = [
         name: 'Aryabhatta Hall',
         shortName: 'ARYABHATTA',
         directions: 'Near Computer Science Block',
-        coordinates: { lat: 11.134364112286272, lng: 75.88804732195877 },
-        imageUrl: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80'
+        coordinates: { lat: 11.134307970312793, lng: 75.88791535285922 },
+        imageUrl: '/venues/aryabhatta.jpeg'
     },
     {
         id: 'ems',
@@ -56,7 +56,7 @@ export const venueData: VenueData[] = [
         shortName: 'CCSIT LAB',
         directions: 'Near CH Library, 2nd Floor',
         coordinates: { lat: 11.136227083791793, lng: 75.88840349398161 },
-        imageUrl: '/venues/ccsit.jpeg'
+        imageUrl: '/venues/ccsit-lab.jpeg'
     },
     {
         id: 'ccsit-seminar',

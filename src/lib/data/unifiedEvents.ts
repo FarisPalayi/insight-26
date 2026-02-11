@@ -74,6 +74,12 @@ export interface UnifiedEvent {
   speaker?: string; // for seminars 
 }
 
+export interface TimelineOverview {
+  id: string;
+  name: string;
+  displayTime: string;
+  venue: VenueId | string;
+}
 // ================== LABELS ==================
 
 export const categoryLabels: Record<EventCategory, string> = {

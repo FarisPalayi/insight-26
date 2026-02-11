@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import logo from "@/assets/logo-rotated.png";
+import logo from "@/assets/logo-min-new.png";
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 

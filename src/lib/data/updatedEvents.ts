@@ -2,34 +2,92 @@ import { type UnifiedEvent } from "./unifiedEvents";
 
 export const unifiedEvents: UnifiedEvent[] = [
     {
-        id: "technova",
+        // Core Identity
+        id: "technova-8-2026",
         name: "Technova 8.0",
         fancyName: "Technova 8.0",
         tagline: "Build. Break. Innovate.",
         description:
-            "The major attraction of INSIGHT is TECHNOVA. The aim of this event is to find out the best geek.It consists of 5 rounds, namely Initum, Techsense, Intersepto, Extremist, and Jackpot. The topper of each round will be awarded. The winner of the jackpot round will be awarded a cash prize.",
+            "Technova 8.0 is the flagship competitive event of Insight 26, designed to identify the ultimate tech champion. The event consists of five intense rounds — Initium, Techsense, Intersepto, Extremist, and Jackpot — testing participants’ logical thinking, technical expertise, problem-solving ability, and teamwork under pressure.",
+
         category: "competition",
+
+        // Schedule
         schedule: {
-            day: '2',
+            day: "2",
             startTime: "11:30",
             endTime: "16:00",
             displayTime: "11:30 AM - 04:00 PM",
         },
+
+        // Location
         venue: "ems-electron",
+
+        // Participation
         teamSize: "2-5",
         entryFee: "500",
-        prizePool: "33,000",
-        prizes: {
-            jackpotPrize: "25,000",
-            first: "5,000",
-            second: "2,000",
-            third: "1,000",
-        },
-        registrationLink: "/register",
-        imageUrl: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80',
+        spotRegistration: false,
+
+        // Visual
+        imageUrl:
+            "https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=1200&q=80",
+
+        // Flags
         isFeatured: true,
+        isAllDay: false,
         isMultiPeriod: true,
-        whatToBring: ["Laptop", "Chargers", "Extension board", "Earbuds", "Ideas"],
+
+        // Prizes
+        prizePool: "33000",
+        prizes: {
+            jackpotPrize: "25000",
+            first: "5000",
+            second: "2000",
+            third: "1000",
+        },
+
+        // Contact
+        coordinators: [
+            { name: "Faris P", phone: "9072402532" },
+            { name: "Anjana", phone: "8606386771" },
+        ],
+
+        // Registration
+        registrationLink: "/register",
+        registrationDeadline: "2026-02-17",
+
+        // Other infos
+        rulesAndGuidelines: [
+            "Technova consists of five rounds: Initium, Techsense, Intersepto, Extremist, and Jackpot.",
+            "Each round will contain multiple tasks with varying levels of difficulty.",
+            "Only team participation is permitted. Each team may consist of two to five members.",
+            "Participating teams must report to the venue at least 30 minutes prior to the scheduled start time.",
+            "Each team must bring at least one laptop.",
+            "Each team will be assigned one or more volunteers by the Technova core team.",
+            "An elimination stage will take place during the competition.",
+            "If registrations exceed the set limit, a preliminary round may be conducted.",
+            "Internet access will be provided in varying capacities based on participant requirements.",
+            "Participants must have basic knowledge of at least one programming language such as C, C++, Python, Java, PHP, or others.",
+            "Participants may request a limited number of clues from their assigned volunteers.",
+            "The use of any browser extensions is strictly prohibited.",
+            "Any malpractice detected during the event will result in immediate disqualification.",
+            "The jackpot prize of 25000 will be awarded to the team that successfully completes all levels first.",
+            "A minimum of four teams is required for the event to be conducted. If this condition is not met, the event may be cancelled.",
+            "Registration fees are non-refundable if a team fails to attend after registering.",
+            "All final decisions will be made by the Technova core team and will be binding.",
+        ],
+
+        eligibility: [
+            "Open to participants with basic programming knowledge.",
+            "Team participation only (2–5 members per team).",
+            "Participants must carry a valid student ID card.",
+        ],
+
+        whatToBring: [
+            "At least one laptop per team.",
+            "Earbuds (optional).",
+            "Valid student ID card.",
+        ],
     },
 
     {
@@ -363,9 +421,9 @@ export const unifiedEvents: UnifiedEvent[] = [
         // Schedule
         schedule: {
             day: "2",
-            startTime: "15:00",
-            endTime: "16:00",
-            displayTime: "03:00 PM - 04:00 PM",
+            startTime: "10:00",
+            endTime: "11:00",
+            displayTime: "10:00 AM - 11:00 AM",
         },
 
         // Location
@@ -513,7 +571,7 @@ export const unifiedEvents: UnifiedEvent[] = [
     {
         // Core Identity
         id: "spot-events",
-        name: "Spot Events",
+        name: "Spot Games",
         fancyName: "Boom Bash",
         tagline: "Win in a blink.",
         description:
@@ -542,7 +600,7 @@ export const unifiedEvents: UnifiedEvent[] = [
             "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=1200&q=80",
 
         // Flags
-        isFeatured: true,
+        isFeatured: false,
         isAllDay: true,
         isMultiPeriod: true,
 
@@ -730,26 +788,71 @@ export const unifiedEvents: UnifiedEvent[] = [
             "Valid student ID card.",
         ],
     },
-
     {
+        // Core Identity
         id: "cultural-night",
         name: "Cultural Night",
         fancyName: "Cultural Night",
         tagline: "Lights. Music. Energy.",
         description:
-            "Grand closing cultural night with music, performances, and celebration.",
+            "Cultural Night marks the grand closing celebration of Insight 26. The evening features electrifying performances, music, stage acts, and a vibrant atmosphere that brings the entire fest together for an unforgettable finale.",
+
         category: "cultural",
+
+        // Schedule
         schedule: {
-            day: '2',
-            startTime: "22:00",
-            endTime: "23:59",
-            displayTime: "10:00 PM",
+            day: "2",
+            startTime: "21:00",
+            endTime: "23:00",
+            displayTime: "09:00 PM - 11:00 PM",
         },
+
+        // Location
         venue: "trap",
+
+        // Participation
         teamSize: "any",
         entryFee: "Free",
-        registrationLink: "/register",
-        imageUrl: 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=800&q=80',
+        spotRegistration: true,
+
+        // Visual
+        imageUrl:
+            "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=1200&q=80",
+
+        // Flags
         isFeatured: true,
+        isAllDay: false,
+        isMultiPeriod: false,
+
+        // Prizes
+        prizePool: "",
+        prizes: {
+            first: "",
+            second: "",
+            third: "",
+        },
+
+        // Contact
+        coordinators: [],
+
+        // Registration
+        registrationLink: "/register",
+        registrationDeadline: "2026-02-17",
+
+        // Other infos
+        rulesAndGuidelines: [
+            "Open to all registered participants of the fest.",
+            "Participants are expected to maintain decorum during performances.",
+            "The organizing committee reserves the right to manage crowd control and entry if required.",
+        ],
+
+        eligibility: [
+            "Open to all fest attendees.",
+        ],
+
+        whatToBring: [
+            "Valid student ID card.",
+            "Entry pass (if applicable).",
+        ],
     }
 ];

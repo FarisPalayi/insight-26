@@ -83,7 +83,7 @@ export default defineConfig([
 - [x] add registration
 - [] add brochure link
 - [] sponsor db connect
-- [] add venue photos
+- [x] add venue photos
 - [x] event cards showing venueId instead of venue full name
 - [x] add both days
 - [] home page events can't be changed
@@ -91,6 +91,9 @@ export default defineConfig([
 - [] remove gsap dependencies (unused)
 - [] compress video
 - [] reload bar not showing in mobile
+- [] create webm video
+- [] don't show registration link if event is free
+- [] view fullmap should expand it fully
 
 - [] laggy carousal. check if chunk splitting is working
 - [] update social media links(in the footer and stuff)
