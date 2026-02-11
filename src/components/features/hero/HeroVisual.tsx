@@ -56,7 +56,7 @@ export const HeroVisual = () => {
       <div
         ref={bgRef}
         className="absolute inset-0 will-change-transform"
-        style={{ opacity: 0.38 }}
+        style={{ opacity: 0.40 }}
       >
         <video
           autoPlay
