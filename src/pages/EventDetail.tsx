@@ -18,7 +18,7 @@ export function EventDetail() {
   return (
     <div className="min-h-screen bg-[#050505] text-foreground selection:bg-primary/30">
       {/* Dynamic Background */}
-      <div className="fixed inset-0 bg-[url('/noise.svg')] opacity-[0.03] pointer-events-none" />
+      <div className="fixed inset-0 opacity-[0.03] pointer-events-none" />
       <div className="fixed inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20">

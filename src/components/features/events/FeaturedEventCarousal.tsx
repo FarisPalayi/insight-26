@@ -1,4 +1,3 @@
-// FeaturedEventsCarousel.tsx
 import { useCallback, useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
