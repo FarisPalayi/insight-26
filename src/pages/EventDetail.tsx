@@ -41,14 +41,16 @@ export function EventDetail() {
             <PrizeModule event={event} />
             <SpotRegistrationBadge event={event} />
             {/* Added a secondary CTA in sidebar for desktop */}
-            <div className="hidden lg:block glass-surface p-6 rounded-2xl border-primary/20 bg-primary/5">
-              <p className="text-sm text-muted-foreground mb-4 font-mono uppercase tracking-widest">Status: Registration Open</p>
-              <Button className="w-full h-14 text-lg font-bold glow-primary">
-                <Link to={`${event.registrationLink}`} >
-                  Register for Event
-                </Link>
-              </Button>
-            </div>
+            {event.registrationLink && (
+              <div className="hidden lg:block glass-surface p-6 rounded-2xl border-primary/20 bg-primary/5">
+                <p className="text-sm text-muted-foreground mb-4 font-mono uppercase tracking-widest">Status: Registration Open</p>
+                <Button className="w-full h-14 text-lg font-bold glow-primary">
+                  <Link to={`${event.registrationLink}`} >
+                    Register for Event
+                  </Link>
+                </Button>
+              </div>
+            )}
           </aside>
         </div>
       </div >
