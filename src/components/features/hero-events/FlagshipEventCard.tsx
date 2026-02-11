@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 import { Button } from "../../ui/button";
 import { ArrowRight, Users, Zap } from "lucide-react";
 import { Link } from "react-router";
-import { type UnifiedEvent } from "@/lib/data/unifiedEvents";
+import { type HeroFlagshipEvent } from "@/lib/data/unifiedEvents";
 
 interface FlagshipEventProps {
-  event: UnifiedEvent;
+  event: HeroFlagshipEvent;
   registrationStatus?: string;
 }
 
@@ -22,7 +22,7 @@ export const FlagshipEvent = ({
   const secondName = nameParts.slice(1).join("");
 
   // Helper to format team size display
-  const getTeamLabel = (size: UnifiedEvent['teamSize']) => {
+  const getTeamLabel = (size: HeroFlagshipEvent['teamSize']) => {
     if (size === 'solo') return 'Solo Event';
     if (size === 'any') return 'Flexible Team';
     return `Team: ${size} Members`;

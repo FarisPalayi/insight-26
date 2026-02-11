@@ -8,7 +8,7 @@ export const unifiedEvents: UnifiedEvent[] = [
         fancyName: "Technova 8.0",
         tagline: "Build. Break. Innovate.",
         description:
-            "Technova 8.0 is the flagship competitive event of Insight 26, designed to identify the ultimate tech champion. The event consists of five intense rounds — Initium, Techsense, Intersepto, Extremist, and Jackpot — testing participants’ logical thinking, technical expertise, problem-solving ability, and teamwork under pressure.",
+            "Technova 8.0 is the flagship event of Insight 26, designed to crown the ultimate tech champion. The event consists of five rounds — Initium, Techsense, Intersepto, Extremist, and Jackpot — testing logical thinking, technical expertise, problem-solving, and teamwork.",
 
         category: "competition",
 
@@ -85,7 +85,7 @@ export const unifiedEvents: UnifiedEvent[] = [
 
         whatToBring: [
             "At least one laptop per team.",
-            "Earbuds (optional).",
+            "Earbuds.",
             "Valid student ID card.",
         ],
     },
@@ -184,6 +184,7 @@ export const unifiedEvents: UnifiedEvent[] = [
         registrationLink: "/register",
         imageUrl: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&q=80',
         isFeatured: false,
+        isFree: true,
     },
     {
         // Core Identity
@@ -592,7 +593,7 @@ export const unifiedEvents: UnifiedEvent[] = [
 
         // Participation
         teamSize: "any",
-        entryFee: "varies",
+        entryFee: "Varies",
         spotRegistration: true,
 
         // Visual
@@ -839,6 +840,7 @@ export const unifiedEvents: UnifiedEvent[] = [
         // Registration
         registrationLink: "https://tiqr.events/e/Sakalakala(Stage-Program)-1809",
         registrationDeadline: "2026-02-17",
+        isFree: true,
 
         // Other infos
         rulesAndGuidelines: [
@@ -910,6 +912,7 @@ export const unifiedEvents: UnifiedEvent[] = [
         // Registration
         registrationLink: "/register",
         registrationDeadline: "2026-02-17",
+        isFree: true,
 
         // Other infos
         rulesAndGuidelines: [

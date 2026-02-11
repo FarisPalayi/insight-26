@@ -80,6 +80,22 @@ export interface TimelineOverview {
   displayTime: string;
   venue: VenueId | string;
 }
+
+export interface HeroFlagshipEvent extends HeroEvent{
+  teamSize: TeamSize;
+  venue: VenueId | string;
+}
+
+export interface HeroEvent {
+  id: string;
+  name: string;
+  description: string;
+  fancyName?: string; // TODO: implement this
+  category: EventCategory;
+  entryFee: string;
+  schedule: EventSchedule;
+}
+
 // ================== LABELS ==================
 
 export const categoryLabels: Record<EventCategory, string> = {

@@ -51,11 +51,11 @@ export function EventHero({ event }: EventHeroProps) {
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent lg:hidden block" />
 
           {/* Floating Jackpot Badge */}
-          {event.prizes?.jackpotPrize && (
+          {(event.prizes?.jackpotPrize || event.isFree) && (
             <div className="absolute top-8 right-8 rotate-12">
               <div className="bg-yellow-400 text-black px-6 py-4 rounded-2xl shadow-[0_0_50px_rgba(250,204,21,0.4)]">
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em]">Jackpot</p>
-                <p className="text-3xl font-black italic tracking-tighter">{event.prizes.jackpotPrize}</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em]">{event.isFree ? "Registration": "Jackpot"}</p>
+                <p className="text-3xl font-black italic tracking-tighter">{event.prizes?.jackpotPrize || (event.isFree && "Free")}</p>
               </div>
             </div>
           )}

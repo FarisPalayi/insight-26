@@ -2,11 +2,11 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router";
-import { type UnifiedEvent } from "@/lib/data/unifiedEvents";
+import { type HeroEvent } from "@/lib/data/unifiedEvents";
 import type React from "react";
 
 interface EventCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  event: UnifiedEvent;
+  event: HeroEvent;
   icon: React.ReactNode;
   accentColor: string;
   index: number;
