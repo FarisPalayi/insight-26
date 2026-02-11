@@ -12,7 +12,7 @@ interface StickyMobileCTAProps {
 export function StickyMobileCTA({ event, isVisible }: StickyMobileCTAProps) {
   return (
     <AnimatePresence>
-      {isVisible && (
+      {isVisible && event.registrationLink && (
         <motion.div
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -22,7 +22,7 @@ export function StickyMobileCTA({ event, isVisible }: StickyMobileCTAProps) {
         >
           {/* Glow Effect */}
           <div className="absolute -inset-x-4 -inset-y-2 bg-gradient-to-t from-primary/20 via-accent/10 to-transparent blur-xl" />
-          
+
           {/* Main Bar */}
           <div className="relative glass-surface-strong backdrop-blur-3xl border-t border-white/10 px-4 py-4 safe-area-bottom">
             <div className="flex items-center gap-4">
@@ -37,7 +37,7 @@ export function StickyMobileCTA({ event, isVisible }: StickyMobileCTAProps) {
               </div>
 
               {/* CTA Button */}
-              <Button 
+              <Button
                 asChild
                 className="rounded-full px-6 h-12 btn-glow bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase text-[11px] tracking-widest shadow-lg shadow-primary/20 flex-shrink-0 group"
               >
