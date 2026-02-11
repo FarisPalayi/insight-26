@@ -15,13 +15,14 @@ export function Home() {
   const isMobile = useIsMobile();
 
   useGSAP(() => {
-    if (!isMobile) {
-      ScrollSmoother.create({
-        smooth: 1,
-        effects: true,
-        normalizeScroll: true,
-      });
-    }
+    if (isMobile) return;
+
+    ScrollSmoother.create({
+      smooth: 1,
+      effects: true,
+      normalizeScroll: true,
+    });
+
   });
 
   return (

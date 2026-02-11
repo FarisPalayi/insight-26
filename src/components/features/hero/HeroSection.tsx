@@ -22,6 +22,8 @@ export const HeroSection = () => {
   ---------------------------------*/
   useGSAP(
     () => {
+      if (isMobile) return;
+      
       const content = sectionRef.current!.querySelector(
         ".hero-content"
       ) as HTMLElement;
@@ -59,19 +61,17 @@ export const HeroSection = () => {
           "-=0.3"
         );
 
-      if (!isMobile) {
-        // Scroll-based compression 
-        gsap.to(content, {
-          scale: 0.96,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-      }
+      // Scroll-based compression 
+      gsap.to(content, {
+        scale: 0.96,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
     },
     { scope: sectionRef }
   );

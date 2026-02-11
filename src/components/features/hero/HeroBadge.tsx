@@ -1,11 +1,14 @@
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export const HeroBadge = () => {
   const badgeRef = useRef<HTMLDivElement | null>(null);
+  const isMobile = useIsMobile();
 
   useGSAP(
     () => {
+      if (isMobile) return;
       const badge = badgeRef.current!;
 
       // 1. Capture the badge's natural position

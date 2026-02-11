@@ -1,11 +1,14 @@
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export const HeroTitle = () => {
   const titleRef = useRef<HTMLDivElement | null>(null);
+  const isMobile = useIsMobile();
 
   useGSAP(
     () => {
+      if (isMobile) return;
       const insight = titleRef.current!.querySelector(
         ".title-insight"
       ) as HTMLElement;

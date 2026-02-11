@@ -1,13 +1,17 @@
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export const HeroVisual = () => {
   const visualRef = useRef<HTMLDivElement | null>(null);
   const bgRef = useRef<HTMLDivElement | null>(null);
   const glowRef = useRef<HTMLDivElement | null>(null);
+  const isMobile = useIsMobile();
 
   useGSAP(
     () => {
+      if (isMobile) return;
+
       const bg = bgRef.current!;
       const glow = glowRef.current!;
 

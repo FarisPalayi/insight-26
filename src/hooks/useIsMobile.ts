@@ -1,18 +1,26 @@
 import { useEffect, useState } from "react";
 
-const MOBILE_BREAKPOINT = 640; // tailwind 'sm' is 40 rem (640px with base size 1rem = 16px)
+const MOBILE_BREAKPOINT = 640;
+
 export function useIsMobile() {
-  const [isMobile, setIsMobile] = useState<boolean | undefined>(undefined);
+  const getIsMobile = () =>
+    typeof window !== "undefined" &&
+    window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`).matches;
+
+  const [isMobile, setIsMobile] = useState(getIsMobile);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
     const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
-    const onChange = () => {
-      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+
+    const onChange = (e: MediaQueryListEvent) => {
+      setIsMobile(e.matches);
     };
+
     mql.addEventListener("change", onChange);
-    setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
     return () => mql.removeEventListener("change", onChange);
   }, []);
 
-  return !!isMobile;
+  return isMobile;
 }
