@@ -86,7 +86,7 @@ export function EventsSection({ events = [] }: EventsSectionProps) {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, height: 0 }}
-                className="mb-16 overflow-hidden"
+                className="mb-16"
               >
                 <h2 className="text-2xl font-bold mb-6">Featured Events</h2>
                 <FeaturedEventsCarousel events={featuredEvents} />

@@ -18,7 +18,7 @@ export function EventsSectionHeader({
   onCategoryChange,
 }: EventsHeaderBarProps) {
   return (
-    <header className="relative md:pt-12 md:pb-8 px-4">
+    <header className="relative md:pb-8 px-4">
       <div className="container mx-auto max-w-7xl">
         {/* Title */}
         <motion.div

@@ -26,7 +26,7 @@ export function FeaturedEventCard({ event, index = 0 }: FeaturedEventCardProps) 
       {/* Premium Outer Glow */}
       <div className="absolute -inset-[2px] bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 rounded-[28px] blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-700" />
 
-      <div className="relative py-0 overflow-hidden glass-surface-strong border-white/10 group-hover:border-white/20 transition-all duration-500 rounded-[26px] shadow-2xl">
+      <div className="relative py-0 glass-surface-strong border-white/10 group-hover:border-white/20 transition-all duration-500 rounded-[26px] shadow-2xl">
         <div className="flex flex-col lg:flex-row lg:h-[420px]">
 
           {/* VISUAL ANCHOR - Image Section */}
