@@ -67,8 +67,9 @@ export const HeroVisual = () => {
           poster="/hero-tech-bg.webp"
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/videos/hero_video.webm" type="video/webm" />
-          <source src="/videos/hero_video.mp4" type="video/mp4" />
+          <source src="/videos/hero_video_360p.mp4" media="(max-width: 640px)" type="video/mp4" />
+          <source src="/videos/hero_video_540p.mp4" media="(max-width: 1024px)" type="video/mp4" />
+          <source src="/videos/hero_video_720p.mp4" type="video/mp4" />
         </video>
       </div>
 
