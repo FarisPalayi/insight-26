@@ -40,12 +40,8 @@ export function GoogleMapsEmbed({
   // Build map URL with venue markers
   const mapUrl = useMemo(() => {
     const coords = selectedVenue?.coordinates || CCSIT;
-    const lonOffset = 0.006;
-    const latOffset = 0.004;
-
-    return `https://www.openstreetmap.org/export/embed.html?bbox=${coords.lng - lonOffset
-      },${coords.lat - latOffset},${coords.lng + lonOffset},${coords.lat + latOffset
-      }&layer=mapnik&marker=${coords.lat},${coords.lng}`;
+    
+    return `https://maps.google.com/maps?q=${coords.lat},${coords.lng}&z=17&output=embed`;
   }, [selectedVenue]);
 
   const handleOpenInMaps = () => {

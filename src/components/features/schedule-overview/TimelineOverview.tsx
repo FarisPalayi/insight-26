@@ -158,7 +158,7 @@ function EventList({ day }: { day: '1' | '2' }) {
 
 function ScheduleCta({ className }: { className?: string }) {
   return (
-    <div className={cn("flex justify-center border-t border-white/5", className)}>
+    <div className={cn("flex justify-center", className)}>
       <Link
         to="/schedule"
         className="group flex items-center gap-3 transition-opacity hover:opacity-80"

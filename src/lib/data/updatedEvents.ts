@@ -7,28 +7,29 @@ export const unifiedEvents: UnifiedEvent[] = [
         fancyName: "Technova 8.0",
         tagline: "Build. Break. Innovate.",
         description:
-            "A full-day hackathon where teams design and build innovative tech solutions. Judged on creativity, usefulness, and execution.",
+            "The major attraction of INSIGHT is TECHNOVA. The aim of this event is to find out the best geek.It consists of 5 rounds, namely Initum, Techsense, Intersepto, Extremist, and Jackpot. The topper of each round will be awarded. The winner of the jackpot round will be awarded a cash prize.",
         category: "competition",
         schedule: {
             day: '2',
-            startTime: "11:00",
-            endTime: "17:00",
-            displayTime: "11:00 AM - 05:00 PM",
+            startTime: "11:30",
+            endTime: "16:00",
+            displayTime: "11:30 AM - 04:00 PM",
         },
         venue: "ems-electron",
         teamSize: "2-5",
-        entryFee: "200",
-        prizePool: "25,000",
+        entryFee: "500",
+        prizePool: "33,000",
         prizes: {
-            first: "15,000",
-            second: "7,000",
-            third: "3,000",
+            jackpotPrize: "25,000",
+            first: "5,000",
+            second: "2,000",
+            third: "1,000",
         },
         registrationLink: "/register",
         imageUrl: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80',
         isFeatured: true,
         isMultiPeriod: true,
-        whatToBring: ["Laptop", "Chargers", "Extension board", "Ideas"],
+        whatToBring: ["Laptop", "Chargers", "Extension board", "Earbuds", "Ideas"],
     },
 
     {
@@ -43,10 +44,10 @@ export const unifiedEvents: UnifiedEvent[] = [
 
         // Schedule
         schedule: {
-            day: "2",
-            startTime: "14:00",
-            endTime: "15:00",
-            displayTime: "02:00 PM - 03:00 PM",
+            day: "1",
+            startTime: "11:00",
+            endTime: "13:00",
+            displayTime: "11:00 AM - 01:00 PM",
         },
 
         // Location
@@ -106,27 +107,6 @@ export const unifiedEvents: UnifiedEvent[] = [
     },
 
     {
-        id: "movie-night",
-        name: "Movie Night",
-        fancyName: "CineTech",
-        tagline: "Relax. Refresh. Reboot.",
-        description:
-            "A fun movie screening for all participants. Chill, socialize, and unwind after a day of technical sessions.",
-        category: "cultural",
-        schedule: {
-            day: '1',
-            startTime: "19:30",
-            endTime: "22:00",
-            displayTime: "07:30 PM - 10:00 PM",
-        },
-        venue: "trap",
-        teamSize: "any",
-        entryFee: "Free",
-        registrationLink: "/register",
-        imageUrl: 'https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=2000&auto=format&fit=crop',
-    },
-
-    {
         id: "inauguration",
         name: "Program Inauguration",
         fancyName: "Insight'26 Kickoff",
@@ -136,93 +116,93 @@ export const unifiedEvents: UnifiedEvent[] = [
         category: "inauguration",
         schedule: {
             day: '2',
-            startTime: "09:30",
-            endTime: "10:30",
-            displayTime: "09:30 AM - 10:30 AM",
+            startTime: "09:00",
+            endTime: "10:00",
+            displayTime: "09:00 AM - 10:00 AM",
         },
         venue: "ems",
         teamSize: "any",
         entryFee: "Free",
         registrationLink: "/register",
         imageUrl: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&q=80',
-        isFeatured: true,
+        isFeatured: false,
     },
- {
-  // Core Identity
-  id: "treasure-hunt",
-  name: "Treasure Hunt",
-  fancyName: "The Cipher Quest",
-  tagline: "Decode to Dominate.",
-  description:
-    "The Cipher Quest is an exciting multi-level treasure hunt designed to test teamwork, problem-solving ability, and strategic thinking. Teams must decode clues, complete challenges, and progress through multiple levels to reach the final objective and claim victory.",
+    {
+        // Core Identity
+        id: "treasure-hunt",
+        name: "Treasure Hunt",
+        fancyName: "The Cipher Quest",
+        tagline: "Decode to Dominate.",
+        description:
+            "The Cipher Quest is an exciting multi-level treasure hunt designed to test teamwork, problem-solving ability, and strategic thinking. Teams must decode clues, complete challenges, and progress through multiple levels to reach the final objective and claim victory.",
 
-  category: "competition",
+        category: "competition",
 
-  // Schedule
-  schedule: {
-    day: "2",
-    startTime: "11:30",
-    endTime: "16:30",
-    displayTime: "11:30 AM - 04:30 PM",
-  },
+        // Schedule
+        schedule: {
+            day: "2",
+            startTime: "11:30",
+            endTime: "16:30",
+            displayTime: "11:30 AM - 04:30 PM",
+        },
 
-  // Location
-  venue: "trap",
+        // Location
+        venue: "trap",
 
-  // Participation
-  teamSize: "4",
-  entryFee: "400",
-  spotRegistration: true,
+        // Participation
+        teamSize: "4",
+        entryFee: "400",
+        spotRegistration: true,
 
-  // Visual
-  imageUrl:
-    "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=80",
+        // Visual
+        imageUrl:
+            "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=80",
 
-  // Flags
-  isFeatured: true,
-  isAllDay: false,
-  isMultiPeriod: true,
+        // Flags
+        isFeatured: true,
+        isAllDay: false,
+        isMultiPeriod: true,
 
-  // Prizes
-  prizePool: "10000",
-  prizes: {
-    jackpotPrize: "10000",
-  },
+        // Prizes
+        prizePool: "10000",
+        prizes: {
+            jackpotPrize: "10000",
+        },
 
-  // Contact
-  coordinators: [
-    { name: "Rahul", phone: "+917909226491" },
-    { name: "Alog", phone: "9072076311" },
-  ],
+        // Contact
+        coordinators: [
+            { name: "Rahul", phone: "+917909226491" },
+            { name: "Alog", phone: "9072076311" },
+        ],
 
-  // Registration
-  registrationLink: "",
-  registrationDeadline: "2026-02-17",
+        // Registration
+        registrationLink: "",
+        registrationDeadline: "2026-02-17",
 
-  // Other infos
-  rulesAndGuidelines: [
-    "The registration fee per team is 400.",
-    "Each team may consist of up to four members.",
-    "Any number of teams from the same college may participate.",
-    "Any form of unethical practice or violation of rules will lead to immediate disqualification.",
-    "If multiple teams from the same college participate, priority will be given to the team that reports the first clue to the organizers.",
-    "Teams that complete tasks first will progress to the next level.",
-    "The judgment of the organizers will be final and binding.",
-    "A minimum of four teams is required for the event to be conducted. If this condition is not met, the event may be cancelled.",
-    "Registration fees are non-refundable if a team fails to attend after registering.",
-    "The jackpot prize will be awarded only to the team that successfully completes all levels.",
-  ],
+        // Other infos
+        rulesAndGuidelines: [
+            "The registration fee per team is 400.",
+            "Each team may consist of up to four members.",
+            "Any number of teams from the same college may participate.",
+            "Any form of unethical practice or violation of rules will lead to immediate disqualification.",
+            "If multiple teams from the same college participate, priority will be given to the team that reports the first clue to the organizers.",
+            "Teams that complete tasks first will progress to the next level.",
+            "The judgment of the organizers will be final and binding.",
+            "A minimum of four teams is required for the event to be conducted. If this condition is not met, the event may be cancelled.",
+            "Registration fees are non-refundable if a team fails to attend after registering.",
+            "The jackpot prize will be awarded only to the team that successfully completes all levels.",
+        ],
 
-  eligibility: [
-    "Open only to students from other colleges.",
-    "Participants must carry a valid student ID card.",
-  ],
+        eligibility: [
+            "Open only to students from other colleges.",
+            "Participants must carry a valid student ID card.",
+        ],
 
-  whatToBring: [
-    "Valid student ID card.",
-    "Comfortable clothing and footwear suitable for movement across locations.",
-  ],
-},
+        whatToBring: [
+            "Valid student ID card.",
+            "Comfortable clothing and footwear suitable for movement across locations.",
+        ],
+    },
 
     {
         id: "debate",
@@ -296,26 +276,79 @@ export const unifiedEvents: UnifiedEvent[] = [
     },
 
     {
+        // Core Identity
         id: "vibe-coding",
         name: "Vibe Coding",
-        fancyName: "Vibe Coding",
-        tagline: "Code with rhythm",
+        fancyName: "Build It Right!",
+        tagline: "What you create stays.",
         description:
-            "A fast-paced coding challenge focused on logic, speed, and clean problem-solving skills.",
+            "Build It Right is an AI-powered website creation challenge where ideas take shape through intuition, creativity, and strategic use of AI tools. Participants are tasked with designing and building a visually compelling front-end website that aligns with a given theme, demonstrating both technical execution and creative vision.",
         category: "competition",
+
+        // Schedule
         schedule: {
-            day: '2',
-            startTime: "13:45",
-            endTime: "14:45",
-            displayTime: "01:45 PM - 02:45 PM",
+            day: "2",
+            startTime: "13:30",
+            endTime: "15:30",
+            displayTime: "01:30 PM - 03:30 PM",
         },
+
+        // Location
         venue: "ccsit-lab",
+
+        // Participation
         teamSize: "solo",
-        entryFee: "100",
-        registrationLink: "/register",
-        prizePool: "4,000",
-        imageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+        entryFee: "200",
         spotRegistration: true,
+
+        // Visual
+        imageUrl:
+            "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=80",
+
+        // Flags
+        isFeatured: true,
+        isAllDay: false,
+        isMultiPeriod: false,
+
+        // Prizes
+        prizePool: "3000",
+        prizes: {
+            first: "2000",
+            second: "1000",
+        },
+
+        // Contact
+        coordinators: [
+            { name: "Navaneeth P", phone: "9495267950" },
+        ],
+
+        // Registration
+        registrationLink: "",
+        registrationDeadline: "2026-02-17",
+
+        // Other infos
+        rulesAndGuidelines: [
+            "This is a solo competition.",
+            "The theme will be revealed at the start of the competition. All designs and content must strictly align with the announced theme.",
+            "Participants must design and build a front-end website using ChatGPT as the provided AI tool.",
+            "ChatGPT is the only AI tool permitted during the competition. Use of any other AI tools will result in disqualification.",
+            "Any front-end technologies such as HTML, CSS, JavaScript, or frameworks are permitted.",
+            "Internet access will be provided by the organizers.",
+            "Internet usage is strictly limited to website development, ChatGPT usage, and downloading images or assets required for the website.",
+            "Any other form of internet usage will result in immediate disqualification.",
+            "Judging will be based on theme interpretation, creativity and visual design, user experience, and overall presentation.",
+            "The decision of the judges will be final and binding.",
+        ],
+
+        eligibility: [
+            "Open to all Undergraduate (UG) and Postgraduate (PG) students.",
+            "Participants must carry a valid student ID card.",
+        ],
+
+        whatToBring: [
+            "Valid student ID card.",
+            "Basic stationery for rough planning (optional).",
+        ],
     },
     {
         // Core Identity
@@ -478,6 +511,227 @@ export const unifiedEvents: UnifiedEvent[] = [
     },
 
     {
+        // Core Identity
+        id: "spot-events",
+        name: "Spot Events",
+        fancyName: "Boom Bash",
+        tagline: "Win in a blink.",
+        description:
+            "Boom Bash is a collection of fun and high-energy spot events conducted on the festival grounds. Participants engage in surprise tasks designed to spark excitement, laughter, and spontaneous competition. No prior preparation is required—just confidence, enthusiasm, and a willingness to jump in.",
+
+        category: "cultural",
+
+        // Schedule
+        schedule: {
+            day: "both",
+            startTime: "09:00",
+            endTime: "17:00",
+            displayTime: "Full Day (Day 1 & Day 2)",
+        },
+
+        // Location
+        venue: "trap",
+
+        // Participation
+        teamSize: "any",
+        entryFee: "varies",
+        spotRegistration: true,
+
+        // Visual
+        imageUrl:
+            "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=1200&q=80",
+
+        // Flags
+        isFeatured: true,
+        isAllDay: true,
+        isMultiPeriod: true,
+
+        // Prizes
+        prizePool: "Varies",
+        prizes: {
+            first: "Varies",
+        },
+
+        // Contact
+        coordinators: [
+            { name: "Nizam", phone: "7306833994" },
+        ],
+
+        // Registration
+        registrationLink: "",
+        registrationDeadline: "2026-02-17",
+
+        // Other infos
+        rulesAndGuidelines: [
+            "Participation is open on the spot. No prior registration is required.",
+            "Team size depends on the specific game announced at the venue.",
+            "Instructions for each game will be explained at the spot before it begins.",
+            "Participants must follow the instructions of the event coordinators.",
+            "Any form of misconduct or unfair practice will lead to disqualification.",
+            "Prizes vary depending on the specific game.",
+        ],
+
+        eligibility: [
+            "Open to all festival participants.",
+            "Participants must carry a valid student ID card.",
+        ],
+
+        whatToBring: [
+            "Valid student ID card.",
+            "Enthusiasm and readiness to participate.",
+        ],
+    },
+
+    {
+        // Core Identity
+        id: "video-making-reel",
+        name: "Video Making",
+        fancyName: "Reel It Up!",
+        tagline: "Capture the vibe. Tell the story.",
+        description:
+            "Reel It Up! is a creative video-making contest where participants capture the energy and highlights of Insight 26 through short-form reels. Showcase your storytelling skills, editing creativity, and ability to bring moments to life on screen.",
+
+        category: "competition",
+
+        // Schedule
+        schedule: {
+            day: "2",
+            startTime: "09:30",
+            endTime: "20:00",
+            displayTime: "09:30 AM - 08:00 PM",
+        },
+
+        // Location
+        venue: "campus",
+
+        // Participation
+        teamSize: "solo",
+        entryFee: "50",
+        spotRegistration: true,
+
+        // Visual
+        imageUrl:
+            "https://images.unsplash.com/photo-1492724441997-5dc865305da7?w=1200&q=80",
+
+        // Flags
+        isFeatured: true,
+        isAllDay: true,
+        isMultiPeriod: false,
+
+        // Prizes
+        prizePool: "",
+        prizes: {
+            first: "",
+            second: "",
+            third: "",
+        },
+
+        // Contact
+        coordinators: [],
+
+        // Registration
+        registrationLink: "",
+        registrationDeadline: "2026-02-17",
+
+        // Other infos
+        rulesAndGuidelines: [
+            "The reel must be based on moments captured during Insight 26.",
+            "The content should reflect the spirit of innovation, technology, and fest energy.",
+            "The video must be original and created by the participant.",
+            "Basic editing is allowed; however, the core footage must be self-recorded.",
+            "Any offensive, inappropriate, or copyrighted content will lead to disqualification.",
+            "Submission format and platform details will be announced at the venue.",
+        ],
+
+        eligibility: [
+            "Open to all registered participants of the Tech Fest.",
+            "Individual participation only.",
+            "Participants must carry a valid student ID card.",
+        ],
+
+        whatToBring: [
+            "Smartphone or camera for recording.",
+            "Valid student ID card.",
+        ],
+    },
+
+    {
+        // Core Identity
+        id: "photography-freeze",
+        name: "Photography",
+        fancyName: "Freeze Frame",
+        tagline: "Y'all Got the Shot.",
+        description:
+            "Freeze Frame is a photography contest inviting participants to capture the most compelling moments of Insight 26. Through creative framing and storytelling, contestants showcase the spirit of innovation, technology, and digital culture across the campus.",
+
+        category: "competition",
+
+        // Schedule
+        schedule: {
+            day: "2",
+            startTime: "09:30",
+            endTime: "20:00",
+            displayTime: "09:30 AM - 08:00 PM",
+        },
+
+        // Location
+        venue: "campus",
+
+        // Participation
+        teamSize: "solo",
+        entryFee: "50",
+        spotRegistration: true,
+
+        // Visual
+        imageUrl:
+            "https://images.unsplash.com/photo-1492724441997-5dc865305da7?w=1200&q=80",
+
+        // Flags
+        isFeatured: true,
+        isAllDay: true,
+        isMultiPeriod: false,
+
+        // Prizes
+        prizePool: "",
+        prizes: {
+            first: "",
+            second: "",
+            third: "",
+        },
+
+        // Contact
+        coordinators: [],
+
+        // Registration
+        registrationLink: "",
+        registrationDeadline: "2026-02-17",
+
+        // Other infos
+        rulesAndGuidelines: [
+            "Photos must align with the Tech Fest theme such as Innovation, Technology, Future, Digital Life, AI, Coding, or Robotics.",
+            "Each participant may submit up to two photographs.",
+            "Photographs must be original and captured by the participant.",
+            "Accepted file formats are JPEG or PNG.",
+            "Minimum resolution required is 1080 × 1080 pixels.",
+            "Basic editing such as color correction and cropping is allowed.",
+            "Heavy manipulation, AI-generated images, or composite images are strictly prohibited.",
+            "No offensive, vulgar, political, or copyrighted content is permitted.",
+            "Images must not contain watermarks, logos, or decorative borders.",
+        ],
+
+        eligibility: [
+            "Open to all registered participants of the Tech Fest.",
+            "Individual participation only.",
+            "Participants must carry a valid student ID card.",
+        ],
+
+        whatToBring: [
+            "Camera or smartphone.",
+            "Valid student ID card.",
+        ],
+    },
+
+    {
         id: "cultural-night",
         name: "Cultural Night",
         fancyName: "Cultural Night",
@@ -491,113 +745,11 @@ export const unifiedEvents: UnifiedEvent[] = [
             endTime: "23:59",
             displayTime: "10:00 PM",
         },
-        venue: "main-stage",
+        venue: "trap",
         teamSize: "any",
         entryFee: "Free",
         registrationLink: "/register",
         imageUrl: 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=800&q=80',
         isFeatured: true,
-    },
-    {
-        id: "spot-events",
-        name: "Spot Events",
-        fancyName: "Spot Events",
-        tagline: "Spontaneous fun. Instant competition.",
-        description:
-            "A series of surprise mini-events conducted throughout the day. Participants can join on the spot and compete in quick, fun challenges.",
-        category: "competition",
-        schedule: {
-            day: '2',
-            startTime: "10:00",
-            endTime: "17:00",
-            displayTime: "10:00 AM - 05:00 PM",
-        },
-        venue: "trap",
-        teamSize: "any",
-        entryFee: "Varies",
-        registrationLink: "/register",
-        spotRegistration: true,
-        imageUrl:
-            "https://images.unsplash.com/photo-1523580846011-d3a5bc25702b",
-        isAllDay: true,
-        prizePool: "Surprise prizes",
-        rulesAndGuidelines: [
-            "Register on the spot before each mini-event",
-            "Follow instructions given by coordinators",
-            "Each event will have different rules",
-        ],
-        coordinators: [
-            { name: "Akshay P", phone: "9895123456" },
-            { name: "Nimisha K", phone: "9847012345" },
-        ],
-    },
-
-    {
-        id: "video-photo-competition",
-        name: "Video & Photo Competition",
-        fancyName: "CaptureX",
-        tagline: "Capture the moment. Tell the story.",
-        description:
-            "Participants capture creative photos and short videos based on given themes. Judged on creativity, composition, and storytelling.",
-        category: "competition",
-        schedule: {
-            day: '2',
-            startTime: "10:00",
-            endTime: "17:00",
-            displayTime: "10:00 AM - 05:00 PM",
-        },
-        venue: "trap",
-        teamSize: "solo",
-        entryFee: "50",
-        registrationLink: "/register",
-        imageUrl:
-            "https://images.unsplash.com/photo-1492724441997-5dc865305da7",
-        isAllDay: true,
-        prizePool: "3,000",
-        prizes: {
-            first: "1,500",
-            second: "1,000",
-            third: "500",
-        },
-        rulesAndGuidelines: [
-            "Photos and videos must be original",
-            "Editing is allowed but no AI-generated media",
-            "Submit before deadline",
-        ],
-        whatToBring: ["Camera or smartphone", "Creativity"],
-        coordinators: [
-            { name: "Fahad M", phone: "9895987654" },
-        ],
-    },
-
-    {
-        id: "spot-competitions",
-        name: "Spot Competitions",
-        fancyName: "Spot Competitions",
-        tagline: "Quick battles. Instant glory.",
-        description:
-            "Short, fast-paced competitions conducted in the afternoon. Includes quizzes, mini-games, and rapid challenges.",
-        category: "competition",
-        schedule: {
-            day: '2',
-            startTime: "15:00",
-            endTime: "17:00",
-            displayTime: "03:00 PM - 05:00 PM",
-        },
-        venue: "trap",
-        teamSize: "any",
-        entryFee: "Varies",
-        registrationLink: "/register",
-        spotRegistration: true,
-        imageUrl:
-            "https://images.unsplash.com/photo-1511632765486-a01980e01a18",
-        rulesAndGuidelines: [
-            "Register before each competition begins",
-            "Decisions by judges are final",
-            "Maintain fair play",
-        ],
-        coordinators: [
-            { name: "Akhil Raj", phone: "9876549876" },
-        ],
-    },
+    }
 ];

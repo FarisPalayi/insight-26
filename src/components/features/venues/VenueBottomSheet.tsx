@@ -27,7 +27,6 @@ import { useIsMobile } from '@/hooks/useIsMobile';
 interface VenueBottomSheetProps {
   venue: VenueData | null;
   events: UnifiedEvent[];
-  onClose: () => void;
 }
 
 const categoryColors: Record<string, string> = {
@@ -41,14 +40,13 @@ const categoryColors: Record<string, string> = {
 export function VenueBottomSheet({
   venue,
   events,
-  onClose,
 }: VenueBottomSheetProps) {
   const isMobile = useIsMobile()
   // Only render on mobile
   if (isMobile) {
     return (
       <div className="lg:hidden">
-        <Drawer open={!!venue} onOpenChange={(open) => !open && onClose()}>
+        <Drawer open={!!venue} onOpenChange={(open) => !open}>
           <DrawerContent className="max-h-[85vh]">
             {venue && (
               <>

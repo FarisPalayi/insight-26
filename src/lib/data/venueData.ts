@@ -40,7 +40,7 @@ export const venueData: VenueData[] = [
         shortName: 'EMS ELECTRON',
         directions: 'Left Hall of EMS Seminar Complex',
         coordinates: { lat: 11.133823216033345, lng: 75.89311231298794 },
-        imageUrl: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80'
+        imageUrl: '/venues/electron.jpeg'
     },
     {
         id: 'ccsit',
@@ -48,7 +48,7 @@ export const venueData: VenueData[] = [
         shortName: 'CCSIT',
         directions: 'Near CH Library',
         coordinates: { lat: 11.136227083791793, lng: 75.88840349398161 },
-        imageUrl: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80'
+        imageUrl: '/venues/ccsit.jpeg'
     },
     {
         id: 'ccsit-lab',
@@ -56,7 +56,7 @@ export const venueData: VenueData[] = [
         shortName: 'CCSIT LAB',
         directions: 'Near CH Library, 2nd Floor',
         coordinates: { lat: 11.136227083791793, lng: 75.88840349398161 },
-        imageUrl: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80'
+        imageUrl: '/venues/ccsit.jpeg'
     },
     {
         id: 'ccsit-seminar',
@@ -64,7 +64,7 @@ export const venueData: VenueData[] = [
         shortName: 'CCSIT SEMINAR',
         directions: 'Near CH Library, 3rd Floor',
         coordinates: { lat: 11.136227083791793, lng: 75.88840349398161 },
-        imageUrl: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80'
+        imageUrl: '/venues/ccsit.jpeg'
     },
     {
         id: 'trap',
@@ -72,7 +72,7 @@ export const venueData: VenueData[] = [
         shortName: 'STUDENT TRAP',
         directions: 'Near Calicut University Park',
         coordinates: { lat: 11.135936892643628, lng: 75.88942328970543 },
-        imageUrl: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80'
+        imageUrl: '/venues/trap.jpeg'
     },
     {
         id: 'main-stage',
@@ -80,7 +80,7 @@ export const venueData: VenueData[] = [
         shortName: 'Calicut University Open Auditorium',
         directions: 'Near Student Trap',
         coordinates: { lat: 11.136752341056354, lng: 75.8891521773991 },
-        imageUrl: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80'
+        imageUrl: '/venues/main-stage.jpeg'
     },
     {
         id: 'campus',
@@ -88,7 +88,7 @@ export const venueData: VenueData[] = [
         shortName: 'CAMPUS',
         directions: 'Throughout the Campus',
         coordinates: { lat: 11.136227083791793, lng: 75.88840349398161 },
-        imageUrl: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80'
+        imageUrl: '/venues/ccsit.jpeg'
     },
 ]
 

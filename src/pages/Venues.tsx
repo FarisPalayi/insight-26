@@ -143,7 +143,6 @@ export function VenuesPage() {
                 <VenueBottomSheet
                     venue={selectedVenue}
                     events={selectedVenueEvents}
-                    onClose={() => setSelectedVenueId(null)}
                 />
             </main>
 

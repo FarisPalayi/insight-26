@@ -65,6 +65,7 @@ export interface UnifiedEvent {
   // Registration
   registrationLink?: string;
   registrationDeadline?: string; // ISO date string
+  isFree?: boolean;
 
   // Other infos
   rulesAndGuidelines?: string[],
