@@ -69,12 +69,12 @@ export function EventCard({ event, index, accentColor = "from-purple-500 to-pink
               </h3>
 
               {hasFancyName && (
-                <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-muted-foreground/60">
+                <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-muted-foreground">
                   {event.name}
                 </p>
               )}
 
-              <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
+              <p className="text-sm text-muted-foreground/50 leading-relaxed line-clamp-2">
                 {event.tagline || "Redefining the boundaries of technology and innovation."}
               </p>
             </div>
