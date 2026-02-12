@@ -1,33 +1,31 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Zap, Music, Star, Flag } from "lucide-react";
+import { ArrowRight, Flag, Wand2,BrainCircuit,Map } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EventCard } from "./EventCard";
 import { FlagshipEvent } from "./FlagshipEventCard";
 import { Link } from "react-router";
-import { type EventCategory } from "@/lib/data/unifiedEvents";
 
 // Import your new mock constants
 import { MOCK_TECHNOVA, FEATURED_EVENTS_MOCK } from "./heroEvents.constants";
 
-// Visual mapping based on the UnifiedEvent category type
-const categoryVisuals: Record<EventCategory, { icon: React.ReactNode; accent: string }> = {
-  competition: {
-    icon: <Zap className="w-6 h-6" />,
-    accent: "from-blue-500 to-indigo-500"
+const ROTATING_VISUALS = [
+  {
+    icon: <Wand2 className="w-6 h-6" />,
+    accent: "from-cyan-500 to-blue-500",
   },
-  cultural: {
-    icon: <Music className="w-6 h-6" />,
-    accent: "from-pink-500 to-rose-500"
+  {
+    icon: <BrainCircuit className="w-6 h-6" />,
+    accent: "from-violet-500 to-fuchsia-500",
   },
-  allday: {
-    icon: <Star className="w-6 h-6" />,
-    accent: "from-amber-500 to-orange-500"
+  {
+    icon: <Map className="w-6 h-6" />,
+    accent: "from-amber-400 to-orange-500",
   },
-  inauguration: {
+  {
     icon: <Flag className="w-6 h-6" />,
-    accent: "from-yellow-500 to-red-500"
-  }
-};
+    accent: "from-emerald-400 to-teal-500",
+  },
+];
 
 const EventsSection = () => {
   // Filter out the flagship event from the secondary grid to avoid duplication
@@ -79,7 +77,8 @@ const EventsSection = () => {
         {/* 2. Secondary Events Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16 md:mb-20">
           {secondaryHighlights.map((event, i) => {
-            const visuals = categoryVisuals[event.category];
+            const visuals = ROTATING_VISUALS[i % ROTATING_VISUALS.length];
+
             return (
               <EventCard
                 key={event.id}
@@ -87,7 +86,7 @@ const EventsSection = () => {
                 icon={visuals.icon}
                 accentColor={visuals.accent}
                 index={i}
-                {...(i === i && { 'data-lag': i * 0.1 })}
+                data-lag={i * 0.1}
               />
             );
           })}
