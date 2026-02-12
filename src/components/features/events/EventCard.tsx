@@ -114,23 +114,38 @@ export function EventCard({ event, index, accentColor = "from-purple-500 to-pink
 
           {/* Actions Footer */}
           <div className="pt-4 border-t border-white/5 space-y-3">
-            <Button
-              asChild
-              className="w-full h-11 bg-white/5 hover:bg-white/10 text-foreground font-semibold text-sm rounded-full transition-all active:scale-[0.98] border border-white/10"
-            >
-              <Link to={`${event.registrationLink}`} className="flex items-center justify-center gap-2">
-                Register Now
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Button>
+            {event.registrationLink ? (
+              <Button
+                asChild
+                className="w-full h-11 bg-white/5 hover:bg-white/10 text-foreground font-semibold text-sm rounded-full transition-all active:scale-[0.98] border border-white/10"
+              >
+                <Link to={`${event.registrationLink}`} className="flex items-center justify-center gap-2">
+                  Register Now
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+            ) :
+              <Button
+                asChild
+                className="w-full h-11 bg-white/5 hover:bg-white/10 text-foreground font-semibold text-sm rounded-full transition-all active:scale-[0.98] border border-white/10"
+              >
+                <Link to={`/events/${event.id}`} className="flex items-center justify-center gap-2">
+                  View Details
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+            }
 
-            <Link
-              to={`/events/${event.id}`}
-              className="flex items-center justify-center gap-2 text-[11px] font-mono uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors py-2"
-            >
-              View Details
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
+            {event.registrationLink && (
+              <Link
+                to={`/events/${event.id}`}
+                className="flex items-center justify-center gap-2 text-[11px] font-mono uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors py-2"
+              >
+                View Details
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            )}
+
           </div>
         </div>
 
