@@ -84,23 +84,33 @@ export default defineConfig([
 - [x] add venue photos
 - [x] event cards showing venueId instead of venue full name
 - [x] add both days
-- [] sponsor db connect
-- [] add brochure link
 - [x] home page events can't be changed
-- [] schedule page showing already shown page more than once
-- [] remove gsap dependencies (unused)
-- [] compress video
-- [] reload bar not showing in mobile
-- [] create webm video
-- [] don't show registration link if event is free
-- [] view fullmap should expand it fully
-- [] in event detail page - spot registration, and free registration
 
-- [] laggy carousal. check if chunk splitting is working
+- [x] update accordion content
+- [x] spot registration info 
+- [x] remove gsap dependencies (unused)
+- [x] compress video
+- [x] reload bar not showing in mobile
+- [-] create webm video
+- [x] don't show registration link if event is free
+- [x] in event detail page - spot registration, and free registration
+- [x] view fullmap should expand it fully
+- [x] remove the unnecessary label in embed map
+
 - [] update social media links(in the footer and stuff)
+- [] add brochure link
 - [] meta tags
+- [] event page images are bandwidth heavy and large
+
+- [x] logo spacing
+- [x] hero page events icon change
+- [x] schedule page showing already shown page more than once
+- [x] add analytics
+- [] add venue section page
+
+- [] host fonts
+- [x] sponsor db connect
+- [x] laggy carousal. check if chunk splitting is working
 - [x] loading page
 - [x] event card and page redesign
-- [] hero section problems
-- [] event page images are bandwidth heavy and large
-- [] host fonts
+- [x] hero section problems
