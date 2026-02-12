@@ -1,95 +1,81 @@
-import { useState, useMemo, useCallback } from 'react';
-import type { EventCategory, EventDay, UnifiedEvent } from '@/lib/data/unifiedEvents';
-import {
-    getFilteredAndGroupedEvents,
-    hasAnyEvents,
-    isValidEventDay,
-    isValidEventCategory,
-} from '../components/features/schedule/ScheduleUtils';
+import { useState, useMemo } from 'react';
+import type { UnifiedEvent, EventCategory, EventDay } from '@/lib/data/unifiedEvents';
+import { getFilteredAndGroupedEvents, hasAnyEvents } from '@/components/features/schedule/eventUtils';
 
 /**
- * Custom hook for managing schedule state and filtering logic
- * Centralizes all state management and memoization
+ * Custom hook for managing schedule state and filtering
+ * 
+ * This hook handles:
+ * - Day selection (Day 1 / Day 2)
+ * - Category filtering
+ * - Event grouping by time period (NO DUPLICATES)
  */
 export function useScheduleState(events: UnifiedEvent[] | undefined | null) {
-    // State
+    // State for selected day
     const [selectedDay, setSelectedDay] = useState<EventDay>('1');
+
+    // State for selected categories (empty array = show all)
     const [selectedCategories, setSelectedCategories] = useState<EventCategory[]>([]);
 
-    // Safely update selected day with validation
-    const handleDayChange = useCallback((day: string) => {
-        if (isValidEventDay(day)) {
+    // Handler for day change
+    const handleDayChange = (day: string) => {
+        if (day === '1' || day === '2') {
             setSelectedDay(day);
-        } else {
-            console.warn(`useScheduleState: Invalid day value "${day}", defaulting to "1"`);
-            setSelectedDay('1');
         }
-    }, []);
+    };
 
-    // Toggle category selection with validation
-    const handleToggleCategory = useCallback((category: EventCategory) => {
-        if (!isValidEventCategory(category)) {
-            console.warn(`useScheduleState: Invalid category "${category}"`);
-            return;
-        }
-
+    // Handler for category toggle
+    const handleToggleCategory = (category: EventCategory) => {
         setSelectedCategories((prev) => {
-            // Ensure prev is an array
-            if (!Array.isArray(prev)) {
-                console.warn('useScheduleState: selectedCategories is not an array, resetting');
-                return [category];
+            if (prev.includes(category)) {
+                // Remove category
+                return prev.filter((c) => c !== category);
+            } else {
+                // Add category
+                return [...prev, category];
             }
-
-            return prev.includes(category)
-                ? prev.filter((c) => c !== category)
-                : [...prev, category];
         });
-    }, []);
-
-    // Clear all category filters
-    const handleClearCategories = useCallback(() => {
-        setSelectedCategories([]);
-    }, []);
+    };
 
     // Memoized filtered and grouped events
+    // THIS IS THE CRITICAL PART - uses the NEW assignment-based logic
     const eventsByPeriod = useMemo(() => {
-        try {
-            return getFilteredAndGroupedEvents(events, selectedDay, selectedCategories);
-        } catch (error) {
-            console.error('useScheduleState: Error getting filtered events', error);
-            return {
-                morning: [],
-                afternoon: [],
-                evening: [],
-                allday: [],
-                totalCount: 0,
-            };
-        }
+        const result = getFilteredAndGroupedEvents(
+            events,
+            selectedDay,
+            selectedCategories
+        );
+
+        console.log('useScheduleState: Grouped events', {
+            day: selectedDay,
+            categories: selectedCategories,
+            morning: result.morning.length,
+            afternoon: result.afternoon.length,
+            evening: result.evening.length,
+            allday: result.allday.length,
+            total: result.totalCount,
+        });
+
+        // Return just the grouped events (without totalCount)
+        return {
+            morning: result.morning,
+            afternoon: result.afternoon,
+            evening: result.evening,
+            allday: result.allday,
+        };
     }, [events, selectedDay, selectedCategories]);
 
-    // Memoized check for any events
-    const hasEvents = useMemo(() => {
-        try {
-            return hasAnyEvents(eventsByPeriod);
-        } catch (error) {
-            console.error('useScheduleState: Error checking for events', error);
-            return false;
-        }
+    // Check if there are any events
+    const hasEventsToDisplay = useMemo(() => {
+        return hasAnyEvents(eventsByPeriod);
     }, [eventsByPeriod]);
 
     return {
-        // State
         selectedDay,
         selectedCategories,
-
-        // Handlers
         handleDayChange,
         handleToggleCategory,
-        handleClearCategories,
-
-        // Computed
         eventsByPeriod,
-        hasEvents,
-        totalEventCount: eventsByPeriod.totalCount,
+        hasEvents: hasEventsToDisplay,
     };
 }

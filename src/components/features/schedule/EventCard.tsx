@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router';
+import { detectMultiPeriodEvent } from './eventUtils';
 
 // ============================================
 // TYPES
@@ -154,8 +155,8 @@ export function ScheduleEventCard({ event, index = 0, onClick }: EventCardProps)
   const eventTime = getEventTime(event);
   const style = getCategoryStyle(event.category);
 
-  // Safely check for multi-period flag
-  const isMultiPeriod = Boolean(event.isMultiPeriod);
+  // Check if event spans multiple periods (either from data flag or by detecting)
+  const isMultiPeriod = Boolean(event.isMultiPeriod) || detectMultiPeriodEvent(event);
 
   // Animation delay with validation
   const animationDelay = typeof index === 'number' && index >= 0 ? index * 0.05 : 0;
@@ -236,4 +237,3 @@ export function ScheduleEventCard({ event, index = 0, onClick }: EventCardProps)
     </motion.div>
   );
 }
-

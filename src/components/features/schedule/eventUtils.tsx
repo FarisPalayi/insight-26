@@ -118,7 +118,7 @@ export function filterEventsByCategories(
 }
 
 // ============================================
-// TIME PERIOD GROUPING
+// TIME PERIOD ASSIGNMENT
 // ============================================
 
 /**
@@ -131,42 +131,93 @@ export interface TimePeriodConfig {
 }
 
 /**
- * Checks if an event falls within a specific time period
+ * Determines which time period an event belongs to based on its START time.
+ * This ensures each event appears in only ONE section, even if it spans multiple periods.
  */
-export function eventFallsInPeriod(
-  event: UnifiedEvent | undefined | null,
-  periodStart: string,
-  periodEnd: string
-): boolean {
+export function assignEventToPeriod(
+  event: UnifiedEvent | undefined | null
+): 'morning' | 'afternoon' | 'evening' | 'allday' | null {
+  if (!event || !isValidEvent(event)) {
+    return null;
+  }
+
+  // All-day events go to the allday section
+  if (event.isAllDay) {
+    return 'allday';
+  }
+
+  const { startTime } = event.schedule;
+
+  // Validate time format
+  if (!isValidTimeFormat(startTime)) {
+    console.warn(
+      `assignEventToPeriod: Invalid time format for event "${event.id}". Start: ${startTime}`
+    );
+    return null;
+  }
+
+  // Assign based on start time
+  // Morning: 07:00 - 12:00
+  if (startTime >= timePeriods.morning.start && startTime < timePeriods.afternoon.start) {
+    return 'morning';
+  }
+  
+  // Afternoon: 12:00 - 17:00
+  if (startTime >= timePeriods.afternoon.start && startTime < timePeriods.evening.start) {
+    return 'afternoon';
+  }
+  
+  // Evening: 17:00 - 22:00
+  if (startTime >= timePeriods.evening.start && startTime < '22:00') {
+    return 'evening';
+  }
+
+  // Events starting before 07:00 or after 22:00 go to the closest period
+  if (startTime < timePeriods.morning.start) {
+    return 'morning';
+  }
+  
+  return 'evening';
+}
+
+/**
+ * Checks if an event spans multiple time periods.
+ * This is used to display the "Multi-session" badge.
+ */
+export function detectMultiPeriodEvent(event: UnifiedEvent): boolean {
   if (!event || !isValidEvent(event)) {
     return false;
   }
 
+  if (event.isAllDay) {
+    return false; // All-day events are already marked as such
+  }
+
   const { startTime, endTime } = event.schedule;
 
-  // Validate time formats
   if (!isValidTimeFormat(startTime) || !isValidTimeFormat(endTime)) {
-    console.warn(
-      `eventFallsInPeriod: Invalid time format for event "${event.id}". Start: ${startTime}, End: ${endTime}`
-    );
     return false;
   }
-
-  if (!isValidTimeFormat(periodStart) || !isValidTimeFormat(periodEnd)) {
-    console.warn(
-      `eventFallsInPeriod: Invalid period time format. Start: ${periodStart}, End: ${periodEnd}`
-    );
-    return false;
+  
+  // Count how many periods the event touches
+  let periodsSpanned = 0;
+  
+  if (startTime < timePeriods.afternoon.start && endTime > timePeriods.morning.start) {
+    periodsSpanned++;
+  }
+  if (startTime < timePeriods.evening.start && endTime > timePeriods.afternoon.start) {
+    periodsSpanned++;
+  }
+  if (startTime < '22:00' && endTime > timePeriods.evening.start) {
+    periodsSpanned++;
   }
 
-  // Event overlaps with period if:
-  // - Event starts before period ends AND
-  // - Event ends after period starts
-  return startTime < periodEnd && endTime > periodStart;
+  return periodsSpanned > 1;
 }
 
 /**
- * Safely groups events by time periods
+ * Safely groups events by time periods.
+ * Each event is assigned to exactly ONE period based on its start time.
  */
 export function groupEventsByTimePeriod(
   events: UnifiedEvent[] | undefined | null
@@ -188,36 +239,29 @@ export function groupEventsByTimePeriod(
     return emptyResult;
   }
 
-  // Validate events and separate all-day from scheduled events
+  // Validate events
   const validEvents = events.filter(isValidEvent);
-  const scheduledEvents = validEvents.filter((event) => !event.isAllDay);
-  const allDayEvents = validEvents.filter((event) => event.isAllDay);
 
   try {
-    return {
-      morning: scheduledEvents.filter((event) =>
-        eventFallsInPeriod(
-          event,
-          timePeriods.morning.start,
-          timePeriods.morning.end
-        )
-      ),
-      afternoon: scheduledEvents.filter((event) =>
-        eventFallsInPeriod(
-          event,
-          timePeriods.afternoon.start,
-          timePeriods.afternoon.end
-        )
-      ),
-      evening: scheduledEvents.filter((event) =>
-        eventFallsInPeriod(
-          event,
-          timePeriods.evening.start,
-          timePeriods.evening.end
-        )
-      ),
-      allday: allDayEvents,
+    const result = {
+      morning: [] as UnifiedEvent[],
+      afternoon: [] as UnifiedEvent[],
+      evening: [] as UnifiedEvent[],
+      allday: [] as UnifiedEvent[],
     };
+
+    // Assign each event to exactly one period
+    for (const event of validEvents) {
+      const period = assignEventToPeriod(event);
+      
+      if (period) {
+        result[period].push(event);
+      } else {
+        console.warn(`groupEventsByTimePeriod: Could not assign period for event "${event.id}"`);
+      }
+    }
+
+    return result;
   } catch (error) {
     console.error('groupEventsByTimePeriod: Error grouping events', error);
     return emptyResult;
@@ -250,7 +294,7 @@ export function getFilteredAndGroupedEvents(
     // Step 2: Filter by categories (if any selected)
     const filteredEvents = filterEventsByCategories(dayEvents, selectedCategories);
 
-    // Step 3: Group by time period
+    // Step 3: Group by time period (each event goes to exactly one period)
     const grouped = groupEventsByTimePeriod(filteredEvents);
 
     // Step 4: Calculate total count
