@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"
-import { GraduationCap, MapPin, Trophy, ExternalLink } from "lucide-react";
+import { GraduationCap, MapPin, ExternalLink } from "lucide-react";
 import { type FooterLink } from "@/types";
+import { Link } from "react-router";
 
 const resourceLinks: FooterLink[] = [
   {
@@ -20,11 +21,6 @@ const resourceLinks: FooterLink[] = [
     href: "/venues",
     icon: <MapPin className="w-4 h-4" />,
   },
-  {
-    label: "Past Winners",
-    href: "#winners",
-    icon: <Trophy className="w-4 h-4" />
-  },
 ];
 
 export const FooterResources = () => {
@@ -41,8 +37,8 @@ export const FooterResources = () => {
       <ul className="space-y-3">
         {resourceLinks.map((link) => (
           <li key={link.label}>
-            <a
-              href={link.href}
+            <Link
+              to={link.href}
               target={link.external ? "_blank" : undefined}
               rel={link.external ? "noopener noreferrer" : undefined}
               className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-200 text-sm group"
@@ -54,7 +50,7 @@ export const FooterResources = () => {
               {link.external && (
                 <ExternalLink className="w-3 h-3 opacity-50" />
               )}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
