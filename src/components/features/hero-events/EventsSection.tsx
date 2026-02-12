@@ -57,7 +57,7 @@ const EventsSection = () => {
           className="text-center mb-12 md:mb-16 lg:mb-20"
         >
 
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+          <h2 className="text-5xl text-foreground md:text-7xl font-bold tracking-tighter leading-[0.95] text-balance">
             <span className="text-foreground">Discover </span>
             <span className="text-gradient">Experiences</span>
           </h2>
