@@ -1,33 +1,31 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Zap, Music, Mic2, Star } from "lucide-react";
+import { ArrowRight, Flag, Wand2,BrainCircuit,Map } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EventCard } from "./EventCard";
 import { FlagshipEvent } from "./FlagshipEventCard";
 import { Link } from "react-router";
-import { type EventCategory } from "@/lib/data/unifiedEvents";
 
 // Import your new mock constants
 import { MOCK_TECHNOVA, FEATURED_EVENTS_MOCK } from "./heroEvents.constants";
 
-// Visual mapping based on the UnifiedEvent category type
-const categoryVisuals: Record<EventCategory, { icon: React.ReactNode; accent: string }> = {
-  competition: {
-    icon: <Zap className="w-6 h-6" />,
-    accent: "from-blue-500 to-indigo-500"
+const ROTATING_VISUALS = [
+  {
+    icon: <Wand2 className="w-6 h-6" />,
+    accent: "from-cyan-500 to-blue-500",
   },
-  seminar: {
-    icon: <Mic2 className="w-6 h-6" />,
-    accent: "from-emerald-500 to-teal-500"
+  {
+    icon: <BrainCircuit className="w-6 h-6" />,
+    accent: "from-violet-500 to-fuchsia-500",
   },
-  cultural: {
-    icon: <Music className="w-6 h-6" />,
-    accent: "from-pink-500 to-rose-500"
+  {
+    icon: <Map className="w-6 h-6" />,
+    accent: "from-amber-400 to-orange-500",
   },
-  allday: {
-    icon: <Star className="w-6 h-6" />,
-    accent: "from-amber-500 to-orange-500"
+  {
+    icon: <Flag className="w-6 h-6" />,
+    accent: "from-emerald-400 to-teal-500",
   },
-};
+];
 
 const EventsSection = () => {
   // Filter out the flagship event from the secondary grid to avoid duplication
@@ -36,7 +34,7 @@ const EventsSection = () => {
   );
 
   return (
-    <section id="events" className="text-foreground relative py-20 md:py-28 lg:py-36 overflow-hidden bg-[#0a0a0a]">
+    <section id="events" className="text-foreground relative pt-20 md:py-28 lg:py-36 overflow-hidden bg-[#0a0a0a]">
       {/* The Grid Layer - Using a cleaner CSS-based mask for better visibility */}
       <div className="absolute inset-0 grid-lines" />
 
@@ -56,20 +54,11 @@ const EventsSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12 md:mb-16 lg:mb-20"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-surface mb-8">
-            <span className="text-xs sm:text-sm font-medium text-muted-foreground uppercase tracking-wide">
-              Featured Events
-            </span>
-          </div>
 
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+          <h2 className="text-5xl text-foreground md:text-7xl font-bold tracking-tighter leading-[0.95] text-balance">
             <span className="text-foreground">Discover </span>
             <span className="text-gradient">Experiences</span>
           </h2>
-
-          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4">
-            From intense tech battles to creative showcases—events that challenge, inspire, and celebrate talent.
-          </p>
         </motion.div>
 
         {/* 1. Flagship Highlight */}
@@ -87,15 +76,17 @@ const EventsSection = () => {
 
         {/* 2. Secondary Events Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16 md:mb-20">
-          {secondaryHighlights.map((event, index) => {
-            const visuals = categoryVisuals[event.category];
+          {secondaryHighlights.map((event, i) => {
+            const visuals = ROTATING_VISUALS[i % ROTATING_VISUALS.length];
+
             return (
               <EventCard
                 key={event.id}
                 event={event}
                 icon={visuals.icon}
                 accentColor={visuals.accent}
-                index={index}
+                index={i}
+                data-lag={i * 0.1}
               />
             );
           })}
@@ -109,14 +100,14 @@ const EventsSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mt-12 md:mt-20"
         >
-          <div className="inline-flex flex-col items-center gap-8 px-10 py-12 rounded-3xl glass-surface border border-white/5 max-w-2xl mx-auto">
+          <div className="inline-flex flex-col items-center gap-8 px-10 py-12 rounded-3xl max-w-2xl mx-auto">
 
             <div className="space-y-3">
               <h3 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">
                 Explore the Full Program
               </h3>
               <p className="text-sm sm:text-base text-muted-foreground max-w-sm mx-auto">
-                From the main stage competitions to niche workshops—see everything we've planned.
+                From the competitions to seminars—see everything we've planned.
               </p>
             </div>
 
@@ -130,13 +121,6 @@ const EventsSection = () => {
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
-
-              <Link
-                to="/schedule"
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
-              >
-                View Full Schedule
-              </Link>
             </div>
           </div>
         </motion.div>

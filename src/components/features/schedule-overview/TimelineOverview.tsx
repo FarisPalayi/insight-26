@@ -1,15 +1,14 @@
-import { useRef, useMemo, useState } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { Sparkles, Clock, MapPin } from 'lucide-react';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowRight, MapPin } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { getEventsByDay } from '@/lib/data/unifiedEvents';
+import { getVenueName, type TimelineOverview } from '@/lib/data/unifiedEvents';
 import { Link } from 'react-router';
+import { timelineDayOneData, timelineDayTwoData } from '@/lib/data/timelineData';
+import { Button } from '@/components/ui/button';
 
 export function TimelineOverview({ className }: { className?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [activeDay, setActiveDay] = useState<string>("1");
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -19,7 +18,7 @@ export function TimelineOverview({ className }: { className?: string }) {
   const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   return (
-    <section className={cn('relative py-16 md:py-24 bg-background overflow-hidden', className)}>
+    <section className={cn('relative pt-24 md:pt-32 lg:pt-40 bg-background overflow-hidden', className)}>
       <div className="grid-lines opacity-30" />
 
       <div className="text-foreground container relative z-10 mx-auto px-4 sm:px-6">
@@ -30,65 +29,66 @@ export function TimelineOverview({ className }: { className?: string }) {
             viewport={{ once: true }}
             className="space-y-4"
           >
-            <Badge variant="outline" className="border-primary/30 bg-primary/10 text-primary py-1 px-4 font-mono">
-              <Sparkles className="mr-2 h-3.5 w-3.5" />
-              SCHEDULE
-            </Badge>
             <h2 className="text-4xl md:text-7xl font-bold font-sans tracking-tight">
               Event <span className="text-gradient">Timeline</span>
             </h2>
           </motion.div>
 
-          <Tabs value={activeDay} onValueChange={setActiveDay} className="mt-8 md:mt-12 w-full max-w-3xl">
-            <div className="flex justify-center mb-12 md:mb-20">
-              <TabsList className="bg-muted/30 border border-white/10 p-1 md:p-1.5 h-12 md:h-14 glass-surface-strong rounded-full">
-                <TabsTrigger
-                  value="1"
-                  className="px-6 md:px-10 rounded-full font-mono text-xs md:text-sm font-semibold transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:glow-primary"
-                >
-                  DAY 01
-                </TabsTrigger>
-                <TabsTrigger
-                  value="2"
-                  className="px-6 md:px-10 rounded-full font-mono text-xs md:text-sm font-semibold transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:glow-primary"
-                >
-                  DAY 02
-                </TabsTrigger>
-              </TabsList>
+          <div ref={containerRef} className="relative min-h-[500px] mt-12 md:mt-20 w-full">
+            {/* Responsive Central Line */}
+            {/* Mobile: Left-aligned (16px from edge) | Desktop: Centered */}
+            <div className="absolute left-[15.5px] md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-px bg-white/10" />
+
+            <div className="absolute left-[15.5px] md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-px overflow-hidden">
+              <motion.div
+                className="w-full origin-top"
+                style={{
+                  height: lineHeight,
+                  background: `linear-gradient(to bottom, transparent, hsl(var(--gradient-mid)), hsl(var(--gradient-end)))`
+                }}
+              />
             </div>
 
-            <div ref={containerRef} className="relative min-h-[500px]">
-              {/* Responsive Central Line */}
-              {/* Mobile: Left-aligned (16px from edge) | Desktop: Centered */}
-              <div className="absolute left-[15.5px] md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-px bg-white/10" />
-
-              <div className="absolute left-[15.5px] md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-px overflow-hidden">
+            <div className="space-y-0">
+              {/* Day 1 Section */}
+              <div className="mb-16 md:mb-24">
                 <motion.div
-                  className="w-full origin-top"
-                  style={{
-                    height: lineHeight,
-                    background: `linear-gradient(to bottom, transparent, hsl(var(--gradient-mid)), hsl(var(--gradient-end)))`
-                  }}
-                />
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  className="relative flex md:justify-center mb-12 md:mb-20"
+                >
+                  <div className="relative z-30">
+                    <div className="glass-surface-strong border border-white/20 rounded-full px-6 md:px-10 py-3 md:py-4 shadow-2xl">
+                      <h3 className="text-xl md:text-3xl font-semibold font-sans tracking-tight">
+                        Day 1
+                      </h3>
+                    </div>
+                  </div>
+                </motion.div>
+                <EventList events={timelineDayOneData} />
               </div>
 
-              <AnimatePresence mode="wait">
+              {/* Day 2 Section */}
+              <div className="mt-16 md:mt-24">
                 <motion.div
-                  key={activeDay}
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -10 }}
-                  transition={{ duration: 0.3 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  className="relative flex md:justify-center mb-12 md:mb-20"
                 >
-                  <TabsContent value={activeDay} forceMount className="outline-none">
-                    <div className="space-y-0">
-                      <EventList day={Number(activeDay) as 1 | 2} />
+                  <div className="relative z-30">
+                    <div className="glass-surface-strong border border-white/20 rounded-full px-6 md:px-10 py-3 md:py-4 shadow-2xl">
+                      <h3 className="text-xl md:text-3xl font-semibold font-sans tracking-tight">
+                        Day 1
+                      </h3>
                     </div>
-                  </TabsContent>
+                  </div>
                 </motion.div>
-              </AnimatePresence>
+                <EventList events={timelineDayTwoData} />
+              </div>
             </div>
-          </Tabs>
+          </div>
         </div>
         <ScheduleCta />
       </div>
@@ -96,13 +96,7 @@ export function TimelineOverview({ className }: { className?: string }) {
   );
 }
 
-function EventList({ day }: { day: 1 | 2 }) {
-  const events = useMemo(() => {
-    return getEventsByDay(day)
-      .filter((e) => !e.isAllDay)
-      .sort((a, b) => a.schedule.startTime.localeCompare(b.schedule.startTime));
-  }, [day]);
-
+function EventList({ events }: { events: TimelineOverview[] }) {
   return (
     <div className="relative">
       {events.map((event, index) => {
@@ -120,15 +114,14 @@ function EventList({ day }: { day: 1 | 2 }) {
           >
             {/* Content Side */}
             <div className={cn(
-              "w-full md:w-[45%] pl-12 md:pl-0", // Mobile: Padding-left for the line | Desktop: 0
+              "w-full md:w-[45%] pl-12 md:pl-0 text-left", // Mobile: Padding-left for the line | Desktop: 0
               isEven ? "md:text-right md:pr-12" : "md:text-left md:pl-12"
             )}>
               <div className={cn(
-                "inline-flex items-center gap-2 text-primary font-mono text-[10px] md:text-xs mb-2 px-2 py-0.5 rounded border border-primary/20 bg-primary/5",
+                "inline-flex items-center gap-2 text-primary font-mono text-[10px] md:text-xs mb-2 px-2 py-0.5 rounded ",
                 isEven ? "md:flex-row-reverse" : "flex-row"
               )}>
-                <Clock className="w-3 h-3" />
-                {event.schedule.displayTime}
+                <span>{event.displayTime}</span>
               </div>
 
               <h3 className="text-xl md:text-3xl font-bold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors leading-tight">
@@ -136,11 +129,11 @@ function EventList({ day }: { day: 1 | 2 }) {
               </h3>
 
               <div className={cn(
-                "flex items-center gap-2 text-muted-foreground text-xs md:text-sm",
+                "hidden lg:flex items-center gap-2 text-muted-foreground text-xs md:text-sm",
                 isEven ? "md:justify-end" : "md:justify-start"
               )}>
                 <MapPin className="w-3.5 h-3.5 text-primary/50" />
-                {event.venue}
+                {getVenueName(event.venue)}
               </div>
             </div>
 
@@ -161,18 +154,18 @@ function EventList({ day }: { day: 1 | 2 }) {
   );
 }
 
-function ScheduleCta({ className }: { className?: string }) {
+function ScheduleCta() {
   return (
-    <div className={cn("py-10 flex justify-center border-t border-white/5", className)}>
-      <Link
-        to="/schedules"
-        className="group flex items-center gap-3 transition-opacity hover:opacity-80"
+    <div className="flex mt-20 lg:mt-0 items-center justify-center gap-6 w-full">
+      <Button
+        asChild
+        className="btn-glow bg-primary hover:bg-primary/90 text-primary-foreground gap-2 px-8 group rounded-xl"
       >
-        <span className="border-b border-primary pb-0.5 text-primary font-mono text-[10px] md:text-xs font-bold tracking-widest uppercase">
-          See Full Schedule
-        </span>
-        <div className="h-px w-8 bg-white/20 transition-all group-hover:w-12 group-hover:bg-primary" />
-      </Link>
+        <Link to="/schedule">
+          See Fulle Schedule
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </Link>
+      </Button>
     </div>
   );
 }

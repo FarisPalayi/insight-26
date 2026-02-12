@@ -1,12 +1,13 @@
 import { motion } from "framer-motion"
-import { BookOpen, Calendar } from "lucide-react";
+import { BookOpen, Calendar, Mail } from "lucide-react";
 import { type FooterLink } from "@/types";
 import { Link } from "react-router";
 
 const quickLinks: FooterLink[] = [
+  { label: "Brochure", href: "brochure", icon: <BookOpen className="w-4 h-4" /> },
   { label: "Events", href: "events", icon: <Calendar className="w-4 h-4" /> },
   { label: "Schedule", href: "schedule", icon: <Calendar className="w-4 h-4" /> },
-  { label: "Brochure", href: "brochure", icon: <BookOpen className="w-4 h-4" /> },
+  { label: "Contact", href: "contact", icon: <Mail className="w-4 h-4" /> },
 ];
 
 export const FooterQuickLinks = () => {

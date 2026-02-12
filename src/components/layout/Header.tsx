@@ -1,21 +1,50 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LogoLink } from "../ui/LogoLink";
 import { Link, useLocation } from "react-router";
+import { UpdatesButton } from "../features/UpdatesButton";
+import type { Update } from "@/types";
+import { getLastSeenAt } from "@/lib/utils";
 
 const navItems = [
   { label: "Events", href: "/events" },
   { label: "Schedule", href: "/schedule" },
-  { label: "Venue", href: "/venue" },
-  { label: "Updates", href: "/updates" },
+  { label: "Venues", href: "/venues" },
   { label: "Contact", href: "/contact" },
 ];
 
-export const Header = () => {
+export const Header = ({ updates }: { updates: Update[] }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+
+  /**
+     * Dummy state used ONLY to trigger re-render
+     * when external state (localStorage) changes.
+     */
+  const [, forecRenderer] = useState(0);
+
+  useEffect(() => {
+    const handler = () => {
+      forecRenderer((v) => v + 1);
+    };
+
+    window.addEventListener("updates:seen", handler);
+    return () => window.removeEventListener("updates:seen", handler);
+  }, []);
+
+  /**
+   * Derived value — computed during render.
+   * No useMemo, no lint warnings, no cascading effects.
+   */
+  const hasUnread =
+    updates &&
+    updates.length > 0 &&
+    updates.some((u) => {
+      if (!u?.createdAt?.seconds) return false;
+      return u.createdAt.seconds * 1000 > getLastSeenAt();
+    });
 
   return (
     <motion.header
@@ -27,6 +56,7 @@ export const Header = () => {
       <div className="glass-surface mx-4 mt-4 rounded-2xl">
         <div className="container flex items-center justify-between h-16 px-6 min-w-full">
           <LogoLink />
+
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
@@ -42,24 +72,33 @@ export const Header = () => {
               </Link>
             ))}
           </nav>
-          {/* CTA Button */}
-          <div className="hidden md:block">
-            <Button asChild>
-              <Link to="/register" className="glow-primary">
-                Register Now
-              </Link>
-            </Button>
+
+          {/* Right Action Cluster */}
+          <div className="flex items-center gap-2">
+            {/* Updates icon — always visible */}
+            <UpdatesButton hasUnread={!!hasUnread} />
+
+            {/* CTA Button */}
+            <div className="hidden md:block">
+              <Button asChild>
+                <Link to="/events" className="glow-primary">
+                  Register Now
+                </Link>
+              </Button>
+            </div>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </div>
       </div>
+
       {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
@@ -90,8 +129,9 @@ export const Header = () => {
                   </Link>
                 </motion.div>
               ))}
+
               <Button asChild className="mt-4 glow-primary w-full">
-                <Link to="/register">Register Now</Link>
+                <Link to="/events">Register Now</Link>
               </Button>
             </nav>
           </motion.div>

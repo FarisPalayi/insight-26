@@ -71,3 +71,36 @@ export default defineConfig([
   },
 ])
 ```
+
+
+- [x] favicon
+- [x] events loader scroll bottom shows home page
+- [x] add contacts link to the home page
+- [x] add maps links
+- [x] add actual map links
+- [x] add venue link and page 
+
+- [x] add registration
+- [x] add venue photos
+- [x] event cards showing venueId instead of venue full name
+- [x] add both days
+- [] sponsor db connect
+- [] add brochure link
+- [x] home page events can't be changed
+- [] schedule page showing already shown page more than once
+- [] remove gsap dependencies (unused)
+- [] compress video
+- [] reload bar not showing in mobile
+- [] create webm video
+- [] don't show registration link if event is free
+- [] view fullmap should expand it fully
+- [] in event detail page - spot registration, and free registration
+
+- [] laggy carousal. check if chunk splitting is working
+- [] update social media links(in the footer and stuff)
+- [] meta tags
+- [x] loading page
+- [x] event card and page redesign
+- [] hero section problems
+- [] event page images are bandwidth heavy and large
+- [] host fonts

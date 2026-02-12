@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { type UnifiedEvent } from '@/lib/data/unifiedEvents';
+import { Link } from 'react-router';
 
 interface EventHeroProps {
   event: UnifiedEvent;
@@ -30,9 +31,13 @@ export function EventHero({ event }: EventHeroProps) {
           </p>
 
           <div className="flex gap-4">
-            <Button size="lg" className="rounded-full px-10 h-14 bg-primary text-primary-foreground font-black uppercase tracking-widest hover:scale-105 transition-transform">
-              Claim Your Spot
-            </Button>
+            {event.registrationLink && (
+              <Button size="lg" className="rounded-full px-10 h-14 bg-primary text-primary-foreground font-black uppercase tracking-widest hover:scale-105 transition-transform">
+                <Link to={`${event.registrationLink}`}>
+                  Claim Your Spot
+                </Link>
+              </Button>
+            )}
           </div>
         </div>
 
@@ -40,17 +45,17 @@ export function EventHero({ event }: EventHeroProps) {
         <div className="relative group overflow-hidden">
           <img
             src={event.imageUrl}
-            className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
+            className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110 hidden lg:block"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-transparent to-transparent lg:block hidden" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-transparent to-transparent lg:block hidden " />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent lg:hidden block" />
 
           {/* Floating Jackpot Badge */}
-          {event.prizes?.jackpotPrize && (
+          {(event.prizes?.jackpotPrize || event.isFree) && (
             <div className="absolute top-8 right-8 rotate-12">
               <div className="bg-yellow-400 text-black px-6 py-4 rounded-2xl shadow-[0_0_50px_rgba(250,204,21,0.4)]">
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em]">Jackpot</p>
-                <p className="text-3xl font-black italic tracking-tighter">{event.prizes.jackpotPrize}</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em]">{event.isFree ? "Registration": "Jackpot"}</p>
+                <p className="text-3xl font-black italic tracking-tighter">{event.prizes?.jackpotPrize || (event.isFree && "Free")}</p>
               </div>
             </div>
           )}

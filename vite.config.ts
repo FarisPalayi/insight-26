@@ -15,8 +15,10 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       output: {
         manualChunks: {
-          'framer-motion': ['framer-motion'],
-          'vendor': ['react', 'react-dom']
+          'animation': ['framer-motion', 'gsap'],
+          'firebase': ["firebase/app", "firebase/firestore"],
+          'reactVendor': ['react', 'react-dom', 'react-router'],
+          'embla-carousel-react': ['embla-carousel-react'],
         }
       }
     }

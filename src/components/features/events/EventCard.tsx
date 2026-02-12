@@ -1,108 +1,142 @@
-import { ChevronRight, Trophy, IndianRupee, Users, ArrowUpRight, Cpu } from 'lucide-react';
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { motion } from "framer-motion";
+import { Trophy, IndianRupee, Users, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router';
+import type { UnifiedEvent } from '@/lib/data/unifiedEvents';
 
-export function EventCard({ event }: { event: any }) {
+interface EventCardProps {
+  event: UnifiedEvent;
+  index: number;
+  accentColor?: string;
+}
+
+export function EventCard({ event, index, accentColor = "from-purple-500 to-pink-500" }: EventCardProps) {
   const hasFancyName = !!event.fancyName;
 
   return (
-    <Card className="py-0 group relative h-full flex flex-col bg-card border-border/60 overflow-hidden transition-all duration-300 hover:border-primary rounded-[var(--radius-lg)] shadow-md">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.05, duration: 0.5 }}
+      className="group relative h-full"
+    >
+      {/* Dynamic Hover Glow */}
+      <div className={`absolute -inset-0.5 bg-gradient-to-r ${accentColor} rounded-3xl blur opacity-0 group-hover:opacity-20 transition duration-500`} />
 
-      {/* 1. VISUAL HEADER - High Contrast Overlays */}
-      <div className="relative aspect-[16/10] overflow-hidden bg-muted">
-        <img
-          src={event.imageUrl}
-          alt={event.name}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
+      <div className="relative h-full flex flex-col rounded-3xl glass-surface border border-white/5 bg-[#0D0D0D]/50 backdrop-blur-sm group-hover:border-white/10 transition-all duration-300 overflow-hidden">
 
-        {/* Stronger gradient for accessibility (ensures top badges are readable) */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--color-background))] via-transparent to-transparent" />
+        {/* Poster Image Section */}
+        <div className="relative aspect-[16/10] overflow-hidden">
+          <img
+            src={event.imageUrl}
+            alt={event.name}
+            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
 
-        {/* Prize Badge - High Visibility Primary Color */}
-        {event.prizePool && (
-          <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 bg-primary rounded-full shadow-xl">
-            <Trophy className="w-3.5 h-3.5 text-primary-foreground" />
-            <span className="font-sans text-[12px] font-bold text-primary-foreground">
-              ₹{event.prizePool}
-            </span>
-          </div>
-        )}
+          {/* Glass Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#0D0D0D]/90" />
 
-        {/* Category Label - High Contrast Secondary */}
-        <div className="absolute top-4 left-4">
-          <Badge className="bg-white text-black text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded-full border-none">
-            {event.category}
-          </Badge>
-        </div>
-      </div>
+          {/* Floating Metadata */}
+          <div className="absolute top-4 left-4 right-4 flex items-start justify-between">
+            {/* Category Badge */}
+            <div className="px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
+              <span className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-white">
+                {event.category}
+              </span>
+            </div>
 
-      {/* 2. CONTENT SECTION - Legibility First */}
-      <div className="flex flex-1 flex-col p-6">
-
-        <div className="space-y-3 mb-6">
-          <div className="space-y-1">
-            {/* Primary Heading - Pure White for maximum contrast */}
-            <h3 className="font-sans font-bold text-2xl lg:text-3xl text-foreground leading-tight tracking-tight">
-              {event.fancyName || event.name}
-            </h3>
-
-            {hasFancyName && (
-              <div className="flex items-center gap-2 text-primary font-mono text-[11px] uppercase tracking-wider font-semibold">
-                <Cpu className="w-3.5 h-3.5" />
-                <span>{event.name}</span>
+            {/* Prize Pool */}
+            {event.prizePool && (
+              <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r ${accentColor} backdrop-blur-md shadow-lg`}>
+                <Trophy className="w-3.5 h-3.5 text-white" />
+                <span className="text-[11px] font-bold text-white">
+                  ₹{event.prizePool}
+                </span>
               </div>
             )}
           </div>
-
-          {/* Tagline - Increased contrast to 80% white */}
-          <p className="text-[14px] text-foreground/80 leading-relaxed line-clamp-2">
-            {event.tagline || "Redefining the boundaries of technology and innovation."}
-          </p>
         </div>
 
-        {/* 3. METADATA SECTION - Solid Background for Readability */}
-        <div className="grid grid-cols-2 gap-px bg-border/40 rounded-xl overflow-hidden mb-6 border border-border/40">
-          <div className="bg-secondary/40 p-4 flex flex-col gap-1">
-            <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Entry Fee</span>
-            <div className="flex items-center gap-1.5 text-foreground">
-              <IndianRupee className="w-4 h-4 text-primary" />
-              <span className="text-base font-bold">{event.entryFee}</span>
-            </div>
-          </div>
-          <div className="bg-secondary/40 p-4 flex flex-col gap-1">
-            <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Team Size</span>
-            <div className="flex items-center gap-1.5 text-foreground">
-              <Users className="w-4 h-4 text-primary" />
-              <span className="text-base font-bold">{event.maxTeam || 'Solo'}</span>
-            </div>
-          </div>
-        </div>
+        {/* Content Section */}
+        <div className="flex flex-1 flex-col p-5 md:p-6">
 
-        {/* 4. ACTIONS - High Affordance */}
-        <div className="mt-auto space-y-4">
-          <Button
-            asChild
-            className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase text-[12px] tracking-widest shadow-lg shadow-primary/20 rounded-full transition-all active:scale-[0.97]"
-          >
-            <Link to="/register" className="flex items-center justify-center gap-2">
-              Register for Event
-              <ChevronRight className="w-4 h-4" />
-            </Link>
-          </Button>
+          <Link to={`/events/${event.id}`}>
+            {/* Title Section */}
+            <div className="space-y-2 mb-4">
+              <h3 className="text-xl md:text-2xl font-bold tracking-tight leading-tight group-hover:text-primary transition-colors">
+                {event.fancyName || event.name}
+              </h3>
 
-          <Link
-            to={`/events/${event.id}`}
-            className="flex items-center justify-center gap-2 font-mono text-[11px] uppercase tracking-widest text-foreground hover:text-primary transition-colors py-2 underline underline-offset-4 decoration-primary/30"
-          >
-            Detailed Guidelines
-            <ArrowUpRight className="w-3.5 h-3.5" />
+              {hasFancyName && (
+                <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-muted-foreground">
+                  {event.name}
+                </p>
+              )}
+
+              <p className="text-sm text-muted-foreground/50 leading-relaxed line-clamp-2">
+                {event.tagline || "Redefining the boundaries of technology and innovation."}
+              </p>
+            </div>
           </Link>
+
+
+          {/* Metadata Grid */}
+          <div className="flex-grow">
+
+            <div className="grid grid-cols-2 gap-3 mb-6">
+              <div className="flex flex-col gap-1 p-3 rounded-xl bg-white/[0.02] border border-white/5">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground/50">
+                  Entry Fee
+                </span>
+                <div className="flex items-center gap-1.5">
+                  <IndianRupee className="w-4 h-4 text-primary/80" />
+                  <span className="text-sm font-bold text-foreground">
+                    {event.entryFee}
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-1 p-3 rounded-xl bg-white/[0.02] border border-white/5">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground/50">
+                  Team Size
+                </span>
+                <div className="flex items-center gap-1.5">
+                  <Users className="w-4 h-4 text-primary/80" />
+                  <span className="text-sm font-bold text-foreground">
+                    {event.teamSize || 'Solo'}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Actions Footer */}
+          <div className="pt-4 border-t border-white/5 space-y-3">
+            <Button
+              asChild
+              className="w-full h-11 bg-white/5 hover:bg-white/10 text-foreground font-semibold text-sm rounded-full transition-all active:scale-[0.98] border border-white/10"
+            >
+              <Link to={`${event.registrationLink}`} className="flex items-center justify-center gap-2">
+                Register Now
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
+
+            <Link
+              to={`/events/${event.id}`}
+              className="flex items-center justify-center gap-2 text-[11px] font-mono uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors py-2"
+            >
+              View Details
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
         </div>
+
+        {/* Background Decorative Gradient */}
+        <div className={`absolute bottom-0 right-0 w-40 h-40 bg-gradient-to-tl ${accentColor} opacity-[0.03] blur-3xl pointer-events-none group-hover:opacity-[0.06] transition-opacity`} />
       </div>
-    </Card>
+    </motion.div>
   );
 }

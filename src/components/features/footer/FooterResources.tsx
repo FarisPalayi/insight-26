@@ -16,10 +16,9 @@ const resourceLinks: FooterLink[] = [
     external: true
   },
   {
-    label: "Event Location",
-    href: "https://maps.app.goo.gl/QDRGdntGfi5hNsDN7",
+    label: "Event Locations",
+    href: "/venues",
     icon: <MapPin className="w-4 h-4" />,
-    external: true
   },
   {
     label: "Past Winners",

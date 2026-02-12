@@ -4,9 +4,7 @@ import { Button } from '@/components/ui/button';
 import { type UnifiedEvent } from '@/lib/data/unifiedEvents';
 
 export function CoordinatorFooter({ event }: { event: UnifiedEvent }) {
-  const coordinators = event.coordinators?.length
-    ? event.coordinators
-    : [{ name: 'Event Desk', phone: '919876543210' }];
+  const coordinators = event.coordinators;
 
   return (
     <section className="mt-20 pt-12 border-t border-white/5">
@@ -24,7 +22,7 @@ export function CoordinatorFooter({ event }: { event: UnifiedEvent }) {
       </div>
 
       <div className="grid sm:grid-cols-2 gap-4">
-        {coordinators.map((person, idx) => (
+        {coordinators?.map((person, idx) => (
           <motion.div
             key={person.name}
             initial={{ opacity: 0, y: 10 }}

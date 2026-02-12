@@ -11,7 +11,7 @@ const stats = [
 
 export default function InsightAbout() {
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden bg-background">
+    <section className="relative pt-20 md:py-28 lg:py-36 overflow-hidden bg-background">
       {/* Seamless Grid Background */}
       <div className="grid-lines opacity-[0.08]" />
 
@@ -42,9 +42,6 @@ export default function InsightAbout() {
               <p className="text-lg md:text-xl text-foreground/80 leading-relaxed font-sans">
                 Kerala's premier National IT Fest, hosted by CCSIT, University of Calicut since 2003.
               </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Insight '26 merges two decades of tradition with raw future-tech energy. A proving ground built by students, for students.
-              </p>
             </div>
 
             <div className="pt-4">
@@ -58,7 +55,7 @@ export default function InsightAbout() {
           </motion.div>
 
           {/* Right Column: The Stats Grid (Bento) */}
-          <div className="grid grid-cols-2 gap-4 text-foreground">
+          <div className="grid grid-cols-2 gap-4 text-foreground" data-speed="0.9">
             {stats.map((stat, index) => (
               <motion.div
                 key={stat.label}

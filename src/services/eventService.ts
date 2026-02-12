@@ -1,6 +1,7 @@
-import { db } from "@/firebase/config";
-import { unifiedEvents } from "@/lib/data/unifiedEvents";
-import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
+import { db } from "@/lib/firebase_config";
+import { unifiedEvents } from "@/lib/data/updatedEvents";
+import { collection, getDocs, doc, getDoc, } from 'firebase/firestore';
+import type { Update } from "@/types";
 
 const USE_FIREBASE = true;
 
@@ -52,6 +53,26 @@ export const fetchAllEvents = async () => {
     return events;
   } catch (error) {
     console.error('Error fetching events:', error);
+    throw error;
+  }
+};
+export const fetchUpdates = async (): Promise<Update[]> => {
+  try {
+    const updatesRef = collection(db, "updates");
+    const snapshot = await getDocs(updatesRef);
+
+    return snapshot.docs
+      .map((doc) => ({
+        id: doc.id,
+        ...(doc.data() as Omit<Update, "id">),
+      }))
+      .filter((update) => update.isPublished)
+      .sort(
+        (a, b) =>
+          (b.createdAt?.seconds ?? 0) - (a.createdAt?.seconds ?? 0)
+      );
+  } catch (error) {
+    console.error("Error fetching updates:", error);
     throw error;
   }
 };

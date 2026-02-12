@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { Button } from "../../ui/button";
-import { ArrowRight, Sparkles, Users, Zap, Trophy } from "lucide-react";
+import { ArrowRight, Users, Zap } from "lucide-react";
 import { Link } from "react-router";
-import { type UnifiedEvent } from "@/lib/data/unifiedEvents";
+import { type HeroFlagshipEvent } from "@/lib/data/unifiedEvents";
 
 interface FlagshipEventProps {
-  event: UnifiedEvent;
+  event: HeroFlagshipEvent;
   registrationStatus?: string;
 }
 
@@ -17,12 +17,12 @@ export const FlagshipEvent = ({
   // Logic to handle fancy name or split name
   // If fancyName is provided, we use that; otherwise, we split the standard name
   const nameToDisplay = event.fancyName || event.name;
-  const nameParts = nameToDisplay.split(/(?=[A-Z])/);
+  const nameParts = nameToDisplay.split(/\s/);
   const firstName = nameParts[0];
   const secondName = nameParts.slice(1).join("");
 
   // Helper to format team size display
-  const getTeamLabel = (size: UnifiedEvent['teamSize']) => {
+  const getTeamLabel = (size: HeroFlagshipEvent['teamSize']) => {
     if (size === 'solo') return 'Solo Event';
     if (size === 'any') return 'Flexible Team';
     return `Team: ${size} Members`;
@@ -58,24 +58,10 @@ export const FlagshipEvent = ({
                   viewport={{ once: true }}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30"
                 >
-                  <Sparkles className="w-4 h-4 text-primary animate-pulse" />
                   <span className="text-sm font-semibold text-primary uppercase tracking-wider">
                     {event.category === 'competition' ? 'Flagship Competition' : 'Featured Event'}
                   </span>
                 </motion.div>
-
-                {event.prizePool && (
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.1 }}
-                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/20"
-                  >
-                    <Trophy className="w-3.5 h-3.5 text-accent" />
-                    <span className="text-xs font-medium text-accent">₹{event.prizePool} Prize Pool</span>
-                  </motion.div>
-                )}
               </div>
 
               <motion.div
@@ -84,14 +70,9 @@ export const FlagshipEvent = ({
                 viewport={{ once: true }}
                 transition={{ delay: 0.2, duration: 0.6 }}
               >
-                <h3 className="text-5xl md:text-6xl lg:text-7xl font-bold">
+                <h3 className="text-4xl md:text-6xl lg:text-7xl font-bold">
                   <span className="text-foreground">{firstName}</span>
-                  <span className="text-gradient">{secondName}</span>
-                  {event.tagline && (
-                    <span className="text-foreground/60 ml-3 text-3xl md:text-4xl lg:text-5xl font-light italic">
-                      {event.tagline}
-                    </span>
-                  )}
+                  <span className="text-foreground text-foreground/60 ml-3 text-3xl md:text-4xl lg:text-5xl font-light italic">{secondName}</span>
                 </h3>
               </motion.div>
 

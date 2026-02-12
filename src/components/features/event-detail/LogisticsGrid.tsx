@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, Users, IndianRupee } from 'lucide-react';
-import { type UnifiedEvent, dayLabels, teamSizeLabels } from '@/lib/data/unifiedEvents';
+import { type UnifiedEvent, dayLabels, getVenueName, teamSizeLabels } from '@/lib/data/unifiedEvents';
 
 interface LogisticsGridProps {
   event: UnifiedEvent;
@@ -45,7 +45,7 @@ export function LogisticsGrid({ event }: LogisticsGridProps) {
     {
       icon: <MapPin className="w-4 h-4 text-event-cultural" />,
       label: 'Venue',
-      value: event.venue,
+      value: getVenueName(event.venue),
     },
     {
       icon: <Users className="w-4 h-4 text-event-seminar" />,

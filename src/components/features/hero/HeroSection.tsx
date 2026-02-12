@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
-import { MapPin, Calendar, ArrowRight } from "lucide-react";
+import { useRef } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CountdownTimer } from "./CountdownTimer";
 import { FloatingParticles } from "../../ui/floaters/FloatingParticles";
@@ -7,65 +8,107 @@ import { FloatingShapes } from "../../ui/floaters/FloatingShapes";
 import { FloatingDots } from "../../ui/floaters/FloatingDots";
 import { HeroBadge } from "./HeroBadge";
 import { HeroTitle } from "./HeroTitle";
-import { Link } from "react-router";
 import { HeroVisual } from "./HeroVisual";
+import { Link } from "react-router";
+import { LocationMeta, DateMeta } from "./MetaItem";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export const HeroSection = () => {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const isMobile = useIsMobile();
+
+  /* --------------------------------
+     HERO ORCHESTRATION + SCROLL LOGIC
+  ---------------------------------*/
+  useGSAP(
+    () => {
+      if (isMobile) return;
+      
+      const content = sectionRef.current!.querySelector(
+        ".hero-content"
+      ) as HTMLElement;
+      const meta = sectionRef.current!.querySelector(
+        ".hero-meta"
+      ) as HTMLElement;
+      const cta = sectionRef.current!.querySelector(
+        ".hero-cta"
+      ) as HTMLElement;
+
+      // Entrance choreography
+      const tl = gsap.timeline({ delay: 0.15 });
+
+      tl.from(content, {
+        opacity: 0,
+        duration: 0.9,
+        ease: "power3.out",
+      })
+        .from(
+          meta,
+          {
+            opacity: 0,
+            duration: 0.6,
+            ease: "power2.out",
+          },
+          "-=0.4"
+        )
+        .from(
+          cta,
+          {
+            opacity: 0,
+            duration: 0.6,
+            ease: "power2.out",
+          },
+          "-=0.3"
+        );
+
+      // Scroll-based compression 
+      gsap.to(content, {
+        scale: 0.96,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    },
+    { scope: sectionRef }
+  );
+
   return (
     <section
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      ref={sectionRef}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-0"
     >
+      {/* Background */}
       <HeroVisual />
 
+      {/* Floaters */}
       <FloatingParticles />
       <FloatingShapes />
       <FloatingDots />
-      {/* Main Content */}
+
+      {/* Content */}
       <div className="container relative z-10 px-4 sm:px-6 pt-32 pb-10">
-        <motion.div
-          className="max-w-5xl mx-auto text-center"
-        >
+        <div className="hero-content max-w-5xl mx-auto text-center">
           <HeroBadge />
           <HeroTitle />
 
-          {/* Event Details */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.55, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 mb-10 sm:mb-14"
-          >
-            <motion.div
-              className="flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl group cursor-default w-full sm:w-auto justify-center"
-              whileHover={{ scale: 1.03, y: -2 }}
-              transition={{ type: "spring", stiffness: 400 }}
-            >
-              <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-primary group-hover:scale-110 transition-transform" />
-              <span className="font-medium text-foreground">16 & 17 February 2026</span>
-            </motion.div>
-            <motion.div
-              className="flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl group cursor-default w-full sm:w-auto justify-center"
-              whileHover={{ scale: 1.03, y: -2 }}
-              transition={{ type: "spring", stiffness: 400 }}
-            >
-              <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-accent group-hover:scale-110 transition-transform" />
-              <span className="font-medium text-foreground">CCSIT CU Campus</span>
-            </motion.div>
-          </motion.div>
+          {/* Event Meta */}
+          <div className="hero-meta flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 mb-10 sm:mb-14">
+            <DateMeta />
+            <LocationMeta />
+          </div>
 
           <CountdownTimer />
 
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.65, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
-          >
+          {/* CTA */}
+          <div className="hero-cta flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <Button asChild>
               <Link
-                to="/register"
-                className="btn-glow bg-primary hover:bg-primary/90 text-primary-foreground font-semibold group text-base px-6 sm:px-8 py-5 sm:py-6 rounded-xl w-full sm:w-auto"
+                to="/events"
+                className="btn-glow max-w-90 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold group text-base px-6 sm:px-8 py-5 sm:py-6 rounded-xl w-full sm:w-auto"
               >
                 Register Now
                 <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
@@ -74,18 +117,16 @@ export const HeroSection = () => {
             <Button variant="outline" size="lg" asChild>
               <Link
                 to="/events"
-                className="btn-outline-glow text-base px-6 sm:px-8 py-5 sm:py-6 rounded-xl border-primary/30 hover:bg-primary/10 hover:border-primary/50 font-normal transition-all duration-300 w-full sm:w-auto text-foreground"
+                className="btn-outline-glow max-w-90 text-base px-6 sm:px-8 py-5 sm:py-6 rounded-xl border-primary/30 hover:bg-primary/10 hover:border-primary/50 font-normal transition-all duration-300 w-full sm:w-auto text-foreground"
               >
                 View Events
               </Link>
             </Button>
+          </div>
 
-          </motion.div>
-        </motion.div>
+        </div>
       </div>
-
     </section>
-
   );
 };
 

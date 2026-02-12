@@ -18,7 +18,7 @@ export function EventsSectionHeader({
   onCategoryChange,
 }: EventsHeaderBarProps) {
   return (
-    <header className="relative pt-12 pb-8 px-4">
+    <header className="relative md:pb-8 px-4">
       <div className="container mx-auto max-w-7xl">
         {/* Title */}
         <motion.div
@@ -31,10 +31,6 @@ export function EventsSectionHeader({
             <span className="text-gradient">Explore</span>{" "}
             <span className="text-foreground">Events</span>
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Discover competitions, seminars, and cultural events. Find your
-            passion and register today.
-          </p>
         </motion.div>
 
         {/* Search & Filter */}

@@ -1,3 +1,5 @@
+import type { Timestamp } from "firebase/firestore";
+
 export type EventData = {
   id: string,
   name: string,
@@ -19,19 +21,22 @@ export interface SocialLink {
   hoverColor: string;
 }
 
+// Updated Sponsor type to include logo
 export interface Sponsor {
   name: string;
-  logo?: string;
-  website?: string;
+  website: string;
+  logo?: string; // URL to logo image
 }
 
 export interface SponsorTier {
+  id?: string;
   name: string;
-  icon: React.ReactNode;
-  sponsors: Sponsor[];
-  accentColor: string;
+  icon: React.ReactNode | string; // Can be ReactNode or string (for Firebase)
   description: string;
-}
+  accentColor: string;
+  sponsors: Sponsor[];
+  order?: number;
+} 
 
 export interface FAQ {
   question: string;
@@ -43,5 +48,15 @@ export interface ContactPerson {
   role: string;
   phone: string;
   initials: string;
+  img?: string;
 }
 
+  
+export interface Update {
+  id: string;
+  title: string;
+  body: string;
+  type: "info" | "important";
+  isPublished: boolean;
+  createdAt: Timestamp;
+}

@@ -1,92 +1,87 @@
-import { type UnifiedEvent } from "@/lib/data/unifiedEvents";
+import { type HeroEvent, type HeroFlagshipEvent } from "@/lib/data/unifiedEvents";
 
-export const MOCK_TECHNOVA: UnifiedEvent = {
+export const MOCK_TECHNOVA: HeroFlagshipEvent = {
   id: "technova",
-  name: "Technova",
-  fancyName: "Technova",
-  tagline: "8.0",
-  description: "Five rounds. Five challenges. One ultimate geek team. Navigate through Initium, Techsense, Intersepto, Extremist, and Jackpot to prove your technical supremacy.",
+  name: "Technova 8.0",
+  fancyName: "Technova 8.0",
+  description:
+    "Technova is a progressive challenge platform designed to test your logic, code, and creativity through increasingly demanding levels. Every stage must be earned.",
   category: "competition",
   schedule: {
-    day: 1,
-    startTime: "09:00",
-    endTime: "17:00",
-    displayTime: "09:00 AM - 05:00 PM"
+    day: "2",
+    startTime: "11:30",
+    endTime: "16:00",
+    displayTime: "11:30 AM - 04:00 PM",
   },
-  venue: "Main Stage",
-  teamSize: "3-5",
-  entryFee: "₹300",
-  imageUrl: "/images/technova.jpg",
-  isFeatured: true,
-  prizePool: "40K+",
-  prizes: {
-    first: "₹20,000",
-    second: "₹10,000",
-    third: "₹5,000",
-    jackpotPrize: "Surprise Gift"
-  },
-  rulesAndGuidelines: [
-    "Malpractice leads to disqualification",
-    "Bring your own hardware if required"
-  ]
-};
+  venue: "ems-electron",
+  teamSize: "2-5",
+  entryFee: "500",
+}
 
 
-export const FEATURED_EVENTS_MOCK: UnifiedEvent[] = [
+export const FEATURED_EVENTS_MOCK: HeroEvent[] = [
   MOCK_TECHNOVA, // Included here so the filter in EventsSection handles it
+
   {
-    id: "shoot-sync",
-    name: "Shoot Sync",
-    tagline: "Visual Magic",
-    description: "Capture the moment, freeze the magic in every frame. Showcase your creative eye and visual storytelling in this high-octane photography challenge.",
+    // Core Identity
+    id: "vibe-coding",
+    name: "Vibe Coding",
+    fancyName: "Build It Right!",
+    description:
+      "Build It Right is an AI-powered website creation challenge where ideas take shape through intuition, creativity, and strategic use of AI tools. Participants are tasked with designing and building a visually compelling front-end website that aligns with a given theme, demonstrating both technical execution and creative vision.",
     category: "competition",
+
+    // Schedule
     schedule: {
-      day: 2,
-      startTime: "10:00",
-      endTime: "14:00",
-      displayTime: "10:00 AM - 02:00 PM"
+      day: "2",
+      startTime: "13:30",
+      endTime: "15:30",
+      displayTime: "01:30 PM - 03:30 PM",
     },
-    venue: "Campus Grounds",
-    teamSize: "solo",
-    entryFee: "₹100",
-    imageUrl: "/images/photo.jpg",
-    spotRegistration: true,
-    eligibility: ["Open to all students with a DSLR or Smartphone"]
+
+    entryFee: "200",
   },
+
   {
-    id: "scavenge-squad",
-    name: "Scavenge Squad",
-    tagline: "Hunt for Clues",
-    description: "Race against time, hunt for clues, claim victory. Team up for the ultimate treasure hunt experience across the hidden corners of the campus.",
-    category: "allday",
-    schedule: {
-      day: "both",
-      startTime: "09:00",
-      endTime: "18:00",
-      displayTime: "Full Day Event"
-    },
-    venue: "Entire Campus",
-    teamSize: "2-4",
-    entryFee: "₹150",
-    imageUrl: "/images/hunt.jpg",
-    prizePool: "10K"
-  },
-  {
+    // Core Identity
     id: "talenx",
-    name: "Talen'X",
-    tagline: "Unleash the Star",
-    description: "Unleash your hidden talents and steal the spotlight. Dance, sing, perform—let your creativity shine in our premier open-stage showcase.",
-    category: "cultural",
+    name: "TalenX 3.0",
+    fancyName: "TalenX 3.0",
+    description:
+      "TalenX 3.0 is a high-energy, non-technical competitive fun event designed to test participants’ talent, logic, creativity, presence of mind, and teamwork. This event proves that success does not require gadgets or screens, only real skills, sharp thinking, and team coordination.",
+    category: "competition",
+
+    // Schedule
     schedule: {
-      day: 2,
-      startTime: "17:00",
-      endTime: "21:00",
-      displayTime: "05:00 PM Onwards"
+      day: "2",
+      startTime: "11:30",
+      endTime: "16:00",
+      displayTime: "11:30 AM - 04:00 PM",
     },
-    venue: "Open Air Theatre",
-    teamSize: "any",
-    entryFee: "Free",
-    imageUrl: "/images/talenx.jpg",
-    isFeatured: false
-  }
+
+    // Participation
+    entryFee: "400",
+  },
+
+  {
+    // Core Identity
+    id: "treasure-hunt",
+    name: "Treasure Hunt",
+    fancyName: "The Cipher Quest",
+    description:
+      "The Cipher Quest is an exciting multi-level treasure hunt designed to test teamwork, problem-solving ability, and strategic thinking. Teams must decode clues, complete challenges, and progress through multiple levels to reach the final objective and claim victory.",
+
+    category: "competition",
+
+    // Schedule
+    schedule: {
+      day: "2",
+      startTime: "11:30",
+      endTime: "16:30",
+      displayTime: "11:30 AM - 04:30 PM",
+    },
+
+    // Participation
+    entryFee: "400",
+  },
 ];

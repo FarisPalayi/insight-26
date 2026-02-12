@@ -2,22 +2,23 @@ import { type ContactPerson } from "@/types";
 
 export const CONTACTS: ContactPerson[] = [
   {
-    name: "Contact Person 1",
-    role: "Event Coordinator",
-    phone: "+919876543210",
-    initials: "CP",
+    name: "Abhinav C",
+    role: "Program Coordinator",
+    phone: "9847313815",
+    initials: "A",
+    img: "avatars/abhinav.jpeg"
   },
   {
-    name: "Contact Person 2",
-    role: "Technical Lead",
-    phone: "+919876543211",
-    initials: "TL",
+    name: "Ansiba k",
+    role: "Program Coordinator",
+    phone: "7510659785",
+    initials: "AK",
   },
   {
-    name: "Contact Person 3",
-    role: "Registration Head",
-    phone: "+919876543212",
-    initials: "RH",
+    name: "Rahul V",
+    role: "Finance",
+    phone: "7909226491",
+    initials: "RV",
   },
 ];
 

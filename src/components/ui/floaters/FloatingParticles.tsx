@@ -11,7 +11,7 @@ export const FloatingParticles = () => {
       {[...Array(particleCount)].map((_, i) => (
         <motion.div
           key={i}
-          className="particle bg-primary"
+          className="floating-layer particle bg-primary"
           style={{
             width: Math.random() * 4 + 2,
             height: Math.random() * 4 + 2,
