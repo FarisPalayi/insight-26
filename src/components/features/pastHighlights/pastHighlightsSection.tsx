@@ -18,11 +18,6 @@ const galleryImages = [
     caption: "Technical Workshop"
   },
   {
-    src: "/gallery/robo-a-team-sm.jpg",
-    alt: "Trap events in progress",
-    caption: "Trap Events"
-  },
-  {
     src: "/gallery/group-sm.jpg",
     alt: "Insight team",
     caption: "Technova team",
@@ -31,6 +26,11 @@ const galleryImages = [
     src: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=450&fit=crop",
     alt: "Cultural night performance",
     caption: "Cultural Night"
+  },
+  {
+    src: "/gallery/robo-with-board-sm.jpg",
+    alt: "Student dressed as a robot posing",
+    caption: "Robo"
   },
 ];
 
