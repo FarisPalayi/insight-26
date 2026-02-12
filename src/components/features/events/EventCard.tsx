@@ -65,12 +65,12 @@ export function EventCard({ event, index, accentColor = "from-purple-500 to-pink
             {/* Title Section */}
             <div className="space-y-2 mb-4">
               <h3 className="text-xl md:text-2xl font-bold tracking-tight leading-tight group-hover:text-primary transition-colors">
-                {event.fancyName || event.name}
+                {event.name}
               </h3>
 
               {hasFancyName && (
                 <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-muted-foreground">
-                  {event.name}
+                  {event.fancyName || event.name}
                 </p>
               )}
 
@@ -104,7 +104,7 @@ export function EventCard({ event, index, accentColor = "from-purple-500 to-pink
                 <div className="flex items-center gap-1.5">
                   <Users className="w-4 h-4 text-primary/80" />
                   <span className="text-sm font-bold text-foreground">
-                    {event.teamSize || 'Solo'}
+                    {event.teamSize}
                   </span>
                 </div>
               </div>
