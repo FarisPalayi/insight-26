@@ -100,17 +100,21 @@ export function FeaturedEventCard({ event, index = 0 }: FeaturedEventCardProps) 
 
             {/* METADATA GRID - Premium Stats */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
-              <StatItem icon={Clock} label="Time" value={event.schedule?.displayTime?.split(' - ')[0] || "10:00 AM"} />
-              <StatItem icon={Users} label="Team Size" value={event.teamSize || "Team of 5"} />
+              <StatItem icon={Clock} label="Time" value={event.schedule?.displayTime?.split(' - ')[0]} />
+              {event.teamSize && (
+                <StatItem icon={Users} label="Team Size" value={event.teamSize} />
+              )}
             </div>
 
             {/* FINANCIALS & CTA */}
             <div className="flex flex-col sm:flex-row items-center gap-6 mt-auto pt-6 border-t border-white/5">
               <div className="flex items-center gap-4 w-full sm:w-auto">
-                <div className="flex flex-col">
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/60 font-bold">Prize Pool</span>
-                  <span className="text-2xl font-black text-primary glow-text">₹{event.prizePool || "25,000"}</span>
-                </div>
+                {event.prizePool && (
+                  <div className="flex flex-col">
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/60 font-bold">Prize Pool</span>
+                    <span className="text-2xl font-black text-primary glow-text">₹{event.prizePool}</span>
+                  </div>
+                )}
                 <div className="w-[1px] h-10 bg-white/10 mx-2" />
                 <div className="flex flex-col">
                   <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/60 font-bold">Entry</span>

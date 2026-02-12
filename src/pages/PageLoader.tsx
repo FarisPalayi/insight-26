@@ -57,7 +57,7 @@ export default function PageLoader() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          <span className="text-sm font-mono tracking-[0.3em] text-primary/80 uppercase">
+          <span className="text-sm font-mono tracking-[0.3em] text-primary/80 uppercase mt-6 md:mt-1">
             Insight'26
           </span>
         </motion.div>
