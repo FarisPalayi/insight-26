@@ -18,10 +18,10 @@ export function EventHero({ event }: EventHeroProps) {
             <Badge variant="outline" className="border-primary/50 text-primary px-3 py-1 uppercase tracking-tighter">
               {event.category}
             </Badge>
-            <h1 className="text-5xl lg:text-7xl font-black tracking-tight leading-none uppercase italic italic-font">
+            <h1 className="text-4xl lg:text-7xl font-black tracking-tight leading-none uppercase italic italic-font">
               {event.name}
             </h1>
-            <p className="text-xl text-primary/80 font-mono tracking-tight underline underline-offset-8">
+            <p className="text-lg lg:text-xl text-primary/80 font-mono tracking-tight underline underline-offset-8">
               {event.tagline}
             </p>
           </div>
