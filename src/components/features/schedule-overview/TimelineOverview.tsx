@@ -80,7 +80,7 @@ export function TimelineOverview({ className }: { className?: string }) {
                   <div className="relative z-30">
                     <div className="glass-surface-strong border border-white/20 rounded-full px-6 md:px-10 py-3 md:py-4 shadow-2xl">
                       <h3 className="text-xl md:text-3xl font-semibold font-sans tracking-tight">
-                        Day 1
+                        Day 2
                       </h3>
                     </div>
                   </div>
